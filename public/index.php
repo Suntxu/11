@@ -29,11 +29,11 @@ define('TOKEN_KEY','wwwhuaimicomcntop');
 
 //官网
 
-define('SPREAD_URL','http://www.huaimi.com/');
+define('SPREAD_URL','http://www-dve.huaimi.com/');
 
 //用户中心
 
-define("WEBURL",'http://my.huaimi.com/');
+define("WEBURL",'http://my-dve.huaimi.com/');
 
 define("WEBNAME",'怀米网');
 //第2个数据库
