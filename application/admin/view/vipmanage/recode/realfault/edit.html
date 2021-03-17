@@ -1,0 +1,129 @@
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>{:__('Title')}</th>
+            <th>{:__('Content')}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>模板ID</td>
+            <td>{$data['id']}</td>
+        </tr>
+        <tr>
+            <td>模板标题</td>
+            <td>{$data['title']}</td>
+        </tr>
+        <tr>
+            <td>模板状态</td>
+            <td>{$data['tempstatus']}</td>
+        </tr>
+        <tr>
+            <td>实名状态</td>
+            <td>{$data['auth_status']}</td>
+        </tr>
+        <tr>
+            <td>持有人姓名</td>
+            <td>{$data['xing']}{$data['ming']}</td>
+        </tr>
+        <tr>
+            <td>持有人邮箱</td>
+            <td>{$data['Email']}</td>
+        </tr>
+        <tr>
+            <td>模板类型</td>
+            <td>{$data['RegistrantType'] == 1 ? '个人' : '企业'}</td>
+        </tr>
+        <tr>
+            <td>模板状态</td>
+            <td>{$data['tempstatus'] == 1?'正常使用':'已删除'}</td>
+        </tr>
+        <tr>
+            <td>国家代码</td>
+            <td>{$data['Country']}</td>
+        </tr>
+        <tr>
+            <td>省份</td>
+            <td>{$data['ZhProvince']}</td>
+        </tr>
+        <tr>
+            <td>城市</td>
+            <td>{$data['ZhCity']}</td>
+        </tr>
+        <tr>
+            <td>详细地址</td>
+            <td>{$data['address']}</td>
+        </tr>
+        <tr>
+            <td>邮编</td>
+            <td>{$data['PostalCode']}</td>
+        </tr>
+        <tr>
+            <td>电话</td>
+            <td>{$data['Telephone']}</td>
+        </tr>
+        <tr>
+            <td>身份证号码</td>
+            <td>{$data['renzhengno']}</td>
+        </tr>
+        <tr>
+            <td>身份证图片</td>
+            <td>
+                {php}
+                $aa = rand(10000,99999);
+                echo '<a href="'.$weburl.'uploads/alireal/'.$data['image1'].'?='.$aa.'" target="_blank" class="">
+                <img width="100" height="102" src="'.$weburl.'uploads/alireal/'.$data['image1'].'?='.$aa.'" class="img-responsive">
+            </a>';
+                {/php}
+            </td>
+        </tr>
+        {eq name="$data['RegistrantType']" value="2"}
+        <tr>
+            <td>营业执照号码</td>
+            <td>{$data['buslicence']}</td>
+        </tr>
+        <tr>
+            <td>营业执照图片</td>
+            <td>
+                {php}
+                echo '<a href="'.$weburl.'uploads/alireal/'.$data['image2'].'?='.$aa.'" target="_blank" class="">
+                <img width="100" height="102" src="'.$weburl.'uploads/alireal/'.$data['image2'].'?='.$aa.'" class="img-responsive">
+            </a>';
+                {/php}
+            </td>
+        </tr>
+        {/eq}
+        <tr>
+            <td>创建时间</td>
+            <td>
+                {$data['newstime']|date='Y-m-d H:i:s',###}
+            </td>
+        </tr>
+        <form id="add-form" class="edit-form form-horizontal" role="form" data-toggle="validator" method="POST" action="">
+            <tr>
+                <td>邮箱认证</td>
+                <td>
+                    <div class="form-group">
+                        <div class="radio">
+                            <label for="ifkf1"><input id="ifkf1"  name="row[email_status]" {if $data['email_status'] == '0'} checked {/if} type="radio" value="0">未认证</label>
+                            <label for="ifkf2"><input id="ifkf2"  name="row[email_status]" type="radio" {if $data['email_status'] == 2} checked {/if} value="2" >认证成功</label>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <input type="hidden" name="row[id]" value="{$data.rid}">
+            <tr>
+                <td align="center">
+                    <button type="submit" class="btn btn-success btn-embossed">{:__('OK')}</button>
+                    <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+                </td>
+            </tr>
+        </form>
+        <body>
+</table>
+<!--<div class="hide layer-footer">-->
+<!--    <label class="control-label col-xs-12 col-sm-2"></label>-->
+<!--    <div class="col-xs-12 col-sm-8">-->
+<!--        <button type="reset" class="btn btn-primary btn-embossed btn-close" onclick="Layer.closeAll();">{:__('Close')}</button>-->
+<!--    </div>-->
+<!--</div>-->

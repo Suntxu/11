@@ -1,0 +1,555 @@
+<style type="text/css">
+    .sm-st {
+        background: #fff;
+        padding: 20px;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+        margin-bottom: 20px;
+        -webkit-box-shadow: 0 1px 0px rgba(0,0,0,0.05);
+        box-shadow: 0 1px 0px rgba(0,0,0,0.05);
+    }
+
+    .sm-st-icon {
+        width: 60px;
+        height: 60px;
+        display: inline-block;
+        line-height: 60px;
+        text-align: center;
+        font-size: 30px;
+        background: #eee;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        float: left;
+        margin-right: 10px;
+        color: #fff;
+    }
+
+    .sm-st-info {
+        font-size: 12px;
+        padding-top: 2px;
+    }
+
+        .sm-st-info span {
+            display: block;
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+    .orange {
+        background: #fa8564 !important;
+    }
+
+    .tar {
+        background: #45cf95 !important;
+    }
+
+    .sm-st .green {
+        background: #86ba41 !important;
+    }
+
+    .pink {
+        background: #AC75F0 !important;
+    }
+
+    .yellow-b {
+        background: #fdd752 !important;
+    }
+
+    .stat-elem {
+        background-color: #fff;
+        padding: 18px;
+        border-radius: 40px;
+    }
+
+    .stat-info {
+        text-align: center;
+        background-color: #fff;
+        border-radius: 5px;
+        margin-top: -5px;
+        padding: 8px;
+        -webkit-box-shadow: 0 1px 0px rgba(0,0,0,0.05);
+        box-shadow: 0 1px 0px rgba(0,0,0,0.05);
+        font-style: italic;
+    }
+
+    .stat-icon {
+        text-align: center;
+        margin-bottom: 5px;
+    }
+
+    .st-red {
+        background-color: #F05050;
+    }
+
+    .st-green {
+        background-color: #27C24C;
+    }
+
+    .st-violet {
+        background-color: #7266ba;
+    }
+
+    .st-blue {
+        background-color: #23b7e5;
+    }
+
+    .stats .stat-icon {
+        color: #28bb9c;
+        display: inline-block;
+        font-size: 26px;
+        text-align: center;
+        vertical-align: middle;
+        width: 50px;
+        float: left;
+    }
+
+    .stat {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: inline-block;
+        margin-right: 10px;
+    }
+
+        .stat .value {
+            font-size: 20px;
+            line-height: 24px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-weight: 500;
+        }
+
+        .stat .name {
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .stat.lg .value {
+            font-size: 26px;
+            line-height: 28px;
+        }
+
+        .stat.lg .name {
+            font-size: 16px;
+        }
+
+    .stat-col .progress {
+        height: 2px;
+    }
+
+    .stat-col .progress-bar {
+        line-height: 2px;
+        height: 2px;
+    }
+
+    .item {
+        padding: 30px 0;
+    }
+</style>
+<div class="panel panel-default panel-intro">
+    <div class="panel-heading">
+        {:build_heading(null, false)}
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#one" data-toggle="tab">{:__('Dashboard')}</a></li>
+        </ul>
+    </div>
+    <div class="panel-body">
+        <div id="myTabContent" class="tab-content">
+             <div class="tab-pane fade active in" id="one">
+                {if(isset($count['userinfo2']) || (isset($count['userinfo3']) && !in_array(12,$groupPids)) || isset($count['userinfo1']) && !in_array(12,$groupPids) || isset($count['userinfo4']) || isset($count['userinfo5']))}
+                <div class="row">
+                    <div class="col-lg-12">
+                        用户信息统计
+                    </div>
+                    {if isset($count['userinfo1']) && !in_array(12,$groupPids)}
+                    <div class="col-sm-2 col-xs-6">
+                        <div class="sm-st clearfix">
+                            <a href="/admin/vipmanage/shoplist/index?t1.shopzt=2" title="开店审核--会员列表"  class="btn-addtabs">
+                                <span class="sm-st-icon st-red"><i class="fa fa-pied-piper-alt"></i></span>
+                                <div class="sm-st-info">
+                                     <span style="width:;">{$count['userinfo1'] }</span>
+                                     开店审核
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    {/if}
+                    {if isset($count['tixian_sf'])}
+                    <div class="col-sm-2 col-xs-6">
+                        <div class="sm-st clearfix">
+                            <a href="/admin/vipmanage/tx/index?t.zt=5" title="提现信息审核--会员提现 " class="btn-addtabs">
+                                <span class="sm-st-icon st-red"><i class="fa fa-users"></i></span>
+                                <div class="sm-st-info">
+                                    <span>{$count['tixian_sf']}</span>
+                                    提现信息审核
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    {/if}
+                    {if isset($count['userinfo2'])}
+                    <div class="col-sm-2 col-xs-6">
+                        <div class="sm-st clearfix">
+                            <a href="/admin/vipmanage/tx/index?t.zt=4" title="需要处理提现--会员提现 " class="btn-addtabs">
+                                <span class="sm-st-icon st-blue"><i class="fa fa-users"></i></span>
+                                <div class="sm-st-info">
+                                    <span>{$count['userinfo2']}</span>
+                                    需要处理提现
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    {/if}
+                    {if isset($count['userinfo3']) && !in_array(12,$groupPids)}
+                    <div class="col-sm-2 col-xs-6">
+                        <div class="sm-st clearfix">
+                            <a href="/admin/vipmanage/realaudit?r.status=0" title="未实名认证--会员列表" class="btn-addtabs">
+                                <span class="sm-st-icon st-red"><i class="fa fa-euro"></i></span>
+                                <div class="sm-st-info">
+                                    <span>{$count['userinfo3']}</span>
+                                    企业实名认证审核
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    {/if}
+                    
+                    {if isset($count['userinfo4'])}
+                    <div class="col-sm-2 col-xs-6">
+                        <div class="sm-st clearfix">
+                            <a href="/admin/vipmanage/users/index?u.zt=3" title="禁用会员--会员列表" class="btn-addtabs">
+                                <span class="sm-st-icon st-red"><i class="fa fa-cny"></i></span>
+                                <div class="sm-st-info">
+                                    <span>{$count['userinfo4']}</span>
+                                    禁用会员
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    {/if}
+                    {if isset($count['userinfo5'])}
+                     <div class="col-sm-2 col-xs-6">
+                        <div class="sm-st clearfix">
+                            <a href="/admin/vipmanage/users/index" title="会员列表"  class="btn-addtabs">
+                                <span class="sm-st-icon st-green"><i class="fa fa-user"></i></span>
+                                <div class="sm-st-info">
+                                    <span>{$count['userinfo5']}</span>
+                                    总用户数
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    {/if}
+                </div>
+                {/if}
+                <div class="row">
+                    <div class="col-lg-12">
+                        域名信息统计
+                    </div>
+
+                    {if isset($count['domain1'])}
+                    <div class="col-sm-2 col-xs-6">
+                        <div class="sm-st clearfix">
+                            <a href="/admin/domain/manage/index" title="域名列表" class="btn-addtabs">
+                                <span class="sm-st-icon st-blue"><i class="fa fa-pied-piper-alt"></i></span>
+                                <div class="sm-st-info">
+                                     <span style="width:;">{$count['domain1']}</span>
+                                     所有域名
+                                </div>
+                        </div>
+                    </div>
+                    {/if}
+                    {if isset($count['domain4'])}
+                    <div class="col-sm-2 col-xs-6">
+                        <div class="sm-st clearfix">
+                            <a href="/admin/domain/manage/index?p.status=4" title="被冻结--域名列表" class="btn-addtabs">
+                                <span class="sm-st-icon st-pink"><i class="fa fa-euro"></i></span>
+                                <div class="sm-st-info">
+                                     <span style="width:;">{$count['domain4']}</span>
+                                     被冻结的域名
+                                </div>
+                        </div>
+                    </div>
+                    {/if}
+                    {if isset($count['domain2'])}
+                    <div class="col-sm-2 col-xs-6">
+                        <div class="sm-st clearfix">
+                            <a href="/admin/domain/yjdomain/index?p.status=1" title="正常销售--域名列表" class="btn-addtabs">
+                                <span class="sm-st-icon st-green"><i class="fa fa-users"></i></span>
+                                <div class="sm-st-info">
+                                    <span>{$count['domain2']}</span>
+                                    一口价在售
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    {/if}
+                    {if isset($count['domain3'])}
+                    <div class="col-sm-2 col-xs-6">
+                        <div class="sm-st clearfix">
+                            <a href="/admin/domain/yjdomain/index?p.status=2" title="下架域名--域名列表" class="btn-addtabs">
+                                <span class="sm-st-icon st-red"><i class="fa fa-euro"></i></span>
+                                <div class="sm-st-info">
+                                    <span>{$count['domain3']}</span>
+                                    一口价下架
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    {/if}
+                </div>
+                {if isset($count['new3'])}
+                <div class="row">
+                    <div class="col-lg-12">
+                        互动信息统计
+                    </div>
+                    <div class="col-sm-2 col-xs-6">
+                        <div class="sm-st clearfix">
+                            <a href="/admin/news/notice/index" title="公告列表" class="btn-addtabs">
+                                <span class="sm-st-icon st-green"><i class="fa fa-euro"></i></span>
+                                <div class="sm-st-info">
+                                    <span>{$count['new3']}</span>
+                                    网站公告
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {/if}
+                <div class="row">
+                    <div class="col-lg-12">
+                        需要处理的任务
+                    </div>
+                    {if isset($count['task1'])}
+                    <div class="col-sm-2 col-xs-6">
+                        <div class="sm-st clearfix">
+                            <a href="/admin/domain/into/intolist/index?audit=0" title="等待处理--转回列表" class="btn-addtabs">
+                                <span class="sm-st-icon st-blue"><i class="fa fa-pied-piper-alt"></i></span>
+                                <div class="sm-st-info">
+                                     <span style="width:;">{$count['task1']}</span>
+                                     等待处理域名转回
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    {/if}
+                    {if isset($count['task1_sf'])}
+                    <div class="col-sm-2 col-xs-6">
+                        <div class="sm-st clearfix">
+                            <a href="/admin/domain/into/intolist/index?audit=4" title="正在处理--转回列表" class="btn-addtabs">
+                                <span class="sm-st-icon st-blue"><i class="fa fa-pied-piper-alt"></i></span>
+                                <div class="sm-st-info">
+                                     <span style="width:;">{$count['task1_sf']}</span>
+                                     等待审核域名转回
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    {/if}
+                    {if isset($count['task2'])}
+                    <div class="col-sm-2 col-xs-6">
+                        <div class="sm-st clearfix">
+                            <a href="/admin/orderfx/order/index?status=1&fx_stat=0" title="未回复--工单列表"  class="btn-addtabs">
+                                <span class="sm-st-icon st-red"><i class="fa fa-users"></i></span>
+                                <div class="sm-st-info">
+                                    <span>{$count['task2']}</span>
+                                    待回复工单
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    {/if}
+                    {if isset($count['task3'])}
+                    <div class="col-sm-2 col-xs-6">
+                        <div class="sm-st clearfix">
+                            <a href="/admin/orderfx/order/index?status=0" title="未处理--工单列表" class="btn-addtabs">
+                                <span class="sm-st-icon st-red"><i class="fa fa-euro"></i></span>
+                                <div class="sm-st-info">
+                                    <span>{$count['task3']}</span>
+                                    未处理工单
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    {/if}
+                    {if isset($count['task4'])}
+                    <div class="col-sm-2 col-xs-6">
+                        <div class="sm-st clearfix">
+                            <a href="/admin/vipmanage/bill/bill?c.statu=0" title="待审核--发票列表" class="btn-addtabs">
+                                <span class="sm-st-icon st-red"><i class="fa fa-stack-overflow fa-fw"></i></span>
+                                <div class="sm-st-info">
+                                    <span>{$count['task4']}</span>
+                                    待审核发票
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    {/if}
+                    {if isset($count['yjtx'])}
+                    <div class="col-sm-2 col-xs-6">
+                        <div class="sm-st clearfix">
+                            <a href="/admin/spread/withdraw?status=0" title="待审核--佣金提取" class="btn-addtabs">
+                                <span class="sm-st-icon st-red"><i class="fa fa-cny"></i></span>
+                                <div class="sm-st-info">
+                                    <span>{$count['yjtx']}</span>
+                                    待审核佣金提现
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    {/if}
+                </div>
+                <div class="row">
+                    {if isset($count['reserve_order'])}
+                    <div class="col-sm-2 col-xs-6">
+                        <div class="sm-st clearfix">
+                            <a href="/admin/domain/reserve/multop/index" title="多通道预定-提交"  class="btn-addtabs">
+                                <span class="sm-st-icon st-red"><i class="fa fa-users"></i></span>
+                                <div class="sm-st-info">
+                                    <span>{$count['reserve_order']}</span>
+                                    未提交域名预定
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    {/if}
+                    {if isset($count['task5'])}
+                    <div class="col-sm-2 col-xs-6">
+                        <div class="sm-st clearfix">
+                            <a href="/admin/domain/access/shift/index?audit=0" title="待审核--域名转入"  class="btn-addtabs">
+                                <span class="sm-st-icon st-red"><i class="fa fa-users"></i></span>
+                                <div class="sm-st-info">
+                                    <span>{$count['task5']}</span>
+                                    域名转入
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    {/if}
+                    <!-- {if isset($count['update_35'])}
+                    <div class="col-sm-2 col-xs-6">
+                        <div class="sm-st clearfix">
+                            <a href="/admin/domain/ownership" title="未处理--手动模板过户"  class="btn-addtabs">
+                                <span class="sm-st-icon st-red"><i class="fa fa-users"></i></span>
+                                <div class="sm-st-info">
+                                    <span>{$count['update_35']}</span>
+                                    手动模板过户
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    {/if} -->
+                    {if isset($count['entrust_0'])}
+                    <div class="col-sm-2 col-xs-6">
+                        <div class="sm-st clearfix">
+                            <a href="/admin/domain/entrust/index?e.status=0" title="待受理--域名委托"  class="btn-addtabs">
+                                <span class="sm-st-icon st-red"><i class="fa fa-pied-piper-alt"></i></span>
+                                <div class="sm-st-info">
+                                    <span>{$count['entrust_0']}</span>
+                                    未受理的域名委托
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    {/if}
+                    {if isset($count['entrust_1'])}
+                    <div class="col-sm-2 col-xs-6">
+                        <div class="sm-st clearfix">
+                            <a href="/admin/domain/entrust/index?e.status=1" title="已受理--域名委托"  class="btn-addtabs">
+                                <span class="sm-st-icon st-red"><i class="fa fa-pied-piper-alt"></i></span>
+                                <div class="sm-st-info">
+                                    <span>{$count['entrust_1']}</span>
+                                    已受理的域名委托
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    {/if}
+                </div>
+                <div class="row">
+                    {if isset($count['task6'])}
+                    <div class="col-sm-2 col-xs-6">
+                        <div class="sm-st clearfix">
+                            <a href="/admin/domain/recycle/recylist?t.status=2" title="待处理--回收任务"  class="btn-addtabs">
+                                <span class="sm-st-icon st-red"><i class="fa fa-pied-piper-alt"></i></span>
+                                <div class="sm-st-info">
+                                    <span>{$count['task6']}</span>
+                                    回收任务待处理
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    {/if}
+                    {if isset($count['recycle'])}
+                    <div class="col-sm-2 col-xs-6">
+                        <div class="sm-st clearfix">
+                            <a href="/admin/domain/recycle/manage?status=0" title="未联系--手动回收"  class="btn-addtabs">
+                                <span class="sm-st-icon st-red"><i class="fa fa-pied-piper-alt"></i></span>
+                                <div class="sm-st-info">
+                                    <span>{$count['recycle']}</span>
+                                    未联系的手动回收记录
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    {/if}
+                    {if isset($count['cancel'])}
+                    <div class="col-sm-2 col-xs-6">
+                        <div class="sm-st clearfix">
+                            <a href="/admin/vipmanage/canceluser?c.status=0" title="待审核--用户注销"  class="btn-addtabs">
+                                <span class="sm-st-icon st-orange"><i class="fa fa-stumbleupon"></i></span>
+                                <div class="sm-st-info">
+                                    <span>{$count['cancel']}</span>
+                                    用户注销申请
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    {/if}
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="two">
+                <div class="row">
+                    <div class="col-xs-12">
+                        {:__('Custom zone')}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script id="newstpl" type="text/html">
+    <ul class="nav nav-stacked">
+        <%for(var i=0;i < news.length;i++){%>
+        <%var item=news[i];%>
+        <li>
+            <a href="<%=item.url%>" target="_blank">
+                <span class="text"><%=item.title%></span>
+            </a>
+        </li>
+        <%}%>
+    </ul>
+</script>
+
+<script id="discussiontpl" type="text/html">
+    <ul class="products-list product-list-in-box">
+        <%for(var i=0;i < news.length;i++){%>
+        <%var item=news[i];%>
+        <li class="item">
+            <div class="">
+                <a href="<%=item.url%>" target="_blank" class="product-title">
+                    <%=item.title%>
+                    <span class="label label-warning pull-right"><%=item.comments_count%></span>
+                </a>
+                <span class="product-description">
+                    <%=item.last_time%>
+                </span>
+            </div>
+        </li>
+        <%}%>
+    </ul>
+</script>

@@ -1,0 +1,119 @@
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>{:__('Title')}</th>
+            <th>{:__('Content')}</th>
+        </tr>
+    </thead>
+    <form id="add-form" class="edit-form form-horizontal" role="form" data-toggle="validator" method="POST" action="">
+        <tbody>
+            <tr>
+                <td>持有人姓名(中文)</td>
+                <td>{$data['xing']}{$data['ming']}</td>
+            </tr>
+            <tr>
+                <td>持有人姓名(英文)</td>
+                <td>{$data['yxing']} {$data['yming']}</td>
+            </tr>
+            <tr>
+                <td>国家</td>
+                <td>中国</td>
+            </tr>
+            <tr>
+                <td>国家编号</td>
+                <td>{$data['Country']}</td>
+            </tr>
+            <tr>
+                <td>省份(中文)</td>
+                <td>{$data['ZhProvince']}</td>
+            </tr>
+            <tr>
+                <td>省份(英文)</td>
+                <td>{$data['yZhProvince']}</td>
+            </tr>
+            <tr>
+                <td>城市(中文)</td>
+                <td>{$data['ZhCity']}</td>
+            </tr>
+            <tr>
+                <td>城市(英文)</td>
+                <td>{$data['yZhCity']}</td>
+            </tr>
+            <tr>
+                <td>详细地址(中文)</td>
+                <td>{$data['address']}</td>
+            </tr>
+            <tr>
+                <td>详细地址(英文)</td>
+                <td>{$data['yaddress']}</td>
+            </tr>
+            <tr>
+                <td>邮政编码</td>
+                <td>
+                    {$data['PostalCode']}
+                </td>
+            </tr>
+            <tr>
+                <td>联系电话</td>
+                <td>
+                    {$data['Telephone']}
+                </td>
+            </tr>
+            <tr>
+                <td>持有人邮箱</td>
+                <td>
+                    {$data['Email']}
+                </td>
+            </tr>
+            <tr>
+                <td>模板类型</td>
+                <td>{$data['RegistrantType'] == 1 ? '个人' : '企业'}</td>
+            </tr>
+            <tr>
+                <td>身份证号码</td>
+                <td>{$data['renzhengno']}</td>
+            </tr>
+            <tr>
+            <td>身份证图片</td>
+            <td>
+                {php}
+                $aa = rand(10000,99999);
+                echo '<a href="'.IMGURL.'alireal/'.$data['image1'].'?='.$aa.'" target="_blank" class="">
+                <img width="100" height="102" src="'.IMGURL.'alireal/'.$data['image1'].'?='.$aa.'" class="img-responsive">
+            </a>';
+                {/php}
+            </td>
+        </tr>
+        {eq name="$data['RegistrantType']" value="2"}
+        <tr>
+            <td>营业执照号码</td>
+            <td>{$data['buslicence']}</td>
+        </tr>
+        
+        <tr>
+            <td>营业执照图片</td>
+            <td>
+                {php}
+                echo '<a href="'.IMGURL.'alireal/'.$data['image2'].'?='.$aa.'" target="_blank" class="">
+                <img width="100" height="102" src="'.IMGURL.'alireal/'.$data['image2'].'?='.$aa.'" class="img-responsive">
+            </a>';
+                {/php}
+            </td>
+        </tr>
+        {/eq}
+            <tr>
+                <td>创建时间</td>
+                <td>
+                    {$data['newstime']|date='Y-m-d H:i:s',###}
+                </td>
+            </tr>
+        </tbody>
+    </form>
+</table>
+<div class="hide layer-footer">
+    <label class="control-label col-xs-12 col-sm-2"></label>
+    <div class="col-xs-12 col-sm-8">
+        <button type="reset" class="btn btn-primary btn-embossed btn-close" onclick="Layer.closeAll();">{:__('Close')}</button>
+    </div>
+</div>
+

@@ -1,0 +1,243 @@
+2019-04-10 03:14:45 pid:1 Worker process terminated with ERROR: E_ERROR "Uncaught Error: Call to a member function lrange() on null in D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\test.php:19
+Stack trace:
+#0 [internal function]: {closure}()
+#1 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Events\Select.php(239): call_user_func_array(Object(Closure), Array)
+#2 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Events\Select.php(282): Workerman\Events\Select->tick()
+#3 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Worker.php(2357): Workerman\Events\Select->loop()
+#4 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Worker.php(1351): Workerman\Worker->run()
+#5 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Worker.php(1294): Workerman\Worker::forkWorkersForWindows()
+#6 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Worker.php(509): Workerman\Worker::forkWorkers()
+#7 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Wor in D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\test.php on line 19"
+2019-04-10 03:16:02 pid:1 Worker process terminated with ERROR: E_ERROR "Uncaught Error: Call to a member function lrange() on null in D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\test.php:19
+Stack trace:
+#0 [internal function]: {closure}()
+#1 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Events\Select.php(239): call_user_func_array(Object(Closure), Array)
+#2 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Events\Select.php(282): Workerman\Events\Select->tick()
+#3 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Worker.php(2357): Workerman\Events\Select->loop()
+#4 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Worker.php(1351): Workerman\Worker->run()
+#5 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Worker.php(1294): Workerman\Worker::forkWorkersForWindows()
+#6 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Worker.php(509): Workerman\Worker::forkWorkers()
+#7 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Wor in D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\test.php on line 19"
+2019-04-10 03:17:25 pid:1 Worker process terminated with ERROR: E_ERROR "Uncaught Error: Call to a member function lrange() on null in D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\test.php:14
+Stack trace:
+#0 [internal function]: test()
+#1 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Events\Select.php(239): call_user_func_array('test', Array)
+#2 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Events\Select.php(282): Workerman\Events\Select->tick()
+#3 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Worker.php(2357): Workerman\Events\Select->loop()
+#4 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Worker.php(1351): Workerman\Worker->run()
+#5 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Worker.php(1294): Workerman\Worker::forkWorkersForWindows()
+#6 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Worker.php(509): Workerman\Worker::forkWorkers()
+#7 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\ in D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\test.php on line 14"
+2019-04-10 03:18:17 pid:1 Worker process terminated with ERROR: E_ERROR "Uncaught Error: Call to a member function lrange() on null in D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\test.php:14
+Stack trace:
+#0 [internal function]: test()
+#1 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Events\Select.php(239): call_user_func_array('test', Array)
+#2 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Events\Select.php(282): Workerman\Events\Select->tick()
+#3 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Worker.php(2357): Workerman\Events\Select->loop()
+#4 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Worker.php(1351): Workerman\Worker->run()
+#5 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Worker.php(1294): Workerman\Worker::forkWorkersForWindows()
+#6 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Worker.php(509): Workerman\Worker::forkWorkers()
+#7 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\ in D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\test.php on line 14"
+2019-04-10 03:20:15 pid:1 Worker process terminated with ERROR: E_ERROR "Uncaught Error: Call to a member function lrange() on null in D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\test.php:19
+Stack trace:
+#0 [internal function]: {closure}()
+#1 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Events\Select.php(239): call_user_func_array(Object(Closure), Array)
+#2 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Events\Select.php(282): Workerman\Events\Select->tick()
+#3 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Worker.php(2357): Workerman\Events\Select->loop()
+#4 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Worker.php(1351): Workerman\Worker->run()
+#5 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Worker.php(1294): Workerman\Worker::forkWorkersForWindows()
+#6 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Worker.php(509): Workerman\Worker::forkWorkers()
+#7 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Wor in D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\test.php on line 19"
+2019-04-10 03:20:38 pid:1 Worker process terminated with ERROR: E_ERROR "Uncaught Error: Call to a member function lrange() on null in D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\test.php:19
+Stack trace:
+#0 [internal function]: {closure}()
+#1 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Events\Select.php(239): call_user_func_array(Object(Closure), Array)
+#2 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Events\Select.php(282): Workerman\Events\Select->tick()
+#3 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Worker.php(2357): Workerman\Events\Select->loop()
+#4 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Worker.php(1351): Workerman\Worker->run()
+#5 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Worker.php(1294): Workerman\Worker::forkWorkersForWindows()
+#6 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Worker.php(509): Workerman\Worker::forkWorkers()
+#7 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Wor in D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\test.php on line 19"
+2019-04-10 03:22:37 pid:1 Worker process terminated with ERROR: E_ERROR "Uncaught Error: Call to undefined method Workerman\Worker::lrange() in D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\test.php:19
+Stack trace:
+#0 [internal function]: {closure}()
+#1 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Events\Select.php(239): call_user_func_array(Object(Closure), Array)
+#2 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Events\Select.php(282): Workerman\Events\Select->tick()
+#3 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Worker.php(2357): Workerman\Events\Select->loop()
+#4 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Worker.php(1351): Workerman\Worker->run()
+#5 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Worker.php(1294): Workerman\Worker::forkWorkersForWindows()
+#6 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Worker.php(509): Workerman\Worker::forkWorkers()
+#7 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\e in D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\test.php on line 19"
+2019-04-11 02:06:55 pid:1 ParseError: syntax error, unexpected 'class' (T_CLASS), expecting '{' in D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Lib\Redis.php:8
+Stack trace:
+#0 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\vendor\composer\ClassLoader.php(322): Composer\Autoload\includeFile('D:\\php\\PHPTutor...')
+#1 [internal function]: Composer\Autoload\ClassLoader->loadClass('Workerman\\Lib\\R...')
+#2 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\test.php(19): spl_autoload_call('Workerman\\Lib\\R...')
+#3 [internal function]: {closure}(Object(Workerman\Worker))
+#4 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Worker.php(2342): call_user_func(Object(Closure), Object(Workerman\Worker))
+#5 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Worker.php(1351): Workerman\Worker->run()
+#6 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Worker.php(1294): Workerman\Worker::forkWorkersForWindows()
+#7 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Worker.php(509): Workerman\Worker::forkWorkers()
+#8 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\test.php(33): Workerman\Worker::runAll()
+#9 {main}
+
+Next ParseError: syntax error, unexpected class (T_CLASS), expecting '{' in D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Lib\Redis.php:8
+Stack trace:
+#0 [internal function]: Workerman\Autoloader::loadByNamespace('Workerman\\Lib\\R...')
+#1 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\test.php(19): spl_autoload_call('Workerman\\Lib\\R...')
+#2 [internal function]: {closure}(Object(Workerman\Worker))
+#3 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Worker.php(2342): call_user_func(Object(Closure), Object(Workerman\Worker))
+#4 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Worker.php(1351): Workerman\Worker->run()
+#5 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Worker.php(1294): Workerman\Worker::forkWorkersForWindows()
+#6 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Worker.php(509): Workerman\Worker::forkWorkers()
+#7 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\test.php(33): Workerman\Worker::runAll()
+#8 {main}
+2019-04-11 02:06:56 pid:1 Worker process terminated
+2019-04-11 02:11:22 pid:1 Worker process terminated
+2019-04-11 02:11:56 pid:1 Worker process terminated
+2019-04-11 02:54:45 pid:1 Worker process terminated with ERROR: E_ERROR "Uncaught PDOException: SQL:SELECT tit,userid,dqsj FROM `yj_domain_access_show` WHERE aid=:aid SQLSTATE[42S22]: Column not found: 1054 Unknown column 'tit' in 'field list' in D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\vendor\workerman\mysql\src\Connection.php:1772
+Stack trace:
+#0 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\vendor\workerman\mysql\src\Connection.php(1830): Workerman\MySQL\Connection->execute('SELECT tit,user...', Array)
+#1 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\test.php(36): Workerman\MySQL\Connection->query()
+#2 [internal function]: DomainStorage()
+#3 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Events\Select.php(239): call_user_func_array('DomainStorage', Array)
+#4 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Events\Select.php(282): Workerman\Events\Select->tick()
+#5 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Worker.php(2357): Wo in D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\vendor\workerman\mysql\src\Connection.php on line 1772"
+2019-04-11 02:55:53 pid:1 Worker process terminated
+2019-04-11 02:59:33 pid:1 Worker process terminated
+2019-04-11 03:09:17 pid:1 Worker process terminated with ERROR: E_COMPILE_ERROR "require_once(): Failed opening required 'D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Libvendor/aliyun/aliyun-php-sdk-core/Config.php' (include_path='.;C:\php\pear') in D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Lib\AliApi.php on line 6"
+2019-04-11 03:10:08 pid:1 Worker process terminated with ERROR: E_COMPILE_ERROR "require_once(): Failed opening required '../vendor/aliyun/aliyun-php-sdk-core/Config.php' (include_path='.;C:\php\pear') in D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Lib\AliApi.php on line 6"
+2019-04-11 03:11:22 pid:1 Worker process terminated
+2019-04-11 03:12:06 pid:1 Worker process terminated with ERROR: E_COMPILE_ERROR "require_once(): Failed opening required 'D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Lib../vendor/aliyun/aliyun-php-sdk-core/Config.php' (include_path='.;C:\php\pear') in D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Lib\AliApi.php on line 6"
+2019-04-11 03:13:09 pid:1 Worker process terminated with ERROR: E_COMPILE_ERROR "require_once(): Failed opening required 'D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Lib../vendor/aliyun/aliyun-php-sdk-core/Config.php' (include_path='.;C:\php\pear') in D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Lib\AliApi.php on line 6"
+2019-04-11 03:13:17 pid:1 Worker process terminated
+2019-04-11 03:13:58 pid:1 Worker process terminated
+2019-04-11 03:15:08 pid:1 Worker process terminated
+2019-04-11 03:19:08 pid:1 Worker process terminated
+2019-04-11 03:39:17 pid:1 Worker process terminated with ERROR: E_ERROR "Uncaught Error: Class 'AliApi' not found in D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\test.php:33
+Stack trace:
+#0 [internal function]: DomainStorage()
+#1 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Events\Select.php(239): call_user_func_array('DomainStorage', Array)
+#2 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Events\Select.php(282): Workerman\Events\Select->tick()
+#3 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Worker.php(2357): Workerman\Events\Select->loop()
+#4 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Worker.php(1351): Workerman\Worker->run()
+#5 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Worker.php(1294): Workerman\Worker::forkWorkersForWindows()
+#6 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Worker.php(509): Workerman\Worker::forkWorkers()
+#7 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\ in D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\test.php on line 33"
+2019-04-11 03:39:40 pid:1 Worker process terminated
+2019-04-11 03:39:58 pid:1 Worker process terminated
+2019-04-11 03:40:58 pid:1 Worker process terminated
+2019-04-11 03:41:37 pid:1 Worker process terminated
+2019-04-11 03:42:06 pid:1 Worker process terminated
+2019-04-11 03:42:28 pid:1 Worker process terminated
+2019-04-11 03:45:38 pid:1 Worker process terminated
+2019-04-11 03:45:53 pid:1 Worker process terminated
+2019-04-11 04:35:49 pid:1 Worker process terminated
+2019-04-11 04:36:07 pid:1 Worker process terminated
+2019-04-11 04:37:01 pid:1 Worker process terminated
+2019-04-11 04:37:20 pid:1 Worker process terminated
+2019-04-11 04:38:46 pid:1 Worker process terminated
+2019-04-11 04:39:14 pid:1 Worker process terminated
+2019-04-11 04:40:00 pid:1 Worker process terminated
+2019-04-11 04:41:13 pid:1 Worker process terminated
+2019-04-11 04:41:44 pid:1 Worker process terminated
+2019-04-11 04:42:10 pid:1 Worker process terminated
+2019-04-11 04:43:45 pid:1 Worker process terminated
+2019-04-11 04:44:29 pid:1 Worker process terminated
+2019-04-11 04:45:49 pid:1 Worker process terminated
+2019-04-11 04:46:14 pid:1 Worker process terminated
+2019-04-11 04:47:47 pid:1 Worker process terminated
+2019-04-11 04:48:30 pid:1 Worker process terminated
+2019-04-11 04:49:13 pid:1 Worker process terminated
+2019-04-11 04:49:40 pid:1 Worker process terminated
+2019-04-11 04:50:20 pid:1 Worker process terminated
+2019-04-11 04:52:24 pid:1 Worker process terminated
+2019-04-11 04:55:21 pid:1 Worker process terminated
+2019-04-11 04:57:01 pid:1 Worker process terminated
+2019-04-11 04:57:23 pid:1 Worker process terminated
+2019-04-11 04:58:03 pid:1 Worker process terminated
+2019-04-11 05:41:15 pid:1 Worker process terminated
+2019-04-11 05:48:11 pid:1 Worker process terminated
+2019-04-11 05:48:23 pid:1 Worker process terminated
+2019-04-11 05:48:31 pid:1 Worker process terminated
+2019-04-11 05:49:09 pid:1 Worker process terminated
+2019-04-11 06:00:13 pid:1 Worker process terminated
+2019-04-11 06:00:39 pid:1 Worker process terminated
+2019-04-11 06:14:40 pid:1 Worker process terminated
+2019-04-11 06:30:41 pid:1 Worker process terminated
+2019-04-11 06:31:16 pid:1 Worker process terminated
+2019-04-11 06:31:54 pid:1 Worker process terminated
+2019-04-11 06:33:30 pid:1 Worker process terminated
+2019-04-11 06:34:02 pid:1 Worker process terminated
+2019-04-11 06:37:57 pid:1 Worker process terminated
+2019-04-11 07:12:57 pid:1 Worker process terminated with ERROR: E_PARSE "syntax error, unexpected '*', expecting function (T_FUNCTION) in D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Lib\SendEmail.php on line 31"
+2019-04-11 07:36:37 pid:1 Worker process terminated with ERROR: E_COMPILE_ERROR "require_once(): Failed opening required 'D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Lib/comm/config.php' (include_path='.;C:\php\pear') in D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Lib\SendEmail.php on line 7"
+2019-04-11 07:37:33 pid:1 Worker process terminated with ERROR: E_COMPILE_ERROR "require_once(): Failed opening required 'D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Lib/comm/config.php' (include_path='.;C:\php\pear') in D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Lib\SendEmail.php on line 5"
+2019-04-11 07:37:42 pid:1 Worker process terminated
+2019-04-11 07:38:31 pid:1 Worker process terminated
+2019-04-11 07:39:22 pid:1 Worker process terminated
+2019-04-11 07:41:17 pid:1 Worker process terminated
+2019-04-11 07:50:22 pid:1 Worker process terminated
+2019-04-11 07:50:53 pid:1 Worker process terminated
+2019-04-11 07:51:30 pid:1 Worker process terminated
+2019-04-11 07:52:12 pid:1 Worker process terminated
+2019-04-11 08:30:07 pid:1 Worker process terminated with ERROR: E_COMPILE_ERROR "require_once(): Failed opening required 'D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Lib/comm/config.php' (include_path='.;C:\php\pear') in D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Lib\SendEmail.php on line 7"
+2019-04-11 08:36:11 pid:1 Worker process terminated with ERROR: E_ERROR "Uncaught Error: Call to undefined method Workerman\Lib\Redis::rpop() in D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\test.php:35
+Stack trace:
+#0 [internal function]: DomainStorage()
+#1 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Events\Select.php(239): call_user_func_array('DomainStorage', Array)
+#2 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Events\Select.php(282): Workerman\Events\Select->tick()
+#3 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Worker.php(2357): Workerman\Events\Select->loop()
+#4 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Worker.php(1351): Workerman\Worker->run()
+#5 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Worker.php(1294): Workerman\Worker::forkWorkersForWindows()
+#6 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Worker.php(509): Workerman\Worker::forkWorkers()
+#7 D:\php\PHPTutorial\WWW\new.spreader.huaimi. in D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\test.php on line 35"
+2019-04-11 08:37:11 pid:1 Worker process terminated with ERROR: E_ERROR "Uncaught Error: Call to undefined method Workerman\Lib\Redis::rpop() in D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\test.php:35
+Stack trace:
+#0 [internal function]: DomainStorage()
+#1 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Events\Select.php(239): call_user_func_array('DomainStorage', Array)
+#2 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Events\Select.php(282): Workerman\Events\Select->tick()
+#3 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Worker.php(2357): Workerman\Events\Select->loop()
+#4 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Worker.php(1351): Workerman\Worker->run()
+#5 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Worker.php(1294): Workerman\Worker::forkWorkersForWindows()
+#6 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Worker.php(509): Workerman\Worker::forkWorkers()
+#7 D:\php\PHPTutorial\WWW\new.spreader.huaimi. in D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\test.php on line 35"
+2019-04-11 08:38:28 pid:1 Worker process terminated with ERROR: E_ERROR "Uncaught Error: Call to undefined method Workerman\Lib\Redis::Rpop() in D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\test.php:35
+Stack trace:
+#0 [internal function]: DomainStorage()
+#1 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Events\Select.php(239): call_user_func_array('DomainStorage', Array)
+#2 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Events\Select.php(282): Workerman\Events\Select->tick()
+#3 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Worker.php(2357): Workerman\Events\Select->loop()
+#4 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Worker.php(1351): Workerman\Worker->run()
+#5 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Worker.php(1294): Workerman\Worker::forkWorkersForWindows()
+#6 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Worker.php(509): Workerman\Worker::forkWorkers()
+#7 D:\php\PHPTutorial\WWW\new.spreader.huaimi. in D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\test.php on line 35"
+2019-04-11 08:42:25 pid:1 Worker process terminated with ERROR: E_ERROR "Uncaught PDOException: SQL:SELECT `s`.`id`,`a`.`userid`,`s`.`domain` FROM `yj_domain_access_show` `s` LEFT JOIN `yj_domain_access` `a` ON `a`.`id`=`s`.`aid` WHERE `s`.`aid`= SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1 in D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\vendor\workerman\mysql\src\Connection.php:1772
+Stack trace:
+#0 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\vendor\workerman\mysql\src\Connection.php(1830): Workerman\MySQL\Connection->execute('SELECT `s`.`id`...', Array)
+#1 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\test.php(37): Workerman\MySQL\Connection->query()
+#2 [internal function]: DomainStorage()
+#3 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Events\Select.php(239): call_user_func_array('DomainStorage', Array)
+#4 D:\php\PHPTutor in D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\vendor\workerman\mysql\src\Connection.php on line 1772"
+2019-04-11 08:43:53 pid:1 Worker process terminated
+2019-04-11 08:45:46 pid:1 Worker process terminated
+2019-04-11 09:12:14 pid:1 Worker process terminated with ERROR: E_ERROR "Uncaught PDOException: SQL:SELECT uid FROM `yj_domain_user` WHERE id= SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1 in D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\vendor\workerman\mysql\src\Connection.php:1772
+Stack trace:
+#0 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\vendor\workerman\mysql\src\Connection.php(1830): Workerman\MySQL\Connection->execute('SELECT uid FROM...', Array)
+#1 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\test.php(96): Workerman\MySQL\Connection->query()
+#2 [internal function]: DomainStorage()
+#3 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Events\Select.php(239): call_user_func_array('DomainStorage', Array)
+#4 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Events\Select.php(282): Workerman\Events\Select- in D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\vendor\workerman\mysql\src\Connection.php on line 1772"
+2019-04-11 09:34:38 pid:1 Worker process terminated
+2019-04-11 09:54:08 pid:1 Worker process terminated with ERROR: E_ERROR "Uncaught PDOException: SQL:SELECT uid,audit,remark AS `任务执行完成`,finishdate FROM `yj_domain_access` WHERE id=225 SQLSTATE[42S22]: Column not found: 1054 Unknown column 'uid' in 'field list' in D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\vendor\workerman\mysql\src\Connection.php:1772
+Stack trace:
+#0 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\vendor\workerman\mysql\src\Connection.php(1830): Workerman\MySQL\Connection->execute('SELECT uid,audi...', Array)
+#1 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\test.php(98): Workerman\MySQL\Connection->query()
+#2 [internal function]: DomainStorage()
+#3 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Events\Select.php(239): call_user_func_array('DomainStorage', Array)
+#4 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\Events\Select.php(282): Workerman\Events\Select->tick()
+#5 D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerma in D:\php\PHPTutorial\WWW\new.spreader.huaimi.com\extend\Workerman-master\vendor\workerman\mysql\src\Connection.php on line 1772"
+2019-04-11 10:10:34 pid:1 Worker process terminated
+2019-04-11 10:15:55 pid:1 Worker process terminated
+2019-04-11 10:17:08 pid:1 Worker process terminated
+2019-04-11 10:19:22 pid:1 Worker process terminated

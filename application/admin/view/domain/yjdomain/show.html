@@ -1,0 +1,213 @@
+<form id="edit-form" class="form-horizontal form-ajax" role="form" data-toggle="validator" method="POST" action="">
+
+    <h4>基本信息</h4>
+    <div class="form-group">
+        <label for="uid" class="control-label col-xs-12 col-sm-2">归属用户:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="uid" value="{$data.uid}" disabled="" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="inserttime" class="control-label col-xs-12 col-sm-2">发布时间:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="inserttime"  value="{$data.inserttime}" disabled="" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="tit" class="control-label col-xs-12 col-sm-2">域名:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="tit"  value="{$data.tit}" disabled="" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="tit" class="control-label col-xs-12 col-sm-2">售价:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="tit"  value="{$data.money}" disabled="" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="tit" class="control-label col-xs-12 col-sm-2">出售类型:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="tit"  value="{$data.type}" disabled="" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="tit" class="control-label col-xs-12 col-sm-2">上下架:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="tit"  value="{$data.status}" disabled="" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="tit" class="control-label col-xs-12 col-sm-2">更新时间:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="tit"  value="{$data.updatetime}" disabled="" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="tit" class="control-label col-xs-12 col-sm-2">结束时间:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="tit"  value="{$data.endtime}" disabled="" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="tit" class="control-label col-xs-12 col-sm-2">备注:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="tit"  value="{$data.txt}" disabled="" />
+        </div>
+    </div>
+    <h4>备案注册</h4>
+    <div class="form-group">
+        <label for="tit" class="control-label col-xs-12 col-sm-2">备案主体:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="tit"  value="{$data.icp_org}" disabled="" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="tit" class="control-label col-xs-12 col-sm-2">备案号:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="tit"  value="{$data.icp_serial}" disabled="" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="tit" class="control-label col-xs-12 col-sm-2">注册接口商:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="tit"  value="{$data.zcs}---{$data.api}" disabled="" />
+        </div>
+    </div>
+    <h4>属性信息</h4>
+    <div class="form-group">
+        <label for="tit" class="control-label col-xs-12 col-sm-2">隐藏状态:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="tit"  value="{$data.display == 1?'隐藏':'显示'}" disabled="" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="tit" class="control-label col-xs-12 col-sm-2">建站类型:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="tit"  value="{$data.icpholder}" disabled="" />
+        </div>
+    </div>
+     <div class="form-group">
+        <label for="tit" class="control-label col-xs-12 col-sm-2">域名类型:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="tit"  value="{$data.stype}" disabled="" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="tit" class="control-label col-xs-12 col-sm-2">特殊属性:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="tit"  value="{$data.attc}" disabled="" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="tit" class="control-label col-xs-12 col-sm-2">建站性质:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="tit"  value="{$data.icptrue}" disabled="" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="tit" class="control-label col-xs-12 col-sm-2">质保属性:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="tit"  value="{$data.quality}" disabled="" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="tit" class="control-label col-xs-12 col-sm-2">备案号:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="tit"  value="{$data.icp_serial}" disabled="" />
+        </div>
+    </div>
+    <h4>解析记录</h4>
+    <div class="form-group">
+        <label for="tit" class="control-label col-xs-12 col-sm-2">当前解析:</label>
+        <div class="col-xs-12 col-sm-8">
+            <table class="table">
+                <tr>
+                    <th>记录类型</th>
+                    <th>主机记录</th>
+                    <th>解析线路(isp)</th>
+                    <th>记录值</th>
+                    <th>TTL值</th>
+                    <th>状态</th>
+                </tr>
+                {if $data['parse']}
+                    {foreach $data['parse'] as $k => $v}
+                        <tr>
+                            <td>{$v['Type']}</td>
+                            <td>{$v['RR']}</td>
+                            <td>{$v['Line']}</td>
+                            <td>{$v['Value']}</td>
+                            <td>{$v['TTL']}</td>
+                            <td>{$v['Status'] == 'Enable'?'正常':'暂停'}</td>
+                        </tr>
+                    {/foreach}
+                {else}
+                    <tr>
+                        <td align="center" colspan="6">无记录</td>
+                    </tr>
+                {/if}
+               
+            </table>
+            <br>
+        </div>
+    </div>
+    <h4>DNS信息</h4>
+        <div class="form-group">
+            <label for="tit" class="control-label col-xs-12 col-sm-2">域名DNS:</label>
+            <div class="col-xs-12 col-sm-8" style="margin-top:7px;">
+                <span>{$data['whois']['dns']}</span>
+            </div>
+        </div><br>
+        <div class="form-group">
+            <label for="tit" class="control-label col-xs-12 col-sm-2">注册人姓名:</label>
+            <div class="col-xs-12 col-sm-8" style="margin-top:7px;">
+                <span>{$data['whois']['registerName']}</span>
+            </div>
+        </div><br>
+        <div class="form-group">
+            <label for="tit" class="control-label col-xs-12 col-sm-2">注册人邮箱:</label>
+            <div class="col-xs-12 col-sm-8" style="margin-top:7px;">
+                <span>{$data['whois']['registerEmail']}</span>
+            </div>
+        </div><br>
+    <h4>交易记录</h4>
+     <div class="form-group">
+        <label for="tit" class="control-label col-xs-12 col-sm-2">当前解析:</label>
+        <div class="col-xs-12 col-sm-8">
+            <table class="table">
+                <tr>
+                    <th>买家</th>
+                    <th>域名金额</th>
+                    <th>实付金额</th>
+                    <th>付款时间</th>
+                    <th>卖家</th>
+                    <th>交易类型</th>
+                </tr>
+                {if $data['teta']}
+                    {foreach $data['teta'] as $k => $v}
+                        <tr>
+                            <td>{$v['uid']}</td>
+                            <td>{$v['money']}</td>
+                            <td>{$v['final_money']}</td>
+                            <td>{$v['paytime']}</td>
+                            <td>{$v['suid']}</td>
+                            <td>{if($v['type'] == '0')} 正常订单 {elseif($v['type'] == 1)} 满减 {elseif($v['type'] == 2)} 微信活动 {elseif($v['type'] == 9)} 打包域名 {/if}</td>
+                        </tr>
+                    {/foreach}
+                {else}
+                    <tr>
+                        <td align="center" colspan="6">无记录</td>
+                    </tr>
+                {/if}
+               
+            </table>
+            <br>
+        </div>
+    </div>
+<div class="hide layer-footer">
+    <label class="control-label col-xs-12 col-sm-2"></label>
+    <div class="col-xs-12 col-sm-8">
+        <button type="reset" class="btn btn-primary btn-embossed btn-close" onclick="Layer.closeAll();">{:__('Close')}</button>
+    </div>
+</div>
+</form>

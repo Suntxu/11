@@ -1,0 +1,181 @@
+    <style type="text/css">
+    .right .uk .l2{
+        padding-top:7px;
+    }
+     .wtfl{
+        margin:10px 0;
+    }
+    .touxiang{
+        float:left;
+        border-radius:50%;
+        width:40px;
+        height:40px;
+        margin-right:15px;
+    }
+    .jllist{
+        padding:20px 0;
+        border-bottom:1px dashed #e5e5e5;
+        font-weight:bold;
+    }
+    .user{
+       color: #999;
+       font-weight:normal;
+    }
+    .datu{
+        display:none;
+    }
+    .time{
+        color:#999;
+        font-size:10px;
+        position:relative;
+        top:5px;
+        font-weight:normal;
+    }
+    .grxinxi{
+        background-color:#e5e5e5;
+        padding:10px 20px;
+        box-sizing:border-box;
+    }
+    .grxinxi p,
+    .grxinxi p span{
+        font-size:12px;
+        line-height:25px;
+    }
+    .tixing{
+        margin-top:10px;
+    }
+    .guke{
+        padding-left:50px;
+        font-size:12px;
+    }
+    .kzn p{
+        font-size:12px;
+        color:#666;
+        line-height:25px;
+    }
+    .kzn p span{
+        color:red;
+        font-size:12px;
+    }
+    .kzn .form-group{
+        margin-top:20px;
+    }
+    .kzn .form-group textarea{
+        margin-top:10px;
+        margin-bottom:5px;
+    }
+    /*图片上传预览区*/
+    .file-preview{
+        width: 100%;
+
+    }
+
+    .file-caption-main{
+        width: 80%;
+
+    }
+    .input-group .form-control:first-child{
+        display: none;
+    }
+    .file-preview-frame{
+        height: 93px;
+    }
+</style>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>{:__('Title')}</th>
+            <th>{:__('Content')}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>工单编号</td>
+            <td>{$data['bh']}</td>
+        </tr>
+        <tr>
+            <td>工单类型</td>
+            <td>{$data['type']}</td>
+        </tr>
+        <tr>
+            <td>工单内容</td>
+            <td>{$data['desc']}</td>
+        </tr>
+        <tr>
+            <td>工单状态</td>
+            <td>{$data['fx_stat1']}</td>
+        </tr>
+        <tr>
+            <td>工单进度</td>
+            <td>{$data['status']}</td>
+        </tr>
+        <tr>
+            <td>工单文件</td>
+            <td>{$data['img']}</td>
+        </tr>
+        <td>
+            <td>{$data['ig']}</td>
+        </td>     
+        <tr>
+            <td>沟通记录</td>
+            <td>
+                {$hf}
+            </td>
+        </tr>
+        {if  $data['fx_stat'] == 1 || $data['fx_stat'] == 0}
+           <tr>
+            <td>内容回复</td>
+            <td>
+                <form id="add-form" class="edit-form form-horizontal" role="form" data-toggle="validator" method="POST" action="">
+                        <table class="table table-striped">
+                            <thead>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2"></label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <textarea id="hf" style="width: 100%; min-height: 200px; z-index: 90;" name="hf" class="form-control" rows="5"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="form-group">
+                                            <label for="c-avatar" class="control-label col-xs-12 col-sm-2">回复文件:</label>
+                                            <div class="col-xs-12 col-sm-8">
+                                                <div class="input-group">
+                                                    <input id="c-avatar" data-rule="" class="form-control" size="50" name="file" type="text" value="">
+                                                    <div class="input-group-addon no-border no-padding">
+                                                        <span><button type="button" id="plupload-avatar" class="btn btn-danger plupload" data-input-id="c-avatar" data-mimetype="image/gif,image/jpeg,image/png,image/jpg,image/bmp" data-multiple="ture"  data-preview-id="p-avatar"><i class="fa fa-upload"></i> 上传</button></span>
+                                                    </div>
+                                                    <span class="msg-box n-right" for="c-avatar"></span>
+                                                </div>
+                                                <ul class="row list-inline plupload-preview" id="p-avatar"></ul>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <input type="hidden" name="gid" value="{$data['id']}">
+                                    <input type="hidden" name="flag" value="dsds">
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td align="center" style="background:#f1f4f6">
+                                        <button type="submit" class="btn btn-success btn-embossed">{:__('OK')}</button>
+                                        <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </form>
+            </td>
+
+        </tr>
+    {/if}
+    </tbody>
+</table>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{:isset($page['title'])?$page['title'].' - ':''}{$config.sitename}</title>
+        <meta charset="utf-8">
+        <meta name="keywords" content="{$keywords??''}">
+        <meta name="description" content="{$description??''}">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta property="og:type" content="article">
+        <meta property="og:title" content="{:isset($page['title'])?$page['title'].' - ':''}{$config.sitename}">
+        <meta property="og:description" content="{$description??''}">
+        <!--<meta property="og:image" content="__ADDON__/images/logo.png">-->
+
+        <!--<link rel="icon" href="__ADDON__/images/logo.png" type="image/x-icon">-->
+
+        <!-- <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Roboto Mono" rel="stylesheet" type="text/css"> -->
+        <link href="__ADDON__/css/highlight.min.css" rel="stylesheet" type="text/css">
+        <link href="__ADDON__/css/search.css" rel="stylesheet" type="text/css">
+
+        <!-- main page styles -->
+        <link rel="stylesheet" href="__ADDON__/css/{:$page.type=='index'?'index':'page'}.css">
+
+        {if $config.extendstyle}
+        <style type="text/css">
+            {$config.extendstyle}
+        </style>
+        {/if}
+
+        <script>window.PAGE_TYPE = "{$page.type}"</script>
+        <script>window.SEARCH_URL = "__ADDON__/js/docs.json"</script>
+        <script>window.DOCS_MODE = "{$docsmode}"</script>
+    </head>
+    <body class="{:$page.type=='index'?'':'docs'}">
+
+        <div id="mobile-bar" {:$page.type=='index'?'class="top"':''}>
+            <a class="menu-button"></a>
+            <a class="logo" href="{if $config['openindex']&&$config['redirectindex']}__HOMEURL__{else /}__INDEXURL__{/if}">
+                {if $config['logo']}
+                <img src="__CDN__{$config.logo}">
+                {else /}
+                <span>{$config.sitename}</span>
+                {/if}
+            </a>
+        </div>
+
+        {include file="common/header"}
+
+        {if $page['type']=='index'}
+        {__CONTENT__}
+        {else /}
+        <div id="main" class="fix-sidebar">
+            {__CONTENT__}
+        </div>
+        <script src="__ADDON__/js/smooth-scroll.min.js"></script>
+        {/if}
+
+        <script src="__ADDON__/js/jquery.min.js"></script>
+        <script src="__ADDON__/js/highlight.min.js"></script>
+        <script src="__ADDON__/js/common.js"></script>
+        <script src="__ADDON__/js/search.js"></script>
+        <script src="__ADDON__/js/fastclick.min.js"></script>
+
+        <script type="text/javascript">
+            document.addEventListener('DOMContentLoaded', function () {
+                FastClick.attach(document.body);
+            }, false);
+        </script>
+
+        {if $config.extendscript}
+        <script type="text/javascript">
+            {
+                $config.extendscript
+            }
+        </script>
+        {/if}
+    </body>
+</html>

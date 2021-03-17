@@ -1,0 +1,141 @@
+<style type="text/css">
+    @media (max-width: 375px) {
+        .edit-form tr td input{width:100%;}
+        .edit-form tr th:first-child,.edit-form tr td:first-child{
+            width:20%;
+        }
+        .edit-form tr th:last-child,.edit-form tr td:last-child{
+            display: none;
+        }
+    }
+    .profile-avatar-container {
+        position:relative;
+        width:100px;margin:0 1%;
+    }
+    .profile-avatar-container .profile-user-img{
+        width:100px;
+        height:100px;
+    }
+    .profile-avatar-container .profile-avatar-text {
+        display:none;
+    }
+    .profile-avatar-container:hover .profile-avatar-text {
+        display:block;
+        position:absolute;
+        height:100px;
+        width:100px;
+        background:#444;
+        opacity: .6;
+        color: #fff;
+        top:0;
+        left:0;
+        line-height: 100px;
+        text-align: center;
+    }
+    .profile-avatar-container button{
+        position:absolute;
+        top:0;left:0;width:100px;height:100px;opacity: 0;
+    }
+    .sf:hover{
+        color: orange;
+    }
+    #f1:hover{
+        color: #0073EA;
+    }
+    #ylsz .form-control{
+        width:70%;
+    }
+</style>
+<div class="panel panel-default panel-intro">
+    <div class="panel-body">
+        <div id="myTabContent" class="tab-content">
+            <div class="" id="add">
+                <div class="widget-body no-padding">
+                    <form id="add-form" class="edit-form form-horizontal" role="form" data-toggle="validator" method="POST" action="">
+                        <table class="table table-striped">
+                            <thead>
+                              
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="row">
+                                            <h3>发布公告</h3>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">公告标题</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control" id="value1" name="row[tit]" value="{$data['tit']}" data-rule="required" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">SEO关键字</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control" id="value1" name="row[wkey]" value="{$data['wkey']}" />
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">SEO描述</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <textarea name="row[wdes]" style="width: 100%; min-height: 60px; z-index: 90;" class="form-control"  rows="5">{$data['wdes']}</textarea>
+                                                </div>
+                                            </div>
+                    
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">详情描述</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <textarea name="row[txt]" class="editor edui-body-container" style="width: 100%; min-height: 200px; z-index: 90;" class="form-control" id="lieb" rows="5">{$data['txt']}</textarea>
+                                                </div>
+                                            </div>
+                                          <h4 style="color: red">管理员操作</h4>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">更新时间</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" id="value1" value="{$data['sj']}" class="form-control datetimepicker" data-format="YYYY-MM-DD" name="row[sj]" data-use-current="true" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">点击率</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="number" class="form-control" id="value1" name="row[djl]" value="{$data['djl']}" data-rule='number'  />
+                                                </div>
+                                            </div>
+                                            <input type="hidden" name="row[id]"  value="{$data['id']}" >
+                                            <div class="form-group">
+                                                <label class="control-label col-xs-12 col-sm-2">审核状态</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <div class="radio">
+                                                        <label for="zt1"><input id="zt1" name="row[zt]" {if $data['zt'] == '0' } checked {/if} type="radio" value="0">正常展示</label> 
+                                                        <label for="zt2"><input id="zt2" name="row[zt]" {if $data['zt'] == '1' } checked {/if} type="radio" value="1">正在审核</label>
+                                                        <label for="zt3"><input id="zt3" name="row[zt]" {if $data['zt'] == '2' } checked {/if} type="radio" value="2">审核不通过</label>
+                                                    </div> 
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <!-- <tr>
+                                    
+                                    <td align="center">
+                                        <button type="reset" class="btn btn-primary btn-embossed btn-close" onclick="Layer.closeAll();">关闭</button>
+                                        <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+                                    </td>
+
+
+                                </tr> -->
+                            </tfoot>
+                        </table>
+                    </form>
+                </div>
+            </div>
+ 
+        
+<!-- <div class="hide layer-footer">
+    <label class="control-label col-xs-12 col-sm-2"></label>
+    <div class="col-xs-12 col-sm-8">
+        <button type="reset" class="btn btn-primary btn-embossed btn-close" onclick="window.close();">{:__('Close')}</button>
+    </div>
+</div> -->

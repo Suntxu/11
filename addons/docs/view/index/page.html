@@ -1,0 +1,39 @@
+{if $page['type']}
+{include file="common/sidebar"}
+{else /}
+<div class="sidebar">
+    <ul class="main-menu">
+        {include file="common/menu"}
+    </ul>
+</div>
+{/if}
+<div class="content {:$page['type']?$page['type'].' with-sidebar':''}">
+    {if $page.title}
+    <h1>{$page.title}</h1>
+    {/if}
+
+    {$page.content}
+
+    {if $config['openprevnext']}
+    <div class="docs-links">
+
+        {if isset($pages[$page['index']-1])}
+        <span>← <a href="{$pages[$page['index']-1]['url']}">{$pages[$page['index']-1]['title']}</a></span>
+        {/if}
+
+        {if isset($pages[$page['index']+1])}
+        <span style="float:right"><a href="{$pages[$page['index']+1]['url']}">{$pages[$page['index']+1]['title']}</a> →</span>
+        {/if}
+    </div>
+    {/if}
+    
+    <div class="footer">
+        {if $config['opencontribute']}
+        {$config['lang']['wanna to edit']}
+        <a href="{$page.contributeurl}" target="_blank">
+            {$config['lang']['edit on git']}
+        </a>
+        {/if}
+    </div>
+    
+</div>

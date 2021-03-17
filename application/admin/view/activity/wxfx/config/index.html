@@ -1,0 +1,209 @@
+<style type="text/css">
+    @media (max-width: 375px) {
+        .edit-form tr td input{width:100%;}
+        .edit-form tr th:first-child,.edit-form tr td:first-child{
+            width:20%;
+        }
+        .edit-form tr th:last-child,.edit-form tr td:last-child{
+            display: none;
+        }
+    }
+    .profile-avatar-container {
+        position:relative;
+        width:100px;margin:0 1%;
+    }
+    .profile-avatar-container .profile-user-img{
+        width:100px;
+        height:100px;
+    }
+    .profile-avatar-container .profile-avatar-text {
+        display:none;
+    }
+    .profile-avatar-container:hover .profile-avatar-text {
+        display:block;
+        position:absolute;
+        height:100px;
+        width:100px;
+        background:#444;
+        opacity: .6;
+        color: #fff;
+        top:0;
+        left:0;
+        line-height: 100px;
+        text-align: center;
+    }
+    .profile-avatar-container button{
+        position:absolute;
+        top:0;left:0;width:100px;height:100px;opacity: 0;
+    }
+    .sf:hover{
+        color: orange;
+    }
+    #f1:hover{
+        color: #0073EA;
+    }
+    #ylsz .form-control{
+        width:70%;
+    }
+</style>
+<div class="panel panel-default panel-intro">
+    <div class="panel-heading">
+        {:build_heading(null, false)}
+        <ul class="nav nav-tabs">
+             <li class=""><a href="#jbpz" id="clickpz" data-toggle="tab">活动配置</a></li>
+            <!-- <li>
+                <a href="#addcfg" data-toggle="tab"><i class="fa fa-plus"></i></a>
+            </li>     -->   
+        </ul>
+    </div>
+    <div class="panel-body">
+        <div id="myTabContent" class="tab-content">
+            <div class="tab-pane fade" id="jbpz">
+                <div class="widget-body no-padding">
+                    <form id="jbpz-form" class="edit-form form-horizontal" role="form" data-toggle="validator" method="POST" action="activity/wxfx/config/edit">
+                        <table class="table table-striped">
+                            <thead>
+                              
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">任务名称</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control" id="value" value="微信分享活动" disabled="" data-rule="required" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">分享标题</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control" id="value" value="{$data.sharetitle}" name="row[sharetitle]" data-rule="required" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">开始时间</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control datetimepicker" data-format="YYYY-MM-DD" id="value" name="row[stime]" value="{$data.stime}"  />
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">结束时间</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control datetimepicker"  name="row[etime]" data-format="YYYY-MM-DD" value="{$data.etime}" data-rule="required" />
+                                                </div>
+                                            </div>
+                                            <!-- 推荐人奖励 -->
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2"></label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <div class="row">
+                                                      <div class="col-xs-6 col-md-4 text-center">折扣</div>
+                                                      <div class="col-xs-6 col-md-4 text-center">可购买域名</div>
+                                                      <div class="col-xs-6 col-md-4 text-center">推荐人数</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">被推荐人奖励</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <div class="row">
+                                                      <div class="col-xs-6 col-md-4 text-center"><input type="text" class="form-control" id="value" name="row[t_sale]" value="{$data.t_sale}" /></div>
+                                                      <div class="col-xs-6 col-md-4 text-center"><input type="text" class="form-control" id="value" name="row[t_num]" value="{$data.t_num}" /></div>
+                                                      <div class="col-xs-6 col-md-4 text-center"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">推荐人奖励</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <div class="row">
+                                                      <div class="col-xs-6 col-md-4 text-center"><input type="text" class="form-control" id="value" name="row[s_sale1]" value="{$data.s_sale1}" /></div>
+                                                      <div class="col-xs-6 col-md-4 text-center"><input type="text" class="form-control" id="value" name="row[s_num1]" value="{$data.s_num1}" /></div>
+                                                      <div class="col-xs-6 col-md-4 text-center"><input type="text" class="form-control" id="value" name="row[s_user1]" value="{$data.s_user1}" /></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2"></label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <div class="row">
+                                                      <div class="col-xs-6 col-md-4 text-center"><input type="text" class="form-control" id="value" name="row[s_sale2]" value="{$data.s_sale2}" /></div>
+                                                      <div class="col-xs-6 col-md-4 text-center"><input type="text" class="form-control" id="value" name="row[s_num2]" value="{$data.s_num2}" /></div>
+                                                      <div class="col-xs-6 col-md-4 text-center"><input type="text" class="form-control" id="value" name="row[s_user2]" value="{$data.s_user2}" /></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2"></label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <div class="row">
+                                                      <div class="col-xs-6 col-md-4 text-center"><input type="text" class="form-control" id="value" name="row[s_sale3]" value="{$data.s_sale3}" /></div>
+                                                      <div class="col-xs-6 col-md-4 text-center"><input type="text" class="form-control" id="value" name="row[s_num3]" value="{$data.s_num3}" /></div>
+                                                      <div class="col-xs-6 col-md-4 text-center"><input type="text" class="form-control" id="value" name="row[s_user3]" value="{$data.s_user3}" /></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2"></label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <div class="row">
+                                                      <div class="col-xs-6 col-md-4 text-center"><input type="text" class="form-control" id="value" name="row[s_sale4]" value="{$data.s_sale4}" /></div>
+                                                      <div class="col-xs-6 col-md-4 text-center"><input type="text" class="form-control" id="value" name="row[s_num4]" value="{$data.s_num4}" /></div>
+                                                      <div class="col-xs-6 col-md-4 text-center"><input type="text" class="form-control" id="value" name="row[s_user4]" value="{$data.s_user4}" /></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2"></label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <div class="row">
+                                                      <div class="col-xs-6 col-md-4 text-center"><input type="text" class="form-control" id="value" name="row[s_sale5]" value="{$data.s_sale5}" /></div>
+                                                      <div class="col-xs-6 col-md-4 text-center"><input type="text" class="form-control" id="value" name="row[s_num5]" value="{$data.s_num5}" /></div>
+                                                      <div class="col-xs-6 col-md-4 text-center"><input type="text" class="form-control" id="value" name="row[s_user5]" value="{$data.s_user5}" /></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2"></label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <div class="row">
+                                                      <div class="col-xs-6 col-md-4 text-center"><input type="text" class="form-control" id="value" name="row[s_sale6]" value="{$data.s_sale6}" /></div>
+                                                      <div class="col-xs-6 col-md-4 text-center"><input type="text" class="form-control" id="value" name="row[s_num6]" value="{$data.s_num6}" /></div>
+                                                      <div class="col-xs-6 col-md-4 text-center"><input type="text" class="form-control" id="value" name="row[s_user6]" value="{$data.s_user6}" /></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">分享描述</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <div class="row">
+                                                        <textarea class="form-control" name="row[ttxt]" rows="5">{$data.ttxt}</textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            </div>
+
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    
+                                    <td align="center">
+                                        <button type="submit" class="btn btn-success btn-embossed">{:__('OK')}</button>
+                                        <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+                                    </td>
+
+
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </form>
+                </div>
+            </div>
+            

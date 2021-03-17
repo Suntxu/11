@@ -1,0 +1,127 @@
+<style type="text/css">
+    @media (max-width: 375px) {
+        .edit-form tr td input{width:100%;}
+        .edit-form tr th:first-child,.edit-form tr td:first-child{
+            width:20%;
+        }
+        .edit-form tr th:last-child,.edit-form tr td:last-child{
+            display: none;
+        }
+    }
+    .profile-avatar-container {
+        position:relative;
+        width:100px;margin:0 1%;
+    }
+    .profile-avatar-container .profile-user-img{
+        width:100px;
+        height:100px;
+    }
+    .profile-avatar-container .profile-avatar-text {
+        display:none;
+    }
+    .profile-avatar-container:hover .profile-avatar-text {
+        display:block;
+        position:absolute;
+        height:100px;
+        width:100px;
+        background:#444;
+        opacity: .6;
+        color: #fff;
+        top:0;
+        left:0;
+        line-height: 100px;
+        text-align: center;
+    }
+    .profile-avatar-container button{
+        position:absolute;
+        top:0;left:0;width:100px;height:100px;opacity: 0;
+    }
+    .sf:hover{
+        color: orange;
+    }
+    #f1:hover{
+        color: #0073EA;
+    }
+
+</style>
+<div class="panel panel-default panel-intro">
+    <form id="add-form" class="form-horizontal form-ajax" role="form" data-toggle="validator" method="POST" about="" style="height: 100%;">
+        <div class="panel-body">
+            <div id="myTabContent" class="tab-content">
+                <div class="tab-pane fade active in" id="jbpz">
+                    <div class="widget-body no-padding">
+                        <table class="table table-striped" >
+                            <thead>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td style="background: #ffffff;">
+                                    <div class="row" id="www" style="background: #ffffff;">
+                                        <div class="form-group">
+                                            <label class="control-label col-xs-12 col-sm-2">活动标题:</label>
+                                            <div  class="col-xs-12 col-sm-8">
+                                                <input type="text" class="form-control" id="hd_title" name="mate[title]" value="" data-rule="required" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-xs-12 col-sm-2">描述:</label>
+                                            <div  class="col-xs-12 col-sm-8">
+                                                <textarea class="form-control" style="height: 123px;" name="mate[describe]"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="value" class="control-label col-xs-12 col-sm-2">活动群体</label>
+                                            <div class="radio">
+                                                <label for="zt1"><input id="zt1"  checked name="mate[colony]"  type="radio" value="0" >所有用户</label> 
+                                                <label for="zt2"><input id="zt2"  name="mate[colony]" type="radio" value="1">新用户</label> 
+                                                <label for="zt3"><input id="zt3"  name="mate[colony]" type="radio" value="2">老用户</label> 
+                                            </div> 
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="value" class="control-label col-xs-12 col-sm-2">是否允许多次注册</label>
+                                            <div class="radio">
+                                                <label for="limi1"><input id="limi1"  checked name="mate[type]"  type="radio" value="0" >不允许</label> 
+                                                <label for="limi2"><input id="limi2" name="mate[type]" type="radio" value="1" >允许</label>
+                                            </div> 
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="control-label col-xs-12 col-sm-2">开始时间:</label>
+                                            <div class="col-xs-12 col-sm-8">
+                                                <input type="text" class="form-control datetimepicker" data-date-format="Y-MM-DD HH:mm:ss" id="value2222" name="mate[start_time]" data-rule="required" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-xs-12 col-sm-2">结束时间:</label>
+                                            <div class="col-xs-12 col-sm-8">
+                                                <input type="text" class="form-control datetimepicker" data-date-format="Y-MM-DD HH:mm:ss" id="value2223" name="mate[end_time]" data-rule="required" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="value" class="control-label col-xs-12 col-sm-2">状态</label>
+                                            <div class="radio">
+                                                <label for="sta1"><input id="sta1"  checked name="mate[status]"  type="radio" value="1" >启用</label> 
+                                                <label for="sta2"><input id="sta2" name="mate[status]" type="radio" value="0" >停用</label>
+                                            </div> 
+                                        </div>
+                                        <div class="form-group layer-footer">
+                                            <label class="control-label col-xs-12 col-sm-2"></label>
+                                            <div class="col-xs-12 col-sm-8">
+                                                <button type="submit" class="btn btn-success btn-embossed disabled">添加</button>
+                                                <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <!-- </form>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </form>
+
+</div>

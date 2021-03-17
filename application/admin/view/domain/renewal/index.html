@@ -1,0 +1,26 @@
+<form id="edit-form" class="edit-form form-horizontal" role="form" data-toggle="validator" method="POST" action="/admin/domain/renewal/index">
+
+    <h3>域名批量到期时间修改</h3>
+    <div class="form-group">
+        <label for="uid" class="control-label col-xs-12 col-sm-2">用户名:</label>
+        <div class="col-xs-12 col-sm-3" >
+            <input id="uid"  style="width: 378px;"  class="form-control" name="row[uid]" data-rule="required" type="text"  value="">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="money" class="control-label col-xs-12 col-sm-2">单价:</label>
+        <div class="col-xs-12 col-sm-3" >
+            <input id="money"  style="width: 378px;" class="form-control" name="row[money]" data-rule="required" type="number"  value="">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="bh" class="control-label col-xs-12 col-sm-2">域名列表:</label>
+        <div class="col-xs-12 col-sm-3">
+            <textarea id="bh" name="row[ttxt]" style="width: 378px;" rows="7" placeholder="一次最多填写20个域名"></textarea>
+        </div>
+    </div>
+    <div class="form-group" style="margin-left: 23% ;">
+        <button type="submit" class="btn btn-success btn-embossed">{:__('OK')}</button>
+        <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+    </div>
+</form>

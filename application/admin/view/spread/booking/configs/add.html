@@ -1,0 +1,222 @@
+<style type="text/css">
+    @media (max-width: 375px) {
+        .edit-form tr td input{width:100%;}
+        .edit-form tr th:first-child,.edit-form tr td:first-child{
+            width:20%;
+        }
+        .edit-form tr th:last-child,.edit-form tr td:last-child{
+            display: none;
+        }
+    }
+    .profile-avatar-container {
+        position:relative;
+        width:100px;margin:0 1%;
+    }
+    .profile-avatar-container .profile-user-img{
+        width:100px;
+        height:100px;
+    }
+    .profile-avatar-container .profile-avatar-text {
+        display:none;
+    }
+    .profile-avatar-container:hover .profile-avatar-text {
+        display:block;
+        position:absolute;
+        height:100px;
+        width:100px;
+        background:#444;
+        opacity: .6;
+        color: #fff;
+        top:0;
+        left:0;
+        line-height: 100px;
+        text-align: center;
+    }
+    .profile-avatar-container button{
+        position:absolute;
+        top:0;left:0;width:100px;height:100px;opacity: 0;
+    }
+    .sf:hover{
+        color: orange;
+    }
+    #f1:hover{
+        color: #0073EA;
+    }
+
+</style>
+<div class="panel panel-default panel-intro">
+    <div class="panel-heading">
+        {:build_heading(null, false)}
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#jbpz"  aria-expanded="true" id="clickpz" data-toggle="tab">活动添加</a></li>
+<!--            <li class=""><a href="#qxpz"  data-toggle="tab">活动套餐</a></li>-->
+        </ul>
+    </div>
+    <form id="add-form" class="form-horizontal form-ajax" role="form" data-toggle="validator" method="POST" about="" style="height: 100%;">
+        <div class="panel-body">
+            <div id="myTabContent" class="tab-content">
+                <div class="tab-pane fade active in" id="jbpz">
+                    <div class="widget-body no-padding">
+                        <!--                    <form id="jbpz-form" class="edit-form form-horizontal" role="form" data-toggle="validator" method="POST" action="{:url('spread.booking.Configs/add')}">-->
+                        <table class="table table-striped" >
+                            <thead>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td style="background: #ffffff;">
+                                    <div class="row" id="www" style="background: #ffffff;">
+                                        <div class="form-group">
+                                            <label class="control-label col-xs-12 col-sm-2">活动后缀:</label>
+                                            <div  class="col-xs-12 col-sm-8">
+                                                <select class='form-control' name="row[suffix]"  id="suffix" onchange="getSuffixApi(this)"  data-rule="required">
+                                                    {foreach list as $vol}
+                                                    <option value="{$vol.name1}"  >{$vol.name1}</option>
+                                                    {/foreach}
+                                                </select>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label class="control-label col-xs-12 col-sm-2">活动标题:</label>
+                                            <div  class="col-xs-12 col-sm-8">
+                                                <input type="text" class="form-control" id="hd_title" name="row[hd_title]" placeholder="区分域名后缀" value="" data-rule="required" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-xs-12 col-sm-2">注册时间:</label>
+                                            <div class="col-xs-12 col-sm-8">
+                                                <input type="text" class="form-control datetimepicker" data-date-format="Y-MM-DD HH:mm:ss" id="value2222" name="row[reg_at]" data-rule="required" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-xs-12 col-sm-2">开始时间:</label>
+                                            <div class="col-xs-12 col-sm-8">
+                                                <input type="text" class="form-control datetimepicker" data-date-format="Y-MM-DD HH:mm:ss" id="value2222" name="row[start_at]" data-rule="required" />
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="control-label col-xs-12 col-sm-2">结束时间:</label>
+                                            <div class="col-xs-12 col-sm-8">
+                                                <input type="text" class="form-control datetimepicker" data-date-format="Y-MM-DD HH:mm:ss" id="value2222" name="row[end_at]" data-rule="required" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-xs-12 col-sm-2">活动时长:</label>
+                                            <div class="col-xs-12 col-sm-8">
+                                                <input type="number" class="form-control" id="dur_active" name="row[dur_active]" placeholder="/天" value="" data-rule="required" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group layer-footer">
+                                            <label class="control-label col-xs-12 col-sm-2"></label>
+                                            <div class="col-xs-12 col-sm-8">
+                                                <button type="submit" class="btn btn-success btn-embossed disabled">添加</button>
+                                                <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+
+                            <tfoot>
+                            <tr>
+
+                            </tr>
+                            </tfoot>
+                        </table>
+                        <!--                </form>-->
+                    </div>
+                </div>
+
+                <!-- 快速添加套餐 -->
+                <div style="width: 100%; height: 50px; text-align: center; line-height: 50px; "><h3 >活动套餐设置</h3></div>
+                <div  >
+                    <div class="widget-body no-padding">
+                        <!--                <form id="qxpz-form" class="edit-form form-horizontal" role="form" data-toggle="validator" method="POST" action="{:url('spread.booking.voucher/add')}">-->
+                        <!-- xf -->
+                        <div class="" style="display: block" id="xf">
+                            <div class="form-group text-center">
+                                <!--                            <div class="col-xs-12 col-sm-4" style="width: 20%;">-->
+                                <!--                                域名后缀-->
+                                <!--                            </div>-->
+                                <div class="col-xs-12 col-sm-4" style="width: 25%;">
+                                    套餐优惠标题
+                                </div>
+                                <div class="col-xs-12 col-sm-4" style="width: 25%;">
+                                    认领数量
+                                </div>
+                                <div class="col-xs-12 col-sm-4" style="width: 25%;">
+                                    单个价格()元/个
+                                </div>
+                                <div class="col-xs-12 col-sm-4" style="width: 25%;">
+                                    使用状态
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-12 col-sm-4" style="width: 25%;">
+                                    <input type="text" class="form-control" id="title" name="row[title0]" value="" data-rule="required" />
+                                </div>
+                                <div class="col-xs-12 col-sm-4" style="width: 25%;">
+                                    <input type="number" class="form-control" name="row[number0]" placeholder="/个" id="num" value="" data-rule="required;number" />
+                                </div>
+                                <div class="col-xs-12 col-sm-4" style="width: 25%;">
+                                    <input type="number" class="form-control" name="row[unit_price0]" placeholder="（）元/个" id="unit_price" value="" data-rule="required;number" />
+                                </div>
+                                <div class="col-xs-12 col-sm-4" style="width: 25%;">
+                                    <select class='form-control' name="row[status0]" data-rule="required">
+                                        <option value="1" >正常</option>
+                                        <option value="0" >禁用</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-12 col-sm-4" style="width: 25%;">
+                                    <input type="text" class="form-control" id="title" name="row[title1]"  value="" data-rule="required" />
+                                </div>
+                                <div class="col-xs-12 col-sm-4" style="width: 25%;">
+                                    <input type="number" class="form-control" name="row[number1]" id="num" placeholder="/个" value="" data-rule="required;number" />
+                                </div>
+                                <div class="col-xs-12 col-sm-4" style="width: 25%;">
+                                    <input type="number" class="form-control" name="row[unit_price1]" placeholder="（）元/个" id="unit_price" value="" data-rule="required;number" />
+                                </div>
+                                <div class="col-xs-12 col-sm-4" style="width: 25%;">
+                                    <select class='form-control' name="row[status1]" data-rule="required">
+                                        <option value="1" >正常</option>
+                                        <option value="0" >禁用</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-12 col-sm-4" style="width: 25%;">
+                                    <input type="text" class="form-control" id="title" name="row[title2]" value="" data-rule="required" />
+                                </div>
+                                <div class="col-xs-12 col-sm-4" style="width: 25%;">
+                                    <input type="number" class="form-control" name="row[number2]" id="num" placeholder="/个" value="" data-rule="required;number" />
+                                </div>
+                                <div class="col-xs-12 col-sm-4" style="width: 25%;">
+                                    <input type="number" class="form-control" name="row[unit_price2]" placeholder="（）元/个" id="unit_price" value="" data-rule="required;number" />
+                                </div>
+                                <div class="col-xs-12 col-sm-4" style="width: 25%;">
+                                    <select class='form-control' name="row[status2]" data-rule="required">
+                                        <option value="1" >正常</option>
+                                        <option value="0" >禁用</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <input type="hidden"  name="type" value="3">
+                        <!-- xf -->
+                        <!--               </form>-->
+                    </div>
+                </div>
+
+                <!-- 通讯接口 -->
+
+
+            </div>
+        </div>
+
+    </form>
+
+</div>

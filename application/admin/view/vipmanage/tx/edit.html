@@ -1,0 +1,202 @@
+    <style type="text/css">
+    @media (max-width: 375px) {
+        .edit-form tr td input{width:100%;}
+        .edit-form tr th:first-child,.edit-form tr td:first-child{
+            width:20%;
+        }
+        .edit-form tr th:last-child,.edit-form tr td:last-child{
+            display: none;
+        }
+    }
+    .profile-avatar-container {
+        position:relative;
+        width:100px;margin:0 1%;
+    }
+    .profile-avatar-container .profile-user-img{
+        width:100px;
+        height:100px;
+    }
+    .profile-avatar-container .profile-avatar-text {
+        display:none;
+    }
+    .profile-avatar-container:hover .profile-avatar-text {
+        display:block;
+        position:absolute;
+        height:100px;
+        width:100px;
+        background:#444;
+        opacity: .6;
+        color: #fff;
+        top:0;
+        left:0;
+        line-height: 100px;
+        text-align: center;
+    }
+    .profile-avatar-container button{
+        position:absolute;
+        top:0;left:0;width:100px;height:100px;opacity: 0;
+    }
+    .sf:hover{
+        color: orange;
+    }
+    #f1:hover{
+        color: #0073EA;
+    }
+    #ylsz .form-control{
+        width:70%;
+    }
+</style>
+<div class="panel panel-default panel-intro">
+    <div class="panel-body">
+        <div id="myTabContent" class="tab-content">
+            <div class="" id="add">
+                <div class="widget-body no-padding">
+                    <form id="add-form" class="edit-form form-horizontal" role="form" data-toggle="validator" method="POST" action="">
+                        <table class="table table-striped">
+                            <thead>
+                              
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="row">
+                                            <h3>会员提现</h3>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">会员信息</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control" id="value2"  readonly="" value="{$data['uid']} 昵称:{$data['nickname']}" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">类型</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <span style="color: red;font-weight: 600;display: inline-block;margin-top: 6px;">{$data['type'] === 0 ? '普通提现' : '注销提现'}</span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">提现金额</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control"  id="value3" name="row[money1]" readonly="" value="{$data['money1']}" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">手续费</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control" id="value4" name="row[sxf]" readonly="" value="{php} echo sprintf('%.2f',$data['money1']-$data['resultmoney']); {/php} " />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">应付金额</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control" id="value4" name="row[resultmoney]"  readonly="" value="{$data['resultmoney']}" />
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">收款人</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control" id="value4" name="row[txname]"  readonly="" value="{$data['txname']}" />
+                                                </div>
+                                            </div>  
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">收款银行</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control" id="value4" name="row[txyh]"  readonly="" value="{$data['txyh']}" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">卡/帐号</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control" id="value4" name="row[txzh]"  readonly="" value="{$data['txzh']}" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">提现时间</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control"  id="value4" name="row[sj]"  readonly="" value="{$data['sj']}" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">当前状态</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <strong>{$data['status']}</strong>
+                                                </div>
+                                            </div>
+                                            {if $data['zt'] == 4 || $data['zt'] == 5}
+                                            <h3><span style="color:red">管理员操作</span></h3>
+                                            <input type="hidden" name="row[id]" value="{$data['id']}" >
+                                            <div class="form-group">
+                                                <label class="control-label col-xs-12 col-sm-2">操作</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <div class="radio">
+                                                        <label for="ifkf0"><input id="ifkf0"  name="row[zt]" type="radio" value="">请选择</label>
+                                                        {if $data['zt'] == 4 && $data['type'] == 0}
+                                                            <label for="ifkf1"><input id="ifkf1"  name="row[zt]" {if $data['zt'] == 5} checked {/if}  type="radio" value="5">审核中(防止用户撤销)</label>
+                                                            
+                                                        {else}
+                                                            <label for="ifkf1"><input id="ifkf1"  name="row[zt]" {if $data['zt'] == 1} checked {/if}  type="radio" value="1">已转帐，提现成功</label>
+                                                        {/if}
+                                                        
+                                                        <label for="ifkf2"><input id="ifkf2"  name="row[zt]" type="radio" {if $data['zt'] == 3} checked {/if} value="3" >提现失败</label> 
+                                                    </div> 
+                                                    <span style="color: red;font-size: 12px;">
+                                                        {if empty($data['shopzt']) || $data['shopzt'] == 2 || $data['shopzt'] == 4 || $data['shopzt'] == 5}
+
+                                                            用户提现审核时间需要24小时
+                                                        {else}
+                                                            商家提现审核时间需要72小时
+                                                        {/if}
+                                                    </span> 
+                                                </div>
+                                            </div>
+                                            {if $data['zt'] == 5}
+                                            <div class="form-group" id="remark" >
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">保证类型</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <label for="promise_type0"><input id="promise_type0" {if in_array(0,$data['promise_type']) } disabled  {/if}  name="promise_type[]" type="checkbox" {if in_array(0,$data['promise_type'])} checked {/if} value="0">身份证正面照片</label>
+                                                    <label for="promise_type1"><input id="promise_type1" {if in_array(1,$data['promise_type']) } disabled  {/if}  name="promise_type[]" type="checkbox" {if in_array(1,$data['promise_type'])} checked {/if} value="1">身份证反面照片</label>
+                                                    <label for="promise_type2"><input id="promise_type2" {if in_array(2,$data['promise_type']) } disabled  {/if} name="promise_type[]" type="checkbox"  {if in_array(2,$data['promise_type'])} checked {/if} value="2">手持身份正面照片</label>
+                                                    <label for="promise_type3"><input id="promise_type3" {if  in_array(3,$data['promise_type']) } disabled {/if} name="promise_type[]" type="checkbox"  {if in_array(3,$data['promise_type'])} checked {/if} value="3">承诺书照片</label>
+                                                    <label for="promise_type4"><input id="promise_type4" {if  in_array(4,$data['promise_type']) } disabled {/if} name="promise_type[]" type="checkbox"  {if in_array(4,$data['promise_type'])} checked {/if} value="4">企业营业执照照片</label>
+                                                    {if $data['success_promises']}
+                                                        <br><span style="color: red;font-weight: 600">已有审核完成的承诺信息,请去列表<a href="/admin/vipmanage/recode/txpromise?uid={$data['uid']}" class="dialogit" title="提现承诺信息">查看详情!</a></span>
+                                                    {/if}
+                                                </div>
+                                            </div>
+                                            {/if}
+                                            <div class="form-group" id="remark" >
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">备注</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control" id="remark1"  name="row[sm]"   value="{if $data['zt'] != 5} {$data['sm']} {/if}" />
+                                                </div>
+                                            </div>
+                                            {/if}
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    {if $data['zt'] == 4 || $data['zt'] == 5}
+                                    <td align="center">
+                                        <button type="submit" class="btn btn-success btn-embossed">{:__('OK')}</button>
+                                        <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+                                    </td>
+                                    {else}
+                                    <div class="hide layer-footer">
+                                        <label class="control-label col-xs-12 col-sm-2"></label>
+                                        <div class="col-xs-12 col-sm-8">
+                                            <button type="reset" class="btn btn-primary btn-embossed btn-close" onclick="Layer.closeAll();">{:__('Close')}</button>
+                                        </div>
+                                    </div>
+                                    {/if}
+
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </form>
+                </div>
+            </div>
+ 
+        
+

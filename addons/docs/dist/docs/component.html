@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>组件 - FastAdmin</title>
+        <meta charset="utf-8">
+        <meta name="keywords" content="">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta property="og:type" content="article">
+        <meta property="og:title" content="组件 - FastAdmin">
+        <meta property="og:description" content="">
+        <!--<meta property="og:image" content="../assets/images/logo.png">-->
+
+        <!--<link rel="icon" href="../assets/images/logo.png" type="image/x-icon">-->
+
+        <!-- <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Roboto Mono" rel="stylesheet" type="text/css"> -->
+        <link href="../assets/css/highlight.min.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/search.css" rel="stylesheet" type="text/css">
+
+        <!-- main page styles -->
+        <link rel="stylesheet" href="../assets/css/page.css">
+
+        
+        <script>window.PAGE_TYPE = "docs"</script>
+        <script>window.SEARCH_URL = "../assets/js/docs.json"</script>
+        <script>window.DOCS_MODE = "html"</script>
+    </head>
+    <body class="docs">
+
+        <div id="mobile-bar" >
+            <a class="menu-button"></a>
+            <a class="logo" href="../docs/index.html">
+                                <span>FastAdmin</span>
+                            </a>
+        </div>
+
+        <div id="header">
+    <a id="logo" href="../docs/index.html">
+                <span>FastAdmin</span>
+            </a>
+    <ul id="nav">
+        <li>
+    <form id="search-form">
+        <input type="text" id="search-query-" class="search-query local-search-input st-default-search-input">
+    </form>
+    <div class="local-search-result"></div>
+</li>
+<li><a href="http://www.fastadmin.net" class="">首页</a></li>
+<li><a href="http://doc.fastadmin.net" class="">文档</a></li>
+<li><a href="http://forum.fastadmin.net" class="">论坛</a></li>
+<li><a href="https://git.oschina.net/karson/fastadmin" class="">下载</a></li>
+<li><a href="http://demo.fastadmin.net" class="">在线演示</a></li>
+    </ul>
+</div>
+
+
+                <div id="main" class="fix-sidebar">
+            <div class="sidebar">
+    <ul class="main-menu">
+        <li>
+    <form id="search-form">
+        <input type="text" id="search-query-" class="search-query local-search-input st-default-search-input">
+    </form>
+    <div class="local-search-result"></div>
+</li>
+<li><a href="http://www.fastadmin.net" class="">首页</a></li>
+<li><a href="http://doc.fastadmin.net" class="">文档</a></li>
+<li><a href="http://forum.fastadmin.net" class="">论坛</a></li>
+<li><a href="https://git.oschina.net/karson/fastadmin" class="">下载</a></li>
+<li><a href="http://demo.fastadmin.net" class="">在线演示</a></li>
+    </ul>
+    <div class="list">
+        <h2>
+            文档        </h2>
+        <ul class="menu-root">
+
+                        <li>
+                <a href="index.html" class="sidebar-link">介绍</a>
+            </li>
+                        <li>
+                <a href="index.html" class="sidebar-link">介绍</a>
+            </li>
+                        <li>
+                <a href="install.html" class="sidebar-link">安装</a>
+            </li>
+                        <li>
+                <a href="install.html" class="sidebar-link">安装</a>
+            </li>
+                        <li>
+                <a href="command.html" class="sidebar-link">命令行</a>
+            </li>
+                        <li>
+                <a href="command.html" class="sidebar-link">命令行</a>
+            </li>
+                        <li>
+                <a href="construct.html" class="sidebar-link">目录结构</a>
+            </li>
+                        <li>
+                <a href="construct.html" class="sidebar-link">目录结构</a>
+            </li>
+                        <li>
+                <a href="language.html" class="sidebar-link">多语言</a>
+            </li>
+                        <li>
+                <a href="language.html" class="sidebar-link">多语言</a>
+            </li>
+                        <li>
+                <a href="database.html" class="sidebar-link">数据库</a>
+            </li>
+                        <li>
+                <a href="database.html" class="sidebar-link">数据库</a>
+            </li>
+                        <li>
+                <a href="module.html" class="sidebar-link">模块</a>
+            </li>
+                        <li>
+                <a href="module.html" class="sidebar-link">模块</a>
+            </li>
+                        <li>
+                <a href="component.html" class="sidebar-link current">组件</a>
+            </li>
+                        <li>
+                <a href="component.html" class="sidebar-link current">组件</a>
+            </li>
+                        <li>
+                <a href="faq.html" class="sidebar-link">常见问题</a>
+            </li>
+                        <li>
+                <a href="faq.html" class="sidebar-link">常见问题</a>
+            </li>
+                        <li>
+                <a href="contributing.html" class="sidebar-link">贡献代码</a>
+            </li>
+                        <li>
+                <a href="contributing.html" class="sidebar-link">贡献代码</a>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+<div class="content docs with-sidebar">
+        <h1>组件</h1>
+    
+    <h2>又拍云上传</h2><p>FastAdmin支持将文件或图片直传至又拍云服务器而不需要通过本地服务器进行中转<br>在使用又拍云上传功能之前请先到又拍云注册一个账号并新增一个云储存服务，又拍云地址是<a href="https://console.upyun.com/register/?invite=SyAt3ehQZ">https://console.upyun.com/register/?invite=SyAt3ehQZ</a><br>当创建好服务后获取到相应的配置信息<br>修改<code>/application/extra/upload.php</code> 文件，修改其中的配置</p><pre><code class="php">//上传配置
+return [
+    /**
+     * 上传地址,默认是本地上传,如果需要使用又拍云则改为http://v0.api.upyun.com/yourbucketname
+     */
+    'uploadurl' =&gt; 'http://v0.api.upyun.com/yourbucketname',
+    /**
+     * 又拍云或本机的CDN地址
+     */
+    'cdnurl'    =&gt; 'http://yourbucketname.b0.upaiyun.com',
+    /**
+     * 上传成功后的通知地址
+     */
+    'notifyurl' =&gt; 'http://www.yoursite.com/upyun/notify',
+    /**
+     * 又拍云Bucket
+     */
+    'bucket'    =&gt; 'yourbucketname',
+    /**
+     * 生成的policy有效时间
+     */
+    'expire'    =&gt; '86400',
+    /**
+     * 又拍云formkey
+     */
+    'formkey'   =&gt; '',
+    /**
+     * 文件保存格式
+     */
+    'savekey'   =&gt; '/uploads/media/{year}/{mon}{day}/{filemd5}{.suffix}',
+    /**
+     * 最大可上传大小
+     */
+    'maxsize'   =&gt; '10mb',
+    /**
+     * 可上传的文件类型
+     */
+    'mimetype'  =&gt; '*',
+    /**
+     * 是否支持批量上传
+     */
+    'multiple'  =&gt; true,
+    /**
+     * 又拍云操作员用户名
+     */
+    'username'  =&gt; '',
+    /**
+     * 又拍云操作员密码
+     */
+    'password'  =&gt; '',
+];</code></pre><p>配置成功后即可在后台直接上传资源到又拍云了。<br>如果在配置了又拍云的基础上又想启用本地上传该如何操作呢？<br>给按钮添加一个属性<code>data-url=&quot;ajax/upload&quot;</code>即可单独使用本地上传</p><h2>第三方登录</h2><p>FastAdmin自带一套第三方登录的扩展，包括QQ、微博、微信三种登录方式，在使用第三方登录前需要修改<code>/application/extra/third.php</code>的参数信息，其中回调地址可以为空，当回调地址为空时，FastAdmin会自动计算回调地址。其次需要在QQ、微博、微信的开放平台上配置好回调信息，例如FastAdmin默认生成QQ登录的回调地址是：</p><pre><code>http://www.yoursite.com/index/user/third/action/callback/platform/qq</code></pre><p>其它平台请按需设置</p><h2>表单生成</h2><p>FastAdmin封装了几个常用的方法，可以快速的生成表单元素</p><ol><li>生成下拉列表框build_select</li></ol><pre><code class="php">&lt;?php echo build_select('row[flag]', 'h,i,s', null, ['id'=&gt;'c-flag','class'=&gt;'form-control selectpicker','required'=&gt;''])?&gt;</code></pre><ol><li>生成单选按钮组build_radios</li></ol><pre><code class="php">&lt;?php echo build_radios('row[enforce]', [1=&gt;&quot;是&quot;, 0=&gt;&quot;否&quot;], 1);?&gt;</code></pre><ol><li>生成复选按钮组build_checkboxs</li></ol><p>使用方法</p><pre><code class="php">&lt;?php echo build_checkboxs('row[game]', [1=&gt;&quot;足球&quot;, 0=&gt;&quot;篮球&quot;], 1);?&gt;</code></pre><h2>阿里大鱼短信发送</h2><p>使用阿里大鱼短信发送之前请预先到阿里大鱼上开通短信功能，生创建一个模板和签名<br>申请好配置信息后修改<code>/application/extra/service.php</code>中的alisms相应配置<br>使用方法：</p><pre><code class="php">$sms = new Alisms();
+$sms-&gt;sign(&quot;FastAdmin&quot;)
+    -&gt;param([&quot;key1&quot;=&gt;&quot;值1&quot;, &quot;key2&quot;=&gt;&quot;值2&quot;])
+    -&gt;template(&quot;模板ID&quot;)
+    -&gt;mobile(&quot;接收号码&quot;)
+    -&gt;send();</code></pre>    <div class="docs-links">
+
+                <span>← <a href="component.html">组件</a></span>
+                <span style="float:right"><a href="faq.html">常见问题</a> →</span>
+            </div>
+        
+    <div class="footer">
+                发现错误？想参与编辑？        <a href="https://github.com/karsonzhang/fastadmin-doc/blob/master/fastadmin-doc-master/component.md" target="_blank">
+            在 Github 上编辑此页！        </a>
+            </div>
+    
+</div>
+
+        </div>
+        <script src="../assets/js/smooth-scroll.min.js"></script>
+        
+        <script src="../assets/js/jquery.min.js"></script>
+        <script src="../assets/js/highlight.min.js"></script>
+        <script src="../assets/js/common.js"></script>
+        <script src="../assets/js/search.js"></script>
+        <script src="../assets/js/fastclick.min.js"></script>
+
+        <script type="text/javascript">
+            document.addEventListener('DOMContentLoaded', function () {
+                FastClick.attach(document.body);
+            }, false);
+        </script>
+
+            </body>
+</html>

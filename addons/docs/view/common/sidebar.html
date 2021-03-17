@@ -1,0 +1,18 @@
+<div class="sidebar">
+    <ul class="main-menu">
+        {include file="common/menu"}
+    </ul>
+    <div class="list">
+        <h2>
+            {:isset($config['lang'][$page['type']])?$config['lang'][$page['type']]:$page['type']}
+        </h2>
+        <ul class="menu-root">
+
+            {foreach name="pages" item="p"}
+            <li>
+                <a href="{$p.url}" class="sidebar-link{:$p.title==$page.title?' current':''}{:isset($p['isnew']) && $p['isnew']?' new':''}">{$p.title}</a>
+            </li>
+            {/foreach}
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,23 @@
+<div class="panel panel-default panel-intro">
+    {:build_heading()}
+    <div class="panel-body">
+        <div id="myTabContent" class="tab-content">
+            <div class="tab-pane fade active in" id="one">
+                <div class="widget-body no-padding">
+                    <div id="toolbar" class="toolbar">
+                        {:build_toolbar('refresh')}
+                        <a href="javascript:;" class="btn btn-success" onclick="fastDateSearch(0,0)" >今天</a>
+                        <a href="javascript:;" class="btn btn-danger"  onclick="fastDateSearch(0,1)" >昨天</a>
+                        <a href="javascript:;" class="btn btn-danger"  onclick="fastDateSearch(0,2)">最近7天</a>
+                        <a href="javascript:;" class="btn btn-danger"  onclick="fastDateSearch(0,3)">最近30天</a>
+                        <a href="javascript:;" class="btn btn-danger"  onclick="fastDateSearch(0,4)">本月</a>
+                        <a href="javascript:;" class="btn btn-danger"  onclick="fastDateSearch(0,5)">上月</a>
+                        <a href="javascript:;" class="btn btn-danger"  onclick="fastDateSearch(0,6,'r\\.createtime')">全部</a>
+                    </div>
+                    <table id="table" class="table table-striped table-bordered table-hover" width="100%">
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

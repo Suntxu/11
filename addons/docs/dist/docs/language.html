@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>多语言 - FastAdmin</title>
+        <meta charset="utf-8">
+        <meta name="keywords" content="">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta property="og:type" content="article">
+        <meta property="og:title" content="多语言 - FastAdmin">
+        <meta property="og:description" content="">
+        <!--<meta property="og:image" content="../assets/images/logo.png">-->
+
+        <!--<link rel="icon" href="../assets/images/logo.png" type="image/x-icon">-->
+
+        <!-- <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Roboto Mono" rel="stylesheet" type="text/css"> -->
+        <link href="../assets/css/highlight.min.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/search.css" rel="stylesheet" type="text/css">
+
+        <!-- main page styles -->
+        <link rel="stylesheet" href="../assets/css/page.css">
+
+        
+        <script>window.PAGE_TYPE = "docs"</script>
+        <script>window.SEARCH_URL = "../assets/js/docs.json"</script>
+        <script>window.DOCS_MODE = "html"</script>
+    </head>
+    <body class="docs">
+
+        <div id="mobile-bar" >
+            <a class="menu-button"></a>
+            <a class="logo" href="../docs/index.html">
+                                <span>FastAdmin</span>
+                            </a>
+        </div>
+
+        <div id="header">
+    <a id="logo" href="../docs/index.html">
+                <span>FastAdmin</span>
+            </a>
+    <ul id="nav">
+        <li>
+    <form id="search-form">
+        <input type="text" id="search-query-" class="search-query local-search-input st-default-search-input">
+    </form>
+    <div class="local-search-result"></div>
+</li>
+<li><a href="http://www.fastadmin.net" class="">首页</a></li>
+<li><a href="http://doc.fastadmin.net" class="">文档</a></li>
+<li><a href="http://forum.fastadmin.net" class="">论坛</a></li>
+<li><a href="https://git.oschina.net/karson/fastadmin" class="">下载</a></li>
+<li><a href="http://demo.fastadmin.net" class="">在线演示</a></li>
+    </ul>
+</div>
+
+
+                <div id="main" class="fix-sidebar">
+            <div class="sidebar">
+    <ul class="main-menu">
+        <li>
+    <form id="search-form">
+        <input type="text" id="search-query-" class="search-query local-search-input st-default-search-input">
+    </form>
+    <div class="local-search-result"></div>
+</li>
+<li><a href="http://www.fastadmin.net" class="">首页</a></li>
+<li><a href="http://doc.fastadmin.net" class="">文档</a></li>
+<li><a href="http://forum.fastadmin.net" class="">论坛</a></li>
+<li><a href="https://git.oschina.net/karson/fastadmin" class="">下载</a></li>
+<li><a href="http://demo.fastadmin.net" class="">在线演示</a></li>
+    </ul>
+    <div class="list">
+        <h2>
+            文档        </h2>
+        <ul class="menu-root">
+
+                        <li>
+                <a href="index.html" class="sidebar-link">介绍</a>
+            </li>
+                        <li>
+                <a href="index.html" class="sidebar-link">介绍</a>
+            </li>
+                        <li>
+                <a href="install.html" class="sidebar-link">安装</a>
+            </li>
+                        <li>
+                <a href="install.html" class="sidebar-link">安装</a>
+            </li>
+                        <li>
+                <a href="command.html" class="sidebar-link">命令行</a>
+            </li>
+                        <li>
+                <a href="command.html" class="sidebar-link">命令行</a>
+            </li>
+                        <li>
+                <a href="construct.html" class="sidebar-link">目录结构</a>
+            </li>
+                        <li>
+                <a href="construct.html" class="sidebar-link">目录结构</a>
+            </li>
+                        <li>
+                <a href="language.html" class="sidebar-link current">多语言</a>
+            </li>
+                        <li>
+                <a href="language.html" class="sidebar-link current">多语言</a>
+            </li>
+                        <li>
+                <a href="database.html" class="sidebar-link">数据库</a>
+            </li>
+                        <li>
+                <a href="database.html" class="sidebar-link">数据库</a>
+            </li>
+                        <li>
+                <a href="module.html" class="sidebar-link">模块</a>
+            </li>
+                        <li>
+                <a href="module.html" class="sidebar-link">模块</a>
+            </li>
+                        <li>
+                <a href="component.html" class="sidebar-link">组件</a>
+            </li>
+                        <li>
+                <a href="component.html" class="sidebar-link">组件</a>
+            </li>
+                        <li>
+                <a href="faq.html" class="sidebar-link">常见问题</a>
+            </li>
+                        <li>
+                <a href="faq.html" class="sidebar-link">常见问题</a>
+            </li>
+                        <li>
+                <a href="contributing.html" class="sidebar-link">贡献代码</a>
+            </li>
+                        <li>
+                <a href="contributing.html" class="sidebar-link">贡献代码</a>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+<div class="content docs with-sidebar">
+        <h1>多语言</h1>
+    
+    <p>在FastAdmin中可以在任何位置(控制器、视图、JS)使用<code>__('语言标识');</code>调用语言包，如果语言标识不存在，则直接输出该语言标识</p><p>FastAdmin中的<code>__</code>函数和ThinkPHP中的<code>lang</code>函数在传参上有些许区别</p><p>比如</p><pre><code class="php">__('My name is %s', &quot;FastAdmin&quot;);</code></pre><p>将会返回</p><pre><code>My name is FastAdmin</code></pre><p>而如果采用ThinkPHP中的lang中的写法则是</p><pre><code class="php">lang('My name is %s', [&quot;FastAdmin&quot;]);</code></pre><p>可以看到ThinkPHP中的第二个参数必须传入数组，而FastAdmin中的__则没有这个要求，其实在多个参数时FastAdmin会忽略掉第三个参数$lang<br>比如</p><pre><code class="php">__('This is %s,base on %s', 'FastAdmin', 'ThinkPHP5');</code></pre><p>则会返回</p><pre><code>This is FastAdmin,base on ThinkPHP5</code></pre><p>而采用lang的写法则是</p><pre><code class="php">lang('This is %s,base on %s', ['FastAdmin', 'ThinkPHP5']);</code></pre><p>因此如果要使第三个参数$lang生效，则只能将第二个参数传为数组或采用ThinkPHP中的lang函数</p><pre><code class="php">/**
+ * 获取语言变量值
+ * @param string    $name 语言变量名
+ * @param array     $vars 动态变量值
+ * @param string    $lang 语言
+ * @return mixed
+ */
+function __($name, $vars = [], $lang = '')
+{
+    if (!is_array($vars))
+    {
+        $vars = func_get_args();
+        array_shift($vars);
+        $lang = '';
+    }
+    return Lang::get($name, $vars, $lang);
+}</code></pre><pre><code class="php">/**
+ * 获取语言变量值
+ * @param string    $name 语言变量名
+ * @param array     $vars 动态变量值
+ * @param string    $lang 语言
+ * @return mixed
+ */
+function lang($name, $vars = [], $lang = '')
+{
+    return Lang::get($name, $vars, $lang);
+}</code></pre>    <div class="docs-links">
+
+                <span>← <a href="language.html">多语言</a></span>
+                <span style="float:right"><a href="database.html">数据库</a> →</span>
+            </div>
+        
+    <div class="footer">
+                发现错误？想参与编辑？        <a href="https://github.com/karsonzhang/fastadmin-doc/blob/master/fastadmin-doc-master/language.md" target="_blank">
+            在 Github 上编辑此页！        </a>
+            </div>
+    
+</div>
+
+        </div>
+        <script src="../assets/js/smooth-scroll.min.js"></script>
+        
+        <script src="../assets/js/jquery.min.js"></script>
+        <script src="../assets/js/highlight.min.js"></script>
+        <script src="../assets/js/common.js"></script>
+        <script src="../assets/js/search.js"></script>
+        <script src="../assets/js/fastclick.min.js"></script>
+
+        <script type="text/javascript">
+            document.addEventListener('DOMContentLoaded', function () {
+                FastClick.attach(document.body);
+            }, false);
+        </script>
+
+            </body>
+</html>

@@ -1,0 +1,140 @@
+    <style type="text/css">
+    @media (max-width: 375px) {
+        .edit-form tr td input{width:100%;}
+        .edit-form tr th:first-child,.edit-form tr td:first-child{
+            width:20%;
+        }
+        .edit-form tr th:last-child,.edit-form tr td:last-child{
+            display: none;
+        }
+    }
+    .profile-avatar-container {
+        position:relative;
+        width:100px;margin:0 1%;
+    }
+    .profile-avatar-container .profile-user-img{
+        width:100px;
+        height:100px;
+    }
+    .profile-avatar-container .profile-avatar-text {
+        display:none;
+    }
+    .profile-avatar-container:hover .profile-avatar-text {
+        display:block;
+        position:absolute;
+        height:100px;
+        width:100px;
+        background:#444;
+        opacity: .6;
+        color: #fff;
+        top:0;
+        left:0;
+        line-height: 100px;
+        text-align: center;
+    }
+    
+    .profile-avatar-container button{
+        position:absolute;
+        top:0;left:0;width:100px;height:100px;opacity: 0;
+    }
+    .sf:hover{
+        color: orange;
+    }
+    #f1:hover{
+        color: #0073EA;
+    }
+    #ylsz .form-control{
+        width:70%;
+    }
+</style>
+<div class="panel panel-default panel-intro">
+    <div class="panel-body">
+        <div id="myTabContent" class="tab-content">
+            <div class="" id="add">
+                <div class="widget-body no-padding">
+                    <form id="add-form" class="edit-form form-horizontal" role="form" data-toggle="validator" method="POST" action="">
+                        <table class="table table-striped">
+                            <thead>
+                            </thead>
+                            
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">标题</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control" id="value2" name="row[title]" value="{$data.title}" data-rule="required"  />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">价格</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="number" class="form-control" id="value2" name="row[money]" value="{$data.money}" placeholder="没有可不用填写"  />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">设置类型</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <select name="row[type]" class="form-control">
+                                                        {foreach $cates as $k =>  $v}
+                                                        <option value="{$k}" {if $data.type == $k} selected {/if} >{$v}</option>
+                                                        {/foreach}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">标题描述</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control" id="value2" name="row[tdesc]" value="{$data.tdesc}" placeholder="多行请用;号隔开" data-rule="required"  />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">活动描述</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control" id="value2" name="row[hdesc]" value="{$data.hdesc}" placeholder="多行请用;号隔开" data-rule="required"  />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">按钮文字</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control" id="value2" name="row[button]" value="{$data.button}"  />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">按钮连接</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control" id="value2" name="row[link]" value="{$data.link}" placeholder="请填写绝对路径" />
+                                                </div>
+                                            </div>
+                                            <input type="hidden" name="row[id]" value="{$data.id}">
+                                            <div class="form-group">
+                                                <label class="control-label col-xs-12 col-sm-2">状态</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <div class="radio">
+                                                        <label for="ifkf1"><input id="ifkf1" {if $data.status == 1} checked {/if} name="row[status]" type="radio" value="1">启用</label>
+                                                        <label for="ifkf2"><input id="ifkf2" {if $data.status == 2} checked {/if} name="row[status]" type="radio" value="2">禁用</label>
+                                                    </div> 
+                                                </div>
+                                            </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    
+                                    <td align="center">
+                                        <button type="submit" class="btn btn-success btn-embossed">{:__('OK')}</button>
+                                        <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+                                    </td>
+
+
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </form>
+                </div>
+            </div>
+ 
+        
+

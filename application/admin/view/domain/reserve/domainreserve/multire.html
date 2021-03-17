@@ -1,0 +1,83 @@
+<form id="add-form" class="form-horizontal form-ajax" role="form" style="height: 580px" data-toggle="validator" method="POST" action="">
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2"><font style="color: red">*</font>域名:</label>
+        <div class="col-xs-12 col-sm-8">
+            <textarea class="form-control" name="row[domain]" id="domains" rows="5" placeholder="域名之间请用回车隔开!每次提交最多200个域名!">{php}foreach($domains as $v){ echo $v."\r\n"; }{/php}</textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2"><font style="color: red">*</font>订单状态:</label>
+        <div class="col-xs-12 col-sm-8">
+            <div class="radio">
+                <label for="sale_domain4"><input id="sale_domain4"  name="row[status]" type="radio" value="9">已提交阿里云</label>
+                <label for="sale_domain1"><input id="sale_domain1"  name="row[status]"  type="radio" data-bbu="1"  value="1">预定成功</label> 
+                <label for="sale_domain3"><input id="sale_domain3"  name="row[status]" type="radio" value="3">预定失败</label> 
+            </div> 
+        </div>
+    </div>
+    <div class="yudin" style="display: none">
+        <div class="form-group">
+            <label class="control-label col-xs-12 col-sm-2"><font style="color: red">*</font>注册商列表:</label>
+            <div class="col-xs-12 col-sm-8">
+                <select class="form-control" id="zcs" onchange="getApp(this)" name="row[zcs]">
+                    <option value="0">请选择</option>
+                    {foreach($zcs as $k=>$b)}
+                        <option value="{$b['id']}" >{$b['name']}</option>
+                    {/foreach}
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-xs-12 col-sm-2"><font style="color: red">*</font>API列表:</label>
+            <div class="col-xs-12 col-sm-8">
+                <select class="form-control" id="ref" name="row[api_id]">
+                   <option>请选择</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-xs-12 col-sm-2"><font style="color: red">*</font>保证金扣除(%):</label>
+            <div class="col-xs-12 col-sm-8">
+                <input type="number" class="form-control" value="20" id="" placeholder="默认带%!" name="au[money]" />
+            </div>
+        </div>
+    </div>
+    <div class="auction" style="display: none">
+        <!-- <div class="form-group">
+            <label for="va1112" class="control-label col-xs-12 col-sm-2"><font style="color: red">*</font>开始时间:</label>
+            <div class="col-xs-12 col-sm-8">
+                <input type="text" class="form-control datetimepicker" data-date-format="Y-MM-DD HH:mm:ss" id="va1112" name="au[start_time]" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="va1113" class="control-label col-xs-12 col-sm-2"><font style="color: red">*</font>结束时间:</label>
+            <div class="col-xs-12 col-sm-8">
+                <input type="text" class="form-control datetimepicker" data-date-format="Y-MM-DD HH:mm:ss" id="va1113" name="au[end_time]" />
+            </div>
+        </div> -->
+
+       <!--  <div class="form-group">
+            <label class="control-label col-xs-12 col-sm-2"><font style="color: red">*</font>扣除域名总价(%):</label>
+            <div class="col-xs-12 col-sm-8">
+                <input type="number" class="form-control" placeholder="默认带%!" id="" name="au[min_rate]" />
+            </div>
+        </div> -->
+    </div>
+    <br><br>
+    <div class="form-group">
+            <label class="control-label col-xs-12 col-sm-2"><font style="color: red">*</font>注意:</label>
+            <div class="col-xs-12 col-sm-8">
+                <h4 style="color: orange;">进行成功操作需要域名的删除时间大于现在的时间,其他操作不做时间限制！</h4>
+                <h4 style="color: red">操作时间小于19：00,竞价结束时间为当天的19：00--21：00</h4>
+                <h4 style="color: red">操作时间大于或者等于19：00,竞价结束时间为第二天的19：00--21：00</h4>
+                <h4 style="color: red">竞拍开始时间为当前操作时间</h4>
+            </div>
+        </div>
+    <div class="form-group hidden layer-footer">
+        <label class="control-label col-xs-12 col-sm-2"></label>
+        <div class="col-xs-12 col-sm-8">
+            <button type="submit" class="btn btn-success btn-embossed disabled">{:__('OK')}</button>
+            <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+        </div>
+    </div>
+</form>

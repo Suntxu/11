@@ -1,0 +1,120 @@
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th width="112px">标题</th>
+            <th>数值</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>域名</td>
+            <td>
+                {$data['tit']}&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="/admin/vipmanage/recode/parselog/index?r.tit={$data['tit']}" class="btn btn-info btn-xs btn-dialog" title="解析日志" data-table-id="table" data-field-index="10" data-row-index="3" data-button-index="0">解析日志</a>
+                &nbsp;<a href="/admin/vipmanage/recode/Transfershow/index?tit={$data['tit']}&type=3" class="btn btn-info btn-xs btn-dialog" title="DNS日志" data-table-id="table" data-field-index="10" data-row-index="3" data-button-index="0">DNS日志</a>
+                &nbsp;<a href="/admin/vipmanage/recode/Transfershow/index?tit={$data['tit']}&type=1" class="btn btn-info btn-xs btn-dialog" title="过户记录" data-table-id="table" data-field-index="10" data-row-index="3" data-button-index="0">过户记录</a>
+            </td>
+        </tr>
+        <tr>
+            <td>入库时间</td>
+            <td>{$data['inserttime']}</td>
+        </tr>
+        <tr>
+            <td>注册时间</td>
+            <td>{$data['zcsj']}</td>
+        </tr>
+        <tr>
+            <td>到期时间</td>
+            <td>{$data['dqsj']}</td>
+        </tr>
+         <tr>
+            <td>长度</td>
+            <td>{$data['len']}</td>
+        </tr>
+         <tr>
+            <td>交易状态</td>
+            <td>{$data['zt']}</td>
+        </tr>
+        <tr>
+            <td>冻结状态</td>
+            <td>{$data['status']}</td>
+        </tr>
+        <tr>
+            <td>push状态</td>
+            <td>{$data['pushid'] > 0 ? 'PUSH中':'正常'}</td>
+        </tr>
+         <tr>
+            <td>注册接口类型</td>
+            <td>{$data['zcs']}---{$data['api']}</td>
+        </tr>
+        <tr>
+            <td>域名Whios信息</td>
+            <td>
+                <div class="form-group">
+                    <label for="tit" class="control-label col-xs-12 col-sm-2" style="margin-left:-2.4%;">域名DNS:</label>
+                    <div class="col-xs-12 col-sm-8">
+                        <span>{$data['whois']['dns']}</span>
+                    </div>
+                </div><br><br>
+                <div class="form-group">
+                    <label for="tit" class="control-label col-xs-12 col-sm-2" style="margin-left:-2.4%;">注册人姓名:</label>
+                    <div class="col-xs-12 col-sm-8">
+                        <span>{$data['whois']['registerName']}</span>
+                    </div>
+                </div><br><br>
+                <div class="form-group">
+                    <label for="tit" class="control-label col-xs-12 col-sm-2" style="margin-left:-2.4%;">注册人邮箱:</label>
+                    <div class="col-xs-12 col-sm-8">
+                        <span>{$data['whois']['registerEmail']}</span>
+                    </div>
+                </div><br><br>
+            </td>
+        </tr>
+        <tr>
+            <form method="post" action="/admin/domain/manage/show" class="edit-form form-horizontal" role="form" data-toggle="validator" >
+            <td>解析记录</td>
+            <td>
+                <table class="table" id="table" style="background-color:#f4f4f4;margin-left:-1.4%;">
+                    <tr>
+                        <th>记录ID</th>
+                        <th>记录类型</th>
+                        <th>主机记录</th>
+                        <th>解析线路(isp)</th>
+                        <th>记录值</th>
+                        <th>TTL值</th>
+                        <th>状态</th>
+                    </tr>
+                    {if $data['parse']}
+                        {foreach $data['parse'] as $k => $v}
+                            <tr>
+                                <input type="hidden" name="rid[]" value="{$v['id']}">
+                                <td><input type="text" name="RecordId[]" value="{$v['RecordId']}" ></td>
+                                <td>{$v['Type']}</td>
+                                <td>{$v['RR']}</td>
+                                <td>{$v['Line']}</td>
+                                <td>{$v['Value']}</td>
+                                <td>{$v['TTL']}</td>
+                                <td>{$v['Status'] == 'Enable'?'正常':'暂停'}</td>
+                            </tr>
+                        {/foreach}
+                    {else}
+                        <tr>
+                            <td align="center" colspan="6">无记录</td>
+                        </tr>
+                    {/if}
+                </table>
+                <div class="hide layer-footer">
+                    <label class="control-label col-xs-12 col-sm-2"></label>
+                    <div class="col-xs-12 col-sm-8">
+                        {if $data['parse']}
+                        <button type="submit" class="btn btn-primary btn-embossed ">确定</button>
+                        {else}
+                        <button type="reset" class="btn btn-primary btn-embossed btn-close" onclick="Layer.closeAll();">{:__('Close')}</button>
+                        {/if}
+                    </div>
+                </div>
+            </td>
+            </form>
+        </tr>
+    </tbody>
+</table>

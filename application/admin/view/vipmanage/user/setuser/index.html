@@ -1,0 +1,628 @@
+<style type="text/css">
+    @media (max-width: 375px) {
+        .edit-form tr td input{width:100%;}
+        .edit-form tr th:first-child,.edit-form tr td:first-child{
+            width:20%;
+        }
+        .edit-form tr th:last-child,.edit-form tr td:last-child{
+            display: none;
+        }
+    }
+    .sf:hover{
+        color: orange;
+    }
+    #f1:hover{
+        color: #0073EA;
+    }
+   /* #ylsz .form-control{
+        width:70%;
+    }*/
+    .row{
+        margin-left: -5px;
+        margin-right: -15px;
+    }
+</style>
+<div class="panel panel-default panel-intro">
+    <div class="panel-heading">
+        {:build_heading(null, false)}
+        <ul class="nav nav-tabs">
+             <li class="" id="j0"><a href="#jbpz" id="clickpz" data-toggle="tab">基本设置</a></li>
+             <li class="" id="j1"><a href="#qxpz"  data-toggle="tab">店铺资料</a></li>
+             <li class="" id="j2"><a href="#txjk" data-toggle="tab">金钱管理</a></li>
+             <li class="" id="j3"><a href="#zfjk"  data-toggle="tab">积分管理</a></li>
+             <li class="" id="j4"><a href="#ylsz" data-toggle="tab">实名认证</a></li>
+             <li class="" id="j5"><a href="#jlcx" data-toggle="tab">记录查询</a></li>
+            <!-- <li>
+                <a href="#addcfg" data-toggle="tab"><i class="fa fa-plus"></i></a>
+            </li>     -->   
+        </ul>
+    </div>
+    <div class="panel-body">
+        <div id="myTabContent" class="tab-content">
+            <div class="tab-pane fade" id="jbpz">
+                <div class="widget-body no-padding">
+                    <form id="jbpz-form" class="edit-form form-horizontal" role="form" data-toggle="validator" method="POST" action="{:url('/admin/vipmanage/user/setuser/edit/flag/qjsz')}">
+                        <table class="table table-striped">
+                            <thead>
+                              
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="row">
+                                            <h3>基本设置</h3>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">会员帐号</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control" id="value" name="row[uid]" disabled="" value="{$data.uid}"  />
+                                                </div>
+                                                <div><a href="#" style="color: green">【进入后台】</a></div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">注册时间</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control" id="value" name="row[sj]" disabled="" value="{$data.sj}"   />
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">注册IP</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control" id="value" name="row[uip]" disabled="" value="{$data.uip}" />
+                                                </div>
+                                                <div><a href="http://www.baidu.com/s?wd={$data.uip}" target="blank" style="color: green">【查看地区】</a></div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">会员密码</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control" id="value" name="row[pwd]" placeholder="留空表示不修改" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">支付密码</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control" id="value" name="row[zfmm]" placeholder="留空表示不修改" />
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">昵称</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control" id="value" value="{$data.nc}" name="row[nc]"/>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">手机号码</label>
+                                                <div class="col-xs-12 col-sm-6">
+                                                    <input type="text" class="form-control" id="value" value="{$data.mot}" name="row[mot]"  />
+                                                </div>
+                                                <div class="col-xs-12 col-sm-2">
+                                                <input  type="checkbox" name="row[ifmot]"  value='1' {if $data.ifmot == 1} checked="" {/if} >绑定手机
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">QQ号码</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control" id="value" value="{$data.uqq}" name="row[uqq]" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">微信号码</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control" id="value" value="{$data.weixin}" name="row[weixin]"  />
+                                                </div>
+                                            </div>
+                                            <input type="hidden" value="{$data.id}" name="id" >
+                                        <!--     <div class="form-group">
+                                                <input type="hidden" id="c-avatar" name="row[head_path]" value="{$data.head_path}" />
+                                                <label for="value" class="control-label col-xs-12 col-sm-2"><strong>个人头像</strong></label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                     <div class="profile-avatar-container">
+                                                        <img class="profile-user-img img-responsive img-circle1a plupload thumbnail" src="__CDN__{$data.head_path}" alt="">
+                                                        <div class="profile-avatar-text thumbnail img-circle1a">点击编辑</div>
+                                                        <button id="plupload-avatar" class="plupload" data-input-id="c-avatar"><i class="fa fa-upload"></i> {:__('Upload')}</button>
+                                                    </div>
+                                                </div>
+                                            </div> -->
+                                            <div class="form-group">
+                                                <label for="c-avatar" class="control-label col-xs-12 col-sm-2">个人头像:</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <div class="input-group">
+                                                        {if is_file('uploads/user/'.$data.id.'/head.jpg')}
+                                                            <input id="c-avatar1" data-rule="" class="form-control" size="50" name="row[head_path]" type="text"  value="/uploads/user/{$data.id}/head.jpg">
+                                                        {else}
+                                                            <input id="c-avatar1" data-rule="" class="form-control" size="50" name="row[head_path]" type="text"  value="/assets/img/avatar.png">
+                                                        {/if}
+                                                        <div class="input-group-addon no-border no-padding">
+                                                            <span><button type="button" id="plupload1-avatar" data-url="ajax/upload/?filepath=user/{$data.id}/&hz=head.jpg" class="btn btn-danger plupload" data-input-id="c-avatar1" data-mimetype="image/gif,image/jpeg,image/png,image/jpg,image/bmp" data-multiple="false" data-preview-id="p-avatar"><i class="fa fa-upload"></i> 上传</button></span>
+                                                        </div>
+                                                        <span class="msg-box n-right" for="c-avatar1"></span>
+                                                    </div>
+                                                    <ul class="row list-inline plupload1-preview" id="p-avatar"></ul>
+                                                </div>
+                                            </div>
+                                            <h3 style="color: red">管理操作</h3>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">状态变更</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <div class="radio">
+                                                        <label for="zt"><input id="zt"  name="row[zt]" {if $data.zt == 1} checked {/if} type="radio" value="1">正常</label> 
+                                                        <label for="zt1"><input id="zt1"  name="row[zt]" {if $data.zt == 2} checked {/if} type="radio" value="2">邮箱未激活</label> 
+                                                        <label for="zt2"><input id="zt2"  name="row[zt]" {if $data.zt == 3} checked {/if} type="radio" value="3">禁用</label> 
+                                                    </div> 
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">可用余额</label>
+                                                <div class="col-xs-12 col-sm-6">
+                                                    <input type="text" class="form-control" id="value" disabled=""  name="row[money1]" value="{$data.money1}"  />
+                                                </div>
+                                                <div class="col-xs-12 col-sm-2"><a style="color: green" onclick="tergg('j2')" href="#txjk" data-toggle="tab" >【修改金额】</a></div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">可用积分</label>
+                                                <div class="col-xs-12 col-sm-6">
+                                                    <input type="text" class="form-control" id="value" disabled="" name="row[jf]" value="{$data.jf}"  />
+                                                    <!-- href="#txjk" data-toggle="tab" -->
+                                                </div>
+                                                <div class="col-xs-12 col-sm-2"><a href="#zfjk" data-toggle="tab" onclick="tergg('j3')"  style="color: green">【修改积分】</a></div>
+                                                 <!-- onclick="tergg('txjk')" -->
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-xs-12 col-sm-2">可删域名用户{$data.jk}</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <div class="radio">
+                                                        <label for="jk"><input id="jk"  name="row[jk]" {if empty($data.jk)} checked {/if} type="radio" value="0">不可删</label> 
+                                                        <label for="jk1"><input id="jk1"  name="row[jk]" {if $data.jk == 1} checked {/if} type="radio" value="1">可删</label> 
+                                                    </div> 
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    
+                                    <td align="center">
+                                        <button type="submit" class="btn btn-success btn-embossed">{:__('OK')}</button>
+                                        <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+                                    </td>
+
+
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </form>
+                </div>
+            </div>
+
+            <!-- 店铺资料 -->
+            <div class="tab-pane fade" id="qxpz">
+                <div class="widget-body no-padding">
+                    <form id="qxpz-form" class="edit-form form-horizontal" role="form" data-toggle="validator" method="POST" action="{:url('/admin/vipmanage/user/setuser/edit/flag/shop')}">
+                        <table class="table table-striped">
+                            <thead>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <label for="123" class="control-label col-xs-12 col-sm-2">店铺审核状态</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" id="123" class="form-control"  disabled="" value="{$data.shopzt}"  />
+                                                </div>
+                                            </div>
+                                            <input type="hidden" name="openshop" value="{$data.openshop}">
+                                            <div class="form-group">
+                                                <label for="value011" class="control-label col-xs-12 col-sm-2"><span style="color: red">*</span>店铺名称</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control"  id="value011" name="row[shopname]" value="{$data.shopname}"  />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="c-avatar" class="control-label col-xs-12 col-sm-2">店铺LOGO:</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <div class="input-group">
+                                                        {if is_file('uploads/user/'.$data.id.'/shop_logo.jpg')}
+                                                            <input id="c-avatar2"  class="form-control" size="50" name="row[head_path]" type="text"  value="/uploads/user/{$data.id}/shop_logo.jpg">
+                                                        {else}
+                                                            <input id="c-avatar2""" class="form-control" size="50" name="row[head_path]" type="text"  value="/assets/img/avatar.png">
+                                                        {/if}
+                                                        <div class="input-group-addon no-border no-padding">
+                                                            <span><button type="button" id="plupload2-avatar" data-url="ajax/upload/?filepath=user/{$data.id}/&hz=shop_logo.jpg" class="btn btn-danger plupload" data-input-id="c-avatar2" data-mimetype="image/gif,image/jpeg,image/png,image/jpg,image/bmp" data-multiple="false" data-preview-id="p-avatar2"><i class="fa fa-upload"></i> 上传</button></span>
+                                                        </div>
+                                                        <span class="msg-box n-right" for="c-avatar2"></span>
+                                                    </div>
+                                                    <ul class="row list-inline plupload2-preview" id="p-avatar2"></ul>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="c-avatar3" class="control-label col-xs-12 col-sm-2">店铺通栏:</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <div class="input-group">
+                                                        {if is_file('uploads/user/'.$data.id.'/shop_tl.jpg')}
+                                                            <input id="c-avatar3"  class="form-control" size="50" name="row[head_path]" type="text"  value="/uploads/user/{$data.id}/shop_tl.jpg">
+                                                        {else}
+                                                            <input id="c-avatar3" class="form-control" size="50" name="row[head_path]" type="text"  value="/assets/img/avatar.png">
+                                                        {/if}
+                                                        <div class="input-group-addon no-border no-padding">
+                                                            <span><button type="button" id="plupload3-avatar" data-url="ajax/upload/?filepath=user/{$data.id}/&hz=shop_tl.jpg" class="btn btn-danger plupload" data-input-id="c-avatar3" data-mimetype="image/gif,image/jpeg,image/png,image/jpg,image/bmp" data-multiple="false" data-preview-id="p-avatar3"><i class="fa fa-upload"></i> 上传</button></span>
+                                                        </div>
+                                                        <span class="msg-box n-right" for="c-avatar3"></span>
+                                                    </div>
+                                                    <ul class="row list-inline plupload3-preview" id="p-avatar3"></ul>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <label for="value" class="control-label col-xs-12 col-sm-2">店铺SEO标题</label>
+                                                    <div class="col-xs-12 col-sm-8">
+                                                        <input type="text" class="form-control" id="value" name="row[seotit]"  value="{$data.seotit}"  />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <label for="value" class="control-label col-xs-12 col-sm-2">店铺SEO关键字</label>
+                                                    <div class="col-xs-12 col-sm-8">
+                                                        <input type="text" class="form-control" id="value" name="row[seokey]"  value="{$data.seokey}"  />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <label for="value" class="control-label col-xs-12 col-sm-2">简要描述：</label>
+                                                    <div class="col-xs-12 col-sm-8">
+                                                        <textarea name="row[seodes]" class="form-control" rows="5" >{$data.seodes}</textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <label for="value" class="control-label col-xs-12 col-sm-2">详细描述</label>
+                                                    <div class="col-xs-12 col-sm-8">
+                                                        <textarea name="row[txt]" class="editor edui-body-container"  style="width: 100%; min-height: 200px; z-index: 90; " >{$data.txt}</textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <h3 style="color: red">管理操作</h3>
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <label for="value11" class="control-label col-xs-12 col-sm-2">推荐排名</label>
+                                                    <div class="col-xs-12 col-sm-8">
+                                                        <input type="number" class="form-control" id="value11" name="row[pm]"  data-tip="0表示不推荐，反之从小到大排序" value="{$data.pm}"  />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <label for="value22" class="control-label col-xs-12 col-sm-2">店铺信用</label>
+                                                    <div class="col-xs-12 col-sm-8">
+                                                        <input type="number" class="form-control" id="value22" name="row[xinyong]"  data-tip="0表示读取常规信用值，反之读取该值" value="{$data.xinyong}"  />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <label for="value" class="control-label col-xs-12 col-sm-2">店铺点击率</label>
+                                                    <div class="col-xs-12 col-sm-8">
+                                                        <input type="number" class="form-control" id="value" name="row[djl]" value="{$data.djl}"  />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">店铺审核{$data.shopzt}</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <div class="radio">
+                                                        <label for="shopzt1"><input id="shopzt1"  name="row[shopzt]" onclick="hiddenYs('shop_bj',this)" {if $data.shopzt == '未提交申请'} checked {/if} type="radio" value="1">未提交申请</label> 
+                                                        <label for="shopzt2"><input id="shopzt2"  name="row[shopzt]" onclick="hiddenYs('shop_bj',this)" {if $data.shopzt == '正在审核'} checked {/if} type="radio" value="2">正在审核</label> 
+                                                        <label for="shopzt3"><input id="shopzt3"  name="row[shopzt]" onclick="hiddenYs('shop_bj',this)" {if $data.shopzt == '正常开店'} checked {/if} type="radio" value="3">正常开店</label> 
+                                                        <label for="shopzt4"><input id="shopzt4"  name="row[shopzt]" onclick="hiddenYs('shop_bj',this,'4')" {if $data.shopzt == '审核被拒'} checked {/if} type="radio" value="4">拒绝申请</label> 
+                                                    </div>
+                                                   
+                                                </div>
+                                            </div>
+                                            <div class="form-group" id="shopztsm">
+                                                <div class="form-group" id="shop_bj"  style="display: none;">
+                                                    <label for="value" class="control-label col-xs-12 col-sm-2">被拒原因</label>
+                                                    <div class="col-xs-12 col-sm-8">
+                                                         <input type="text" id="shop_bj1" class="form-control"  name="row[shopztsm]" placeholder="如果拒绝申请，则会员缴纳的费用将退回至其会员帐号中。通过申请，不会自动扣费。" value="{$data.shopztsm}"> 
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <input type="hidden" value="{$data.id}" name="id" >
+                                        </div>
+
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td align="center">
+                                        <button type="submit" class="btn btn-success btn-embossed">{:__('OK')}</button>
+                                        <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </form>
+                </div>
+            </div>
+
+            <!-- 金钱管理 -->
+
+             <div class="tab-pane fade" id="txjk">
+                <div class="widget-body no-padding">
+                    <form id="txjk-form" class="edit-form form-horizontal" role="form" data-toggle="validator" method="POST" action="{:url('/admin/vipmanage/user/setuser/edit?flag=money')}">
+                        <table class="table table-striped">
+                            <thead>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="row">
+                                            <h3>金钱设置</h3><span  style="position: relative;top: -27px;left:95px;color:#999;"><a class="sf" href="http://www.yj99.cn/faq/view9.html" target="blank">【查看方法】</a></span>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">会员帐号</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control" id="value" name="row[uid]" readonly="" value="{$data.uid}"  data-rule="required" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">可用余额</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control" id="value" name="row[money1]" disabled="" value="{$data.money1|sprintf='%.2f',###}"  data-rule="required" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">金钱管理</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <select name="jinq" class="form-control selectpicker">
+                                                        <option value="1">帐户金额充值</option>
+                                                        <option value="2">帐户金额扣除</option>
+                                                        <option value="3">冻结账户资金</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="valueXX" class="control-label col-xs-12 col-sm-2">金钱数量</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="number" class="form-control" id="valueXX"  name="jinq_num" value=""  />
+                                                </div>
+                                            </div> <input type="hidden" value="{$data.id}" name="id" >
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">说明</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control" id="value" name="money_sm" value=""  />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td align="center">
+                                        <button type="submit" class="btn btn-success btn-embossed">{:__('OK')}</button>
+                                        <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </form>
+                </div>
+            </div>
+
+             <div class="tab-pane fade" id="zfjk">
+                <div class="widget-body no-padding">
+                    <form id="zfjk-form" class="edit-form form-horizontal" role="form" data-toggle="validator" method="POST" action="{:url('/admin/vipmanage/user/setuser/edit?flag=socre')}">
+                        <table class="table table-striped">
+                            <thead>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="row">
+                                            <h3>积分设置</h3>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">会员帐号</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control" id="value" name="row[uid]" readonly="" value="{$data.uid}"  data-rule="required" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">可用积分</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control" id="value" name="row[jf]" disabled="" value="{$data.jf}"  data-rule="required" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">积分管理</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <select name="jf" class="form-control selectpicker">
+                                                        <option value="1">增加积分</option>
+                                                        <option value="2">扣除积分</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <input type="hidden" value="{$data.id}" name="id" >
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">积分数量</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="number" class="form-control" id="value" name="jf_num" value=""  />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">说明</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control" id="value" name="jf_sm" value=""  />
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td align="center">
+                                        <button type="submit" class="btn btn-success btn-embossed">{:__('OK')}</button>
+                                        <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </form>
+                </div>
+            </div>
+            <!-- 实名认证 -->
+            <div class="tab-pane fade" id="ylsz">
+                <div class="widget-body no-padding">
+                    <form id="ylsz-form" class="edit-form form-horizontal" role="form" data-toggle="validator" method="POST" action="{:url('/admin/vipmanage/user/setuser/edit?flag=sfz')}">
+                        <table class="table table-striped">
+                            <thead>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="row">
+                                            <h3>实名设置</h3>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">会员帐号</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control" id="value" name="row[uid]" readonly="" value="{$data.uid}"  data-rule="required" />
+                                                </div>
+                                            </div> <input type="hidden" value="{$data.id}" name="id" >
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">身份证审核</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <div class="radio">
+                                                        <label for="sfzrz0"><input id="sfzrz0"  name="row[sfzrz]" onclick="hiddenYs('sfzrz',this)" {if $data.sfzrz == 1} checked {/if} type="radio" value="1">等待审核</label> 
+                                                        <label for="sfzrz2"><input id="sfzrz2"  name="row[sfzrz]" onclick="hiddenYs('sfzrz',this)" {if $data.sfzrz == 2} checked {/if} type="radio" value="2">通过认证</label> 
+                                                        <label for="sfzrz3"><input id="sfzrz3"  name="row[sfzrz]" onclick="hiddenYs('sfzrz',this,3)" {if $data.sfzrz == 3} checked {/if} type="radio" value="3">认证不通过</label> 
+                                                        <label for="sfzrz4"><input id="sfzrz4"  name="row[sfzrz]" onclick="hiddenYs('sfzrz',this)" {if $data.sfzrz == 4} checked {/if} type="radio" value="4">未提交认证</label> 
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group" id="sfzrz" style="display: none" >
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">被拒原因</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                     <input type="text"  class="form-control" id="sfzsm1"  name="row[sfzrzsm]" value="{$data.sfzrzsm}"> 
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">真实姓名</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control" id="value1"  name="row[uname]" value="{$data.uname}" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">身份证号</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control" id="value2" name="row[sfz]" value="{$data.sfz}"  />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="c-avatar3" class="control-label col-xs-12 col-sm-2">身份证正面照:</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <div class="input-group">
+                                                        {if is_file('uploads/user/'.$data.id.'/sfz_1.jpg')}
+                                                            <input id="c-avatar4"  class="form-control" size="50" type="text"  value="/uploads/user/{$data.id}/sfz_1.jpg">
+                                                        {else}
+                                                            <input id="c-avatar4" class="form-control" size="50"  type="text"  value="/assets/img/avatar.png">
+                                                        {/if}
+                                                        <div class="input-group-addon no-border no-padding">
+                                                            <span><button type="button" id="plupload4-avatar" data-url="ajax/upload/?filepath=user/{$data.id}/&hz=sfz_1.jpg" class="btn btn-danger plupload" data-input-id="c-avatar4" data-mimetype="image/gif,image/jpeg,image/png,image/jpg,image/bmp" data-multiple="false" data-preview-id="p-avatar4"><i class="fa fa-upload"></i> 上传</button></span>
+                                                        </div>
+                                                        <span class="msg-box n-right" for="c-avatar4"></span>
+                                                    </div>
+                                                    <ul class="row list-inline plupload4-preview" id="p-avatar4"></ul>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="c-avatar3" class="control-label col-xs-12 col-sm-2">身份证反面照:</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <div class="input-group">
+                                                        {if is_file('uploads/user/'.$data.id.'/sfz_2.jpg')}
+                                                            <input id="c-avatar5"  class="form-control" size="50" type="text"  value="/uploads/user/{$data.id}/sfz_2.jpg">
+                                                        {else}
+                                                            <input id="c-avatar5" class="form-control" size="50"  type="text"  value="/assets/img/avatar.png">
+                                                        {/if}
+                                                        <!-- data-maxsize="200KB" -->
+                                                        <div class="input-group-addon no-border no-padding">
+                                                            <span><button type="button" id="plupload5-avatar" data-url="ajax/upload/?filepath=user/{$data.id}/&hz=sfz_2.jpg" class="btn btn-danger plupload" data-input-id="c-avatar5" data-mimetype="image/gif,image/jpeg,image/png,image/jpg,image/bmp"  data-multiple="false" data-preview-id="p-avatar5"><i class="fa fa-upload"></i> 上传</button></span>
+                                                        </div>
+                                                        <span class="msg-box n-right" for="c-avatar5"></span>
+                                                    </div>
+                                                    <ul class="row list-inline plupload5-preview" id="p-avatar5"></ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td align="center">
+                                        <button  type="submit" class="btn btn-success btn-embossed">{:__('OK')}</button>
+                                        <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </form>
+                </div>
+            </div>
+<!-- 记录查询 -->
+    <!-- 实名认证 -->
+            <div class="tab-pane fade" id="jlcx">
+                <div class="widget-body no-padding">
+                    <form id="jlcx-form" class="edit-form form-horizontal" role="form" data-toggle="validator" method="POST" action="{:url('/admin/vipmanage/user/setuser/edit?flag=sfz')}">
+                        <table class="table table-striped">
+                            <thead>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <h2>记录查询</h2>
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">会员帐号</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control" id="value" name="row[uid]" readonly="" value="{$data.uid}"  data-rule="required" />
+                                                </div>
+                                            </div>
+                                           
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">快速查询</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <a href="/admin/vipmanage/recode/loginlog/index/ids/{$data.uid}" class="btn btn-info btn-xs btn-dialog" title="登陆日志" data-table-id="table" data-field-index="10" data-row-index="3" data-button-index="0">登陆日志</a>
+                                                    <a href="/admin/vipmanage/recode/parselog/index/ids/{$data.uid}" class="btn btn-info btn-xs btn-dialog" title="解析记录" data-table-id="table" data-field-index="10" data-row-index="3" data-button-index="0">解析记录</a>
+                                                    <a href="/admin/vipmanage/recode/payrank/index/ids/{$data.uid}" class="btn btn-info btn-xs btn-dialog" title="充值记录" data-table-id="table" data-field-index="10" data-row-index="3" data-button-index="0">充值记录</a>
+                                                    <a href="/admin/vipmanage/recode/dinndan/index/ids/{$data.uid}" class="btn btn-info btn-xs btn-dialog" title="资金明细" data-table-id="table" data-field-index="10" data-row-index="3" data-button-index="0">资金明细</a>
+                                                    <a href="/admin/vipmanage/recode/reglog/index/ids/{$data.uid}" class="btn btn-info btn-xs btn-dialog" title="域名注册" data-table-id="table" data-field-index="10" data-row-index="3" data-button-index="0">域名注册</a>
+                                                    <a href="/admin/vipmanage/recode/deallog/index/ids/{$data.uid}/status/1" class="btn btn-info btn-xs btn-dialog" title="域名交易" data-table-id="table" data-field-index="10" data-row-index="3" data-button-index="0">域名交易</a>
+                                                </div>
+                                            </div>
+                                            
+                                            
+                                        </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                
+                            </tfoot>
+                        </table>
+                    </form>
+                </div>
+            </div>

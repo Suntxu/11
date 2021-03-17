@@ -1,0 +1,40 @@
+<div class="panel panel-default panel-intro">
+    {:build_heading()}
+
+    <div class="panel-body">
+        <div id="myTabContent" class="tab-content">
+            <div class="tab-pane fade active in" id="one">
+                <div class="widget-body no-padding">
+                    <div id="toolbar" class="toolbar">
+                        {:build_toolbar('refresh')}&nbsp;
+                        <a href="javascript:;" class="btn btn-success btn-operate btn-disabled disabled dialogit" style="background: #e74c3c;" data-url="/admin/domain/store/del/index" title="批量出库"><i class="fa fa-trash"></i>批量出库</a>&nbsp;
+                        <a href="javascript:;" class="btn btn-warning btn-operate btn-disabled disabled dialogit" style="background: #e74c3c;" data-url="/admin/domain/refund" title="注册域名退款"><i class="fa fa-rupee"></i>注册域名退款</a>&nbsp;
+                        <a href="javascript:;" class="btn btn-success btn-operate btn-disabled disabled dialogit" data-url="/admin/domain/guishu/index" title="归属查询"><i class="fa fa-houzz"></i>归属查询</a>&nbsp;
+                        <a href="javascript:;" class="btn btn-warning btn-operate btn-disabled disabled dialogit" data-url="/admin/domain/verification/add" title="添加自查域名"><i class="fa fa-cab fa-fw"></i>添加自查</a>
+                        <span style="margin-left: 5px;" >状态操作:</span>
+                        <a class="btn btn-success btn-disabled disabled btn-freeze" data-type="2" ><i class="fa fa-shirtsinbulk"></i>冻结</a>&nbsp;
+                        <!-- <a class="btn btn-success btn-disabled disabled btn-freeze" data-type="3" ><i class="fa fa-shirtsinbulk"></i>hold</a>&nbsp; -->
+                        <a class="btn btn-success btn-disabled disabled btn-freeze" data-type="1" ><i class="fa fa-shirtsinbulk"></i>恢复正常</a>
+                        <a class="btn btn-warning btn-disabled disabled btn-freeze" data-type="4" ><i class="fa fa-shirtsinbulk"></i>云解析添加成功</a>
+                         <!-- <br><br> -->
+                        <span style="margin-left: 5px;" >过期状态:</span>
+                        <a class="btn btn-success shuhui"  id="what1" data-type="1" ><i class="fa fa-reddit-alien"></i>未过期</a>
+                        <a class="btn btn-warning shuhui"  id="what2" data-type="2" ><i class="fa fa-reddit-alien"></i>已过期</a>
+                        <a class="btn btn-danger shuhui"   id="what3" data-type="3" ><i class="fa fa-reddit-alien"></i>赎回期</a>
+                        <a class="btn btn-primary shuhui"  id="what4" data-type="" ><i class="fa fa-reddit-alien"></i>全部</a>
+                         &nbsp;&nbsp;
+                        <button id="offline_export" class="btn btn-warning" onclick="offlineExport('domainpro')"> 离线导出 </button>
+                        <div class="dropdown btn-group {:$auth->check('domain/manage/multi')?'':'hide'}">
+                            <ul class="dropdown-menu text-left" role="menu">
+                                <li><a class="btn btn-link btn-multi btn-disabled disabled" href="javascript:;" data-params="status=normal"><i class="fa fa-eye"></i> {:__('Set to normal')}</a></li>
+                                <li><a class="btn btn-link btn-multi btn-disabled disabled" href="javascript:;" data-params="status=hidden"><i class="fa fa-eye-slash"></i> {:__('Set to hidden')}</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <table id="table" class="table table-striped table-bordered table-hover" width="100%"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

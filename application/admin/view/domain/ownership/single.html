@@ -1,0 +1,31 @@
+<form id="add-form" class="form-horizontal form-ajax" role="form" data-toggle="validator" method="POST" action="">
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2"><font style="color: red">*</font>域名:</label>
+        <div class="col-xs-12 col-sm-8">
+            <textarea class="form-control" name="row[domain]"  rows="5" placeholder="域名之间请用回车隔开！">{php}foreach($domains as $v){ echo $v."\r\n"; }{/php}</textarea>
+        </div>
+    </div>
+    <input type="hidden" name="row[taskid]" value="{$taskid}">
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2"><font style="color: red">*</font>过户状态:</label>
+        <div class="col-xs-12 col-sm-8">
+            <div class="radio">
+                <label for="sale_domain1"><input id="sale_domain1" onclick="hiden(this)" name="row[status]"  type="radio" value="1">成功</label> 
+                <label for="sale_domain2"><input id="sale_domain2" onclick="hiden(this)"  name="row[status]"  type="radio" value="2">失败</label> 
+            </div> 
+        </div>
+    </div>
+    <div class="form-group" id="remark" style="display: none;" >
+        <label class="control-label col-xs-12 col-sm-2"><font style="color: red">*</font>失败原因:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" name="row[remark]">
+        </div>
+    </div>
+    <div class="form-group hidden layer-footer">
+        <label class="control-label col-xs-12 col-sm-2"></label>
+        <div class="col-xs-12 col-sm-8">
+            <button type="submit" class="btn btn-success btn-embossed ">{:__('OK')}</button>
+            <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,151 @@
+<style type="text/css">
+    @media (max-width: 375px) {
+        .edit-form tr td input{width:100%;}
+        .edit-form tr th:first-child,.edit-form tr td:first-child{
+            width:20%;
+        }
+        .edit-form tr th:last-child,.edit-form tr td:last-child{
+            display: none;
+        }
+    }
+    .profile-avatar-container {
+        position:relative;
+        width:100px;margin:0 1%;
+    }
+    .profile-avatar-container .profile-user-img{
+        width:100px;
+        height:100px;
+    }
+    .profile-avatar-container .profile-avatar-text {
+        display:none;
+    }
+    .profile-avatar-container:hover .profile-avatar-text {
+        display:block;
+        position:absolute;
+        height:100px;
+        width:100px;
+        background:#444;
+        opacity: .6;
+        color: #fff;
+        top:0;
+        left:0;
+        line-height: 100px;
+        text-align: center;
+    }
+    .profile-avatar-container button{
+        position:absolute;
+        top:0;left:0;width:100px;height:100px;opacity: 0;
+    }
+    .sf:hover{
+        color: orange;
+    }
+    #f1:hover{
+        color: #0073EA;
+    }
+
+</style>
+<div class="panel panel-default panel-intro">
+    <form id="add-form" class="form-horizontal form-ajax" role="form" data-toggle="validator" method="POST" about="" style="height: 100%;">
+        <div class="panel-body">
+            <div id="myTabContent" class="tab-content">
+                <div class="tab-pane fade active in" id="jbpz">
+                    <div class="widget-body no-padding">
+                        <table class="table table-striped" >
+                            <thead>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td style="background: #ffffff;">
+                                    <div class="row" id="www" style="background: #ffffff;">
+                                        <div class="form-group">
+                                            <label class="control-label col-xs-12 col-sm-2">标题:</label>
+                                            <div  class="col-xs-12 col-sm-8">
+                                                <input type="text" class="form-control" id="hd_title" name="row[title]" value="{$data['title']}" data-rule="required" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-xs-12 col-sm-2">描述:</label>
+                                            <div  class="col-xs-12 col-sm-8">
+                                                <textarea class="form-control" style="height: 123px;" name="row[remark]" placeholder="描述,可以为空">{$data['remark']}</textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="value2" class="control-label col-xs-12 col-sm-2">后缀</label>
+                                            <div class="col-xs-12 col-sm-8">
+                                                <select id="suffix" name="row[suffix]" data-rule="required" class="form-control">
+                                                    <option value="">请选择</option>
+                                                    {foreach $suffixInfo as $v}
+                                                        <option value="{$v['name1']}" {if $data['suffix'] == $v['name1']} selected {/if} data-price="{$v['ysje']}" data-cost="{$v['cost']}" >{$v['name1']}</option>
+                                                    {/foreach}
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="value2" class="control-label col-xs-12 col-sm-2">接口商</label>
+                                            <div class="col-xs-12 col-sm-8">
+                                                <select name="row[api_id]" data-rule="required" class="form-control">
+                                                    <option value="">请选择</option>
+                                                    {foreach $apiInfo as $k => $v}
+                                                        <option value="{$k}" {if $k == $data['api_id']} selected {/if} >{$v}</option>
+                                                    {/foreach}
+                                                </select>
+                                            </div>
+                                        </div>
+                                            <input type="hidden" name="row[id]" value="{$data['id']}">
+                                        <div class="form-group">
+                                            <label class="control-label col-xs-12 col-sm-2">注册原价格:</label>
+                                            <div  class="col-xs-12 col-sm-8">
+                                                <input type="number" class="form-control" id="hd_title1" name="row[original_cost]" value="{$data['original_cost']}" placeholder="选择后缀后自动填写" data-rule="required" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-xs-12 col-sm-2">注册成本价格:</label>
+                                            <div  class="col-xs-12 col-sm-8">
+                                                <input type="number" class="form-control" id="hd_title2" name="row[cost]" value="{$data['cost']}" placeholder="选择后缀后自动填写" data-rule="required" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-xs-12 col-sm-2">福利开始时间:</label>
+                                            <div class="col-xs-12 col-sm-8">
+                                                <input type="text" class="form-control datetimepicker" value="{$data.start_time|date='Y-m-d H:i:s',###}" data-date-format="Y-MM-DD HH:mm:ss" id="value2222" name="row[start_time]" data-rule="required" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-xs-12 col-sm-2">福利结束时间:</label>
+                                            <div class="col-xs-12 col-sm-8">
+                                                <input type="text" class="form-control datetimepicker" value="{$data.end_time|date='Y-m-d H:i:s',###}" data-date-format="Y-MM-DD HH:mm:ss" id="value2223" name="row[end_time]" data-rule="required" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-xs-12 col-sm-2">序号(倒序):</label>
+                                            <div  class="col-xs-12 col-sm-8">
+                                                <input type="text" class="form-control" id="aa111" name="row[sort]" value="{$data['sort']}" data-rule="required,integer" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="value" class="control-label col-xs-12 col-sm-2">状态</label>
+                                            <div class="radio">
+                                                <label for="sta1"><input id="sta1" {if $data['status'] === 0} checked {/if} name="row[status]"  type="radio" value="0" >开启</label> 
+                                                <label for="sta2"><input id="sta2" {if $data['status'] == 1} checked {/if} name="row[status]" type="radio" value="1" >关闭</label>
+                                            </div> 
+                                        </div>
+                                        <div class="form-group layer-footer">
+                                            <label class="control-label col-xs-12 col-sm-2"></label>
+                                            <div class="col-xs-12 col-sm-8">
+                                                <button type="submit" class="btn btn-success btn-embossed disabled">修改</button>
+                                                <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <!-- </form>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+

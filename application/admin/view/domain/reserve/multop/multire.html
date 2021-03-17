@@ -1,0 +1,53 @@
+<form id="add-form" class="form-horizontal form-ajax" role="form" style="height: 580px" data-toggle="validator" method="POST" action="">
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2"><font style="color: red">*</font>域名:</label>
+        <div class="col-xs-12 col-sm-8">
+            <textarea class="form-control" name="row[domain]" {if $ids}  readonly="" {/if}  id="domains" rows="5" placeholder="域名之间请用回车隔开!每次提交最多500个域名!">{php}foreach($tits as $v){ echo $v."\r\n"; }{/php}</textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2"><font style="color: red">*</font>订单状态:</label>
+        <div class="col-xs-12 col-sm-8">
+            <div class="radio">
+                {if $status == 1}
+                    <label for="sale_domain1"><input id="sale_domain1"  name="row[flag]" type="radio" value="1">提交</label>
+                    <label for="sale_domain4"><input id="sale_domain4"  name="row[flag]" type="radio" value="4">预定失败</label> 
+                {else}
+                    <label for="sale_domain2"><input id="sale_domain2"  name="row[flag]" type="radio" value="2">预定成功</label>
+                    <label for="sale_domain3"><input id="sale_domain3"  name="row[flag]" type="radio" value="3">预定失败</label> 
+                {/if}
+            </div> 
+        </div>
+    </div>
+    
+    {if !$ids}
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2"><font style="color: red">*</font>注册商列表:</label>
+        <div class="col-xs-12 col-sm-8">
+            <select class="form-control" id="zcs" onchange="getApp(this)">
+                <option value="0">请选择</option>
+                {foreach($zcs as $k=>$b)}
+                    <option value="{$k}" >{$b['name']}</option>
+                {/foreach}
+            </select>
+        </div>
+        <input type="hidden" id="zinfo" value='{$zinfo}'>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2"><font style="color: red">*</font>API列表:</label>
+        <div class="col-xs-12 col-sm-8">
+            <select class="form-control" id="ref" name="row[api_id]">
+               <option value="">请选择</option>
+            </select>
+        </div>
+    </div>
+    {/if}
+    <input type="hidden" name="row[id]" value="{$ids}">
+    <div class="form-group hidden layer-footer">
+        <label class="control-label col-xs-12 col-sm-2"></label>
+        <div class="col-xs-12 col-sm-8">
+            <button type="submit" class="btn btn-success btn-embossed disabled">{:__('OK')}</button>
+            <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+        </div>
+    </div>
+</form>

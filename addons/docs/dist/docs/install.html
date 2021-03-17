@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>安装 - FastAdmin</title>
+        <meta charset="utf-8">
+        <meta name="keywords" content="">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta property="og:type" content="article">
+        <meta property="og:title" content="安装 - FastAdmin">
+        <meta property="og:description" content="">
+        <!--<meta property="og:image" content="../assets/images/logo.png">-->
+
+        <!--<link rel="icon" href="../assets/images/logo.png" type="image/x-icon">-->
+
+        <!-- <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Roboto Mono" rel="stylesheet" type="text/css"> -->
+        <link href="../assets/css/highlight.min.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/search.css" rel="stylesheet" type="text/css">
+
+        <!-- main page styles -->
+        <link rel="stylesheet" href="../assets/css/page.css">
+
+        
+        <script>window.PAGE_TYPE = "docs"</script>
+        <script>window.SEARCH_URL = "../assets/js/docs.json"</script>
+        <script>window.DOCS_MODE = "html"</script>
+    </head>
+    <body class="docs">
+
+        <div id="mobile-bar" >
+            <a class="menu-button"></a>
+            <a class="logo" href="../docs/index.html">
+                                <span>FastAdmin</span>
+                            </a>
+        </div>
+
+        <div id="header">
+    <a id="logo" href="../docs/index.html">
+                <span>FastAdmin</span>
+            </a>
+    <ul id="nav">
+        <li>
+    <form id="search-form">
+        <input type="text" id="search-query-" class="search-query local-search-input st-default-search-input">
+    </form>
+    <div class="local-search-result"></div>
+</li>
+<li><a href="http://www.fastadmin.net" class="">首页</a></li>
+<li><a href="http://doc.fastadmin.net" class="">文档</a></li>
+<li><a href="http://forum.fastadmin.net" class="">论坛</a></li>
+<li><a href="https://git.oschina.net/karson/fastadmin" class="">下载</a></li>
+<li><a href="http://demo.fastadmin.net" class="">在线演示</a></li>
+    </ul>
+</div>
+
+
+                <div id="main" class="fix-sidebar">
+            <div class="sidebar">
+    <ul class="main-menu">
+        <li>
+    <form id="search-form">
+        <input type="text" id="search-query-" class="search-query local-search-input st-default-search-input">
+    </form>
+    <div class="local-search-result"></div>
+</li>
+<li><a href="http://www.fastadmin.net" class="">首页</a></li>
+<li><a href="http://doc.fastadmin.net" class="">文档</a></li>
+<li><a href="http://forum.fastadmin.net" class="">论坛</a></li>
+<li><a href="https://git.oschina.net/karson/fastadmin" class="">下载</a></li>
+<li><a href="http://demo.fastadmin.net" class="">在线演示</a></li>
+    </ul>
+    <div class="list">
+        <h2>
+            文档        </h2>
+        <ul class="menu-root">
+
+                        <li>
+                <a href="index.html" class="sidebar-link">介绍</a>
+            </li>
+                        <li>
+                <a href="index.html" class="sidebar-link">介绍</a>
+            </li>
+                        <li>
+                <a href="install.html" class="sidebar-link current">安装</a>
+            </li>
+                        <li>
+                <a href="install.html" class="sidebar-link current">安装</a>
+            </li>
+                        <li>
+                <a href="command.html" class="sidebar-link">命令行</a>
+            </li>
+                        <li>
+                <a href="command.html" class="sidebar-link">命令行</a>
+            </li>
+                        <li>
+                <a href="construct.html" class="sidebar-link">目录结构</a>
+            </li>
+                        <li>
+                <a href="construct.html" class="sidebar-link">目录结构</a>
+            </li>
+                        <li>
+                <a href="language.html" class="sidebar-link">多语言</a>
+            </li>
+                        <li>
+                <a href="language.html" class="sidebar-link">多语言</a>
+            </li>
+                        <li>
+                <a href="database.html" class="sidebar-link">数据库</a>
+            </li>
+                        <li>
+                <a href="database.html" class="sidebar-link">数据库</a>
+            </li>
+                        <li>
+                <a href="module.html" class="sidebar-link">模块</a>
+            </li>
+                        <li>
+                <a href="module.html" class="sidebar-link">模块</a>
+            </li>
+                        <li>
+                <a href="component.html" class="sidebar-link">组件</a>
+            </li>
+                        <li>
+                <a href="component.html" class="sidebar-link">组件</a>
+            </li>
+                        <li>
+                <a href="faq.html" class="sidebar-link">常见问题</a>
+            </li>
+                        <li>
+                <a href="faq.html" class="sidebar-link">常见问题</a>
+            </li>
+                        <li>
+                <a href="contributing.html" class="sidebar-link">贡献代码</a>
+            </li>
+                        <li>
+                <a href="contributing.html" class="sidebar-link">贡献代码</a>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+<div class="content docs with-sidebar">
+        <h1>安装</h1>
+    
+    <h2><strong>环境要求</strong></h2><pre><code>PHP &gt;= 5.5.0
+Mysql &gt;= 5.5.0
+Apache 或 Nginx
+PDO PHP Extension
+MBstring PHP Extension
+CURL PHP Extension
+Node.js (可选,用于安装Bower和LESS,同时打包压缩也需要使用到)
+Composer (可选,用于管理第三方扩展包)
+Bower (可选,用于管理前端资源)
+Less (可选,用于编辑less文件,如果你需要增改css样式，最好安装上)</code></pre><h2><strong>源代码安装</strong></h2><ol><li>下载FastAdmin完整包解压到你本地<br> <a href="http://git.oschina.net/karson/fastadmin/attach_files">http://git.oschina.net/karson/fastadmin/attach_files</a><br>还可以加QQ群(<a href="https://jq.qq.com/?_wv=1027&k=487PNBb">636393962</a>) 在群共享下载</li><li>将你的虚拟主机绑定到<code>/yoursitepath/public</code>目录</li><li>访问 <a href="http://www.yourwebsite.com/install.php">http://www.yourwebsite.com/install.php</a> 按指示进行安装</li></ol><h2><strong>命令行安装</strong></h2><ol><li>克隆FastAdmin到你本地<br><code>git clone https://git.oschina.net/karson/fastadmin.git </code></li><li>进入目录<br><code>cd fastadmin </code></li><li>下载前端插件依赖包<br><code>bower install </code></li><li>下载PHP依赖包<br><code>composer install</code></li><li>一键创建数据库并导入数据<br><code>php think install</code></li></ol><h2><strong>常见问题</strong></h2><ol><li>如果使用命令行安装则默认密码是<code>123456</code></li><li>提示<code>请先下载完整包覆盖后再安装</code>，说明你是直接从仓库下载的代码，请从附件或群共享中下载完整包覆盖后再进行安装</li><li>执行<code>php think install</code>时出现<code>Access denied for user ...</code>，请确保数据库服务器、用户名、密码配置正确</li><li>执行<code>php think install</code>时报不是内部或外部命令? 请将php.exe所在的目录路径加入到环境变量PATH中</li><li>使用命令行安装时可能会由于你所处的网络环境导致资源下载不完整，请下载完整包覆盖后再尝试安装。</li></ol><ul><li><ul><li><ul><li><ul><li>*</li></ul></li></ul></li></ul></li></ul><p>遇到问题到<a href="http://forum.fastadmin.net">论坛</a> 或QQ群：<a href="https://jq.qq.com/?_wv=1027&k=487PNBb">636393962</a> 反馈</p>    <div class="docs-links">
+
+                <span>← <a href="install.html">安装</a></span>
+                <span style="float:right"><a href="command.html">命令行</a> →</span>
+            </div>
+        
+    <div class="footer">
+                发现错误？想参与编辑？        <a href="https://github.com/karsonzhang/fastadmin-doc/blob/master/fastadmin-doc-master/install.md" target="_blank">
+            在 Github 上编辑此页！        </a>
+            </div>
+    
+</div>
+
+        </div>
+        <script src="../assets/js/smooth-scroll.min.js"></script>
+        
+        <script src="../assets/js/jquery.min.js"></script>
+        <script src="../assets/js/highlight.min.js"></script>
+        <script src="../assets/js/common.js"></script>
+        <script src="../assets/js/search.js"></script>
+        <script src="../assets/js/fastclick.min.js"></script>
+
+        <script type="text/javascript">
+            document.addEventListener('DOMContentLoaded', function () {
+                FastClick.attach(document.body);
+            }, false);
+        </script>
+
+            </body>
+</html>

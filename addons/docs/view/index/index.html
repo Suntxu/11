@@ -1,0 +1,17 @@
+<div class="sidebar">
+    <ul class="main-menu">
+        {include file="common/menu"}
+    </ul>
+</div>
+
+<div id="about">
+    <div class="inner">
+        <h1>
+            {$config.sitename}<br>{$config.description}
+        </h1>
+        <p>
+            <a class="button start" href="__INDEXURL__">{$config['lang']['docs']}</a>
+            <a class="button github" href="{$config['downloadurl']}" target="_blank">{$config['lang']['download']}</a>
+        </p>
+    </div>
+</div>

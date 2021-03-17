@@ -1,0 +1,167 @@
+<form id="edit-form" class="edit-form form-horizontal" role="form" data-toggle="validator" method="POST" action="/admin/domain/editdomain/index">
+
+    <h3>域名批量操作</h3>
+    <div class="form-group">
+        <label for="op" class="control-label col-xs-12 col-sm-2" style="color: red;font-weight: 700;">操作类型:</label>
+        <div class="col-xs-12 col-sm-8">
+            <label for="op_1"><input id="op_1"  name="row[operate]" checked type="radio" value="0">编辑在售域名</label>
+            <label for="op_2"><input id="op_2"  name="row[operate]" type="radio" value="1">删除在售域名</label>
+        </div>
+    </div>
+    <div id="edit">
+        <div class="form-group">
+            <label for="bh" class="control-label col-xs-12 col-sm-2">微信检测:</label>
+            <div class="col-xs-12 col-sm-8">
+                <label for="wx_check1"><input id="wx_check1"  name="row[wx_check]" checked type="radio" value="0">不设置</label>
+                <label for="wx_check2"><input id="wx_check2"  name="row[wx_check]" type="radio" value="1">未拦截</label>
+                <label for="wx_check3"><input id="wx_check3"  name="row[wx_check]" type="radio" value="2">已拦截</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="bh" class="control-label col-xs-12 col-sm-2">QQ&nbsp;检测:</label>
+            <div class="col-xs-12 col-sm-8">
+                <label for="qq_check"><input  id="qq_check"   name="row[qq_check]" checked type="radio" value="0">不设置</label>
+                <label for="qq_check1"><input id="qq_check1"  name="row[qq_check]" type="radio" value="1">未拦截</label>
+                <label for="qq_check2"><input id="qq_check2"  name="row[qq_check]" type="radio" value="2">已拦截</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="bh" class="control-label col-xs-12 col-sm-2">质保域名:</label>
+            <div class="col-xs-12 col-sm-8">
+                {foreach $Think.config.quality_select as $k => $v}
+                <label for="guarantee_domain{$k}"><input id="guarantee_domain{$k}"  name="row[quality]" {if $k == 0} checked="" {/if} type="radio" value="{$k}">{$k == '0'?'不设置':   $v}</label>
+                {/foreach}
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="bh" class="control-label col-xs-12 col-sm-2">特价域名:</label>
+            <div class="col-xs-12 col-sm-8">
+                <label for="sale_domain1"><input id="sale_domain1"  name="row[special]" checked type="radio" value="0">不设置</label>
+                <label for="sale_domain2"><input id="sale_domain2"   name="row[special]" type="radio" value="1">是</label>
+                <label for="sale_domain3"><input id="sale_domain3"  name="row[special]" type="radio" value="2">否</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="bh" class="control-label col-xs-12 col-sm-2">建站类型:</label>
+            <div class="col-xs-12 col-sm-8">
+                <label for="jztype1"><input id="jztype1"  name="row[icpholder]" checked type="radio" value="0">不设置</label>
+                <label for="jztype2"><input id="jztype2"  name="row[icpholder]" type="radio" value="1">阿里云</label>
+                <label for="jztype3"><input id="jztype3"  name="row[icpholder]" type="radio" value="2">腾讯云</label>
+                <label for="jztype4"><input id="jztype4"  name="row[icpholder]" type="radio" value="3">其它</label>
+                <label for="jztype5"><input id="jztype5"  name="row[icpholder]" type="radio" value="4">所有</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="bh" class="control-label col-xs-12 col-sm-2">建站性质:</label>
+            <div class="col-xs-12 col-sm-8">
+                <label for="baxz1"><input class="icptrue" id="baxz1"  name="row[icptrue]" checked type="radio" value="0">不设置</label>
+                <label for="baxz2"><input class="icptrue" id="baxz2"  name="row[icptrue]" type="radio" value="1">个人</label>
+                <label for="baxz3"><input class="icptrue" id="baxz3"  name="row[icptrue]" type="radio" value="2">企业</label>
+                <label for="baxz4"><input class="icptrue" id="baxz4"  name="row[icptrue]" type="radio" value="3">未备案</label>
+                <label for="baxz5"><input class="icptrue" id="baxz5"  name="row[icptrue]" type="radio" value="4">存在</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="bh" class="control-label col-xs-12 col-sm-2">特殊属性:</label>
+            <div class="col-xs-12 col-sm-8">
+                <label for="attr_domain1"><input id="attr_domain1"  name="row[attc]" checked type="radio" value="0">不设置</label>
+                <label for="attr_domain2"><input id="attr_domain2"  name="row[attc]" type="radio" value="1">二级不死</label>
+                <label for="attr_domain3"><input id="attr_domain3"  name="row[attc]" type="radio" value="2">大站</label>
+                <label for="attr_domain4"><input id="attr_domain4"  name="row[attc]" type="radio" value="3">绿标</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="bh" class="control-label col-xs-12 col-sm-2">域名类型:</label>
+            <div class="col-xs-12 col-sm-8">
+                <label for="domain_type1"><input id="domain_type1"  name="row[stype]" checked type="radio" value="0">不设置</label>
+                <label for="domain_type2"><input id="domain_type2"  name="row[stype]" type="radio" value="1">老域名</label>
+                <label for="domain_type3"><input id="domain_type3"  name="row[stype]" type="radio" value="2">高收录</label>
+                <label for="domain_type4"><input id="domain_type4"  name="row[stype]" type="radio" value="3">高权重</label>
+                <label for="domain_type5"><input id="domain_type5"  name="row[stype]" type="radio" value="4">高pr</label>
+                <label for="domain_type6"><input id="domain_type6"  name="row[stype]" type="radio" value="5">高外链</label>
+                <label for="domain_type7"><input id="domain_type7"  name="row[stype]" type="radio" value="6">高反链</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="" class="control-label col-xs-12 col-sm-2">精选域名:</label>
+            <div class="col-xs-12 col-sm-8">
+                <label for="isjx1"><input id="isjx1"  name="row[is_sift]" type="radio" checked="" value="0">不设置</label>
+                <label for="isjx3"><input id="isjx3"  name="row[is_sift]" type="radio" value="1">设置</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="" class="control-label col-xs-12 col-sm-2">推荐域名:</label>
+            <div class="col-xs-12 col-sm-8">
+                <label for="iftj1"><input id="iftj1"  name="row[istj]" type="radio" checked="" value="0">不设置</label>
+                <label for="iftj3"><input id="iftj3"  name="row[istj]" type="radio" value="2">设置</label>
+            </div>
+        </div>
+    <!--    <div class="form-group">-->
+    <!--        <label for="bh" class="control-label col-xs-12 col-sm-2">在售类型:</label>-->
+    <!--        <div class="col-xs-12 col-sm-8">-->
+    <!--            <label for="type1"><input id="type1"  name="row[type]" type="radio" checked="" value="0">不设置</label>-->
+    <!--            <label for="type3"><input id="type3"  name="row[type]" type="radio" value="1">满减</label>-->
+    <!--            <label for="type4"><input id="type4"  name="row[type]" type="radio" value="9">打包一口价</label>-->
+    <!--        </div>-->
+    <!--    </div>-->
+        <div class="form-group">
+            <label for="bh" class="control-label col-xs-12 col-sm-2">重置的属性:</label>
+            <div class="col-xs-12 col-sm-8">
+                <label for="domain_type21"><input id="domain_type21"  name="flag[]" type="checkbox" value="wx_check">微信检测</label>
+                <label for="domain_type31"><input id="domain_type31"  name="flag[]" type="checkbox" value="qq_check">QQ检测</label>
+                <label for="domain_type41"><input id="domain_type41"  name="flag[]" type="checkbox" value="quality">质保域名</label>
+                <label for="domain_type51"><input id="domain_type51"  name="flag[]" type="checkbox" value="special">特价域名</label>
+                <label for="domain_type61"><input id="domain_type61"  name="flag[]" type="checkbox" value="icpholder">建站类型</label>
+                <label for="domain_type71"><input id="domain_type71"  name="flag[]" type="checkbox" class="icptrue" value="icptrue">建站性质</label>
+                <label for="domain_type72"><input id="domain_type72"  name="flag[]" type="checkbox" value="attc">特殊属性</label>
+                <label for="domain_type73"><input id="domain_type73"  name="flag[]" type="checkbox" value="stype">域名类型</label>
+                <!-- <label for="domain_type74"><input id="domain_type74"  name="flag[]" type="checkbox" value="type">在售类型</label> -->
+                <label for="domain_type75"><input id="domain_type75"  name="flag[]" type="checkbox" value="is_sift">精选域名</label>
+                <label for="domain_type76"><input id="domain_type76"  name="flag[]" type="checkbox" value="istj">推荐域名</label>
+                <label for="domain_type77"><input id="domain_type77"  name="flag[]" type="checkbox" value="txt">域名简介</label>
+                <label for="domain_type78"><input id="domain_type78"  name="flag[]" type="checkbox" value="lock">域名状态</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="ifxj" class="control-label col-xs-12 col-sm-2">上下架:</label>
+            <div class="col-xs-12 col-sm-8">
+                <label for="ifxj"><input id="ifxj"  name="row[status]" checked type="radio" value="0">不设置</label>
+                <label for="ifxj1"><input id="ifxj1"  name="row[status]" type="radio" value="1">上架</label>
+                <label for="ifxj2"><input id="ifxj2"  name="row[status]" type="radio" value="2">下架</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="ifxj" class="control-label col-xs-12 col-sm-2">出售价格:</label>
+            <div class="col-xs-12 col-sm-8">
+                <label for="money1">
+                    <input id="money1" name="row[money]" value="0" class="form-control" type="number">
+                </label>
+                <span style="color: red;font-size: 12px;">域名售价,请谨慎修改!</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="bh" class="control-label col-xs-12 col-sm-2">域名状态:</label>
+            <div class="col-xs-12 col-sm-8">
+                <label for="domain_freeze1"><input id="domain_freeze1"  name="row[lock]" checked type="radio" value="">不设置</label>
+                <label for="domain_freeze3"><input id="domain_freeze3"  name="row[lock]" type="radio" value="1">hold</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="ifxj" class="control-label col-xs-12 col-sm-2">域名简介:</label>
+            <div class="col-xs-12 col-sm-8">
+                <textarea name="row[txt]" style="width: 378px;" rows="4" placeholder="最多50个字符" ></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="bh" class="control-label col-xs-12 col-sm-2">域名列表:</label>
+        <div class="col-xs-12 col-sm-8">
+            <textarea name="row[ttxt]" placeholder="最多可填写5000个域名,域名之间用空格隔开!" style="width: 378px;" rows="7" >{php}foreach($domain as $k=>$v){echo $v['tit']."\n";}{/php}</textarea>
+        </div>
+    </div>
+    <div class="form-group" style="margin-left: 23% ;">
+        <button type="submit" class="btn btn-success btn-embossed">{:__('OK')}</button>
+        <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+    </div>
+</form>

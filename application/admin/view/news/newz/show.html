@@ -1,0 +1,191 @@
+<style type="text/css">
+    @media (max-width: 375px) {
+        .edit-form tr td input{width:100%;}
+        .edit-form tr th:first-child,.edit-form tr td:first-child{
+            width:20%;
+        }
+        .edit-form tr th:last-child,.edit-form tr td:last-child{
+            display: none;
+        }
+    }
+    .profile-avatar-container {
+        position:relative;
+        width:100px;margin:0 1%;
+    }
+    .profile-avatar-container .profile-user-img{
+        width:100px;
+        height:100px;
+    }
+    .profile-avatar-container .profile-avatar-text {
+        display:none;
+    }
+    .profile-avatar-container:hover .profile-avatar-text {
+        display:block;
+        position:absolute;
+        height:100px;
+        width:100px;
+        background:#444;
+        opacity: .6;
+        color: #fff;
+        top:0;
+        left:0;
+        line-height: 100px;
+        text-align: center;
+    }
+    .profile-avatar-container button{
+        position:absolute;
+        top:0;left:0;width:100px;height:100px;opacity: 0;
+    }
+    .sf:hover{
+        color: orange;
+    }
+    #f1:hover{
+        color: #0073EA;
+    }
+    #ylsz .form-control{
+        width:70%;
+    }
+</style>
+<div class="panel panel-default panel-intro">
+    <div class="panel-body">
+        <div id="myTabContent" class="tab-content">
+            <div class="" id="add">
+                <div class="widget-body no-padding">
+                    <form id="add-form" class="edit-form form-horizontal" role="form" data-toggle="validator" method="POST" action="">
+                        <table class="table table-striped">
+                            <thead>
+                              
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="row">
+                                            <h3>查看资讯详情</h3>
+
+                                            <div class="form-group">
+                                                <label for="c-pid" class="control-label col-xs-12 col-sm-2">分组</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    {$sel}
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">标题</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control" id="value1" name="row[tit]"  value="{$data['tit']}" data-rule="required" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-xs-12 col-sm-2">是否加粗</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <div class="radio">
+                                                        <label for="z1"><input id="z1" {if $data['ifjc'] == '0'} checked {/if} name="row[ifjc]"  type="radio" value="0">否</label> 
+                                                        <label for="z2"><input id="z2" {if $data['ifjc'] == '1'} checked {/if} name="row[ifjc]" type="radio" value="1">是</label>
+                                                    </div> 
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="c-pid" class="control-label col-xs-12 col-sm-2">标题颜色</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                   <select name="row[titys]" class="form-control">
+                                                       <option value="#333" {if $data['titys'] == '#333'} selected {/if} style="background-color: #333">#333</option>
+                                                       <option value="#ff6600" {if $data['titys'] == '#ff6600'} selected {/if} style="background-color: #ff6600">#ff6600</option>
+                                                       <option value="#9C02F8" {if $data['titys'] == '#9C02F8'} selected {/if} style="background-color: #9C02F8">#9C02F8</option>
+                                                       <option value="#ff0000" {if $data['titys'] == '#ff0000'} selected {/if} style="background-color: #ff0000">#ff0000</option>
+                                                       <option value="#2C64B1" {if $data['titys'] == '#2C64B1'} selected {/if} style="background-color: #2C64B1">#2C64B1</option>
+                                                       <option value="#07BF2E" {if $data['titys'] == '#07BF2E'} selected {/if} style="background-color: #07BF2E">#07BF2E</option>
+                                                       <option value="#36ADC2" {if $data['titys'] == '#36ADC2'} selected {/if} style="background-color: #36ADC2">#36ADC2</option>
+                                                   </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">作者</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control" id="value1" name="row[zze]" value="{$data['zze']}" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">来源</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control" id="value1" name="row[ly]" value="{$data['ly']}" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">来源网址</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control" id="value1" name="row[lyurl]" value="{$data['lyurl']}" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">SEO关键词</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control" id="value1" name="row[wkey]" value="{$data['wkey']}" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">SEO描述</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <textarea name="row[wdes]" style="width: 100%; min-height: 60px; z-index: 90;" class="form-control"  rows="5">{$data['wdes']}</textarea>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">详情描述</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <textarea name="row[txt]" class="editor edui-body-container" style="width: 100%; min-height: 200px; z-index: 90;" class="form-control" id="lieb" rows="5">{$data['txt']}</textarea>
+                                                </div>
+                                            </div>
+                                          <h4 style="color: red">管理员操作</h4>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">更新时间</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" id="value1" value="{$data['lastsj']}" class="form-control datetimepicker" data-format="YYYY-MM-DD" name="row[lastsj]" data-use-current="true" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">点击率</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="number" class="form-control" id="value1" value="{$data['djl']}" name="row[djl]" data-rule='number'  />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-xs-12 col-sm-2">今日头条</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <div class="radio">
+                                                        <label for="t1"><input id="t1" {if $data['indextop'] == '0'} checked {/if} name="row[indextop]"  type="radio" value="0">普通</label> 
+                                                        <label for="t2"><input id="t2" {if $data['indextop'] == '1'} checked {/if} name="row[indextop]" type="radio" value="1">头条</label>
+                                                    </div> 
+                                                </div>
+                                            </div>
+                                            <input type="hidden" name="row[id]" value="{$data['id']}">
+                                            <div class="form-group">
+                                                <label class="control-label col-xs-12 col-sm-2">审核状态</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <div class="radio">
+                                                        <label for="zt1"><input id="zt1" {if $data['zt'] == '1'} checked {/if} name="row[zt]"  type="radio" value="1">正常展示</label> 
+                                                        <label for="zt2"><input id="zt2" {if $data['zt'] == '2'} checked {/if} name="row[zt]" type="radio" value="2">正在审核</label>
+                                                        <label for="zt3"><input id="zt3" {if $data['zt'] == '3'} checked {/if} name="row[zt]" type="radio" value="3">审核不通过</label>
+                                                    </div> 
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    
+                                   <!--  <td align="center">
+                                        <button type="submit" class="btn btn-success btn-embossed">{:__('OK')}</button>
+                                        <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+                                    </td> -->
+
+
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </form>
+                </div>
+            </div>
+ 
+        
+

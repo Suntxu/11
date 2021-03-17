@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>数据库 - FastAdmin</title>
+        <meta charset="utf-8">
+        <meta name="keywords" content="">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta property="og:type" content="article">
+        <meta property="og:title" content="数据库 - FastAdmin">
+        <meta property="og:description" content="">
+        <!--<meta property="og:image" content="../assets/images/logo.png">-->
+
+        <!--<link rel="icon" href="../assets/images/logo.png" type="image/x-icon">-->
+
+        <!-- <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Roboto Mono" rel="stylesheet" type="text/css"> -->
+        <link href="../assets/css/highlight.min.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/search.css" rel="stylesheet" type="text/css">
+
+        <!-- main page styles -->
+        <link rel="stylesheet" href="../assets/css/page.css">
+
+        
+        <script>window.PAGE_TYPE = "docs"</script>
+        <script>window.SEARCH_URL = "../assets/js/docs.json"</script>
+        <script>window.DOCS_MODE = "html"</script>
+    </head>
+    <body class="docs">
+
+        <div id="mobile-bar" >
+            <a class="menu-button"></a>
+            <a class="logo" href="../docs/index.html">
+                                <span>FastAdmin</span>
+                            </a>
+        </div>
+
+        <div id="header">
+    <a id="logo" href="../docs/index.html">
+                <span>FastAdmin</span>
+            </a>
+    <ul id="nav">
+        <li>
+    <form id="search-form">
+        <input type="text" id="search-query-" class="search-query local-search-input st-default-search-input">
+    </form>
+    <div class="local-search-result"></div>
+</li>
+<li><a href="http://www.fastadmin.net" class="">首页</a></li>
+<li><a href="http://doc.fastadmin.net" class="">文档</a></li>
+<li><a href="http://forum.fastadmin.net" class="">论坛</a></li>
+<li><a href="https://git.oschina.net/karson/fastadmin" class="">下载</a></li>
+<li><a href="http://demo.fastadmin.net" class="">在线演示</a></li>
+    </ul>
+</div>
+
+
+                <div id="main" class="fix-sidebar">
+            <div class="sidebar">
+    <ul class="main-menu">
+        <li>
+    <form id="search-form">
+        <input type="text" id="search-query-" class="search-query local-search-input st-default-search-input">
+    </form>
+    <div class="local-search-result"></div>
+</li>
+<li><a href="http://www.fastadmin.net" class="">首页</a></li>
+<li><a href="http://doc.fastadmin.net" class="">文档</a></li>
+<li><a href="http://forum.fastadmin.net" class="">论坛</a></li>
+<li><a href="https://git.oschina.net/karson/fastadmin" class="">下载</a></li>
+<li><a href="http://demo.fastadmin.net" class="">在线演示</a></li>
+    </ul>
+    <div class="list">
+        <h2>
+            文档        </h2>
+        <ul class="menu-root">
+
+                        <li>
+                <a href="index.html" class="sidebar-link">介绍</a>
+            </li>
+                        <li>
+                <a href="index.html" class="sidebar-link">介绍</a>
+            </li>
+                        <li>
+                <a href="install.html" class="sidebar-link">安装</a>
+            </li>
+                        <li>
+                <a href="install.html" class="sidebar-link">安装</a>
+            </li>
+                        <li>
+                <a href="command.html" class="sidebar-link">命令行</a>
+            </li>
+                        <li>
+                <a href="command.html" class="sidebar-link">命令行</a>
+            </li>
+                        <li>
+                <a href="construct.html" class="sidebar-link">目录结构</a>
+            </li>
+                        <li>
+                <a href="construct.html" class="sidebar-link">目录结构</a>
+            </li>
+                        <li>
+                <a href="language.html" class="sidebar-link">多语言</a>
+            </li>
+                        <li>
+                <a href="language.html" class="sidebar-link">多语言</a>
+            </li>
+                        <li>
+                <a href="database.html" class="sidebar-link current">数据库</a>
+            </li>
+                        <li>
+                <a href="database.html" class="sidebar-link current">数据库</a>
+            </li>
+                        <li>
+                <a href="module.html" class="sidebar-link">模块</a>
+            </li>
+                        <li>
+                <a href="module.html" class="sidebar-link">模块</a>
+            </li>
+                        <li>
+                <a href="component.html" class="sidebar-link">组件</a>
+            </li>
+                        <li>
+                <a href="component.html" class="sidebar-link">组件</a>
+            </li>
+                        <li>
+                <a href="faq.html" class="sidebar-link">常见问题</a>
+            </li>
+                        <li>
+                <a href="faq.html" class="sidebar-link">常见问题</a>
+            </li>
+                        <li>
+                <a href="contributing.html" class="sidebar-link">贡献代码</a>
+            </li>
+                        <li>
+                <a href="contributing.html" class="sidebar-link">贡献代码</a>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+<div class="content docs with-sidebar">
+        <h1>数据库</h1>
+    
+    <p>这里提供的是数据库表字段规则在你新增表时使用，当按如下的规则进行字段命名时<br>使用<code>php think crud -t 表名</code>生成CRUD时会自动生成对应的HTML元素和组件</p><h2>根据字段类型</h2><table><thead><tr><th>类型</th><th>备注</th><th>类型说明</th></tr></thead><tbody><tr><td>int</td><td>整形</td><td>自动生成type为number的文本框，步长为1</td></tr><tr><td>enum</td><td>枚举型</td><td>自动生成单选下拉列表框</td></tr><tr><td>set</td><td>set型</td><td>自动生成多选下拉列表框</td></tr><tr><td>float</td><td>浮点型</td><td>自动生成type为number的文本框，步长根据小数点位数生成</td></tr><tr><td>text</td><td>文本型</td><td>自动生成textarea文本框</td></tr><tr><td>datetime</td><td>日期时间</td><td>自动生成日期时间的组件</td></tr><tr><td>date</td><td>日期型</td><td>自动生成日期型的组件</td></tr><tr><td>timestamp</td><td>时间戳</td><td>自动生成日期时间的组件</td></tr></tbody></table><h2>特殊字段</h2><table><thead><tr><th>字段</th><th>字段名称</th><th>字段类型</th><th>字段说明</th></tr></thead><tbody><tr><td>category_id</td><td>分类ID</td><td>int</td><td>将生成选择分类的下拉框,分类类型根据去掉前缀的表名，单选</td></tr><tr><td>category_ids</td><td>多选分类ID</td><td>varchar</td><td>将生成选择分类的下拉框,分类类型根据去掉前缀的表名，多选</td></tr><tr><td>weigh</td><td>权重</td><td>int</td><td>后台的排序字段，如果存在该字段将出现排序按钮，可上下拖动进行排序</td></tr><tr><td>createtime</td><td>创建时间</td><td>int</td><td>记录添加时间字段,不需要手动维护</td></tr><tr><td>updatetime</td><td>更新时间</td><td>int</td><td>记录更新时间的字段,不需要手动维护</td></tr></tbody></table><h2>以特殊字符结尾的规则</h2><table><thead><tr><th>结尾字符</th><th>示例</th><th>类型要求</th><th>字段说明</th></tr></thead><tbody><tr><td>time</td><td>refreshtime</td><td>int</td><td>识别为日期时间型数据，自动创建选择时间的组件</td></tr><tr><td>image</td><td>smallimage</td><td>varchar</td><td>识别为图片文件，自动生成可上传图片的组件,单图</td></tr><tr><td>images</td><td>smallimages</td><td>varchar</td><td>识别为图片文件，自动生成可上传图片的组件,多图</td></tr><tr><td>file</td><td>attachfile</td><td>varchar</td><td>识别为普通文件，自动生成可上传文件的组件,单文件</td></tr><tr><td>files</td><td>attachfiles</td><td>varchar</td><td>识别为普通文件，自动生成可上传文件的组件,多文件</td></tr><tr><td>avatar</td><td>miniavatar</td><td>varchar</td><td>识别为头像，自动生成可上传图片的组件,单图</td></tr><tr><td>avatars</td><td>miniavatars</td><td>varchar</td><td>识别为头像，自动生成可上传图片的组件,多图</td></tr><tr><td>content</td><td>maincontent</td><td>text</td><td>识别为内容，自动生成带编辑器的组件</td></tr><tr><td>_id</td><td>user_id</td><td>int/varchar</td><td>识别为关联字段，自动生成可自动完成的文本框，单选</td></tr><tr><td>_ids</td><td>user_ids</td><td>varchar</td><td>识别为关联字段，自动生成可自动完成的文本框，多选</td></tr><tr><td>list</td><td>timelist</td><td>enum</td><td>识别为列表字段，自动生成单选下拉列表</td></tr><tr><td>list</td><td>timelist</td><td>set</td><td>识别为列表字段，自动生成多选下拉列表</td></tr><tr><td>data</td><td>hobbydata</td><td>enum</td><td>识别为选项字段，自动生成单选框</td></tr><tr><td>data</td><td>hobbydata</td><td>set</td><td>识别为选项字段，自动生成复选框</td></tr></tbody></table><p>温馨提示：以list或data结尾的字段必须搭配enum或set类型才起作用</p><h2>注释说明</h2><table><thead><tr><th>字段</th><th>注释内容</th><th>字段类型</th><th>字段说明</th></tr></thead><tbody><tr><td>status</td><td>状态</td><td>int</td><td>将生成普通语言包和普通文本框</td></tr><tr><td>status</td><td>状态</td><td>int</td><td>将生成普通语言包和普通文本框</td></tr><tr><td>status</td><td>状态</td><td>enum(‘0’,’1’,’2’)</td><td>将生成普通语言包和单选下拉列表</td></tr><tr><td>status</td><td>状态:0=隐藏,1=正常,2=推荐</td><td>enum(‘0’,’1’,’2’)</td><td>将生成多个语言包和单选下拉列表，且列表中的值显示为对应的文字</td></tr></tbody></table>    <div class="docs-links">
+
+                <span>← <a href="database.html">数据库</a></span>
+                <span style="float:right"><a href="module.html">模块</a> →</span>
+            </div>
+        
+    <div class="footer">
+                发现错误？想参与编辑？        <a href="https://github.com/karsonzhang/fastadmin-doc/blob/master/database.md" target="_blank">
+            在 Github 上编辑此页！        </a>
+            </div>
+    
+</div>
+
+        </div>
+        <script src="../assets/js/smooth-scroll.min.js"></script>
+        
+        <script src="../assets/js/jquery.min.js"></script>
+        <script src="../assets/js/highlight.min.js"></script>
+        <script src="../assets/js/common.js"></script>
+        <script src="../assets/js/search.js"></script>
+        <script src="../assets/js/fastclick.min.js"></script>
+
+        <script type="text/javascript">
+            document.addEventListener('DOMContentLoaded', function () {
+                FastClick.attach(document.body);
+            }, false);
+        </script>
+
+            </body>
+</html>

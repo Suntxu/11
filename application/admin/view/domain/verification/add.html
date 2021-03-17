@@ -1,0 +1,34 @@
+<form id="edit-form" class="edit-form form-horizontal" role="form" data-toggle="validator" method="POST" action="">
+    <h3>添加自查域名</h3>
+    <div class="form-group">
+        <label for="bh" class="control-label col-xs-12 col-sm-2">记录来源:</label>
+        <div class="col-xs-12 col-sm-8">
+            <label for="gtype1"><input id="gtype1"  name="row[gtype]" checked type="radio" value="0">自查</label>
+            <label for="gtype2"><input id="gtype2"  name="row[gtype]" type="radio" value="1">用户举报</label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="bh" class="control-label col-xs-12 col-sm-2">处罚动作:</label>
+        <div class="col-xs-12 col-sm-8">
+            <label for="otype1"><input id="otype1"  name="row[otype]" checked type="radio" value="0">警告整改</label>
+            <label for="otype2"><input id="otype2"  name="row[otype]" type="radio" value="1">申请hold</label>
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <label for="bh" class="control-label col-xs-12 col-sm-2">域名列表:</label>
+        <div class="col-xs-12 col-sm-6">
+            <textarea name="row[tit]" style="width: 370px;" placeholder="一次最多添加100个域名!" rows="6" >{php}foreach($domains as $k=>$v){echo $v."\n";}{/php}</textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="bh" class="control-label col-xs-12 col-sm-2">处罚原因:</label>
+        <div class="col-xs-12 col-sm-6">
+            <textarea name="row[remark]" style="width: 370px;" rows="4" ></textarea>
+        </div>
+    </div>
+    <div class="form-group" style="margin-left: 23% ;">
+        <button type="submit" class="btn btn-success btn-embossed">{:__('OK')}</button>
+        <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+    </div>
+</form> 

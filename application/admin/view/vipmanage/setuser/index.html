@@ -1,0 +1,561 @@
+<style type="text/css">
+    @media (max-width: 375px) {
+        .edit-form tr td input{width:100%;}
+        .edit-form tr th:first-child,.edit-form tr td:first-child{
+            width:20%;
+        }
+        .edit-form tr th:last-child,.edit-form tr td:last-child{
+            display: none;
+        }
+    }
+    .sf:hover{
+        color: orange;
+    }
+    #f1:hover{
+        color: #0073EA;
+    }
+    /* #ylsz .form-control{
+         width:70%;
+     }*/
+    .row{
+        margin-left: -5px;
+        margin-right: -15px;
+    }
+</style>
+<div class="panel panel-default panel-intro">
+    <div class="panel-heading">
+        {:build_heading(null, false)}
+        <ul class="nav nav-tabs">
+            <li class="active" id="j0"><a href="#jbpz" id="clickpz" data-toggle="tab">基本设置</a></li>
+            <li class="" id="j2"><a href="#txjk" data-toggle="tab">金钱管理</a></li>
+            <li class="" id="j3"><a href="#zfjk"  data-toggle="tab">积分管理</a></li>
+            <li class="" id="j4"><a href="#rebates"  data-toggle="tab">返利设置</a></li>
+            <li class="" id="j4"><a href="#other"  data-toggle="tab">其他设置</a></li>
+            <li class="" id="j5"><a href="#jlcx" data-toggle="tab">记录查询</a></li>
+        </ul>
+    </div>
+    <div class="panel-body">
+        <div id="myTabContent" class="tab-content">
+            <div class="tab-pane fade active in" id="jbpz">
+                <div class="widget-body no-padding">
+                    <form id="jbpz-form" class="edit-form form-horizontal" role="form" data-toggle="validator" method="POST" action="{:url('/admin/vipmanage/setuser/edit/flag/qjsz')}">
+                        <table class="table table-striped">
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <div class="row">
+                                        <h3>基本设置</h3>
+                                        <div class="form-group">
+                                            <label for="value" class="control-label col-xs-12 col-sm-2">会员帐号</label>
+                                            <div class="col-xs-12 col-sm-6">
+                                                <input type="text" class="form-control"  name="row[uid]" disabled="" value="{$data.uid} "  />
+                                            </div>
+                                            {if $data.zt == 6}
+                                                <span style="color: red;">该用户已注销</span>
+                                            {/if}
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="value" class="control-label col-xs-12 col-sm-2">注册时间</label>
+                                            <div class="col-xs-12 col-sm-8">
+                                                <input type="text" class="form-control"  name="row[sj]" disabled="" value="{$data.sj}"   />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="value" class="control-label col-xs-12 col-sm-2">注册IP</label>
+                                            <div class="col-xs-12 col-sm-8">
+                                                <input type="text" class="form-control" name="row[uip]" disabled="" value="{$data.uip}" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="value" class="control-label col-xs-12 col-sm-2">会员密码</label>
+                                            <div class="col-xs-12 col-sm-8">
+                                                <input type="password" class="form-control"  name="row[pwd]" placeholder="留空表示不修改" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="value" class="control-label col-xs-12 col-sm-2">支付密码</label>
+                                            <div class="col-xs-12 col-sm-8">
+                                                <input type="password" class="form-control"  name="row[zfmm]" placeholder="留空表示不修改" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="value" class="control-label col-xs-12 col-sm-2">昵称</label>
+                                            <div class="col-xs-12 col-sm-8">
+                                                <input type="text" class="form-control"  value="{$data.nc}" name="row[nc]"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="value" class="control-label col-xs-12 col-sm-2">手机号码</label>
+                                            <div class="col-xs-12 col-sm-6">
+                                                <input type="text" class="form-control"  value="{$data.mot}" name="row[mot]"  />
+                                            </div>
+                                            <div class="col-xs-12 col-sm-2">
+                                                <input  type="checkbox" name="row[ifmot]"  value='1' {if $data.ifmot == 1} checked="" {/if} >绑定手机
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="value" class="control-label col-xs-12 col-sm-2">QQ号码</label>
+                                            <div class="col-xs-12 col-sm-8">
+                                                <input type="text" class="form-control"  value="{$data.uqq}" name="row[uqq]" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="value" class="control-label col-xs-12 col-sm-2">微信号码</label>
+                                            <div class="col-xs-12 col-sm-8">
+                                                <input type="text" class="form-control"  value="{$data.weixin}" name="row[weixin]"  />
+                                            </div>
+                                        </div>
+                                        <input type="hidden" value="{$data.id}" name="id" >
+                                        <div class="form-group">
+                                            <label for="c-avatar" class="control-label col-xs-12 col-sm-2">个人头像:</label>
+                                            <div class="col-xs-12 col-sm-8">
+                                                <div class="input-group">
+                                                    {php}
+                                                    if($data['topimg'] && @file_get_contents(WEBURL.'uploads/headimg/'.$data['topimg'],0,null,0,1)){
+                                                    echo '<a href="'.WEBURL.'uploads/headimg/'.$data['topimg'].'" target="_blank" class="thumbnail">
+                                                    <img width="100" height="102" src="'.WEBURL.'uploads/headimg/'.$data['topimg'].'" class="img-responsive">
+                                                </a>';
+                                                    }else{
+                                                    echo '<a href="/assets/img/avatar.png" data-url="/assets/img/avatar.png" target="_blank" class="thumbnail">
+                                                    <img  width="100" height="102" src="/assets/img/avatar.png" class="img-responsive">
+                                                </a>';
+                                                    }
+                                                    {/php}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="value" class="control-label col-xs-12 col-sm-2">会员标识</label>
+                                            <div class="col-xs-12 col-sm-8">
+                                                <div class="radio">
+                                                    <label for="spreal"><input id="spreal"  name="row[special]" onclick="servire(this)" {if $data.special == 1} checked {/if} type="checkbox" value="1">专属客服</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- 专属客服 -->
+                                        <div id="special" style="display: none">
+                                            <h3 style="color: red">专属客服</h3>
+                                            <div class="form-group">
+                                                <label for="c-avatar" class="control-label col-xs-12 col-sm-2">二维码:</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <div class="input-group">
+                                                        <input id="c-avatar" data-rule="" class="form-control" size="50" name="serv[img]" data-rule="required" type="text" value="{$serv.img}">
+                                                        <div class="input-group-addon no-border no-padding">
+                                                            <span><button type="button" id="plupload-avatar" class="btn btn-danger plupload" data-input-id="c-avatar" data-mimetype="image/gif,image/jpeg,image/png,image/jpg,image/bmp" data-multiple="false" data-preview-id="p-avatar"><i class="fa fa-upload"></i> 上传</button></span>
+                                                        </div>
+                                                        <span class="msg-box n-right" for="c-avatar"></span>
+                                                    </div>
+                                                    <ul class="row list-inline plupload-preview" id="p-avatar"></ul>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">昵称:</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control" id="val1" value="{$serv.nickname}"name="serv[nickname]"  />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">性别:</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <div class="radio">
+                                                        <label for="sex"><input id="sex"  name="serv[sex]" {if $serv.sex == 1} checked {/if} type="radio" value="1">男</label>
+                                                        <label for="sex1"><input id="sex1"  name="serv[sex]" {if $serv.sex == '0'} checked {/if} type="radio" value="0">女</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">手机号:</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control" id="val2" value="{$serv.tel}"  name="serv[tel]"  />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">QQ号:</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control" id="val3" value="{$serv.qq}"  name="serv[qq]"  />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">微信号:</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control" id="val4" value="{$serv.wx}" name="serv[wx]"  />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <h3 style="color: red">管理操作</h3>
+                                        <div class="form-group">
+                                            <label for="value" class="control-label col-xs-12 col-sm-2">状态变更</label>
+                                            <div class="col-xs-12 col-sm-10">
+                                                <div class="radio">
+                                                    <label for="zt"><input id="zt" class="cencel_remark"  onclick="hiddenYs('dis_remark',this,3)" name="row[zt]" {if $data.zt == 1} checked {/if} type="radio" value="1" data-value="{$data.zt}">正常</label>
+                                                    <label for="zt1"><input id="zt1"  name="row[zt]" disabled {if $data.zt == 2} checked {/if} type="radio" value="2">邮箱未激活</label>
+                                                    <label for="zt2"><input id="zt2"  name="row[zt]"  onclick="hiddenYs('dis_remark',this,3)" {if $data.zt == 3} checked {/if} type="radio" value="3">禁用</label>
+                                                    <label for="zt3"><input id="zt3"  name="row[zt]" disabled  {if $data.zt == 4} checked {/if} type="radio" value="4">安全码错误过多</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="dis_remark" style="{if $data.zt != 3} display:none; {/if}">
+                                            <div class="form-group"  >
+                                                <label class="control-label col-xs-12 col-sm-2">禁用天数:</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control"  {if $data.zt == 3} disabled {/if} value="{if isset($data.dis_days)} {$data.dis_days} {else} 0 {/if}" name="dis_days"  />
+                                                    <span style="font-size: 12px;color: red;">禁用信息提交后无法修改,请确认后在填写!</span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group" >
+                                                <label class="control-label col-xs-12 col-sm-2">禁用原因:</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text"  {if $data.zt == 3} disabled {/if} class="form-control" value="{if isset($data.dis_remark)} {$data.dis_remark} {else} {/if}" name="dis_remark"  />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <td align="center">
+                                    {if $data.zt == 6}
+                                        <button type="reset" style="margin-top:3%;margin-left: -14%;" class="btn btn-danger btn-embossed" disabled="disabled">该用户已注销</button>
+                                    {else}
+                                        <button type="submit" class="btn btn-success btn-embossed">{:__('OK')}</button>
+                                        <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+                                    {/if}
+                                </td>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </form>
+                </div>
+            </div>
+            <!-- 金钱管理 -->
+            <div class="tab-pane fade" id="txjk">
+                <div class="widget-body no-padding">
+                    <form id="txjk-form" class="edit-form form-horizontal" role="form" data-toggle="validator" method="POST" action="{:url('/admin/vipmanage/setuser/edit?flag=money')}">
+                        <table class="table table-striped">
+                            <thead>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <div class="row">
+                                        <h3>金钱设置</h3>
+                                        <div class="form-group">
+                                            <label for="value" class="control-label col-xs-12 col-sm-2">会员帐号</label>
+                                            <div class="col-xs-12 col-sm-8">
+                                                <input type="text" class="form-control"  readonly="" value="{$data.uid}"  data-rule="required" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="value" class="control-label col-xs-12 col-sm-2">账户余额</label>
+                                            <div class="col-xs-12 col-sm-8">
+                                                <input type="text" class="form-control" disabled=""  name="money[money1]" value="{$data.money1}"  />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="value" class="control-label col-xs-12 col-sm-2">可用余额</label>
+                                            <div class="col-xs-12 col-sm-8">
+                                                <input type="text" class="form-control" disabled="" value="{$data.money1 - $data.baomoney1 | sprintf='%.2f',###}"  />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="value" class="control-label col-xs-12 col-sm-2">保证金</label>
+                                            <div class="col-xs-12 col-sm-8">
+                                                <input type="text" class="form-control"  disabled="" value="{$data.baomoney1}"  />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="value" class="control-label col-xs-12 col-sm-2">金钱管理</label>
+                                            <div class="col-xs-12 col-sm-8">
+                                                <select name="money[op]" class="form-control selectpicker">
+                                                    <option value="1">帐户金额充值</option>
+                                                    <option value="2">帐户金额扣除</option>
+                                                    <option value="3">冻结账户资金</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label for="valueXX" class="control-label col-xs-12 col-sm-2">金额</label>
+                                            <div class="col-xs-12 col-sm-8">
+                                                <input type="number" class="form-control" id="valueXX"  name="money[money]" value=""  />
+                                            </div>
+                                        </div> <input type="hidden" value="{$data.id}" name="id" >
+                                        <div class="form-group">
+                                            <label for="value" class="control-label col-xs-12 col-sm-2">交易号</label>
+                                            <div class="col-xs-12 col-sm-8">
+                                                <input type="text" class="form-control" name="money[wxddbh]" value=""  />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="value" class="control-label col-xs-12 col-sm-2">备注</label>
+                                            <div class="col-xs-12 col-sm-8">
+                                                <input type="text" class="form-control" name="money[remark]" value=""  />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <td align="center">
+                                    {if $data.zt == 6}
+                                    <button type="reset" style="margin-top:3%;margin-left: -14%;" class="btn btn-danger btn-embossed" disabled="disabled">该用户已注销</button>
+                                    {else}
+                                    <button type="submit" class="btn btn-success btn-embossed">{:__('OK')}</button>
+                                    <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+                                    {/if}
+                                </td>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </form>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="zfjk">
+                <div class="widget-body no-padding">
+                    <form id="zfjk-form" class="edit-form form-horizontal" role="form" data-toggle="validator" method="POST" action="{:url('/admin/vipmanage/setuser/edit?flag=socre')}">
+                        <table class="table table-striped">
+                            <thead>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <div class="row">
+                                        <h3>积分设置</h3>
+                                        <div class="form-group">
+                                            <label for="value" class="control-label col-xs-12 col-sm-2">会员帐号</label>
+                                            <div class="col-xs-12 col-sm-8">
+                                                <input type="text" class="form-control"  readonly="" value="{$data.uid}"  data-rule="required" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="value" class="control-label col-xs-12 col-sm-2">可用积分</label>
+                                            <div class="col-xs-12 col-sm-8">
+                                                <input type="text" class="form-control"  name="score[jf]" disabled="" value="{$data.jf}"  data-rule="required" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="value" class="control-label col-xs-12 col-sm-2">积分管理</label>
+                                            <div class="col-xs-12 col-sm-8">
+                                                <select name="score[op]" class="form-control selectpicker">
+                                                    <option value="1">增加积分</option>
+                                                    <option value="2">扣除积分</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" value="{$data.id}" name="id" >
+                                        <div class="form-group">
+                                            <label for="value" class="control-label col-xs-12 col-sm-2">积分数量</label>
+                                            <div class="col-xs-12 col-sm-8">
+                                                <input type="number" class="form-control"  name="score[num]" value=""  />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="value" class="control-label col-xs-12 col-sm-2">说明</label>
+                                            <div class="col-xs-12 col-sm-8">
+                                                <input type="text" class="form-control" name="score[remark]" value=""  />
+                                            </div>
+                                        </div>
+
+                                    </div>
+                </div>
+                </td>
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr>
+                    <td align="center">
+                        {if $data.zt == 6}
+                        <button type="reset" style="margin-top:3%;margin-left: -14%;" class="btn btn-danger btn-embossed" disabled="disabled">该用户已注销</button>
+                        {else}
+                        <button type="submit" class="btn btn-success btn-embossed">{:__('OK')}</button>
+                        <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+                        {/if}
+                    </td>
+                </tr>
+                </tfoot>
+                </table>
+                </form>
+            </div>
+        </div>
+        <!--返利配置 -->
+        <div class="tab-pane fade" id="rebates">
+            <div class="widget-body no-padding">
+                <form id="txjk-form1" class="edit-form form-horizontal" role="form" data-toggle="validator" method="POST" action="{:url('/admin/vipmanage/setuser/edit?flag=rebates')}">
+                    <table class="table table-striped">
+                        <thead>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <div class="row">
+                                    <h3>会员账号</h3>
+                                    <div class="form-group">
+                                        <label for="value" class="control-label col-xs-12 col-sm-2">&nbsp;</label>
+                                        <div class="col-xs-12 col-sm-8">
+                                            {$data.uid}
+                                        </div>
+                                    </div>
+                                    <h4>阿里云预释放竞拍返利比例设置:</h4>
+                                    <div class="form-group">
+                                        <label for="value" class="control-label col-xs-12 col-sm-2">A计划第一名<br>(<span style="color: red;">内部价格</span>)</label>
+                                        <div class="col-xs-12 col-sm-8">
+                                            <input type="number" class="form-control"  data-tip="默认带%,默认2位小数！" name="rebates[66][rebate_a]" value="{$rebate[66]['rebate_a'] | default=0}"  />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="value" class="control-label col-xs-12 col-sm-2">B计划第一名<br>(<span style="color: red;">外部价格</span>)</label>
+                                        <div class="col-xs-12 col-sm-8">
+                                            <input type="number" class="form-control" data-tip="默认带%,默认2位小数！" name="rebates[66][rebate_b]" value="{$rebate[66]['rebate_b'] | default=0}"  />
+                                        </div>
+                                    </div>
+                                    <h4>易名网预释放竞拍返利比例设置:</h4>
+                                    <div class="form-group">
+                                        <label for="value" class="control-label col-xs-12 col-sm-2">A计划第一名<br>(<span style="color: red;">内部价格</span>)</label>
+                                        <div class="col-xs-12 col-sm-8">
+                                            <input type="number" class="form-control"  data-tip="默认带%,默认2位小数！" name="rebates[88][rebate_a]" value="{$rebate[88]['rebate_a'] | default=0}"  />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="value" class="control-label col-xs-12 col-sm-2">B计划第一名<br>(<span style="color: red;">外部价格</span>)</label>
+                                        <div class="col-xs-12 col-sm-8">
+                                            <input type="number" class="form-control" data-tip="默认带%,默认2位小数！" name="rebates[88][rebate_b]" readonly value="{$rebate[88]['rebate_b'] | default=0}"  />
+                                            <br><span style="color: red;">易名网b计划暂无返点</span>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" value="{$data.id}" name="id" >
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <td align="center">
+                                {if $data.zt == 6}
+                                <button type="reset" style="margin-top:3%;margin-left: -14%;" class="btn btn-danger btn-embossed" disabled="disabled">该用户已注销</button>
+                                {else}
+                                <button type="submit" class="btn btn-success btn-embossed">{:__('OK')}</button>
+                                <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+                                {/if}
+                            </td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </form>
+            </div>
+        </div>
+        <!--其他设置 -->
+        <div class="tab-pane fade" id="other">
+            <div class="widget-body no-padding">
+                <form id="txjk-form1" class="edit-form form-horizontal" role="form" data-toggle="validator" method="POST" action="{:url('/admin/vipmanage/setuser/edit?flag=other')}">
+                    <table class="table table-striped">
+                        <thead>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <div class="row">
+                                    <h3>会员账号</h3>
+                                    <div class="form-group">
+                                        <label for="value" class="control-label col-xs-12 col-sm-2">&nbsp;</label>
+                                        <div class="col-xs-12 col-sm-8">
+                                            {$data.uid}
+                                        </div>
+                                    </div>
+                                    <h4>0元配置</h4>
+                                    <div class="form-group">
+                                        <label for="value" class="control-label col-xs-12 col-sm-2">大批量域名转回</label>
+                                        <div class="col-xs-12 col-sm-8">
+                                            <div class="col-xs-12 col-sm-8">
+                                                <div class="radio">
+                                                    <label for="restiu1"><input id="restiu1"  name="other[restiu]" {if $data.restiu == 1} checked {/if} type="radio" value="1">开启</label>
+                                                    <label for="restiu2"><input id="restiu2"  name="other[restiu]" {if empty($data.restiu)} checked {/if} type="radio" value="0">不开启</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" value="{$data.id}" name="id" >
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <td align="center">
+                                {if $data.zt == 6}
+                                <button type="reset" style="margin-top:3%;margin-left: -14%;" class="btn btn-danger btn-embossed" disabled="disabled">该用户已注销</button>
+                                {else}
+                                <button type="submit" class="btn btn-success btn-embossed">{:__('OK')}</button>
+                                <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+                                {/if}
+                            </td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </form>
+            </div>
+        </div>
+        <!-- 记录查询 -->
+        <!-- 实名认证 -->
+        <div class="tab-pane fade" id="jlcx">
+            <div class="widget-body no-padding">
+                <form id="jlcx-form" class="edit-form form-horizontal" role="form" data-toggle="validator" method="POST" action="{:url('/admin/vipmanage/setuser/edit?flag=sfz')}">
+                    <table class="table table-striped">
+                        <thead>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <h2>记录查询</h2>
+                                        <label for="value" class="control-label col-xs-12 col-sm-2">会员帐号</label>
+                                        <div class="col-xs-12 col-sm-8">
+                                            <input type="text" class="form-control" id="value" name="row[uid]" readonly="" value="{$data.uid}"  data-rule="required" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="value" class="control-label col-xs-12 col-sm-2">快速查询</label>
+                                        <div class="col-xs-12 col-sm-8">
+                                            <a href="/admin/vipmanage/recode/loginlog/index?u.uid={$data.uid}" class="btn btn-info btn-xs btn-dialog" title="登陆日志" data-table-id="table" data-field-index="10" data-row-index="3" data-button-index="0">登陆日志</a>
+                                            <a href="/admin/vipmanage/recode/parselog/index?u.uid={$data.uid}" class="btn btn-info btn-xs btn-dialog" title="解析记录" data-table-id="table" data-field-index="10" data-row-index="3" data-button-index="0">解析记录</a>
+                                            <a href="/admin/vipmanage/recode/payrank/index?uid={$data.uid}" class="btn btn-info btn-xs btn-dialog" title="充值记录" data-table-id="table" data-field-index="10" data-row-index="3" data-button-index="0">充值记录</a>
+                                            <a href="/admin/vipmanage/recode/dinndan/index?uid={$data.uid}" class="btn btn-info btn-xs btn-dialog" title="资金明细" data-table-id="table" data-field-index="10" data-row-index="3" data-button-index="0">资金明细</a>
+                                            <a href="/admin/vipmanage/recode/reglog/index?u.uid={$data.uid}" class="btn btn-info btn-xs btn-dialog" title="域名注册" data-table-id="table" data-field-index="10" data-row-index="3" data-button-index="0">域名注册</a>
+                                            <a href="/admin/vipmanage/recode/deallog/index/?u.uid={$data.uid}&c.status=1" class="btn btn-info btn-xs btn-dialog" title="域名交易" data-table-id="table" data-field-index="10" data-row-index="3" data-button-index="0">域名交易</a>
+                                            <a href="/admin/vipmanage/recode/depush/index/?u.uid={$data.uid}" class="btn btn-info btn-xs btn-dialog" title="push记录" data-table-id="table" data-field-index="10" data-row-index="3" data-button-index="0">push记录</a><br>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-8" style="margin-top: 10px;">
+                                            <a href="/admin/vipmanage/recode/transfer?uid={$data.uid}" class="btn btn-info btn-xs btn-dialog" title="主任务记录" data-table-id="table" data-field-index="10" data-row-index="3" data-button-index="0">主任务记录</a>
+                                            <a href="/admin/vipmanage/recode/renewlog?u.uid={$data.uid}" class="btn btn-info btn-xs btn-dialog" title="域名续费" data-table-id="table" data-field-index="10" data-row-index="3" data-button-index="0">域名续费</a>
+                                            <a href="/admin/vipmanage/recode/shift?u1.uid={$data.uid}" class="btn btn-info btn-xs btn-dialog" title="域名转移" data-table-id="table" data-field-index="10" data-row-index="3" data-button-index="0">域名转移</a>
+                                            <a href="/admin/vipmanage/recode/seerecord?uid={$data.uid}" class="btn btn-info btn-xs btn-dialog" title="域名转移" data-table-id="table" data-field-index="10" data-row-index="3" data-button-index="0">域名访问</a>
+                                            <a href="/admin/vipmanage/recode/replenishment?u.uid={$data.uid}" class="btn btn-info btn-xs btn-dialog" title="补单记录" data-table-id="table" data-field-index="10" data-row-index="3" data-button-index="0">补单记录</a>
+                                            <a href="/admin/vipmanage/recode/margin?uid={$data.uid}" class="btn btn-info btn-xs btn-dialog" title="保证金记录" data-table-id="table" data-field-index="10" data-row-index="3" data-button-index="0">保证金记录</a>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-8" style="margin-top: 10px;margin-left: 126px;">
+                                            <a href="/admin/domain/reserve/orders?uid={$data.uid}" class="btn btn-info btn-xs btn-dialog" title="域名预定订单" data-table-id="table" data-field-index="10" data-row-index="3" data-button-index="0">域名预定订单</a>
+                                            <a href="/admin/domain/reserve/preorders?uid={$data.uid}" class="btn btn-info btn-xs btn-dialog" title="域名预释放订单" data-table-id="table" data-field-index="10" data-row-index="3" data-button-index="0">域名预释放订单</a>
+                                            <a href="/admin/domain/reserve/auctionlog?uid={$data.uid}" class="btn btn-info btn-xs btn-dialog" title="域名竞拍记录" data-table-id="table" data-field-index="10" data-row-index="3" data-button-index="0">域名竞拍记录</a>
+                                        </div>
+                                    </div>
+
+                                </div>
+            </div>
+            </td>
+            </tr>
+            </tbody>
+            <tfoot>
+
+            </tfoot>
+            </table>
+            </form>
+        </div>
+    </div>
+</div>

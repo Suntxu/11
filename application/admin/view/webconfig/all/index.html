@@ -1,0 +1,951 @@
+<style type="text/css">
+    @media (max-width: 375px) {
+        .edit-form tr td input{width:100%;}
+        .edit-form tr th:first-child,.edit-form tr td:first-child{
+            width:20%;
+        }
+        .edit-form tr th:last-child,.edit-form tr td:last-child{
+            display: none;
+        }
+    }
+    .profile-avatar-container {
+        position:relative;
+        width:100px;margin:0 1%;
+    }
+    .profile-avatar-container .profile-user-img{
+        width:100px;
+        height:100px;
+    }
+    .profile-avatar-container .profile-avatar-text {
+        display:none;
+    }
+    .profile-avatar-container:hover .profile-avatar-text {
+        display:block;
+        position:absolute;
+        height:100px;
+        width:100px;
+        background:#444;
+        opacity: .6;
+        color: #fff;
+        top:0;
+        left:0;
+        line-height: 100px;
+        text-align: center;
+    }
+    .profile-avatar-container button{
+        position:absolute;
+        top:0;left:0;width:100px;height:100px;opacity: 0;
+    }
+    .sf:hover{
+        color: orange;
+    }
+    #f1:hover{
+        color: #0073EA;
+    }
+    #ylsz .form-control {
+        width:70%;
+    }
+    #rebate .form-control{
+         width:70%;
+     }
+</style>
+<div class="panel panel-default panel-intro">
+    <div class="panel-heading">
+        {:build_heading(null, false)}
+        <ul class="nav nav-tabs">
+             <li class=""><a href="#jbpz" id="clickpz" data-toggle="tab">基本配置</a></li>
+             <li class=""><a href="#qxpz" data-toggle="tab">权限设置</a></li>
+             <li class=""><a href="#txjk" data-toggle="tab">通用接口</a></li>
+             <li class=""><a href="#zfjk" data-toggle="tab">支付接口</a></li>
+             <li class=""><a href="#ylsz" data-toggle="tab">盈利设置</a></li>
+             <li class=""><a href="#seosz" data-toggle="tab">查询系统</a></li>
+             <li class=""><a href="#rebate" data-toggle="tab">竞拍返利</a></li>
+             <li class=""><a href="#numlimit" data-toggle="tab">功能数量限制</a></li>
+             <li class=""><a href="#activity" data-toggle="tab">活动单项配置</a></li>
+            <!-- <li>
+                <a href="#addcfg" data-toggle="tab"><i class="fa fa-plus"></i></a>
+            </li>     -->   
+        </ul>
+    </div>
+    <div class="panel-body">
+        <div id="myTabContent" class="tab-content">
+            <div class="tab-pane fade" id="jbpz">
+                <div class="widget-body no-padding">
+                    <form id="jbpz-form" class="edit-form form-horizontal" role="form" data-toggle="validator" method="POST" action="{:url('webconfig.all/edit?flag=qjsz')}">
+                        <table class="table table-striped">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="row">
+                                            <h3>基础页面</h3>
+                                            <div class="form-group">
+                                                <label  class="control-label col-xs-12 col-sm-2">网站名称</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control"  name="row[webnamev]" value="{$siteList.webnamev}" data-rule="required" />
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label  class="control-label col-xs-12 col-sm-2">认证IP</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control"  name="rzip" value="{$siteList.rzip}"  />
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label  class="control-label col-xs-12 col-sm-2">网址</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control" data-tip="切记：必须以 http://开头,斜杆/结尾,不要轻易修改"  name="row[weburlv]" value="{$siteList.weburlv}" data-rule="required" />
+                                                </div>
+                                            </div>
+
+                                            <h3>全局页面</h3>
+                                            <div class="form-group">
+                                                <label  class="control-label col-xs-12 col-sm-2">网站标题</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control"  name="row[webtit]" value="{$siteList.webtit}"  />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label  class="control-label col-xs-12 col-sm-2">站点关键词</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control" name="row[webkey]" value="{$siteList.webkey}"  />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label  class="control-label col-xs-12 col-sm-2">站点描述</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                     <textarea name="row[webdes]" class="form-control"  rows="5" >{$siteList.webdes}</textarea>
+                                                </div>
+                                            </div>
+
+                                            <h3>域名交易页面</h3>
+                                            <div class="form-group">
+                                                <label  class="control-label col-xs-12 col-sm-2">页面标题</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control"  name="domain_info_tit" value="{$siteList.domain_info[0]}"  />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label  class="control-label col-xs-12 col-sm-2">页面关键词</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control" name="domain_info_keyword" value="{$siteList.domain_info[1]}" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label  class="control-label col-xs-12 col-sm-2">页面描述</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                     <textarea name="domain_info_desc" class="form-control"  rows="5" >{$siteList.domain_info[2]}</textarea>
+                                                </div>
+                                            </div>
+                                            <h3>域名注册首页</h3>
+                                            <div class="form-group">
+                                                <label  class="control-label col-xs-12 col-sm-2">页面标题</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control" name="row[regseotitle]" value="{$siteList.regseotitle}"  />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label  class="control-label col-xs-12 col-sm-2">页面关键词</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control" name="row[regseokey]" value="{$siteList.regseokey}" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label  class="control-label col-xs-12 col-sm-2">页面描述</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                     <textarea name="row[regseodesc]" class="form-control"  rows="5" >{$siteList.regseodesc}</textarea>
+                                                </div>
+                                            </div>
+
+                                            <h3>域名详情页面</h3>
+                                            <div class="form-group">
+                                                <label  class="control-label col-xs-12 col-sm-2">页面标题</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control" name="domain_show_tit" value="{$siteList.domain_show[0]}"  />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label  class="control-label col-xs-12 col-sm-2">页面关键词</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control" name="domain_show_keyword" value="{$siteList.domain_show[1]}"  />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label  class="control-label col-xs-12 col-sm-2">页面描述</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                     <textarea name="domain_show_desc" class="form-control" rows="5" >{$siteList.domain_show[2]}</textarea>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                 <input type="hidden" id="c-avatar" name="row[logoPath]" value="{$siteList.logoPath}" />
+                                                <label  class="control-label col-xs-12 col-sm-2"><strong>网站LOGO</strong></label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                     <div class="profile-avatar-container">
+                                                        <img class="profile-user-img img-responsive img-circle plupload thumbnail" src="__CDN__{$siteList.logoPath}" alt="">
+                                                        <div class="profile-avatar-text thumbnail img-circle">点击编辑</div>
+                                                        <button id="plupload-avatar" class="plupload" data-input-id="c-avatar"><i class="fa fa-upload"></i> {:__('Upload')}</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                             <div class="form-group">
+                                                <label  class="control-label col-xs-12 col-sm-2">统计代码</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                     <textarea name="row[webtj]" class="form-control" rows="5" >{$siteList.webtj}</textarea>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label  class="control-label col-xs-12 col-sm-2">联系电话</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control"  name="row[webtelv]" value="{$siteList.webtelv}"  />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label  class="control-label col-xs-12 col-sm-2">客服QQ</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control" data-tip="格式：qq号码*称呼,qq号码*称呼"  name="row[webqqv]" value="{$siteList.webqqv}" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label  class="control-label col-xs-12 col-sm-2">网站备案号</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control" name="row[beian]" value="{$siteList.beian}"  />
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="control-label col-xs-12 col-sm-2">搜索</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <div class="radio">
+                                                        <label for="sermode"><input id="sermode"  name="row[sermode]" {if $siteList.sermode == 1} checked {/if} type="radio" value="1">常规模式</label> 
+                                                        <label for="sermode1"><input id="sermode1"  name="row[sermode]" {if $siteList.sermode == 2} checked {/if} type="radio" value="2">常规转码</label> 
+                                                        <label for="sermode2"><input id="sermode2"  name="row[sermode]" {if $siteList.sermode == '0'} checked {/if} type="radio" value="0">强化转码模式</label> 
+                                                    </div> 
+                                                </div>
+                                            </div>
+                                            <h3>域名相关设置</h3>
+
+                                            <div class="form-group">
+                                                <label class="control-label col-xs-12 col-sm-2">WHOIS接口</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <div class="radio">
+                                                        <label for="whoisid"><input id="whoisid"  name="row[whoisid]" {if $siteList.whoisid == 1} checked {/if} type="radio" value="1">1号接口</label> 
+                                                    </div> 
+                                                </div>
+                                            </div> 
+                                            <div class="form-group">
+                                                <label class="control-label col-xs-12 col-sm-2">域名注册接口</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <div class="radio">
+                                                        <label for="rul1"><input id="rul1"  name="row[rul]" {if $siteList.rul == 1} checked {/if} type="radio" value="1">阿里云接口</label>
+                                                        <label for="rul2"><input id="rul2"  name="row[rul]" {if $siteList.rul == 2} checked {/if} type="radio" value="2">西部数码接口</label> 
+                                                    </div> 
+                                                </div>
+                                            </div> 
+                                            <div class="form-group">
+                                                <label class="control-label col-xs-12 col-sm-2">转回原注册商支付类型</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <div class="radio">
+                                                        <label for="intotype1"><input id="intotype1"  name="row[intotype]" {if $siteList.intotype == 1} checked {/if} type="radio" value="1">按批次收费</label>
+                                                        <label for="intotype2"><input id="intotype2"  name="row[intotype]" {if $siteList.intotype == 2} checked {/if} type="radio" value="2">按域名收费</label> 
+                                                    </div> 
+                                                </div>
+                                            </div> 
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    
+                                    <td align="center">
+                                        <button type="submit" class="btn btn-success btn-embossed">{:__('OK')}</button>
+                                        <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+                                    </td>
+
+
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </form>
+                </div>
+            </div>
+            <!-- 权限配置 -->
+            <div class="tab-pane fade" id="qxpz">
+                <div class="widget-body no-padding">
+                    <form id="qxpz-form" class="edit-form form-horizontal" role="form" data-toggle="validator" method="POST" action="{:url('webconfig.all/edit')}">
+                        <table class="table table-striped">
+                            <thead>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="row">
+                                            
+                                            <div class="form-group">
+
+                                                <label class="control-label col-xs-12 col-sm-2">卖家开店权限</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <div class="radio">
+                                                        <label for="Rifsell"><input id="Rifsell"  name="row[ifsell]" {if $siteList.ifsell == 'off'} checked {/if} type="radio" value="off">需要审核</label> 
+                                                        <label for="Rifsell1"><input id="Rifsell1"  name="row[ifsell]" {if $siteList.ifsell == 'on'} checked {/if} type="radio" value="on">不需要审核</label> 
+                                                       
+                                                    </div> 
+                                                </div>
+                                            </div>
+
+                                            <!-- 后续功能 -->
+                                           <!--  <div class="form-group">
+                                                <label  class="control-label col-xs-12 col-sm-2">开店费用</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control" id="value" name="row[openshop]" value="{$siteList.openshop}"  />
+                                                </div>
+                                            </div> -->
+
+
+
+                                            <div class="form-group">
+                                                <label class="control-label col-xs-12 col-sm-2">右侧客服</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <div class="radio">
+                                                        <label for="ifkf1"><input id="ifkf1"  name="row[ifkf]" {if $siteList.ifkf == 'on'} checked {/if} type="radio" value="on">启用</label>
+                                                        <label for="ifkf2"><input id="ifkf2"  name="row[ifkf]" {if $siteList.ifkf == 'off'} checked {/if} type="radio" value="off">不启用</label> 
+                                                    </div> 
+                                                </div>
+                                            </div> 
+                                        </div>
+
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td align="center">
+                                        <button type="submit" class="btn btn-success btn-embossed">{:__('OK')}</button>
+                                        <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </form>
+                </div>
+            </div>
+
+            <!-- 通讯接口 -->
+
+             <div class="tab-pane fade" id="txjk">
+                <div class="widget-body no-padding">
+                    <form id="txjk-form" class="edit-form form-horizontal" role="form" data-toggle="validator" method="POST" action="{:url('webconfig.all/edit?flag=qxpz')}">
+                        <table class="table table-striped">
+                            <thead>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="row">
+                                            <h3>邮局设置</h3><span  style="position: relative;top: -27px;left:95px;color:#999;"><a class="sf" href="http://www.yj99.cn/faq/view9.html" target="blank">【查看方法】</a></span>
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <label  class="control-label col-xs-12 col-sm-2">设置邮箱帐号</label>
+                                                    <div class="col-xs-12 col-sm-8">
+                                                        <input type="text" class="form-control"  name="m1" value="{$siteList.mail[0]}"  />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <label  class="control-label col-xs-12 col-sm-2">设置邮箱密码</label>
+                                                    <div class="col-xs-12 col-sm-8">
+                                                        <input type="text" class="form-control" name="m2" value="{$siteList.mail[1]}"  />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <label  class="control-label col-xs-12 col-sm-2">邮箱SMTP</label>
+                                                    <div class="col-xs-12 col-sm-8">
+                                                        <input type="text" class="form-control"  name="m3" value="{$siteList.mail[2]}"  />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <label  class="control-label col-xs-12 col-sm-2">邮箱端口</label>
+                                                    <div class="col-xs-12 col-sm-8">
+                                                        <input type="text" class="form-control"  name="m4" value="{$siteList.mail[3]}"  />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <h3>QQ接口</h3>
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <label  class="control-label col-xs-12 col-sm-2">APP ID</label>
+                                                    <div class="col-xs-12 col-sm-8">
+                                                        <input type="text" class="form-control" name="q1" value="{$siteList.qqapp[0]}"  />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <label  class="control-label col-xs-12 col-sm-2">APP KEY</label>
+                                                    <div class="col-xs-12 col-sm-8">
+                                                        <input type="text" class="form-control"  name="q2" value="{$siteList.qqapp[1]}"  />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <h3>手机短信接口</h3>
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <label  class="control-label col-xs-12 col-sm-2">剩余短信数</label>
+                                                    <div class="col-xs-12 col-sm-8">
+                                                        <input type="text" class="form-control"  name="row[smskc]" value="{$siteList.smskc}"  />
+                                                    </div>
+                                                </div>
+                                            </div> 
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <label  class="control-label col-xs-12 col-sm-2">编写函数规则<br><span style="color:red"><a id="f1" href="http://www.yj99.cn/faq/view12.html" target="blank">如何写规则？</a></span></label>
+                                                    <div class="col-xs-12 col-sm-8">
+                                                       <textarea name="row[smsfun]" class="form-control" rows="5" >{$siteList.smsfun}</textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <h3>网站功能性接口</h3>
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <label  class="control-label col-xs-12 col-sm-2">是否开启打码接口(redis)</label>
+                                                    <div class="col-xs-12 col-sm-8">
+                                                        <label for="ymdm1"><input id="ymdm1"  name="row[checkdomain_use_dm]" {if $checkdomain_use_dm == '1'} checked {/if} type="radio" value="1">启用</label>
+                                                        <label for="ymdm2"><input id="ymdm2"  name="row[checkdomain_use_dm]" {if $checkdomain_use_dm == '0'} checked {/if} type="radio" value="0">不启用</label> 
+                                                    </div>
+                                                </div>
+                                            </div> 
+                                        </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td align="center">
+                                        <button type="submit" class="btn btn-success btn-embossed">{:__('OK')}</button>
+                                        <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </form>
+                </div>
+            </div>
+
+            <!-- 支付接口 -->
+
+             <div class="tab-pane fade" id="zfjk">
+                <div class="widget-body no-padding">
+                    <form id="zfjk-form" class="edit-form form-horizontal" role="form" data-toggle="validator" method="POST" action="{:url('webconfig.all/edit?flag=zfjk')}">
+                        <table class="table table-striped">
+                            <thead>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="row">
+                                            <h3>支付宝设置</h3><span  style="position: relative;top: -27px;left:105px;color:#999;"><a class="sf" href="https://b.alipay.com/order/productIndex.htm" target="blank">【申请】</a></span>
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <label  class="control-label col-xs-12 col-sm-2">partner</label>
+                                                    <div class="col-xs-12 col-sm-8">
+                                                        <input type="text" class="form-control"  name="zf1" data-tip="请输入支付宝的partner" value="{$siteList.alipay[0]}"  />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <label  class="control-label col-xs-12 col-sm-2">security_code</label>
+                                                    <div class="col-xs-12 col-sm-8">
+                                                        <input type="text" class="form-control"  data-tip="请输入支付宝的security_code" name="zf2" value="{$siteList.alipay[1]}"  />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <label  class="control-label col-xs-12 col-sm-2">seller_email</label>
+                                                    <div class="col-xs-12 col-sm-8">
+                                                        <input type="text" class="form-control" data-tip="请输入支付宝的seller_email" name="zf3" value="{$siteList.alipay[2]}"  />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <h3>财付通设置(包含网银接口)</h3><span  style="position: relative;top: -27px;left:245px;color:#999;"><a class="sf" href="http://mch.tenpay.com/" target="blank">【申请】</a></span>
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <label  class="control-label col-xs-12 col-sm-2">商户编号</label>
+                                                    <div class="col-xs-12 col-sm-8">
+                                                        <input type="text" class="form-control"  data-tip="请输入财付通的商户号" name="tenpay1" value="{$siteList.tenpay[0]}"  />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <label  class="control-label col-xs-12 col-sm-2">密钥：</label>
+                                                    <div class="col-xs-12 col-sm-8">
+                                                        <input type="text" class="form-control" data-tip="请输入财付通的商户密钥" name="tenpay2" value="{$siteList.tenpay[1]}"  />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <h3>微信支付</h3>
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <label  class="control-label col-xs-12 col-sm-2">APPID</label>
+                                                    <div class="col-xs-12 col-sm-8">
+                                                        <input type="text" class="form-control" name="wxpay0" value="{$siteList.wxpay[0]}"  />
+                                                    </div>
+                                                </div>
+                                            </div> 
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <label  class="control-label col-xs-12 col-sm-2">MCHID</label>
+                                                    <div class="col-xs-12 col-sm-8">
+                                                        <input type="text" class="form-control"  name="wxpay1" value="{$siteList.wxpay[1]}"  />
+                                                    </div>
+                                                </div>
+                                            </div> 
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <label  class="control-label col-xs-12 col-sm-2">KEY</label>
+                                                    <div class="col-xs-12 col-sm-8">
+                                                        <input type="text" class="form-control"  name="wxpay2" value="{$siteList.wxpay[2]}"  />
+                                                    </div>
+                                                </div>
+                                            </div> 
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <label  class="control-label col-xs-12 col-sm-2">APPSECRET</label>
+                                                    <div class="col-xs-12 col-sm-8">
+                                                        <input type="text" class="form-control" name="wxpay3" value="{$siteList.wxpay[3]}"  />
+                                                    </div>
+                                                </div>
+                                            </div> 
+                                            
+                                        </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td align="center">
+                                        <button type="submit" class="btn btn-success btn-embossed">{:__('OK')}</button>
+                                        <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- 盈利设置 -->
+            <div class="tab-pane fade" id="ylsz">
+                <div class="widget-body no-padding">
+                    <form id="ylsz-form1" class="edit-form form-horizontal" role="form" data-toggle="validator" method="POST" action="{:url('webconfig.all/edit')}">
+                        <table class="table table-striped">
+                            <thead>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <label  class="control-label col-xs-12 col-sm-2">注册赠送金钱</label>
+                                                    <div class="col-xs-12 col-sm-8">
+                                                        <input type="text" class="form-control"  name="row[regmoney]" data-tip="默认为0，数值表示会员注册时赠送的金额，不要太高哦" value="{$siteList.regmoney}"  />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <label  class="control-label col-xs-12 col-sm-2">注册赠送积分</label>
+                                                    <div class="col-xs-12 col-sm-8">
+                                                        <input type="text" class="form-control"  data-tip="默认为0，数值表示会员注册时赠送的积分，不要太高哦" name="row[regjf]" value="{$siteList.regjf}"  />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <label  class="control-label col-xs-12 col-sm-2">竞拍保证金比例(%)</label>
+                                                    <div class="col-xs-12 col-sm-8">
+                                                        <input type="text" class="form-control"  data-tip="参与竞拍时，要缴纳冻结的保证金比例，如起拍价为1000元，比例设为0.1，则表示冻结100元" name="row[paibao]" value="{$siteList.paibao}"  />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <label  class="control-label col-xs-12 col-sm-2">签到积分</label>
+                                                    <div class="col-xs-12 col-sm-8">
+                                                        <input type="text" class="form-control"  data-tip="每日签到，用户可获得的积分" name="row[qdjf]" value="{$siteList.qdjf}"  />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <label  class="control-label col-xs-12 col-sm-2">最低提现额</label>
+                                                    <div class="col-xs-12 col-sm-8">
+                                                        <input type="text" class="form-control" data-tip="单位：元" name="row[txdi]" value="{$siteList.txdi}"  />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <label  class="control-label col-xs-12 col-sm-2">每月提现次数</label>
+                                                    <div class="col-xs-12 col-sm-8">
+                                                        <input type="text" class="form-control"  data-tip="单位：次" name="row[txcs]" value="{$siteList.txcs}"  />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <label  class="control-label col-xs-12 col-sm-2">提现费率(%)</label>
+                                                    <div class="col-xs-12 col-sm-8">
+                                                        <input type="text" class="form-control" data-tip="如0.01表示百分之一的手续费" name="row[txfl]" value="{$siteList.txfl}"  />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <label  class="control-label col-xs-12 col-sm-2">自动确认过户</label>
+                                                    <div class="col-xs-12 col-sm-8">
+                                                        <input type="text" class="form-control" data-tip="输入天数，如15，表示15天后没有退款，自动过户成功" name="row[autogh]" value="{$siteList.autogh}"  />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <label  class="control-label col-xs-12 col-sm-2">自动确认退款</label>
+                                                    <div class="col-xs-12 col-sm-8">
+                                                        <input type="text" class="form-control"  data-tip="输入天数，如10，表示10天后卖家没处理，表示自动退款" name="row[autotk]" value="{$siteList.autotk}"  />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <label  class="control-label col-xs-12 col-sm-2">一口价域名交易手续费率(%)</label>
+                                                    <div class="col-xs-12 col-sm-8">
+                                                        <input type="number" class="form-control"  data-tip="默认带%,如无小数,可以不输入小数位,默认2位小数！" name="row[dealcharge]" value="{$siteList.dealcharge}"  />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <label  class="control-label col-xs-12 col-sm-2">一口价域名最低手续费</label>
+                                                    <div class="col-xs-12 col-sm-8">
+                                                        <input type="number" class="form-control" data-tip="如无小数,可以不输入小数位,默认2位小数！" name="row[dealfloor]" value="{$siteList.dealfloor}"  />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <label  class="control-label col-xs-12 col-sm-2">一口价域名返佣比例(%)</label>
+                                                    <div class="col-xs-12 col-sm-8">
+                                                        <input type="number" class="form-control"  data-tip="默认带%,如无小数,可以不输入小数位,默认2位小数！" name="row[rebate]" value="{$siteList.rebate}"  />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <label  class="control-label col-xs-12 col-sm-2">注册域名返佣比例(%)</label>
+                                                    <div class="col-xs-12 col-sm-8">
+                                                        <input type="number" class="form-control"  data-tip="默认带%,如无小数,可以不输入小数位,默认2位小数！" name="row[regrebate]" value="{$siteList.regrebate}"  />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <label  class="control-label col-xs-12 col-sm-2">发票运费</label>
+                                                    <div class="col-xs-12 col-sm-8">
+                                                        <input type="number" class="form-control"  data-tip="" name="row[freight]" value="{$siteList.freight}"  />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <label  class="control-label col-xs-12 col-sm-2">转回原注册商支付金额</label>
+                                                    <div class="col-xs-12 col-sm-8">
+                                                        <input type="number" class="form-control" name="row[intomoney]" value="{$siteList.intomoney}"  />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <label for="value74" class="control-label col-xs-12 col-sm-2">转出域名发布一口价手续费比例(%)</label>
+                                                    <div class="col-xs-12 col-sm-8">
+                                                        <input type="number" class="form-control" data-tip="默认带%,如无小数,可以不输入小数位,默认2位小数！" name="row[tranmoney]" value="{$siteList.tranmoney}"  />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td align="center">
+                                        <button style="margin-left: -20%;" type="submit" class="btn btn-success btn-embossed">{:__('OK')}</button>
+                                        <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </form>
+                </div>
+            </div>
+            <!-- SEO设置 -->
+            <div class="tab-pane fade" id="seosz">
+                <div class="widget-body no-padding">
+                    <form id="ylsz-form" class="edit-form form-horizontal" role="form" data-toggle="validator" method="POST" action="{:url('webconfig.all/edit?flag=seosz')}">
+                        <table class="table table-striped">
+                            <thead>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="row">
+                                            <h3>ICP设置</h3>
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <label  class="control-label col-xs-12 col-sm-2">SEO标题</label>
+                                                    <div class="col-xs-12 col-sm-8">
+                                                        <input type="text" class="form-control"  name="row[put_tit]"  value="{$db2.put_tit}"  />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <label  class="control-label col-xs-12 col-sm-2">SEO关键字</label>
+                                                    <div class="col-xs-12 col-sm-8">
+                                                        <input type="text" class="form-control"  name="row[put_key]"  value="{$db2.put_key}"  />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <label  class="control-label col-xs-12 col-sm-2">SEO描述</label>
+                                                    <div class="col-xs-12 col-sm-8">
+                                                        <textarea name="row[put_desc]" class="form-control" rows="5" >{$db2.put_desc}</textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <h3>whois设置</h3>
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <label  class="control-label col-xs-12 col-sm-2">SEO标题</label>
+                                                    <div class="col-xs-12 col-sm-8">
+                                                        <input type="text" class="form-control" name="row[wh_tit]"  value="{$db2.wh_tit}"  />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <label  class="control-label col-xs-12 col-sm-2">SEO关键字</label>
+                                                    <div class="col-xs-12 col-sm-8">
+                                                        <input type="text" class="form-control" name="row[wh_key]"  value="{$db2.wh_key}"  />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <label  class="control-label col-xs-12 col-sm-2">SEO描述</label>
+                                                    <div class="col-xs-12 col-sm-8">
+                                                        <textarea name="row[wh_desc]" class="form-control" rows="5" >{$db2.wh_desc}</textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <h3>微信检测设置</h3>
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <label  class="control-label col-xs-12 col-sm-2">COOKIE设置</label>
+                                                    <div class="col-xs-12 col-sm-8">
+                                                        <input type="text" class="form-control"  name="row[wx_cookie]"  value="{$db2.wx_cookie}"  />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <label  class="control-label col-xs-12 col-sm-2">SEO标题</label>
+                                                    <div class="col-xs-12 col-sm-8">
+                                                        <input type="text" class="form-control"  name="row[wx_tit]"  value="{$db2.wx_tit}"  />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <label  class="control-label col-xs-12 col-sm-2">SEO关键字</label>
+                                                    <div class="col-xs-12 col-sm-8">
+                                                        <input type="text" class="form-control"  name="row[wx_key]"  value="{$db2.wx_key}"  />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <label  class="control-label col-xs-12 col-sm-2">SEO描述</label>
+                                                    <div class="col-xs-12 col-sm-8">
+                                                        <textarea name="row[wx_desc]" class="form-control" rows="5" >{$db2.wx_desc}</textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td align="center">
+                                        <button style="margin-left: -20%;" type="submit" class="btn btn-success btn-embossed">{:__('OK')}</button>
+                                        <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </form>
+                </div>
+            </div>
+            <!-- 返利设置 -->
+            <div class="tab-pane fade" id="rebate">
+            <div class="widget-body no-padding">
+                <form id="ylsz-form2" class="edit-form form-horizontal" role="form" data-toggle="validator" method="POST" action="{:url('webconfig.all/edit?flag=rebate')}">
+                    <table class="table table-striped">
+                        <thead>
+                        </thead>
+                        <tbody>
+                        <tr>
+                        <td>
+                        <div class="row">
+                            <h4>阿里云预释放竞拍返利比例设置:</h4>
+                            <div class="form-group">
+                                <label for="value" class="control-label col-xs-12 col-sm-2">A计划(%)</label>
+                                <div class="col-xs-12 col-sm-8">
+                                    <input type="number" class="form-control" data-tip="默认带%,如无小数,可以不输入小数位,默认2位小数！" name="row[ali_rebate_unify_a]" value="{$siteList.ali_rebate_unify_a}"  />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="value" class="control-label col-xs-12 col-sm-2">B计划(%)</label>
+                                <div class="col-xs-12 col-sm-8">
+                                    <input type="number" class="form-control" id="value73" data-tip="默认带%,如无小数,可以不输入小数位,默认2位小数！" name="row[ali_rebate_unify_b]" value="{$siteList.ali_rebate_unify_b}"  />
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            
+            </tbody>
+            <tfoot>
+            <tr>
+                <td align="center">
+                    <button style="margin-left: -20%;" type="submit" class="btn btn-success btn-embossed">{:__('OK')}</button>
+                    <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+                </td>
+            </tr>
+            </tfoot>
+            </table>
+            </form>
+            </div>
+            </div>
+            
+             <!-- 功能数量限制 -->
+            <div class="tab-pane fade" id="numlimit">
+            <div class="widget-body no-padding">
+                <form id="ylsz-form2" class="edit-form form-horizontal" role="form" data-toggle="validator" method="POST" action="{:url('webconfig.all/edit?flag=rebate')}">
+                    <table class="table table-striped">
+                        <thead>
+                        </thead>
+                        <tbody>
+                        <tr>
+                        <td>
+                        <div class="row">
+                            <h4>用户中心功能限制:</h4>
+                            <div class="form-group">
+                                <label for="value" class="control-label col-xs-12 col-sm-2">每天最多申请转入域名数量:</label>
+                                <div class="col-xs-12 col-sm-8">
+                                    <input type="number" class="form-control" name="row[domain_shift_max_limit]" value="{$siteList.domain_shift_max_limit}"  />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="value" class="control-label col-xs-12 col-sm-2">发票模板修改次数:</label>
+                                <div class="col-xs-12 col-sm-8">
+                                    <input type="number" class="form-control" name="con[bill_modi_count]" value="{$siteList.bill_modi_count}"  />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="value" class="control-label col-xs-12 col-sm-2">怀米专属素材用户:</label>
+                                <div class="col-xs-12 col-sm-8">
+                                    <textarea name="row[exclusive_material_userid]" class="form-control"  rows="5" >{$siteList.exclusive_material_userid}</textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td align="center">
+                    <button style="margin-left: -20%;" type="submit" class="btn btn-success btn-embossed">{:__('OK')}</button>
+                    <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+                </td>
+            </tr>
+            </tfoot>
+            </table>
+            </form>
+            </div>
+            </div>
+
+            <!-- 活动单项配置 -->
+            <div class="tab-pane fade" id="activity">
+            <div class="widget-body no-padding">
+                <form id="ylsz-form2" class="edit-form form-horizontal" role="form" data-toggle="validator" method="POST" action="{:url('webconfig.all/edit?flag=activity')}">
+                    <table class="table table-striped">
+                        <thead>
+                        </thead>
+                        <tbody>
+                        <tr>
+                        <td>
+                        <div class="row">
+                            <h4>注册包页面配置:</h4>
+                            <div class="form-group">
+                                <label for="value" class="control-label col-xs-12 col-sm-2">标题:</label>
+                                <div class="col-xs-12 col-sm-6">
+                                    <input type="text" class="form-control" name="row[activity_regback_title]" value="{$siteList.activity_regback_title}"  />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="value" class="control-label col-xs-12 col-sm-2">描述:</label>
+                                <div class="col-xs-12 col-sm-6">
+                                    <input type="text" class="form-control" name="row[activity_regback_desc]" value="{$siteList.activity_regback_desc}"  />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="value" class="control-label col-xs-12 col-sm-2">规则:</label>
+                                <div class="col-xs-12 col-sm-6">
+                                    <textarea class="form-control editor edui-body-container" style="height: 300px;" name="row[activity_regback_rule]">{$siteList.activity_regback_rule}</textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td align="center">
+                    <button style="margin-left: -20%;" type="submit" class="btn btn-success btn-embossed">{:__('OK')}</button>
+                    <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+                </td>
+            </tr>
+            </tfoot>
+            </table>
+            </form>
+            </div>
+            </div> 

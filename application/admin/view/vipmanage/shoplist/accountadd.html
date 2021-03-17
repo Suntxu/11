@@ -1,0 +1,50 @@
+<form id="add-form"  class="form-horizontal" name=" " role="form" data-toggle="validator" method="POST" action="">
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">用户名:</label>
+        <div  class="col-xs-12 col-sm-8">
+            <input type="text" class='form-control' name="row[uid]" value="{$uid}">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">靓号:</label>
+        <div  class="col-xs-12 col-sm-8">
+            <input type="text" class='form-control' name="row[account]" value="">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="value" class="control-label col-xs-12 col-sm-2">是否默认店铺号:</label>
+        <div class="col-xs-12 col-sm-8">
+            <div class="radio">
+                <label for="is_default"><input id="is_default"  name="row[is_default]" checked="" type="radio" value="0">否</label>
+                <label for="is_default1"><input id="is_default1"  name="row[is_default]" type="radio" value="1">是</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="value" class="control-label col-xs-12 col-sm-2">状态:</label>
+        <div class="col-xs-12 col-sm-8">
+            <div class="radio">
+                 <label for="status"><input id="status"  name="row[status]" checked="" type="radio" value="0">正常</label>
+                 <label for="status1"><input id="status1"  name="row[status]" type="radio" value="1">禁用</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">结束时间:</label>
+        <div  class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control datetimepicker" data-date-format="Y-MM-DD HH:mm:ss" name="row[endtime]" placeholder="不选择为不限时" />
+        </div>
+    </div>
+
+    <div class="form-group layer-footer">
+        <label class="control-label col-xs-12 col-sm-2"></label>
+        <div class="col-xs-12 col-sm-8">
+            <button type="submit" class="btn btn-success btn-embossed disabled">修改</button>
+            <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+        </div>
+    </div>
+</form>

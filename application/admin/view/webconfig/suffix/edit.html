@@ -1,0 +1,377 @@
+<style type="text/css">
+    @media (max-width: 375px) {
+        .edit-form tr td input{width:100%;}
+        .edit-form tr th:first-child,.edit-form tr td:first-child{
+            width:20%;
+        }
+        .edit-form tr th:last-child,.edit-form tr td:last-child{
+            display: none;
+        }
+    }
+    .profile-avatar-container {
+        position:relative;
+        width:100px;margin:0 1%;
+    }
+    .profile-avatar-container .profile-user-img{
+        width:100px;
+        height:100px;
+    }
+    .profile-avatar-container .profile-avatar-text {
+        display:none;
+    }
+    .profile-avatar-container:hover .profile-avatar-text {
+        display:block;
+        position:absolute;
+        height:100px;
+        width:100px;
+        background:#444;
+        opacity: .6;
+        color: #fff;
+        top:0;
+        left:0;
+        line-height: 100px;
+        text-align: center;
+    }
+    .profile-avatar-container button{
+        position:absolute;
+        top:0;left:0;width:100px;height:100px;opacity: 0;
+    }
+    .sf:hover{
+        color: orange;
+    }
+    #f1:hover{
+        color: #0073EA;
+    }
+    #ylsz .form-control{
+        width:70%;
+    }
+    
+</style>
+<div class="panel panel-default panel-intro">
+    <div class="panel-heading">
+        <ul class="nav nav-tabs">
+             <li class=""><a href="#hz" id="clickpz" class="active xianshi" data-toggle="tab">后缀配置</a></li>
+             <li class=""><a href="#ym" class="xianshi" data-toggle="tab">页面配置</a></li>
+             <li class=""><a href="#xf" class="xianshi" data-toggle="tab">续费配置</a></li>
+             <li class=""><a href="#hs" class="xianshi" data-toggle="tab">回收配置</a></li>
+        </ul>
+    </div>
+    <div class="panel-body">
+        <div id="myTabContent" class="tab-content">
+            <div class="" id="add">
+                <div class="widget-body no-padding">
+                    <form id="add-form" class="edit-form form-horizontal" role="form" data-toggle="validator" method="POST" action="">
+                        <table class="table table-striped">
+                            <thead>
+                              
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="" id="hz" >
+                                            <h3>后缀修改</h3>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">后缀</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control" id="value1" name="row[name1]"  value="{$data['name1']}" readonly/>
+                                                </div>
+                                            </div>
+                                            <input type="hidden" name="row[id]" value="{$data['id']}">
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">排序</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="number" class="form-control" id="value2" name="row[xh]" value="{$data['xh']}" data-tip="序号越大，越靠前" />
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">注册原始价格</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="number" class="form-control"  id="value3" name="row[ysje]" value="{$data['ysje']}" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value35" class="control-label col-xs-12 col-sm-2">享受优惠数量1：</label>
+                                                <div class="col-xs-12 col-sm-2">
+                                                    <input type="number" class="form-control" id="value35" name="row[num]" value="{$data['num']}"  />
+                                                </div>
+                                                <div class="col-xs-12 col-sm-6">
+                                                    <input type="number" class="form-control" id="value4" name="row[money]" value="{$data['money']}"/>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value35" class="control-label col-xs-12 col-sm-2">享受优惠数量2：</label>
+                                                <div class="col-xs-12 col-sm-2">
+                                                    <input type="number" class="form-control" id="value35" name="row[num1]" value="{$data['num1']}"/>
+                                                </div>
+                                                <div class="col-xs-12 col-sm-6">
+                                                    <input type="number" class="form-control" id="value4" name="row[money1]" value="{$data['money1']}"/>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value35" class="control-label col-xs-12 col-sm-2">享受优惠数量3：</label>
+                                                <div class="col-xs-12 col-sm-2">
+                                                    <input type="number" class="form-control" id="value35" name="row[num2]" value="{$data['num2']}" />
+                                                </div>
+                                                <div class="col-xs-12 col-sm-6">
+                                                    <input type="number" class="form-control" id="value4" name="row[money2]" value="{$data['money2']}" />
+                                                </div>
+                                            </div>
+
+
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">开始时间</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control datetimepicker" data-date-format="Y-MM-DD HH:mm:ss" value="{$data['yhsj1']}" id="value5" name="row[yhsj1]" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">结束时间</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control datetimepicker" data-date-format="Y-MM-DD HH:mm:ss" value="{$data['yhsj2']}" id="value5" name="row[yhsj2]" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value35" class="control-label col-xs-12 col-sm-2">优惠总数量：</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="number" class="form-control" id="discounts" value="{$data['discounts']}" name="row[discounts]" data-tip="0表示不限制数量" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value3" class="control-label col-xs-12 col-sm-2">续费原始价格</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="number" class="form-control"  id="value3" name="row[xfmoney]" value="{$data['xfmoney']}"/>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">续费优惠价格</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="number" class="form-control" id="value4" name="row[xfxfyg]" value="{$data['xfxfyg']}"/>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">开始时间</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control datetimepicker" data-date-format="Y-MM-DD HH:mm:ss" value="{$data['xfsj1']}" id="value5" name="row[xfsj1]" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">结束时间</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control datetimepicker" data-date-format="Y-MM-DD HH:mm:ss" value="{$data['xfsj2']}"  id="value5" name="row[xfsj2]" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="regbrokerage" class="control-label col-xs-12 col-sm-2">注册域名返佣百分比</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control" data-tip="默认带%,默认2位小数！" value="{$data['regbrokerage']}" id="regbrokerage" name="row[regbrokerage]"  />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value2" class="control-label col-xs-12 col-sm-2">注册接口</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <select id="c-type" name="row[aid]" class="form-control">
+                                                        {foreach $api as $k=>$v}
+                                                        <option value="{$v['id']}" {if $v['id'] == $data['aid']} selected {/if} >{$v['tit']}</option>
+                                                        {/foreach}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">成本价</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="number" class="form-control" value="{$data['cost']}" id="value4" name="row[cost]"/>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value31" class="control-label col-xs-12 col-sm-2">预定价格</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="number" class="form-control"  id="value31" name="row[res_pirce]" value="{$data['res_pirce']}"  />
+                                                </div>
+                                            </div>
+                                           <!--  <div class="form-group">
+                                                <label class="control-label col-xs-12 col-sm-2">禁止续费</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <div class="radio">
+                                                        <label for="forbid1"><input id="forbid1"  {if($data['forbid'] == '0')} checked {/if} name="row[forbid]"  type="radio" value="0">否</label> 
+                                                        <label for="forbid2"><input id="forbid2"  {if($data['forbid'] == '1')} checked {/if} name="row[forbid]" type="radio" value="1">是</label> 
+                                                    </div> 
+                                                </div>
+                                            </div> -->
+                                            <div class="form-group">
+                                                <label class="control-label col-xs-12 col-sm-2">状态变更</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <div class="radio">
+                                                        <label for="zt1"><input id="zt1" {if($data['zt'] == 1)} checked {/if} name="row[zt]"  type="radio" value="1">开启</label> 
+                                                        <label for="zt2"><input id="zt2"  name="row[zt]" type="radio" {if($data['zt']==2)} checked {/if} value="2">关闭</label> 
+                                                    </div> 
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">域名介绍</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control" id="value" name="row[domain_intro]" value="{$data['domain_intro']}"  />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="" style="display: none" id="ym">
+                                            <h3>资讯分类</h3>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">分类名</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control" id="value111" name="news[name1]" value="{$data['nname1']}" />
+                                                    <input type="hidden" name="news[id]" value="{$data['nid']}">
+                                                </div>
+                                            </div>
+                                            <h3>页面设置</h3>
+                                            <input type="hidden" name="page[id]" value="{$data['pid']}">
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">seo标题</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control" id="value112" name="page[seotit]" value="{$data['seotit']}" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">标题</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control" id="value112" value="{$data['title']}" name="page[title]" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">后缀描述</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <textarea class="form-control" name="page[hzdesc]" cols="5" >{$data['hzdesc']}</textarea>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="c-avatar" class="control-label col-xs-12 col-sm-2">页面图像</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <div class="input-group">
+                                                        <input id="c-avatar"  class="form-control" size="50" name="page[imgpath]" value="{$data['imgpath']}" type="text" value="">
+                                                        <div class="input-group-addon no-border no-padding">
+                                                            <span><button type="button" id="plupload-avatar" class="btn btn-danger plupload" data-input-id="c-avatar" data-mimetype="image/gif,image/jpeg,image/png,image/jpg,image/bmp" data-multiple="false" data-preview-id="p-avatar"><i class="fa fa-upload"></i> 上传</button></span>
+                                                        </div>
+                                                        <span class="msg-box n-right" for="c-avatar"></span>
+                                                    </div>
+                                                    <ul class="row list-inline plupload-preview" id="p-avatar"></ul>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">页面详情</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <textarea name="page[desc]" class="editor edui-body-container" style="width: 100%; min-height: 200px;height: 200px;  z-index: 90;" class="form-control" id="lieb" rows="8">{$data['desc']}</textarea>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                        <!-- xf -->
+                                        <div class="" style="display: none" id="xf">
+                                            <h3>续费设置</h3>
+                                            <div class="form-group text-center">
+                                                <div class="col-xs-12 col-sm-4">
+                                                    注册商
+                                                </div>
+                                                <div class="col-xs-12 col-sm-4">
+                                                    价格
+                                                </div>
+                                                <div class="col-xs-12 col-sm-4">
+                                                    状态
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-xs-12 col-sm-4">
+                                                    批量设置
+                                                </div>
+                                                <div class="col-xs-12 col-sm-4">
+                                                    <input type="text" class="form-control" id="pl_money" value="" placeholder="￥"/>
+                                                </div>
+                                                <div class="col-xs-12 col-sm-4">
+                                                    <input type="radio" class="pl_status" name="pl_status" value="0">否
+                                                    <input type="radio" class="pl_status" name="pl_status" value="1">是
+                                                </div>
+                                            </div>
+                                            {foreach $renew as $k=>$v}
+                                            <div class="form-group">
+                                                <div class="col-xs-12 col-sm-4">
+                                                    <input type="text" class="form-control" value="{$v['name']}" readonly/>
+                                                    <input type="hidden" class="form-control" name="xf[{$v['cid']}][zcs]" value="{$v['cid']}"/>
+                                                </div>
+                                                <div class="col-xs-12 col-sm-4">
+                                                    <input type="text" class="form-control pl_money2" name="xf[{$v['cid']}][money]" value="{$v['money']}" placeholder="￥"/>
+                                                </div>
+                                                <div class="col-xs-12 col-sm-4">
+                                                    <input class="pl_status_0" {if($v['status'] == '0')} checked {/if} name="xf[{$v['cid']}][status]" type="radio" value="0">否
+                                                    <input class="pl_status_1" {if($v['status'] == '1')} checked {/if} name="xf[{$v['cid']}][status]" type="radio" value="1">是
+                                                </div>
+                                            </div>
+                                            {/foreach}
+                                        </div>
+                                        
+                                        <!-- xf -->
+                                         <!-- hs -->
+                                        <div class="" style="display: none" id="hs">
+                                            <h3>回收设置</h3>
+                                            <div class="form-group">
+                                                <label class="control-label col-xs-12 col-sm-2">是否开启</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <div class="radio">
+                                                        <label for="hs1"><input id="hs1" onclick="statusModi(this)" {if $data['status'] === 0} checked {/if} name="recy[status]"  type="radio" value="0">开启</label> 
+                                                        <label for="hs2"><input id="hs2" onclick="statusModi(this)" {if $data['status'] == 1} checked {/if} name="recy[status]" type="radio" value="1">关闭</label> 
+                                                    </div> 
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">基础回收价格</label>
+                                                <div class="col-xs-12 col-sm-6">
+                                                    <input type="number" class="form-control hs_set" {if $data['status'] == 1} readonly {/if}  id="value5" name="recy[recycle_price]" value="{$data['recycle_price']}" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">回收最大价格</label>
+                                                <div class="col-xs-12 col-sm-6">
+                                                    <input type="number" class="form-control hs_set" {if $data['status'] == 1} readonly {/if} id="value5" name="recy[max_money]" value="{$data['max_money']}" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">回收每月递增价格</label>
+                                                <div class="col-xs-12 col-sm-6">
+                                                    <input type="number" class="form-control hs_set" {if $data['status'] == 1} readonly {/if} id="value5" name="recy[recycle_inc]" value="{$data['recycle_inc']}"/>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label  class="control-label col-xs-12 col-sm-2">最小到期时间(天)</label>
+                                                <div class="col-xs-12 col-sm-6">
+                                                    <input type="number" class="form-control hs_set" {if $data['status'] == 1} readonly {/if} name="recy[datemin]" value="{$data['datemin']}"  />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label  class="control-label col-xs-12 col-sm-2">最大到期时间(天)</label>
+                                                <div class="col-xs-12 col-sm-6">
+                                                    <input type="number" class="form-control hs_set" {if $data['status'] == 1} readonly {/if} name="recy[datemax]" data-tip="0为无限制" value="{$data['datemax']}"  />
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <!-- hs -->
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    
+                                    <td align="center">
+                                        <button type="submit" class="btn btn-success btn-embossed">{:__('OK')}</button>
+                                        <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+                                    </td>
+
+
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </form>
+                </div>
+            </div>
+        
+

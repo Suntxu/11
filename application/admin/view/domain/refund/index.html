@@ -1,0 +1,51 @@
+<form class=" form-horizontal" role="form" data-toggle="validator" method="POST" action="/admin/domain/refund/index">
+    <!-- <h3>域名归属地查询</h3> -->
+    <div class="form-group">
+        <label for="bh" class="control-label col-xs-12 col-sm-2">域名列表:</label>
+        <div class="col-xs-12 col-sm-8">
+            <textarea name="domain" style="width: 378px;" rows="7" id="bh" placeholder="域名之间请用回车隔开,每次最多可提交200个域名！" {if $total} readonly="readonly" {/if}  data-rule="required" >{php}foreach($domain as $k=>$v){echo $v."\n";}{/php}</textarea>
+            <div style="color: red;font-size: 12px;">符合下列条件的域名无法自动退款<br> 注册人非归属人、一口价出售、打包出售、push中、转回原注册商!</div>
+        </div>
+    </div>
+    <div class="form-group" style="margin-left: 23% ;">
+        {if $total}
+        <button type="button" class="btn btn-danger btn-embossed" onclick="refund()" style="margin-left: 4%">退款</button>
+        {else}
+        <button type="submit" class="btn btn-success btn-embossed" style="margin-left: 4%" >查询</button>
+        {/if}
+        
+        <div class="btn  btn-embossed" disabled  ><b>退款域名总数量:<span id="total" style="color: red"> {$total} </span></b></div>
+    </div>
+</form>
+<table id="" class="table table-striped table-bordered table-hover" data-operate-edit="1" data-operate-del="1" width="100%"  {if $show == 'aaaa' } style="display: none" {/if} >
+    <thead>
+        <tr>
+            <th style="text-align: center; vertical-align: middle; " data-field="id"><div class="th-inner ">序号</div><div class="fht-cell"></div></th>
+            <th style="text-align: center; vertical-align: middle; " data-field="id"><div class="th-inner ">ID</div><div class="fht-cell"></div></th>
+            <th style="text-align: center; vertical-align: middle; " data-field="tit"><div class="th-inner ">域名</div><div class="fht-cell"></div></th>
+            <th style="text-align: center; vertical-align: middle; " data-field="tit"><div class="th-inner ">价格</div><div class="fht-cell"></div></th>
+            <th style="text-align: center; vertical-align: middle; " data-field="tit"><div class="th-inner ">注册商</div><div class="fht-cell"></div></th>
+            <th style="text-align: center; vertical-align: middle; " data-field="tit"><div class="th-inner ">注册时间</div><div class="fht-cell"></div></th>
+            <th style="text-align: center; vertical-align: middle; " data-field="group"><div class="th-inner ">注册用户</div><div class="fht-cell"></div></th>
+        </tr>
+    </thead>
+    <tbody data-listidx="0">
+        {if empty($data)}
+            <tr class="no-records-found">
+                <td colspan="7" align="center">没有找到匹配的记录</td>
+            </tr>
+        {else}
+            {foreach $data as $k=>$v}
+                <tr data-index="{$k}">
+                    <td align="center">{$k+1}</td>
+                    <td align="center">{$v['id']}</td>
+                    <td align="center">{$v['tit']}</td>
+                    <td align="center">{$v['money']}</td>
+                    <td align="center">{$v['zcs']}</td>
+                    <td align="center">{$v['CreateTime'] | date="Y-m-d H:i:s",###}</td>
+                    <td align="center">{$v['uid']}</td>
+                </tr>
+            {/foreach}
+        {/if}
+    </tbody>
+</table>

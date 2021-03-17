@@ -1,0 +1,55 @@
+<style type="text/css">
+    @media (max-width: 375px) {
+        .edit-form tr td input{width:100%;}
+        .edit-form tr th:first-child,.edit-form tr td:first-child{
+            width:20%;
+        }
+        .edit-form tr th:last-child,.edit-form tr td:last-child{
+            display: none;
+        }
+    }
+    .sf:hover{
+        color: orange;
+    }
+    #f1:hover{
+        color: #0073EA;
+    }
+   /* #ylsz .form-control{
+        width:70%;
+    }*/
+    .row{
+        margin-left: -5px;
+        margin-right: -15px;
+    }
+</style>
+<form id="edit-form" class="edit-form form-horizontal" role="form" data-toggle="validator" enctype="multipart/form-data" method="POST" action="/admin/domain/updatezcs/index">
+    <h3>修改域名注册商</h3>
+        <div class="form-group">
+            <label for="c-avatar" class="control-label col-xs-12 col-sm-2">注册商列表:</label>
+            <div class="col-xs-12 col-sm-2">
+                <select class="form-control" id="zcs" onchange="getApiRadio(this)" name="zcs">
+                    <option value="0">请选择</option>
+                    {foreach($zcs as $k=>$b)}
+                        <option value="{$b['id']}" >{$b['name']}</option>
+                    {/foreach}
+                </select>
+            </div>
+        </div>
+        <div class="form-group" id="api">
+            <label for="c-avatar" class="control-label col-xs-12 col-sm-2">API列表:</label>
+            <div class="col-xs-12 col-sm-8" id="ref">
+                <label for="apiw" style="color: red;">请先选择注册商</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="bh" class="control-label col-xs-12 col-sm-2">域名:</label>
+            <div class="col-xs-12 col-sm-8">
+                <textarea name="ttxt" id="domain" style="width: 378px;" rows="7" placeholder="一次最多可填入5000个域名,域名之间请用回车隔开"></textarea>
+            </div>
+        </div>
+    <div class="form-group" style="margin-left: 17% ;margin-top: 3%;">
+        <button type="submit" class="btn btn-success btn-embossed">{:__('OK')}</button>
+        <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+    </div>
+</form>
+

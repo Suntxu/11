@@ -1,0 +1,36 @@
+{
+    "name": "karsonzhang/fastadmin",
+    "description": "the fastest admin framework",
+    "type": "project",
+    "keywords": [
+        "fastadmin",
+        "thinkphp"
+    ],
+    "homepage": "http://www.fastadmin.net/",
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "Karson",
+            "email": "karsonzhang@163.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "topthink/framework": "~5.0.14",
+        "overtrue/wechat": "~3.1",
+        "endroid/qr-code": "^1.9",
+        "topthink/think-captcha": "^1.0",
+        "mtdowling/cron-expression": "^1.2",
+        "phpmailer/phpmailer": "^5.2",
+        "karsonzhang/fastadmin-addons": "~1.1.4",
+        "overtrue/pinyin": "~3.0",
+        "phpoffice/phpexcel": "^1.8",
+        "phpoffice/phpspreadsheet": "^1.5",
+        "topthink/think-worker": "v1.0.1",
+        "aliyuncs/oss-sdk-php": "^2.3",
+        "box/spout": "v3.0.0"
+    },
+    "config": {
+        "preferred-install": "dist"
+    }
+}

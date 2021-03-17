@@ -1,0 +1,17 @@
+<form id="edit-form" class="edit-form form-horizontal" role="form" data-toggle="validator" method="POST" action="/admin/domain/store/del/index" >
+    <h3>域名出库</h3>
+    <div class="form-group">
+        <label for="bh" class="control-label col-xs-12 col-sm-2">域名列表:</label>
+        <div class="col-xs-12 col-sm-8">
+            <textarea name="ttxt" id="domain" style="width: 378px;" rows="7" placeholder="push、转回中的域名不可出库,一次最多可填入10000个域名,域名之间请用回车隔开">{php}foreach($domain as $k=>$v){echo $v['tit']."\n";}{/php}</textarea>
+        </div>
+    </div>
+
+    <input type="hidden" name="row[pack]" id="pack" value="0">
+    <input type="hidden" name="row[ttxt]" id="ttxt" value="0">
+    <div class="form-group" style="margin-left: 23% ;">
+        <button type="button" class="btn btn-success btn-embossed" onclick="checkedPack()" >{:__('OK')}</button>
+        <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+    </div>
+</form>
+

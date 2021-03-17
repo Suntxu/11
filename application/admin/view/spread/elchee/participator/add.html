@@ -1,0 +1,116 @@
+<style type="text/css">
+    @media (max-width: 375px) {
+        .edit-form tr td input{width:100%;}
+        .edit-form tr th:first-child,.edit-form tr td:first-child{
+            width:20%;
+        }
+        .edit-form tr th:last-child,.edit-form tr td:last-child{
+            display: none;
+        }
+    }
+    .profile-avatar-container {
+        position:relative;
+        width:100px;margin:0 1%;
+    }
+    .profile-avatar-container .profile-user-img{
+        width:100px;
+        height:100px;
+    }
+    .profile-avatar-container .profile-avatar-text {
+        display:none;
+    }
+    .profile-avatar-container:hover .profile-avatar-text {
+        display:block;
+        position:absolute;
+        height:100px;
+        width:100px;
+        background:#444;
+        opacity: .6;
+        color: #fff;
+        top:0;
+        left:0;
+        line-height: 100px;
+        text-align: center;
+    }
+    .profile-avatar-container button{
+        position:absolute;
+        top:0;left:0;width:100px;height:100px;opacity: 0;
+    }
+    .sf:hover{
+        color: orange;
+    }
+    #f1:hover{
+        color: #0073EA;
+    }
+    #ylsz .form-control{
+        width:70%;
+    }
+</style>
+<div class="panel panel-default panel-intro">
+    <div class="panel-body">
+        <div id="myTabContent" class="tab-content">
+            <div class="" id="add">
+                <div class="widget-body no-padding">
+                    <form id="add-form" class="edit-form form-horizontal" role="form" data-toggle="validator" method="POST" action="">
+                        <table class="table table-striped">
+                            <thead>
+                              
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="row">
+                                            <h3>添加活动域名</h3>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">活动类型</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <select name="row[ac_coupon]" class="form-control selectpicker">
+                                                        {foreach($type as $k=>$v)}
+                                                            <option value="{$k}">{$v}</option>
+                                                        {/foreach}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">参与类型</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <div class="radio">
+                                                        <label for="rul1"><input id="rul1" onclick="show(this)"  checked=""  type="radio" name="row[type]" value="1">域名</label>
+                                                        <label for="rul2"><input id="rul2" onclick="show(this)" {if $data} disabled="" {/if} type="radio" name="row[type]" value="2">店铺</label> 
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group" id="shop" style="display: none">
+                                                <label for="use_shop" class="control-label col-xs-12 col-sm-2">指定店铺:</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input  placeholder="请填写用户名"  class="form-control " name="row[userid]" type="text"  value="">
+                                                </div>
+                                            </div>
+                                            <div class="form-group" id="domain">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">活动域名</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <textarea name="row[tit]" style="width: 100%; min-height: 60px; z-index: 90;" class="form-control" placeholder="域名之间请用回车隔开" rows="5">{php} foreach($data as $v){ echo $v."\r\n";}{/php}</textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    
+                                    <td align="center">
+                                        <button type="submit" class="btn btn-success btn-embossed">{:__('OK')}</button>
+                                        <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+                                    </td>
+
+
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </form>
+                </div>
+            </div>
+ 
+        
+

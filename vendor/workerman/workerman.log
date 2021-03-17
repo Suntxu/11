@@ -1,0 +1,251 @@
+2018-03-14 19:04:33 pid:68477 Workerman[start.php] start in DEBUG mode
+2018-03-14 21:58:37 pid:68477 Workerman[start.php] stopping ...
+2018-03-14 21:58:37 pid:68477 Workerman[start.php] has been stopped
+2020-04-03 16:16:07 pid:1 think\exception\ErrorException: Undefined variable: record_db in D:\phpStudy\PHPTutorial\WWW\ht2020\application\worker\controller\Offline.php:62
+Stack trace:
+#0 D:\phpStudy\PHPTutorial\WWW\ht2020\application\worker\controller\Offline.php(62): think\Error::appError(8, 'Undefined varia...', 'D:\\phpStudy\\PHP...', 62, Array)
+#1 D:\phpStudy\PHPTutorial\WWW\ht2020\application\worker\controller\Offline.php(25): app\worker\controller\Offline->ExportDomain()
+#2 D:\phpStudy\PHPTutorial\WWW\ht2020\vendor\workerman\workerman\Worker.php(2393): app\worker\controller\Offline->onWorkerStart(Object(Workerman\Worker))
+#3 D:\phpStudy\PHPTutorial\WWW\ht2020\vendor\workerman\workerman\Worker.php(1404): Workerman\Worker->run()
+#4 D:\phpStudy\PHPTutorial\WWW\ht2020\vendor\workerman\workerman\Worker.php(1347): Workerman\Worker::forkWorkersForWindows()
+#5 D:\phpStudy\PHPTutorial\WWW\ht2020\vendor\workerman\workerman\Worker.php(546): Workerman\Worker::forkWorkers()
+#6 D:\phpStudy\PHPTutorial\WWW\ht2020\vendor\topthink\think-worker\src\Server.php(48): Workerman\Worker::runAll()
+#7 [internal function]: think\worker\Server->__construct()
+#8 D:\phpStudy\PHPTutorial\WWW\ht2020\thinkphp\library\think\App.php(359): ReflectionClass->newInstanceArgs(Array)
+#9 D:\phpStudy\PHPTutorial\WWW\ht2020\thinkphp\library\think\Loader.php(479): think\App::invokeClass('app\\worker\\cont...')
+#10 D:\phpStudy\PHPTutorial\WWW\ht2020\thinkphp\library\think\App.php(575): think\Loader::controller('offline', 'controller', false, 'Error')
+#11 D:\phpStudy\PHPTutorial\WWW\ht2020\thinkphp\library\think\App.php(456): think\App::module(Array, Array, true)
+#12 D:\phpStudy\PHPTutorial\WWW\ht2020\thinkphp\library\think\App.php(139): think\App::exec(Array, Array)
+#13 D:\phpStudy\PHPTutorial\WWW\ht2020\thinkphp\start.php(19): think\App::run()
+#14 D:\phpStudy\PHPTutorial\WWW\ht2020\public\service.php(7): require('D:\\phpStudy\\PHP...')
+#15 {main}
+2020-04-03 16:16:08 pid:1 Worker process terminated
+2020-04-03 16:18:35 pid:1 think\exception\ErrorException: Undefined variable: record_db in D:\phpStudy\PHPTutorial\WWW\ht2020\application\worker\controller\Offline.php:62
+Stack trace:
+#0 D:\phpStudy\PHPTutorial\WWW\ht2020\application\worker\controller\Offline.php(62): think\Error::appError(8, 'Undefined varia...', 'D:\\phpStudy\\PHP...', 62, Array)
+#1 D:\phpStudy\PHPTutorial\WWW\ht2020\application\worker\controller\Offline.php(25): app\worker\controller\Offline->ExportDomain()
+#2 D:\phpStudy\PHPTutorial\WWW\ht2020\vendor\workerman\workerman\Worker.php(2393): app\worker\controller\Offline->onWorkerStart(Object(Workerman\Worker))
+#3 D:\phpStudy\PHPTutorial\WWW\ht2020\vendor\workerman\workerman\Worker.php(1404): Workerman\Worker->run()
+#4 D:\phpStudy\PHPTutorial\WWW\ht2020\vendor\workerman\workerman\Worker.php(1347): Workerman\Worker::forkWorkersForWindows()
+#5 D:\phpStudy\PHPTutorial\WWW\ht2020\vendor\workerman\workerman\Worker.php(546): Workerman\Worker::forkWorkers()
+#6 D:\phpStudy\PHPTutorial\WWW\ht2020\vendor\topthink\think-worker\src\Server.php(48): Workerman\Worker::runAll()
+#7 [internal function]: think\worker\Server->__construct()
+#8 D:\phpStudy\PHPTutorial\WWW\ht2020\thinkphp\library\think\App.php(359): ReflectionClass->newInstanceArgs(Array)
+#9 D:\phpStudy\PHPTutorial\WWW\ht2020\thinkphp\library\think\Loader.php(479): think\App::invokeClass('app\\worker\\cont...')
+#10 D:\phpStudy\PHPTutorial\WWW\ht2020\thinkphp\library\think\App.php(575): think\Loader::controller('offline', 'controller', false, 'Error')
+#11 D:\phpStudy\PHPTutorial\WWW\ht2020\thinkphp\library\think\App.php(456): think\App::module(Array, Array, true)
+#12 D:\phpStudy\PHPTutorial\WWW\ht2020\thinkphp\library\think\App.php(139): think\App::exec(Array, Array)
+#13 D:\phpStudy\PHPTutorial\WWW\ht2020\thinkphp\start.php(19): think\App::run()
+#14 D:\phpStudy\PHPTutorial\WWW\ht2020\public\service.php(30): require('D:\\phpStudy\\PHP...')
+#15 {main}
+2020-04-03 16:18:36 pid:1 Worker process terminated
+2020-04-03 16:19:34 pid:1 think\exception\ErrorException: date() expects parameter 2 to be integer, string given in D:\phpStudy\PHPTutorial\WWW\ht2020\application\worker\controller\Offline.php:94
+Stack trace:
+#0 [internal function]: think\Error::appError(2, 'date() expects ...', 'D:\\phpStudy\\PHP...', 94, Array)
+#1 D:\phpStudy\PHPTutorial\WWW\ht2020\application\worker\controller\Offline.php(94): date('YmdHis', '1585901974408')
+#2 D:\phpStudy\PHPTutorial\WWW\ht2020\application\worker\controller\Offline.php(25): app\worker\controller\Offline->ExportDomain()
+#3 D:\phpStudy\PHPTutorial\WWW\ht2020\vendor\workerman\workerman\Worker.php(2393): app\worker\controller\Offline->onWorkerStart(Object(Workerman\Worker))
+#4 D:\phpStudy\PHPTutorial\WWW\ht2020\vendor\workerman\workerman\Worker.php(1404): Workerman\Worker->run()
+#5 D:\phpStudy\PHPTutorial\WWW\ht2020\vendor\workerman\workerman\Worker.php(1347): Workerman\Worker::forkWorkersForWindows()
+#6 D:\phpStudy\PHPTutorial\WWW\ht2020\vendor\workerman\workerman\Worker.php(546): Workerman\Worker::forkWorkers()
+#7 D:\phpStudy\PHPTutorial\WWW\ht2020\vendor\topthink\think-worker\src\Server.php(48): Workerman\Worker::runAll()
+#8 [internal function]: think\worker\Server->__construct()
+#9 D:\phpStudy\PHPTutorial\WWW\ht2020\thinkphp\library\think\App.php(359): ReflectionClass->newInstanceArgs(Array)
+#10 D:\phpStudy\PHPTutorial\WWW\ht2020\thinkphp\library\think\Loader.php(479): think\App::invokeClass('app\\worker\\cont...')
+#11 D:\phpStudy\PHPTutorial\WWW\ht2020\thinkphp\library\think\App.php(575): think\Loader::controller('offline', 'controller', false, 'Error')
+#12 D:\phpStudy\PHPTutorial\WWW\ht2020\thinkphp\library\think\App.php(456): think\App::module(Array, Array, true)
+#13 D:\phpStudy\PHPTutorial\WWW\ht2020\thinkphp\library\think\App.php(139): think\App::exec(Array, Array)
+#14 D:\phpStudy\PHPTutorial\WWW\ht2020\thinkphp\start.php(19): think\App::run()
+#15 D:\phpStudy\PHPTutorial\WWW\ht2020\public\service.php(10): require('D:\\phpStudy\\PHP...')
+#16 {main}
+2020-04-03 16:19:35 pid:1 Worker process terminated
+2020-04-03 16:24:08 pid:1 Worker process terminated
+2020-04-03 16:25:17 pid:1 Worker process terminated
+2020-04-03 16:25:24 pid:1 think\exception\ErrorException: date() expects parameter 2 to be integer, string given in D:\phpStudy\PHPTutorial\WWW\ht2020\application\worker\controller\Offline.php:93
+Stack trace:
+#0 [internal function]: think\Error::appError(2, 'date() expects ...', 'D:\\phpStudy\\PHP...', 93, Array)
+#1 D:\phpStudy\PHPTutorial\WWW\ht2020\application\worker\controller\Offline.php(93): date('YmdHis', '1585902324880')
+#2 D:\phpStudy\PHPTutorial\WWW\ht2020\application\worker\controller\Offline.php(25): app\worker\controller\Offline->ExportDomain()
+#3 D:\phpStudy\PHPTutorial\WWW\ht2020\vendor\workerman\workerman\Worker.php(2393): app\worker\controller\Offline->onWorkerStart(Object(Workerman\Worker))
+#4 D:\phpStudy\PHPTutorial\WWW\ht2020\vendor\workerman\workerman\Worker.php(1404): Workerman\Worker->run()
+#5 D:\phpStudy\PHPTutorial\WWW\ht2020\vendor\workerman\workerman\Worker.php(1347): Workerman\Worker::forkWorkersForWindows()
+#6 D:\phpStudy\PHPTutorial\WWW\ht2020\vendor\workerman\workerman\Worker.php(546): Workerman\Worker::forkWorkers()
+#7 D:\phpStudy\PHPTutorial\WWW\ht2020\vendor\topthink\think-worker\src\Server.php(48): Workerman\Worker::runAll()
+#8 [internal function]: think\worker\Server->__construct()
+#9 D:\phpStudy\PHPTutorial\WWW\ht2020\thinkphp\library\think\App.php(359): ReflectionClass->newInstanceArgs(Array)
+#10 D:\phpStudy\PHPTutorial\WWW\ht2020\thinkphp\library\think\Loader.php(479): think\App::invokeClass('app\\worker\\cont...')
+#11 D:\phpStudy\PHPTutorial\WWW\ht2020\thinkphp\library\think\App.php(575): think\Loader::controller('offline', 'controller', false, 'Error')
+#12 D:\phpStudy\PHPTutorial\WWW\ht2020\thinkphp\library\think\App.php(456): think\App::module(Array, Array, true)
+#13 D:\phpStudy\PHPTutorial\WWW\ht2020\thinkphp\library\think\App.php(139): think\App::exec(Array, Array)
+#14 D:\phpStudy\PHPTutorial\WWW\ht2020\thinkphp\start.php(19): think\App::run()
+#15 D:\phpStudy\PHPTutorial\WWW\ht2020\public\service.php(8): require('D:\\phpStudy\\PHP...')
+#16 {main}
+2020-04-03 16:31:04 pid:1 think\exception\ErrorException: Undefined variable: redis in D:\phpStudy\PHPTutorial\WWW\ht2020\application\worker\controller\Offline.php:116
+Stack trace:
+#0 D:\phpStudy\PHPTutorial\WWW\ht2020\application\worker\controller\Offline.php(116): think\Error::appError(8, 'Undefined varia...', 'D:\\phpStudy\\PHP...', 116, Array)
+#1 D:\phpStudy\PHPTutorial\WWW\ht2020\application\worker\controller\Offline.php(25): app\worker\controller\Offline->ExportDomain()
+#2 D:\phpStudy\PHPTutorial\WWW\ht2020\vendor\workerman\workerman\Worker.php(2393): app\worker\controller\Offline->onWorkerStart(Object(Workerman\Worker))
+#3 D:\phpStudy\PHPTutorial\WWW\ht2020\vendor\workerman\workerman\Worker.php(1404): Workerman\Worker->run()
+#4 D:\phpStudy\PHPTutorial\WWW\ht2020\vendor\workerman\workerman\Worker.php(1347): Workerman\Worker::forkWorkersForWindows()
+#5 D:\phpStudy\PHPTutorial\WWW\ht2020\vendor\workerman\workerman\Worker.php(546): Workerman\Worker::forkWorkers()
+#6 D:\phpStudy\PHPTutorial\WWW\ht2020\vendor\topthink\think-worker\src\Server.php(48): Workerman\Worker::runAll()
+#7 [internal function]: think\worker\Server->__construct()
+#8 D:\phpStudy\PHPTutorial\WWW\ht2020\thinkphp\library\think\App.php(359): ReflectionClass->newInstanceArgs(Array)
+#9 D:\phpStudy\PHPTutorial\WWW\ht2020\thinkphp\library\think\Loader.php(479): think\App::invokeClass('app\\worker\\cont...')
+#10 D:\phpStudy\PHPTutorial\WWW\ht2020\thinkphp\library\think\App.php(575): think\Loader::controller('offline', 'controller', false, 'Error')
+#11 D:\phpStudy\PHPTutorial\WWW\ht2020\thinkphp\library\think\App.php(456): think\App::module(Array, Array, true)
+#12 D:\phpStudy\PHPTutorial\WWW\ht2020\thinkphp\library\think\App.php(139): think\App::exec(Array, Array)
+#13 D:\phpStudy\PHPTutorial\WWW\ht2020\thinkphp\start.php(19): think\App::run()
+#14 D:\phpStudy\PHPTutorial\WWW\ht2020\public\service.php(8): require('D:\\phpStudy\\PHP...')
+#15 {main}
+2020-04-03 16:31:05 pid:1 Worker process terminated
+2020-04-03 16:59:44 pid:1 Worker process terminated
+2020-04-03 17:00:07 pid:1 Worker process terminated
+2020-04-03 17:00:44 pid:1 Worker process terminated
+2020-04-03 17:00:55 pid:1 Worker process terminated
+2020-04-03 17:02:38 pid:1 Worker process terminated
+2020-04-03 17:02:55 pid:1 Worker process terminated
+2020-04-03 17:03:40 pid:1 Worker process terminated
+2020-04-03 17:03:57 pid:1 Worker process terminated
+2020-04-03 17:04:19 pid:1 Worker process terminated
+2020-04-03 17:20:11 pid:1 think\exception\ErrorException: Illegal string offset 'reg_time' in D:\phpStudy\PHPTutorial\WWW\ht2020\application\worker\controller\Offline.php:82
+Stack trace:
+#0 D:\phpStudy\PHPTutorial\WWW\ht2020\application\worker\controller\Offline.php(82): think\Error::appError(2, 'Illegal string ...', 'D:\\phpStudy\\PHP...', 82, Array)
+#1 D:\phpStudy\PHPTutorial\WWW\ht2020\application\worker\controller\Offline.php(25): app\worker\controller\Offline->ExportDomain()
+#2 D:\phpStudy\PHPTutorial\WWW\ht2020\vendor\workerman\workerman\Worker.php(2393): app\worker\controller\Offline->onWorkerStart(Object(Workerman\Worker))
+#3 D:\phpStudy\PHPTutorial\WWW\ht2020\vendor\workerman\workerman\Worker.php(1404): Workerman\Worker->run()
+#4 D:\phpStudy\PHPTutorial\WWW\ht2020\vendor\workerman\workerman\Worker.php(1347): Workerman\Worker::forkWorkersForWindows()
+#5 D:\phpStudy\PHPTutorial\WWW\ht2020\vendor\workerman\workerman\Worker.php(546): Workerman\Worker::forkWorkers()
+#6 D:\phpStudy\PHPTutorial\WWW\ht2020\vendor\topthink\think-worker\src\Server.php(48): Workerman\Worker::runAll()
+#7 [internal function]: think\worker\Server->__construct()
+#8 D:\phpStudy\PHPTutorial\WWW\ht2020\thinkphp\library\think\App.php(359): ReflectionClass->newInstanceArgs(Array)
+#9 D:\phpStudy\PHPTutorial\WWW\ht2020\thinkphp\library\think\Loader.php(479): think\App::invokeClass('app\\worker\\cont...')
+#10 D:\phpStudy\PHPTutorial\WWW\ht2020\thinkphp\library\think\App.php(575): think\Loader::controller('offline', 'controller', false, 'Error')
+#11 D:\phpStudy\PHPTutorial\WWW\ht2020\thinkphp\library\think\App.php(456): think\App::module(Array, Array, true)
+#12 D:\phpStudy\PHPTutorial\WWW\ht2020\thinkphp\library\think\App.php(139): think\App::exec(Array, Array)
+#13 D:\phpStudy\PHPTutorial\WWW\ht2020\thinkphp\start.php(19): think\App::run()
+#14 D:\phpStudy\PHPTutorial\WWW\ht2020\public\service.php(32): require('D:\\phpStudy\\PHP...')
+#15 {main}
+2020-04-03 17:20:12 pid:1 Worker process terminated
+2020-04-03 17:20:55 pid:1 Worker process terminated
+2020-04-03 17:22:47 pid:1 Worker process terminated
+2020-04-07 11:48:24 pid:1 Worker process terminated with ERROR: E_ERROR "Allowed memory size of 134217728 bytes exhausted (tried to allocate 12582920 bytes) in D:\phpStudy\PHPTutorial\WWW\ht2020\application\worker\controller\Offline.php on line 78"
+2020-04-07 11:52:22 pid:1 Worker process terminated with ERROR: E_ERROR "Allowed memory size of 134217728 bytes exhausted (tried to allocate 12582920 bytes) in D:\phpStudy\PHPTutorial\WWW\ht2020\application\worker\controller\Offline.php on line 78"
+2020-04-07 12:00:15 pid:1 Worker process terminated with ERROR: E_ERROR "Allowed memory size of 134217728 bytes exhausted (tried to allocate 12582920 bytes) in D:\phpStudy\PHPTutorial\WWW\ht2020\application\worker\controller\Offline.php on line 78"
+2020-04-07 13:52:13 pid:1 Worker process terminated
+2020-04-07 13:54:15 pid:1 Worker process terminated
+2020-04-07 13:55:17 pid:1 Worker process terminated
+2020-04-07 13:55:48 pid:1 Worker process terminated with ERROR: E_ERROR "Allowed memory size of 134217728 bytes exhausted (tried to allocate 12582920 bytes) in D:\phpStudy\PHPTutorial\WWW\ht2020\application\worker\controller\Offline.php on line 79"
+2020-04-07 13:58:14 pid:1 Worker process terminated
+2020-04-07 14:02:51 pid:1 Worker process terminated
+2020-04-07 14:06:20 pid:1 Worker process terminated with ERROR: E_ERROR "Allowed memory size of 134217728 bytes exhausted (tried to allocate 12582920 bytes) in D:\phpStudy\PHPTutorial\WWW\ht2020\application\worker\controller\Offline.php on line 77"
+2020-04-07 14:08:02 pid:1 Worker process terminated
+2020-04-07 14:37:12 pid:1 Worker process terminated
+2020-04-07 14:39:04 pid:1 Worker process terminated
+2020-04-08 17:23:20 pid:1 think\exception\ErrorException: Undefined variable: lLen in D:\phpStudy\PHPTutorial\WWW\ht2020\application\worker\controller\Offline.php:37
+Stack trace:
+#0 D:\phpStudy\PHPTutorial\WWW\ht2020\application\worker\controller\Offline.php(37): think\Error::appError(8, 'Undefined varia...', 'D:\\phpStudy\\PHP...', 37, Array)
+#1 D:\phpStudy\PHPTutorial\WWW\ht2020\application\worker\controller\Offline.php(25): app\worker\controller\Offline->saveErpDomain()
+#2 D:\phpStudy\PHPTutorial\WWW\ht2020\vendor\workerman\workerman\Worker.php(2393): app\worker\controller\Offline->onWorkerStart(Object(Workerman\Worker))
+#3 D:\phpStudy\PHPTutorial\WWW\ht2020\vendor\workerman\workerman\Worker.php(1404): Workerman\Worker->run()
+#4 D:\phpStudy\PHPTutorial\WWW\ht2020\vendor\workerman\workerman\Worker.php(1347): Workerman\Worker::forkWorkersForWindows()
+#5 D:\phpStudy\PHPTutorial\WWW\ht2020\vendor\workerman\workerman\Worker.php(546): Workerman\Worker::forkWorkers()
+#6 D:\phpStudy\PHPTutorial\WWW\ht2020\vendor\topthink\think-worker\src\Server.php(48): Workerman\Worker::runAll()
+#7 [internal function]: think\worker\Server->__construct()
+#8 D:\phpStudy\PHPTutorial\WWW\ht2020\thinkphp\library\think\App.php(359): ReflectionClass->newInstanceArgs(Array)
+#9 D:\phpStudy\PHPTutorial\WWW\ht2020\thinkphp\library\think\Loader.php(479): think\App::invokeClass('app\\worker\\cont...')
+#10 D:\phpStudy\PHPTutorial\WWW\ht2020\thinkphp\library\think\App.php(575): think\Loader::controller('offline', 'controller', false, 'Error')
+#11 D:\phpStudy\PHPTutorial\WWW\ht2020\thinkphp\library\think\App.php(456): think\App::module(Array, Array, true)
+#12 D:\phpStudy\PHPTutorial\WWW\ht2020\thinkphp\library\think\App.php(139): think\App::exec(Array, Array)
+#13 D:\phpStudy\PHPTutorial\WWW\ht2020\thinkphp\start.php(19): think\App::run()
+#14 D:\phpStudy\PHPTutorial\WWW\ht2020\public\service.php(32): require('D:\\phpStudy\\PHP...')
+#15 {main}
+2020-04-08 17:23:35 pid:1 Worker process terminated
+2020-04-08 17:23:50 pid:1 Worker process terminated
+2020-04-08 17:24:08 pid:1 think\exception\ErrorException: array_chunk() expects parameter 1 to be array, boolean given in D:\phpStudy\PHPTutorial\WWW\ht2020\application\worker\controller\Offline.php:48
+Stack trace:
+#0 [internal function]: think\Error::appError(2, 'array_chunk() e...', 'D:\\phpStudy\\PHP...', 48, Array)
+#1 D:\phpStudy\PHPTutorial\WWW\ht2020\application\worker\controller\Offline.php(48): array_chunk(false, 500)
+#2 D:\phpStudy\PHPTutorial\WWW\ht2020\application\worker\controller\Offline.php(25): app\worker\controller\Offline->saveErpDomain()
+#3 D:\phpStudy\PHPTutorial\WWW\ht2020\vendor\workerman\workerman\Worker.php(2393): app\worker\controller\Offline->onWorkerStart(Object(Workerman\Worker))
+#4 D:\phpStudy\PHPTutorial\WWW\ht2020\vendor\workerman\workerman\Worker.php(1404): Workerman\Worker->run()
+#5 D:\phpStudy\PHPTutorial\WWW\ht2020\vendor\workerman\workerman\Worker.php(1347): Workerman\Worker::forkWorkersForWindows()
+#6 D:\phpStudy\PHPTutorial\WWW\ht2020\vendor\workerman\workerman\Worker.php(546): Workerman\Worker::forkWorkers()
+#7 D:\phpStudy\PHPTutorial\WWW\ht2020\vendor\topthink\think-worker\src\Server.php(48): Workerman\Worker::runAll()
+#8 [internal function]: think\worker\Server->__construct()
+#9 D:\phpStudy\PHPTutorial\WWW\ht2020\thinkphp\library\think\App.php(359): ReflectionClass->newInstanceArgs(Array)
+#10 D:\phpStudy\PHPTutorial\WWW\ht2020\thinkphp\library\think\Loader.php(479): think\App::invokeClass('app\\worker\\cont...')
+#11 D:\phpStudy\PHPTutorial\WWW\ht2020\thinkphp\library\think\App.php(575): think\Loader::controller('offline', 'controller', false, 'Error')
+#12 D:\phpStudy\PHPTutorial\WWW\ht2020\thinkphp\library\think\App.php(456): think\App::module(Array, Array, true)
+#13 D:\phpStudy\PHPTutorial\WWW\ht2020\thinkphp\library\think\App.php(139): think\App::exec(Array, Array)
+#14 D:\phpStudy\PHPTutorial\WWW\ht2020\thinkphp\start.php(19): think\App::run()
+#15 D:\phpStudy\PHPTutorial\WWW\ht2020\public\service.php(32): require('D:\\phpStudy\\PHP...')
+#16 {main}
+2020-04-08 17:24:51 pid:1 think\exception\ErrorException: array_chunk() expects parameter 1 to be array, boolean given in D:\phpStudy\PHPTutorial\WWW\ht2020\application\worker\controller\Offline.php:48
+Stack trace:
+#0 [internal function]: think\Error::appError(2, 'array_chunk() e...', 'D:\\phpStudy\\PHP...', 48, Array)
+#1 D:\phpStudy\PHPTutorial\WWW\ht2020\application\worker\controller\Offline.php(48): array_chunk(false, 500)
+#2 D:\phpStudy\PHPTutorial\WWW\ht2020\application\worker\controller\Offline.php(25): app\worker\controller\Offline->saveErpDomain()
+#3 D:\phpStudy\PHPTutorial\WWW\ht2020\vendor\workerman\workerman\Worker.php(2393): app\worker\controller\Offline->onWorkerStart(Object(Workerman\Worker))
+#4 D:\phpStudy\PHPTutorial\WWW\ht2020\vendor\workerman\workerman\Worker.php(1404): Workerman\Worker->run()
+#5 D:\phpStudy\PHPTutorial\WWW\ht2020\vendor\workerman\workerman\Worker.php(1347): Workerman\Worker::forkWorkersForWindows()
+#6 D:\phpStudy\PHPTutorial\WWW\ht2020\vendor\workerman\workerman\Worker.php(546): Workerman\Worker::forkWorkers()
+#7 D:\phpStudy\PHPTutorial\WWW\ht2020\vendor\topthink\think-worker\src\Server.php(48): Workerman\Worker::runAll()
+#8 [internal function]: think\worker\Server->__construct()
+#9 D:\phpStudy\PHPTutorial\WWW\ht2020\thinkphp\library\think\App.php(359): ReflectionClass->newInstanceArgs(Array)
+#10 D:\phpStudy\PHPTutorial\WWW\ht2020\thinkphp\library\think\Loader.php(479): think\App::invokeClass('app\\worker\\cont...')
+#11 D:\phpStudy\PHPTutorial\WWW\ht2020\thinkphp\library\think\App.php(575): think\Loader::controller('offline', 'controller', false, 'Error')
+#12 D:\phpStudy\PHPTutorial\WWW\ht2020\thinkphp\library\think\App.php(456): think\App::module(Array, Array, true)
+#13 D:\phpStudy\PHPTutorial\WWW\ht2020\thinkphp\library\think\App.php(139): think\App::exec(Array, Array)
+#14 D:\phpStudy\PHPTutorial\WWW\ht2020\thinkphp\start.php(19): think\App::run()
+#15 D:\phpStudy\PHPTutorial\WWW\ht2020\public\service.php(32): require('D:\\phpStudy\\PHP...')
+#16 {main}
+2020-04-08 17:25:06 pid:1 Worker process terminated
+2020-04-08 17:29:34 pid:1 Worker process terminated
+2020-04-08 17:34:41 pid:1 Worker process terminated
+2020-04-08 17:34:57 pid:1 Worker process terminated
+2020-04-08 17:35:14 pid:1 Worker process terminated
+2020-04-08 17:35:33 pid:1 Worker process terminated
+2020-04-08 17:36:07 pid:1 Worker process terminated
+2020-04-08 17:36:28 pid:1 Worker process terminated
+2020-04-08 17:36:56 pid:1 Worker process terminated
+2020-04-08 17:37:43 pid:1 Worker process terminated
+2020-04-08 17:37:55 pid:1 Worker process terminated
+2020-04-10 14:06:07 pid:1 Worker process terminated
+2020-04-10 14:14:14 pid:1 Worker process terminated
+2020-04-10 14:15:21 pid:1 Worker process terminated
+2020-04-10 14:15:41 pid:1 Worker process terminated
+2020-04-10 14:15:54 pid:1 Worker process terminated
+2020-04-10 14:16:13 pid:1 Worker process terminated
+2020-04-10 15:13:49 pid:1 Worker process terminated
+2020-04-10 15:15:41 pid:1 Worker process terminated
+2020-04-15 09:16:29 pid:1 Worker process terminated
+2020-04-15 09:20:27 pid:1 Worker process terminated
+2020-04-15 09:20:31 pid:1 Worker process terminated
+2020-04-15 09:28:19 pid:1 Worker process terminated
+2020-04-15 09:28:38 pid:1 Worker process terminated
+2020-04-15 09:29:20 pid:1 Error: Class 'app\worker\controller\Http' not found in D:\phpStudy\PHPTutorial\WWW\ht2020\application\worker\controller\Offline.php:46
+Stack trace:
+#0 D:\phpStudy\PHPTutorial\WWW\ht2020\application\worker\controller\Offline.php(27): app\worker\controller\Offline->saveErpDomain()
+#1 D:\phpStudy\PHPTutorial\WWW\ht2020\vendor\workerman\workerman\Worker.php(2393): app\worker\controller\Offline->onWorkerStart(Object(Workerman\Worker))
+#2 D:\phpStudy\PHPTutorial\WWW\ht2020\vendor\workerman\workerman\Worker.php(1404): Workerman\Worker->run()
+#3 D:\phpStudy\PHPTutorial\WWW\ht2020\vendor\workerman\workerman\Worker.php(1347): Workerman\Worker::forkWorkersForWindows()
+#4 D:\phpStudy\PHPTutorial\WWW\ht2020\vendor\workerman\workerman\Worker.php(546): Workerman\Worker::forkWorkers()
+#5 D:\phpStudy\PHPTutorial\WWW\ht2020\vendor\topthink\think-worker\src\Server.php(48): Workerman\Worker::runAll()
+#6 [internal function]: think\worker\Server->__construct()
+#7 D:\phpStudy\PHPTutorial\WWW\ht2020\thinkphp\library\think\App.php(359): ReflectionClass->newInstanceArgs(Array)
+#8 D:\phpStudy\PHPTutorial\WWW\ht2020\thinkphp\library\think\Loader.php(479): think\App::invokeClass('app\\worker\\cont...')
+#9 D:\phpStudy\PHPTutorial\WWW\ht2020\thinkphp\library\think\App.php(575): think\Loader::controller('offline', 'controller', false, 'Error')
+#10 D:\phpStudy\PHPTutorial\WWW\ht2020\thinkphp\library\think\App.php(456): think\App::module(Array, Array, true)
+#11 D:\phpStudy\PHPTutorial\WWW\ht2020\thinkphp\library\think\App.php(139): think\App::exec(Array, Array)
+#12 D:\phpStudy\PHPTutorial\WWW\ht2020\thinkphp\start.php(19): think\App::run()
+#13 D:\phpStudy\PHPTutorial\WWW\ht2020\public\service.php(32): require('D:\\phpStudy\\PHP...')
+#14 {main}
+2020-04-15 09:29:21 pid:1 Worker process terminated
+2020-07-22 17:31:35 pid:1 Worker process terminated
+2020-08-11 15:55:33 pid:1 Worker process terminated
+2020-08-21 16:40:56 pid:1 Worker process terminated
+2021-01-13 12:19:46 pid:1 Worker process terminated
+2021-02-01 14:04:43 pid:1 Worker process terminated
+2021-02-01 14:08:05 pid:1 Worker process terminated
+2021-02-01 14:18:46 pid:1 Worker process terminated

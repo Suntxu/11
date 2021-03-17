@@ -1,0 +1,151 @@
+<div class="panel panel-default panel-intro">
+    <div class="panel-body">
+        <div id="myTabContent" class="tab-content">
+            <div class="" id="add">
+                <div class="widget-body no-padding">
+                    <form id="add-form" class="edit-form form-horizontal" role="form" data-toggle="validator" method="POST" action="">
+                        <table class="table table-striped">
+                            <thead>
+                              
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td align="center">
+                                        <div class="row" style="margin-left: 3%;">
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-3 col-sm-2"><span style="color: red;">*</span>后缀</label>
+                                                <div class="col-xs-6 col-sm-8">
+                                                    <select class="form-control" onchange="getZcs(this)" name="row[name]">
+                                                        <option value="">请选择</option>
+                                                        {foreach $suffix as $v}
+                                                        <option value="{$v}">{$v}</option>
+                                                        {/foreach}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-3 col-sm-2">注册原始价格<span style="color: red;">*</span></label>
+                                                <div class="col-xs-6 col-sm-8">
+                                                    <input type="number" class="form-control"  id="value3" name="row[ysje]"  />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value35" class="control-label col-xs-3 col-sm-2">享受优惠数量1：</label>
+                                                <div class="col-xs-3 col-sm-2">
+                                                    <input type="number" class="form-control" id="value35" name="row[num]" />
+                                                </div>
+                                                <div class="col-xs-3 col-sm-6">
+                                                    <input type="number" class="form-control" id="value4" name="row[money]" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value35" class="control-label col-xs-3 col-sm-2">享受优惠数量2：</label>
+                                                <div class="col-xs-3 col-sm-2">
+                                                    <input type="number" class="form-control" id="value35" name="row[num1]" />
+                                                </div>
+                                                <div class="col-xs-3 col-sm-6">
+                                                    <input type="number" class="form-control" id="value4" name="row[money1]" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value35" class="control-label col-xs-3 col-sm-2">享受优惠数量3：</label>
+                                                <div class="col-xs-3 col-sm-2">
+                                                    <input type="number" class="form-control" id="value35" name="row[num2]" />
+                                                </div>
+                                                <div class="col-xs-3 col-sm-6">
+                                                    <input type="number" class="form-control" id="value4" name="row[money2]" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-3 col-sm-2">开始时间</label>
+                                                <div class="col-xs-6 col-sm-8">
+                                                    <input type="text" class="form-control datetimepicker" data-date-format="Y-MM-DD HH:mm:ss" id="value5" name="row[yhsj1]" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-3 col-sm-2">结束时间</label>
+                                                <div class="col-xs-6 col-sm-8">
+                                                    <input type="text" class="form-control datetimepicker" data-date-format="Y-MM-DD HH:mm:ss" id="value5" name="row[yhsj2]" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value35" class="control-label col-xs-3 col-sm-2">优惠总数量<span style="color: red;">(为0不限数量)</span>：</label>
+                                                <div class="col-xs-6 col-sm-8">
+                                                    <input type="number" class="form-control" id="discounts" value="" name="row[discounts]" placeholder="0表示不限制数量"  />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="regbrokerage" class="control-label col-xs-3 col-sm-2">注册域名返佣百分比</label>
+                                                <div class="col-xs-6 col-sm-8">
+                                                    <input type="text" class="form-control" placeholder="默认带%,默认2位小数！" id="regbrokerage" name="row[regbrokerage]"  />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-3 col-sm-2">成本价</label>
+                                                <div class="col-xs-6 col-sm-8">
+                                                    <input type="number" class="form-control" id="value4" name="row[cost]"/>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-3 col-sm-2">注册商<span style="color: red;">*</span></label>
+                                                <div class="col-xs-6 col-sm-8">
+                                                    <select class="form-control" name="row[zcs]" id="zcs" onchange="getApi(this)">
+                                                        <option value="">请先选择后缀</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group" id="api">
+                                                <label for="value" class="control-label col-xs-3 col-sm-2">接口商<span style="color: red;">*</span></label>
+                                                <div class="col-xs-6 col-sm-8">
+                                                    <select class="form-control" id="ref" name="row[aid]">
+                                                        <option value="">请选择</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">排序</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="number" class="form-control" id="value2" value="0" name="row[xh]" data-tip="序号越大，越靠前" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-xs-3 col-sm-2">设置默认注册商</label>
+                                                <div class="col-xs-12 col-sm-6">
+                                                    <div class="radio" style="float:left;">
+                                                        <label for="detu1"><input id="detu1" checked name="row[defu]"  type="radio" value="0">否</label>
+                                                        <label for="detu2"><input id="detu2" name="row[defu]"  type="radio" value="1">是</label>
+                                                    </div>
+                                                    <span style="color: red;font-size: 12px;display: inline-block;margin-top:8px;float: left;">每个后缀只能设置一个默认注册商</span>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="control-label col-xs-3 col-sm-2">状态变更</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <div class="radio" style="float:left;">
+                                                        <label for="zt1"><input id="zt1"  checked name="row[zt]"  type="radio" value="1">开启</label> 
+                                                        <label for="zt2"><input id="zt2"  name="row[zt]" type="radio" value="2">关闭</label> 
+                                                    </div> 
+                                                </div>
+                                            </div>
+                                          
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td align="center">
+                                        <button type="submit" class="btn btn-success btn-embossed">{:__('OK')}</button>
+                                        <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

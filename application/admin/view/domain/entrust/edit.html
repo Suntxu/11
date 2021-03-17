@@ -1,0 +1,159 @@
+    <style type="text/css">
+    @media (max-width: 375px) {
+        .edit-form tr td input{width:100%;}
+        .edit-form tr th:first-child,.edit-form tr td:first-child{
+            width:20%;
+        }
+        .edit-form tr th:last-child,.edit-form tr td:last-child{
+            display: none;
+        }
+    }
+    .profile-avatar-container {
+        position:relative;
+        width:100px;margin:0 1%;
+    }
+    .profile-avatar-container .profile-user-img{
+        width:100px;
+        height:100px;
+    }
+    .profile-avatar-container .profile-avatar-text {
+        display:none;
+    }
+    .profile-avatar-container:hover .profile-avatar-text {
+        display:block;
+        position:absolute;
+        height:100px;
+        width:100px;
+        background:#444;
+        opacity: .6;
+        color: #fff;
+        top:0;
+        left:0;
+        line-height: 100px;
+        text-align: center;
+    }
+    .profile-avatar-container button{
+        position:absolute;
+        top:0;left:0;width:100px;height:100px;opacity: 0;
+    }
+    .sf:hover{
+        color: orange;
+    }
+    #f1:hover{
+        color: #0073EA;
+    }
+    #ylsz .form-control{
+        width:70%;
+    }
+</style>
+<div class="panel panel-default panel-intro">
+    <div class="panel-body">
+        <div id="myTabContent" class="tab-content">
+            <div class="" id="add">
+                <div class="widget-body no-padding">
+                    <form id="add-form" class="edit-form form-horizontal" role="form" data-toggle="validator" method="POST" action="">
+                        <table class="table table-striped">
+                            <thead>
+                              
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="row">
+                                            <h3>域名委托审核</h3>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">域名简介</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control"  style="cursor:text;" disabled="" value="{$data.tit}" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">用户</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control" style="cursor:text;"  disabled="" value="{$data.uid}" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">报价金额</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control" style="cursor:text;" disabled="" value="{$data.money}" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">域名描述</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <textarea class="form-control" style="height: 120px;cursor:text;"  disabled="" >{$data.txt}</textarea>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">提交时间</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control" disabled="" value="{$data.create_time|date='Y-m-d H:i:s',###}" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">当前状态</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <strong>{$data['zt']}</strong>
+                                                </div>
+                                            </div>
+                                            {if $data['status'] != 2 && $data['status'] != 3 }
+                                            <input type="hidden" name="row[id]" value="{$data['id']}" >
+                                            <div class="form-group">
+                                                <label class="control-label col-xs-12 col-sm-2">操作</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <div class="radio">
+                                                        {if $data.status == '0'}
+                                                            <label for="ifkf1"><input id="ifkf1"  name="row[status]" type="radio"  value="1" onclick="hiddenYs('remark',this,3)" >受理</label> 
+                                                        {else}
+                                                            <label for="ifkf2"><input id="ifkf2"  name="row[status]" type="radio"  value="2" onclick="hiddenYs('remark',this,3)" >成功</label>
+                                                        {/if}
+                                                        <label for="ifkf10"><input id="ifkf10"  name="row[status]" type="radio"  value="3" onclick="hiddenYs('remark',this,3)" >失败</label> 
+                                                    </div> 
+                                                </div>
+                                            </div>
+                                            <div class="form-group" id="remark" style="display: none">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">失败原因</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control" id="remark1" name="row[remark]"  />
+                                                </div>
+                                            </div>
+                                            {elseif $data.status == 2}
+                                            <div class="form-group" id="remark">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">失败原因</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control" id="remark1" disabled=""   value="{$data['remark']}" />
+                                                </div>
+                                            </div>
+
+                                            {/if}
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    {if $data['status'] != 2 && $data['status'] != 3 }
+                                    <td align="center">
+                                        <button type="submit" class="btn btn-success btn-embossed">{:__('OK')}</button>
+                                        <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+                                    </td>
+                                    {else}
+                                    <div class="hide layer-footer">
+                                        <label class="control-label col-xs-12 col-sm-2"></label>
+                                        <div class="col-xs-12 col-sm-8">
+                                            <button type="reset" class="btn btn-primary btn-embossed btn-close" onclick="Layer.closeAll();">{:__('Close')}</button>
+                                        </div>
+                                    </div>
+                                    {/if}
+
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </form>
+                </div>
+            </div>
+ 
+        
+

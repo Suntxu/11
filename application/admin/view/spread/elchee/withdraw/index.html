@@ -1,0 +1,34 @@
+﻿<div class="panel panel-default panel-intro">
+    {:build_heading()}
+
+    <div class="panel-body">
+        <div id="myTabContent" class="tab-content">
+            <div class="tab-pane fade active in" id="one">
+                <div class="widget-body no-padding">
+                    <div id="toolbar" class="toolbar">
+                        {:build_toolbar('refresh')}
+                        <a href="javascript:;" class="btn btn-success selectl" id="seek0">今天</a>
+                        <a href="javascript:;" class="btn btn-danger selectl" id="seek1">昨天</a>
+                        <a href="javascript:;" class="btn btn-danger selectl" id="seek2">最近7天</a>
+                        <a href="javascript:;" class="btn btn-danger selectl" id="seek3">最近30天</a>
+                        <a href="javascript:;" class="btn btn-danger selectl" id="seek4">本月</a>
+                        <a href="javascript:;" class="btn btn-danger selectl" id="seek5">上月</a>
+                        <a href="javascript:;" class="btn btn-danger selectl" id="seek6">全部</a>
+                        <div class="dropdown btn-group {:$auth->check('spread/elchee/withdraw/multi')?'':'hide'}">
+                            <ul class="dropdown-menu text-left" role="menu">
+                                <li><a class="btn btn-link btn-multi btn-disabled disabled" href="javascript:;" data-params="status=normal"><i class="fa fa-eye"></i> {:__('Set to normal')}</a></li>
+                                <li><a class="btn btn-link btn-multi btn-disabled disabled" href="javascript:;" data-params="status=hidden"><i class="fa fa-eye-slash"></i> {:__('Set to hidden')}</a></li>
+                            </ul>
+                        </div>
+                        <input type="hidden" name="id" id="id" value="{$id}">
+                        <input type="hidden" name="status" id="status" value="{$status}">
+                    </div>
+                    <table id="table" class="table table-striped table-bordered table-hover"
+                           data-operate-edit="{:$auth->check('spread/elchee/withdraw/edit')}"
+                           data-operate-del="{:$auth->check('spread/elchee/withdraw/del')}"
+                           width="100%"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

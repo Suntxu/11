@@ -1,0 +1,12 @@
+<div id="header">
+    <a id="logo" href="{if $config['openindex']&&$config['redirectindex']}__HOMEURL__{else /}__INDEXURL__{/if}">
+        {if $config['logo']}
+        <img src="__CDN__{$config.logo}">
+        {else /}
+        <span>{$config.sitename}</span>
+        {/if}
+    </a>
+    <ul id="nav">
+        {include file="common/menu"}
+    </ul>
+</div>

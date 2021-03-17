@@ -1,0 +1,163 @@
+<style type="text/css">
+    @media (max-width: 375px) {
+        .edit-form tr td input{width:100%;}
+        .edit-form tr th:first-child,.edit-form tr td:first-child{
+            width:20%;
+        }
+        .edit-form tr th:last-child,.edit-form tr td:last-child{
+            display: none;
+        }
+    }
+    .sf:hover{
+        color: orange;
+    }
+    #f1:hover{
+        color: #0073EA;
+    }
+    
+    /* #ylsz .form-control{
+         width:70%;
+     }*/
+    .row{
+        margin-left: -5px;
+        margin-right: -15px;
+    }
+    .profile-avatar-container {
+        position:relative;
+        width:100px;margin:0 1%;
+    }
+    .profile-avatar-container .profile-user-img{
+        width:100px;
+        height:100px;
+    }
+    .profile-avatar-container .profile-avatar-text {
+        display:none;
+    }
+    .profile-avatar-container:hover .profile-avatar-text {
+        display:block;
+        position:absolute;
+        height:100px;
+        width:100px;
+        background:#444;
+        opacity: .6;
+        color: #fff;
+        top:0;
+        left:0;
+        line-height: 100px;
+        text-align: center;
+    }
+    .profile-avatar-container button{
+        position:absolute;
+        top:0;left:0;width:100px;height:100px;opacity: 0;
+    }
+</style>
+
+
+<form id="ylsz-form" class="edit-form form-horizontal" role="form" data-toggle="validator" method="POST" action="{:url('/admin/vipmanage/realaudit/maralname')}">
+    <table class="table table-striped">
+        <thead>
+        </thead>
+        <tbody>
+        <tr>
+            <td>
+                <div class="row">
+                    <div>
+                        <h3>手动添加实名</h3>
+                        <div style="color: red;float: right;margin-top: -26px;margin-right: 145px;font-weight: 700;">手动实名仅用于用户端无法实名的时候,信息填写前请自行核对身份信息的真实性！</div>
+                    </div>
+                    
+                    <br>
+                    <div class="form-group">
+                        <label for="value" class="control-label col-xs-12 col-sm-2">用户</label>
+                        <div class="col-xs-12 col-sm-8">
+                            <input type="text" class="form-control" name="row[uid]" value="" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="value" class="control-label col-sm-2">姓</label>
+                        <div class="col-xs-12 col-sm-2">
+                            <input type="text" class="form-control" id="value"  name="row[xing]" value="" />
+                        </div>
+                        <label for="value" class="control-label  col-sm-2">名</label>
+                        <div class="col-xs-12 col-sm-2">
+                            <input type="text" class="form-control" id="value" name="row[ming]" value="" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="value" class="control-label col-xs-12 col-sm-2">地址</label>
+                        <div class="col-xs-12 col-sm-8">
+                            <input type="text" class="form-control" name="row[address]" value="" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="value" class="control-label col-xs-12 col-sm-2">身份证号</label>
+                        <div class="col-xs-12 col-sm-8">
+                            <input type="text" class="form-control" id="value1" name="row[renzhengno]" value="" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="c-flash" class="control-label col-xs-12 col-sm-2">身份证正面照</label>
+                        <div class="col-xs-12 col-sm-8">
+                            <div class="input-group">
+                                <input id="c-flash" class="form-control" size="50" readonly=""  name="row[image1]" type="text" value="">
+                                <div class="input-group-addon no-border no-padding">
+                                    <span><button type="button" id="plupload-flash"  data-url="ajax/uploadUser?flag=real" class="btn btn-danger plupload" readonly="" data-input-id="c-flash" data-mimetype="image/jpeg" data-maxsize="1M"  oss-real="true" data-multiple="false" data-preview-id="p-flash"><i class="fa fa-upload"></i> {:__('Upload')}</button></span>
+                                </div>
+                                <span class="msg-box n-right"></span>
+                            </div>
+                            <div style="color: red;font-size: 12px;">必须上传大小55KB-1M之间的jpeg类型的图片,且证件信息必须与本页显示的信息一致！</div>
+                            <ul class="row list-inline plupload-preview" data-oss="real" id="p-flash"></ul>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="value" class="control-label col-xs-12 col-sm-2">认证类型</label>
+                        <div class="col-xs-12 col-sm-8">
+                            <div class="radio">
+                                <label for="sfzrz2"><input id="sfzrz2" class="meral" name="row[renzheng]" checked type="radio" value="0">个人</label>
+                                <label for="sfzrz3"><input id="sfzrz3" class="meral"  name="row[renzheng]" type="radio" value="1">企业</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="firm" style="display: none;">
+                        <div class="form-group">
+                            <label for="value" class="control-label col-xs-12 col-sm-2">公司名称</label>
+                            <div class="col-xs-12 col-sm-8">
+                                <input type="text" class="form-control"   name="row[busname]"  value="" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="value" class="control-label col-xs-12 col-sm-2">营业执照号码</label>
+                            <div class="col-xs-12 col-sm-8">
+                                <input type="text" class="form-control"  value="" name="row[buslicence]" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="c-flash" class="control-label col-xs-12 col-sm-2">营业执照图片</label>
+                            <div class="col-xs-12 col-sm-8">
+                                <div class="input-group">
+                                    <input id="c-flash1" class="form-control" size="50" readonly=""  name="row[image2]" type="text" value="">
+                                    <div class="input-group-addon no-border no-padding">
+                                        <span><button type="button" id="plupload-flash1" data-url="ajax/uploadUser?flag=real" class="btn btn-danger plupload" readonly="" data-input-id="c-flash1"  data-multiple="false" data-preview-id="p-flash1"><i class="fa fa-upload"></i> {:__('Upload')}</button></span>
+                                    </div>
+                                    <span class="msg-box n-right"></span>
+                                </div>
+                                <div style="color: red;font-size: 12px;">必须上传大小55KB-1M之间的jpeg类型的图片,且证件信息必须与本页显示的信息一致！</div>
+                                <ul class="row list-inline plupload-preview" data-oss="real" id="p-flash1"></ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+            <td align="center">
+                <button  type="submit" class="btn btn-success btn-embossed">{:__('OK')}</button>
+                <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+            </td>
+        </tr>
+        </tfoot>
+    </table>
+</form>

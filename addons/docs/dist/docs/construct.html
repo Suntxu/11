@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>目录结构 - FastAdmin</title>
+        <meta charset="utf-8">
+        <meta name="keywords" content="">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta property="og:type" content="article">
+        <meta property="og:title" content="目录结构 - FastAdmin">
+        <meta property="og:description" content="">
+        <!--<meta property="og:image" content="../assets/images/logo.png">-->
+
+        <!--<link rel="icon" href="../assets/images/logo.png" type="image/x-icon">-->
+
+        <!-- <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Roboto Mono" rel="stylesheet" type="text/css"> -->
+        <link href="../assets/css/highlight.min.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/search.css" rel="stylesheet" type="text/css">
+
+        <!-- main page styles -->
+        <link rel="stylesheet" href="../assets/css/page.css">
+
+        
+        <script>window.PAGE_TYPE = "docs"</script>
+        <script>window.SEARCH_URL = "../assets/js/docs.json"</script>
+        <script>window.DOCS_MODE = "html"</script>
+    </head>
+    <body class="docs">
+
+        <div id="mobile-bar" >
+            <a class="menu-button"></a>
+            <a class="logo" href="../docs/index.html">
+                                <span>FastAdmin</span>
+                            </a>
+        </div>
+
+        <div id="header">
+    <a id="logo" href="../docs/index.html">
+                <span>FastAdmin</span>
+            </a>
+    <ul id="nav">
+        <li>
+    <form id="search-form">
+        <input type="text" id="search-query-" class="search-query local-search-input st-default-search-input">
+    </form>
+    <div class="local-search-result"></div>
+</li>
+<li><a href="http://www.fastadmin.net" class="">首页</a></li>
+<li><a href="http://doc.fastadmin.net" class="">文档</a></li>
+<li><a href="http://forum.fastadmin.net" class="">论坛</a></li>
+<li><a href="https://git.oschina.net/karson/fastadmin" class="">下载</a></li>
+<li><a href="http://demo.fastadmin.net" class="">在线演示</a></li>
+    </ul>
+</div>
+
+
+                <div id="main" class="fix-sidebar">
+            <div class="sidebar">
+    <ul class="main-menu">
+        <li>
+    <form id="search-form">
+        <input type="text" id="search-query-" class="search-query local-search-input st-default-search-input">
+    </form>
+    <div class="local-search-result"></div>
+</li>
+<li><a href="http://www.fastadmin.net" class="">首页</a></li>
+<li><a href="http://doc.fastadmin.net" class="">文档</a></li>
+<li><a href="http://forum.fastadmin.net" class="">论坛</a></li>
+<li><a href="https://git.oschina.net/karson/fastadmin" class="">下载</a></li>
+<li><a href="http://demo.fastadmin.net" class="">在线演示</a></li>
+    </ul>
+    <div class="list">
+        <h2>
+            文档        </h2>
+        <ul class="menu-root">
+
+                        <li>
+                <a href="index.html" class="sidebar-link">介绍</a>
+            </li>
+                        <li>
+                <a href="index.html" class="sidebar-link">介绍</a>
+            </li>
+                        <li>
+                <a href="install.html" class="sidebar-link">安装</a>
+            </li>
+                        <li>
+                <a href="install.html" class="sidebar-link">安装</a>
+            </li>
+                        <li>
+                <a href="command.html" class="sidebar-link">命令行</a>
+            </li>
+                        <li>
+                <a href="command.html" class="sidebar-link">命令行</a>
+            </li>
+                        <li>
+                <a href="construct.html" class="sidebar-link current">目录结构</a>
+            </li>
+                        <li>
+                <a href="construct.html" class="sidebar-link current">目录结构</a>
+            </li>
+                        <li>
+                <a href="language.html" class="sidebar-link">多语言</a>
+            </li>
+                        <li>
+                <a href="language.html" class="sidebar-link">多语言</a>
+            </li>
+                        <li>
+                <a href="database.html" class="sidebar-link">数据库</a>
+            </li>
+                        <li>
+                <a href="database.html" class="sidebar-link">数据库</a>
+            </li>
+                        <li>
+                <a href="module.html" class="sidebar-link">模块</a>
+            </li>
+                        <li>
+                <a href="module.html" class="sidebar-link">模块</a>
+            </li>
+                        <li>
+                <a href="component.html" class="sidebar-link">组件</a>
+            </li>
+                        <li>
+                <a href="component.html" class="sidebar-link">组件</a>
+            </li>
+                        <li>
+                <a href="faq.html" class="sidebar-link">常见问题</a>
+            </li>
+                        <li>
+                <a href="faq.html" class="sidebar-link">常见问题</a>
+            </li>
+                        <li>
+                <a href="contributing.html" class="sidebar-link">贡献代码</a>
+            </li>
+                        <li>
+                <a href="contributing.html" class="sidebar-link">贡献代码</a>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+<div class="content docs with-sidebar">
+        <h1>目录结构</h1>
+    
+    <p>FastAdmin目录结构如下：</p><pre><code class="javascript">FastAdmin项目目录
+├── application
+│   ├── admin
+│   │   ├── command            //控制台命令
+│   │   ├── controller
+│   │   ├── lang
+│   │   │   ├── zh-cn            //控制器对应语言包,按需加载
+│   │   │   │   ├── general        
+│   │   │   │   ├── index.php
+│   │   │   │   └── page.php
+│   │   │   └── zh-cn.php        //后台语言包,默认加载
+│   │   ├── library
+│   │   │   ├── Auth.php        //后台权限验证类
+│   │   │   └── traits
+│   │   │       └── Backend.php         //后台控制器的Traits
+│   │   ├── model
+│   │   ├── view
+│   │   ├── common.php
+│   │   └── config.php
+│   ├── api
+│   │   ├── controller
+│   │   ├── model
+│   │   ├── view
+│   │   ├── common.php
+│   │   └── config.php
+│   ├── common
+│   │   ├── controller
+│   │   │   ├── Api.php            //Api基类
+│   │   │   ├── Backend.php        //后台基类
+│   │   │   ├── Frontend.php            //前台基类
+│   │   │   └── Uc.php            //Ucenter基类
+│   │   ├── library
+│   │   │   ├── Auth.php        //前台权限验证类
+│   │   │   └── Token.php        //前台Token类
+│   │   ├── model
+│   │   └── view
+│   ├── extra
+│   │   ├── payment.php            //支付配置
+│   │   ├── service.php            //第三方服务配置
+│   │   ├── site.php            //站点配置
+│   │   ├── third.php            //第三方登录配置
+│   │   ├── upload.php            //上传配置
+│   │   └── wechat.php            //微信配置
+│   ├── index
+│   │   ├── controller
+│   │   ├── lang
+│   │   ├── model
+│   │   └── view
+│   ├── build.php
+│   ├── command.php
+│   ├── common.php
+│   ├── config.php
+│   ├── constants.php
+│   ├── database.php
+│   ├── route.php
+│   ├── tags.php
+│   └── uc.php                //UC常量
+├── extend
+│   └── fast
+│       ├── payment            //微信支付宝类
+│       ├── service            //第三方服务扩展
+│       ├── third            //第三方登录类
+│       ├── ucenter            //Ucenter文件夹
+│       ├── Auth.php            //Auth权限验证类
+│       ├── Date.php            //日期类
+│       ├── Form.php            //表单元素生成类
+│       ├── Http.php            //Http请求类
+│       ├── Menu.php            //后台菜单生成类
+│       ├── Pinyin.php            //中文转拼音转换类
+│       ├── Random.php            //随机数生成类
+│       ├── Rsa.php            //Rsa验证类
+│       └── Tree.php            //Tree类
+├── public
+│   ├── assets
+│   │   ├── build            //打包JS、CSS的资源目录
+│   │   ├── css                //CSS样式目录
+│   │   ├── fonts            //字体目录
+│   │   ├── img
+│   │   ├── js
+│   │   │   ├── backend
+│   │   │   └── frontend
+│   │   ├── libs            //Bower资源包位置
+│   │   └── less            //Less资源目录
+│   └── uploads                //上传文件目录
+│   ├── index.php                       //应用入口主文件
+│   ├── install.php                     //FastAdmin安装引导
+│   ├── admin.php                       //后台入口文件,强烈建议修改
+│   ├── robots.txt
+│   └── router.php
+├── runtime                        
+├── thinkphp                //ThinkPHP5框架核心目录
+├── vendor                //Compposer资源包位置
+├── .bowerrc                //Bower目录配置文件
+├── LICENSE
+├── README.md
+├── bower.json                //Bower前端包配置
+├── build.php                    
+├── composer.json            //Composer包配置
+└── think</code></pre>    <div class="docs-links">
+
+                <span>← <a href="construct.html">目录结构</a></span>
+                <span style="float:right"><a href="language.html">多语言</a> →</span>
+            </div>
+        
+    <div class="footer">
+                发现错误？想参与编辑？        <a href="https://github.com/karsonzhang/fastadmin-doc/blob/master/fastadmin-doc-master/construct.md" target="_blank">
+            在 Github 上编辑此页！        </a>
+            </div>
+    
+</div>
+
+        </div>
+        <script src="../assets/js/smooth-scroll.min.js"></script>
+        
+        <script src="../assets/js/jquery.min.js"></script>
+        <script src="../assets/js/highlight.min.js"></script>
+        <script src="../assets/js/common.js"></script>
+        <script src="../assets/js/search.js"></script>
+        <script src="../assets/js/fastclick.min.js"></script>
+
+        <script type="text/javascript">
+            document.addEventListener('DOMContentLoaded', function () {
+                FastClick.attach(document.body);
+            }, false);
+        </script>
+
+            </body>
+</html>

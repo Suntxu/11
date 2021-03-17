@@ -1,0 +1,11 @@
+{if $config['opensearch']}
+<li>
+    <form id="search-form">
+        <input type="text" id="search-query-{$keywords??''}" class="search-query local-search-input st-default-search-input">
+    </form>
+    <div class="local-search-result"></div>
+</li>
+{/if}
+{foreach name="config['menu']" item="vo"}
+<li><a href="{$vo}" class="">{$key}</a></li>
+{/foreach}

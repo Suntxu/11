@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>怀米网 - 为您打造优质的域名服务</title>
+
+        <!-- Bootstrap Core CSS -->
+        <!-- <link href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"> -->
+        <link rel="stylesheet" type="text/css" href="__CDN__/assets/css/bootstrap.min.css">
+        <link href="/assets/css/index.css" rel="stylesheet">
+        <!-- Plugin CSS -->
+        <link href="/assets/css/font-awesome.min.css" rel="stylesheet">
+        <link href="/assets/css/simple-line-icons.min.css" rel="stylesheet">
+    </head>
+
+    <body id="page-top">
+        <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-menu">
+                        <span class="sr-only">Toggle navigation</span><i class="fa fa-bars"></i>
+                    </button>
+                    <a class="navbar-brand page-scroll" href="#page-top"><img src="__CDN__/assets/img/logo.png" style="width:200px;" alt=""></a>
+                </div>
+            </div>
+
+        </nav>
+
+        <header>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="header-content" style="height: 93vh;">
+                            <div class="header-content-inner">
+                                <h1>怀米网</h1>
+                                <h3>为您打造优质的域名服务</h3>
+                                <a href="{:url('admin/index/login')}" class="btn btn-warning btn-xl page-scroll">{:__('Go to Dashboard')}</a>
+                                <a href="{:url('index/user/index')}" class="btn btn-outline btn-xl page-scroll">{:__('Go to Member center')}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer style="background-color: rgba(0,0,0,0);">
+                <div class="container">
+                    <!-- FastAdmin是开源程序，建议在您的网站底部保留一个FastAdmin的链接 -->
+                    <p style="color: #f5f5f4;">Copyright &copy; 2018 <a href="http://www.huaimi.com" target="_blank">怀米网</a>版权所有 - 鲁ICP备18031210号-1</p>
+                    <ul class="list-inline">
+                        <li style="color: #ccccff;">
+                           友情链接:<a style="color: #ccccff;" href="https://www.fastadmin.net/" target="_blank">FastAdmin</a>
+                        </li>
+                    </ul>
+                </div>
+            </footer>
+    </header>
+        <!-- jQuery -->
+        <!-- <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script> -->
+        <script type="text/javascript" src="/assets/js/jquery-1.9.1.min.js"></script>
+        <!-- Bootstrap Core JavaScript -->
+        <script src="/assets/js/bootstrap.min.js"></script>
+
+        <!-- Plugin JavaScript -->
+        <script src="/assets/js/jquery.easing.min.js"></script>
+
+        <script>
+            $(function () {
+                $(window).on("scroll", function () {
+                    $("#mainNav").toggleClass("affix", $(window).height() - $(window).scrollTop() <= 50);
+                });
+
+                //发送版本统计信息
+                try {
+                    var installed = localStorage.getItem("installed");
+                    if (!installed) {
+                        $.ajax({
+                            url: "{$Think.config.fastadmin.api_url}/statistics/installed",
+                            data: {
+                                version: "{:config('fastadmin.version')}",
+                                os: "{$Think.PHP_OS}",
+                                sapi: "{$Think.PHP_SAPI}",
+                                tpversion: "{$Think.THINK_VERSION}",
+                                phpversion: "{$Think.PHP_VERSION}",
+                                software: "{$Request.server.SERVER_SOFTWARE}",
+                                url: location.href,
+                            },
+                            dataType: 'jsonp',
+                        });
+                        localStorage.setItem("installed", true);
+                    }
+                } catch (e) {
+
+                }
+
+            });
+        </script>
+
+        <script>
+            // var _hmt = _hmt || [];
+            // (function () {
+            //     var hm = document.createElement("script");
+            //     hm.src = "https://hm.baidu.com/hm.js?f8d0a8c400404989e195270b0bbf060a";
+            //     var s = document.getElementsByTagName("script")[0];
+            //     s.parentNode.insertBefore(hm, s);
+            // })();
+        </script>
+
+    </body>
+
+</html>

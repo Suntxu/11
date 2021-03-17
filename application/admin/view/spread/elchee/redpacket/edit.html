@@ -1,0 +1,123 @@
+<form id="add-form" class="form-horizontal form-ajax" role="form" data-toggle="validator" method="POST" action="">
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">标题:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="title" name="row[title]" value="{$data['title']}" data-rule="required" />
+           <!--  <select name="group[]" class="form-control selectpicker" data-rule="required" >
+                    
+            </select> -->
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="term" class="control-label col-xs-12 col-sm-2">有效期:</label>
+        <div class="col-xs-12 col-sm-8">
+            <select name="row[term]" class="form-control selectpicker" data-rule="required" >
+                 <option value="1" {if $data['term'] == 1} selected {/if}>1天</option>
+                 <option value="3" {if $data['term'] == 3} selected {/if}>3天</option>
+                 <option value="5" {if $data['term'] == 5} selected {/if}>5天</option>
+                 <option value="7" {if $data['term'] == 7} selected {/if}>7天</option>
+                 <option value="15"{if $data['term'] == 15} selected {/if}>15天</option>
+                 <option value="30"{if $data['term'] == 30} selected {/if}>30天</option>
+                 <option value="60"{if $data['term'] == 60} selected {/if}>60天</option>
+                 <option value="120"{if $data['term'] == 120} selected {/if}>120天</option>        
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="satisfy_amount" class="control-label col-xs-12 col-sm-2">满足金额(元):</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="number" class="form-control" id="satisfy_amount" name="row[satisfy_amount]" value="{$data['satisfy_amount']}" data-rule="required;number" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="rebate_amount" class="control-label col-xs-12 col-sm-2">折扣金额(元):</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="number" class="form-control" id="rebate_amount" name="row[rebate_amount]" value="{$data['rebate_amount']}" data-rule="required;number" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="use_type" class="control-label col-xs-12 col-sm-2">使用类型:</label>
+        <div class="col-xs-12 col-sm-8">
+            <select name="row[use_type]" id="use_type" class="form-control selectpicker" data-rule="required" >
+                <option value="1" {if $data['use_type'] == 1} selected {/if}>一口价</option>
+            </select>
+        </div>
+    </div>
+    <input type="hidden" name="row[id]" value="{$data['id']}">
+    <div class="form-group">
+        <label for="use_shop" class="control-label col-xs-12 col-sm-2">指定用户(已开通店铺):</label>
+        <div class="col-xs-12 col-sm-8">
+            <input placeholder="不填写为不限用户"  class="form-control" name="row[use_shop]" type="text" data-tip="不填写为不限用户" value="{$data['use_shop']}">
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <label for="type" class="control-label col-xs-12 col-sm-2">指定用户类型:</label>
+        <div class="col-xs-12 col-sm-8">
+            <select name="row[type]" class="form-control selectpicker" data-rule="required" >
+                <option value="0"{if $data['type'] == '0'} selected {/if}>所有用户</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="use_goods" class="control-label col-xs-12 col-sm-2">活动类型:</label>
+        <div class="col-xs-12 col-sm-8">
+            <select name="row[use_goods]" class="form-control selectpicker" data-rule="required" >
+                <option value="0"{if $data['use_goods'] == '0'} selected {/if}>不限</option>
+                <option value="1"{if $data['use_goods'] == '1'} selected {/if}>满减</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="status" class="control-label col-xs-12 col-sm-2">状态:</label>
+        <div class="col-xs-12 col-sm-8">
+            <select name="row[status]" class="form-control selectpicker" data-rule="required" >
+                <option value="0"{if $data['status'] == '0'} selected {/if}>下架</option>
+                <option value="1"{if $data['status'] == '1'} selected {/if}>启用</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="stime" class="control-label col-xs-12 col-sm-2">领取开始时间:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control datetimepicker" id="stime" name="row[stime]" autocomplete="off" value="{$data['stime']|date='Y-m-d H:i:s',###}" data-rule="required" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="etime" class="control-label col-xs-12 col-sm-2">领取截止时间:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control datetimepicker" id="etime" name="row[etime]" autocomplete="off" value="{$data['etime']|date='Y-m-d H:i:s',###}" data-rule="required" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="number" class="control-label col-xs-12 col-sm-2">领取限制次数:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="number" class="form-control" id="number" name="row[number]" autocomplete="off" value="{$data['number']}" data-rule="required;number" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="intime" class="control-label col-xs-12 col-sm-2">领取间隔:</label>
+        <div class="col-xs-12 col-sm-8">
+            <select name="row[intime]" class="form-control selectpicker" data-rule="required" >
+                 <option value="1"{if $data['intime'] == 1} selected {/if}>1小时</option>
+                 <option value="2"{if $data['intime'] == 2} selected {/if}>2小时</option>
+                 <option value="8"{if $data['intime'] == 8} selected {/if}>8小时</option>
+                 <option value="10"{if $data['intime'] == 10} selected {/if}>10小时</option>
+                 <option value="24"{if $data['intime'] == 24} selected {/if}>24小时</option>
+                 <option value="36"{if $data['intime'] == 36} selected {/if}>36小时</option>
+                 <option value="48"{if $data['intime'] == 48} selected {/if}>48小时</option>
+                 <option value="72"{if $data['intime'] == 72} selected {/if}>72小时</option>
+                 <option value="120"{if $data['intime'] == 120} selected {/if}>120小时</option>
+                 <option value="168"{if $data['intime'] == 168} selected {/if}>168小时</option>
+                 <option value="200"{if $data['intime'] == 200} selected {/if}>200小时</option>        
+            </select>
+        </div>
+    </div>
+    <div class="form-group hidden layer-footer">
+        <label class="control-label col-xs-12 col-sm-2"></label>
+        <div class="col-xs-12 col-sm-8">
+            <button type="submit" class="btn btn-success btn-embossed disabled">{:__('OK')}</button>
+            <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+        </div>
+    </div>
+</form>

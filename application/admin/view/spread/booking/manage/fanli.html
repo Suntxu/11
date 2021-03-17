@@ -1,0 +1,54 @@
+<form id="add-form" class="form-horizontal" role="form" data-toggle="validator" method="POST" action="">
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">编号:</label>
+        <div  class="col-xs-12 col-sm-8">
+            <input name="row[id]" type="text" disabled class='form-control' value="{$data['id']}" data-rule="required;number">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">用户名称</label>
+        <div  class="col-xs-12 col-sm-8">
+            <input name="row[uid]" type="text" disabled="" class='form-control' value="{$data['name']}" data-rule="required;number">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">团队编号</label>
+        <div  class="col-xs-12 col-sm-8">
+            <input name="row[team_no]" type="text" disabled="disabled" class='form-control' value="{$data['team_no']}" data-rule="required;number">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">活动单价:</label>
+        <div  class="col-xs-12 col-sm-8">
+            <input type="number" class="form-control"  id="unit_price" name="row[unit_price]" <?php if($data['status']  != 0 ){echo "disabled";}?> value="{$data['unit_price']}" data-rule="required;number" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">注册数量:</label>
+        <div  class="col-xs-12 col-sm-8">
+            <input type="number" class="form-control"  id="reg_num" name="row[reg_num]" <?php if($data['status']  != 0 ){echo "disabled";}?> value="{$data['reg_num']}" data-rule="required;number" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">返利金额</label>
+        <div  class="col-xs-12 col-sm-8">
+            <input name="row[rebate_price]" type="number" <?php if($data['status']  ==  -1||$data['status']  ==  0||$data['status']  ==  1||$data['status']  ==  2||$data['status']  ==  3||$iso  ==  1){ echo "disabled";} ?> class='form-control' value="{$data['rebate_price']}" data-rule="required;number">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">创建时间:</label>
+        <div  class="col-xs-12 col-sm-8">
+            <input name="row[created_at]" type="text" disabled="" class='form-control' value="{$data['created_at']}" data-rule="required;number">
+        </div>
+    </div>
+    <input name="row[id]" type="hidden" value="{$data.id}">
+    <input name="row[uid]" type="hidden" value="{$data.uid}">
+    <input name="row[team_no]" type="hidden" value="{$data.team_no}">
+    <div class="form-group layer-footer">
+        <label class="control-label col-xs-12 col-sm-2"></label>
+        <div class="col-xs-12 col-sm-8">
+            <button type="submit" class="btn btn-success btn-embossed disabled">修改</button>
+            <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,209 @@
+    <style type="text/css">
+    @media (max-width: 375px) {
+        .edit-form tr td input{width:100%;}
+        .edit-form tr th:first-child,.edit-form tr td:first-child{
+            width:20%;
+        }
+        .edit-form tr th:last-child,.edit-form tr td:last-child{
+            display: none;
+        }
+    }
+    .profile-avatar-container {
+        position:relative;
+        width:100px;margin:0 1%;
+    }
+    .profile-avatar-container .profile-user-img{
+        width:100px;
+        height:100px;
+    }
+    .profile-avatar-container .profile-avatar-text {
+        display:none;
+    }
+    .profile-avatar-container:hover .profile-avatar-text {
+        display:block;
+        position:absolute;
+        height:100px;
+        width:100px;
+        background:#444;
+        opacity: .6;
+        color: #fff;
+        top:0;
+        left:0;
+        line-height: 100px;
+        text-align: center;
+    }
+    .profile-avatar-container button{
+        position:absolute;
+        top:0;left:0;width:100px;height:100px;opacity: 0;
+    }
+    .sf:hover{
+        color: orange;
+    }
+    #f1:hover{
+        color: #0073EA;
+    }
+    #ylsz .form-control{
+        width:70%;
+    }
+</style>
+<div class="panel panel-default panel-intro">
+    <div class="panel-body">
+        <div id="myTabContent" class="tab-content">
+            <div class="" id="add">
+                <div class="widget-body no-padding">
+                    <form id="add-form" class="edit-form form-horizontal" role="form" data-toggle="validator" method="POST" action="">
+                        <table class="table table-striped">
+                            <thead>
+                              
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="row">
+                                            <h4>通用参数</h4>
+                                            <div class="form-group">
+                                                <label class="control-label col-xs-12 col-sm-2">标题(前台)</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control" value="{$data['showtit']}"  name="row[showtit]"  />
+                                                </div>
+                                            </div>
+                                             <div class="form-group">
+                                                <label class="control-label col-xs-12 col-sm-2">邮箱认证</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <div class="radio">
+                                                        <label for="emailau"><input id="emailau" {if $data['emailau'] == '0'} checked {/if} name="row[emailau]" type="radio"  value="0">不需要</label>
+                                                        <label for="emailau1"><input id="emailau1" {if $data['emailau'] == '1'} checked {/if} name="row[emailau]" type="radio" value="1">需要</label> 
+                                                    </div> 
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-xs-12 col-sm-2">实名认证</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <div class="radio">
+                                                        <label for="ifreal"><input id="ifreal" {if $data['ifreal'] == '1'} checked {/if} name="row[ifreal]" type="radio"  value="1">不需要</label>
+                                                        <label for="ifreal1"><input id="ifreal1" {if $data['ifreal'] == '2'} checked {/if} name="row[ifreal]" type="radio" value="2">需要</label> 
+                                                    </div> 
+                                                </div>
+                                            </div>
+                                             <div class="form-group">
+                                                <label class="control-label col-xs-12 col-sm-2">接口账号</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control" value="{$data['tempid']}" name="row[tempid]" />
+                                                </div>
+                                            </div>
+                                            <h4>基本参数</h4>
+                                            <div class="form-group">
+                                                <label for="value2" class="control-label col-xs-12 col-sm-2">标题</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control" id="value2" name="row[tit]" value="{$data['tit']}"  />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value2" class="control-label col-xs-12 col-sm-2">注册商</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <select id="c-type" name="row[regid]" class="form-control">
+                                                        {foreach $cat as $k=>$v}
+                                                        <option value="{$v['id']}" {if $v['id'] == $data['regid']} selected {/if} >{$v['name']}</option>
+                                                        {/foreach}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-xs-12 col-sm-2">状态</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <div class="radio">
+                                                        <label for="ifkf1"><input id="ifkf1"  name="row[status]" type="radio" {if $data['status'] == 1} checked {/if} value="1">启用</label>
+                                                        <label for="ifkf2"><input id="ifkf2"  name="row[status]" type="radio" {if $data['status'] == 2} checked {/if} value="2">不启用</label> 
+                                                    </div> 
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-xs-12 col-sm-2">续费状态</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <div class="radio">
+                                                        <label for="xf_lock"><input id="xf_lock"  name="row[xf_lock]" type="radio" {if $data['xf_lock'] == '0'} checked {/if} value="0">正常</label>
+                                                        <label for="xf_lock1"><input id="xf_lock1"  name="row[xf_lock]" type="radio" {if $data['xf_lock'] == 1} checked {/if} value="1">禁止</label> 
+                                                    </div> 
+                                                </div>
+                                            </div> 
+                                            <div class="form-group">
+                                                <label for="value31" class="control-label col-xs-12 col-sm-2">备注</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <textarea id="c-description" class="form-control" name="row[remark]">{$data['remark']}</textarea>
+                                                </div>
+                                            </div>
+                                            
+                                            <input type="hidden" name="row[id]" value="{$data['id']}">
+                                            <h4>API参数</h4>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">RegionID</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control" id="value2" name="row[region]" value="{$data['region']}"  />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">AccessKey</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control" id="value2" name="row[accessKey]" value="{$data['accessKey']}" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value" class="control-label col-xs-12 col-sm-2">Secret</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control" id="value2" name="row[secret]" value="{$data['secret']}"  />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value31" class="control-label col-xs-12 col-sm-2">API链接</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <input type="text" class="form-control"  id="value31" name="row[api]"  value="{$data['api']}" data-rule="required" />
+                                                </div>
+                                            </div>
+                                            <h4>模板参数</h4>
+                                            <div class="form-group">
+                                                <label class="control-label col-xs-12 col-sm-2">添加方式</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <div class="radio">
+                                                        <label for="aa1"><input id="aa1"  name="row[tempmethod]" type="radio" {if $data['tempmethod'] == 1} checked {/if} value="1">手动</label>
+                                                        <label for="aa2"><input id="aa2"  name="row[tempmethod]" type="radio" {if $data['tempmethod'] == 2} checked {/if} value="2">自动</label> 
+                                                        <label for="aa3"><input id="aa3"  name="row[tempmethod]" type="radio" {if $data['tempmethod'] == 3} checked {/if} value="3">客服添加</label> 
+                                                    </div> 
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-xs-12 col-sm-2">模板流程</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <div class="radio">
+                                                        <label for="aab1"><input id="aab1" {if $data['flow'] == '0'} checked {/if}  name="row[flow]" type="radio" checked value="0">正常</label>
+                                                        <label for="aab2"><input id="aab2" {if $data['flow'] == 1} checked {/if}  name="row[flow]" type="radio" value="1">过户进行中</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="value31" class="control-label col-xs-12 col-sm-2">模板说明</label>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <textarea id="c-description" class="form-control" name="row[tempexp]">{$data['tempexp']}</textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    
+                                    <td align="center">
+                                        <button type="submit" class="btn btn-success btn-embossed">{:__('OK')}</button>
+                                        <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+                                    </td>
+
+
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </form>
+                </div>
+            </div>
+ 
+        
+

@@ -1,0 +1,22 @@
+<div class="panel panel-default panel-intro">
+    {:build_heading()}
+    <div class="panel-body">
+        <div id="myTabContent" class="tab-content">
+            <div class="tab-pane fade active in" id="one">
+                <div class="widget-body no-padding">
+                    <div id="toolbar" class="toolbar">
+                        {:build_toolbar('refresh')}
+                        <a href="javascript:;" class="btn btn-danger" onclick="dateSearch(3)" >离过期3天</a>
+                        <a href="javascript:;" class="btn btn-danger"  onclick="dateSearch(7)" >离过期7天</a>
+                        <a href="javascript:;" class="btn btn-danger"  onclick="dateSearch(15)">离过期15天</a>
+                        <a href="javascript:;" class="btn btn-danger"  onclick="dateSearch(30)">离过期30天</a>
+                        <a href="javascript:;" class="btn btn-danger"  onclick="dateSearch(45)">离过期45天</a>
+                        <a href="javascript:;" class="btn btn-success" onclick="dateSearch(-1)" >清空</a>
+                    </div>
+                    <table id="table" class="table table-striped table-bordered table-hover" width="100%">
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

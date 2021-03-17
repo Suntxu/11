@@ -1,0 +1,85 @@
+
+/*搜索重置按钮*/
+#search-form .fa-times {
+    display: none;
+    padding: 1px 0.7em;
+    box-shadow: 0 0 3px rgba(0,0,0,0.15);
+    cursor: pointer;
+    color: #808080;
+}
+#search-form .fa-times:active {
+    background: #d3d3d3;
+}
+#search-form .fa-times:hover {
+    zoom: 1.1;
+    padding: 1px 0.6em;
+    border: 1px solid #d3d3d3;
+    box-shadow: 0 0 6px rgba(0,0,0,0.25);
+}
+
+/*搜索结果区*/
+
+.local-search-result {
+    display:none;
+    position:absolute;
+    top:40px;
+    left:0;
+    font-size: 0.9em;
+    text-align: left;
+    word-break: break-all;
+    background:#fff;
+    height:400px;
+    width:300px;
+    overflow-y:auto;
+    border-radius: 3px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+}
+.sidebar .local-search-result {
+    top:100px;
+    width:260px;
+}
+.local-search-result h3 {
+    margin:0;
+    padding:0;
+    color:#2c3e50;
+}
+.local-search-result ul {
+    list-style:none;
+    padding:0;
+    margin:0 5px;
+}
+.local-search-result ul li {
+    margin:0;
+    padding:10px;
+    border-bottom: 1px solid #eee;
+    display:block;
+}
+
+.local-search-result ul.search-result-list li:hover {
+    cursor:pointer;
+    font-weight: normal;
+    background: #eee;
+}
+
+/*匹配的标题*/
+.local-search-result a.search-result-title {
+    color: #708090;
+}
+
+/*搜索预览段落*/
+.local-search-result p.search-result {
+    margin: 0 auto;
+    line-height: 1.3em;
+    max-height: 3.6em;
+    font-size:.9em;
+    overflow: hidden;
+    color: #808080;
+}
+
+/*匹配的关键词*/
+.local-search-result em.search-keyword {
+    color: #f58e90;
+    border-bottom: 1px dashed #f58e90;
+    font-weight: bold;
+    font-style: normal;
+}

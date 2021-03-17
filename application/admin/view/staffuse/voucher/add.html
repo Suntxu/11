@@ -1,0 +1,53 @@
+﻿<form id="add-form" class="form-horizontal" role="form" data-toggle="validator" method="POST" action="">
+    <div class="form-group">
+        <label for="c-name1" class="control-label col-xs-12 col-sm-2">代金券面值:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-name1" data-rule="required,number" class="form-control" name="row[money]" type="number" value="">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="c-name" class="control-label col-xs-12 col-sm-2">生效时间:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input  class="form-control datetimepicker   " name="row[audittime]" type="text" value="">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">产品/场景:</label>
+        <div class="col-xs-12 col-sm-8">
+            {$sel}
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="c-name" class="control-label col-xs-12 col-sm-2">发放用户:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-category_id" data-rule="required" data-field="uid" data-source="/admin/category/getUser"  data-params='{"custom[type]":"staff"}' class="form-control selectpage" name="row[userid]" type="text" value="">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">使用周期:</label>
+        <div class="col-xs-12 col-sm-8">
+            <select class='form-control' data-rule="required" name="row[cycletime]">
+                <option value="week">一周</option>
+                <option value="mon">半个月</option>
+                <option value="month">一个月</option>
+                <option value="quarter">一季度</option>
+                <option value="year">半年</option>
+            </select>
+        </div>
+    </div>
+  
+    <div class="form-group">
+        <label for="c-description" class="control-label col-xs-12 col-sm-2">备注:</label>
+        <div class="col-xs-12 col-sm-8">
+            <textarea id="c-description" class="form-control" name="row[remark]"></textarea>
+        </div>
+    </div>
+    <div class="form-group layer-footer">
+        <label class="control-label col-xs-12 col-sm-2"></label>
+        <div class="col-xs-12 col-sm-8">
+            <button type="submit" class="btn btn-success btn-embossed disabled">申请</button>
+            <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+        </div>
+    </div>
+</form>

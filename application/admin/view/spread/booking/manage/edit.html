@@ -1,0 +1,140 @@
+<form id="add-form" class="form-horizontal" role="form" data-toggle="validator" method="POST" action="">
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">编号:</label>
+        <div  class="col-xs-12 col-sm-8">
+            <input name="row[id]" type="text" disabled class='form-control' value="{$data['id']}" data-rule="required;number">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">用户名称</label>
+        <div  class="col-xs-12 col-sm-8">
+            <input name="row[uid]" type="text" disabled="" class='form-control' value="{$data['name']}" data-rule="required;number">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">团队编号</label>
+        <div  class="col-xs-12 col-sm-8">
+            <input name="row[team_no]" type="text" disabled="disabled" class='form-control' value="{$data['team_no']}" data-rule="required;number">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">拼团后缀:</label>
+        <div  class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" disabled id="suffix" name="row[suffix]"  value="{$data['suffix']}" data-rule="required" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">返利金额</label>
+        <div  class="col-xs-12 col-sm-8">
+            <input name="row[rebate_price]" type="number" disabled="" class='form-control'  value="{$data['rebate_price']}" data-rule="required;number">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">创建时间:</label>
+        <div  class="col-xs-12 col-sm-8">
+            <input name="row[created_at]" type="text" disabled="" class='form-control' value="{$data['created_at']}" data-rule="required;number">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">总认领数量:</label>
+        <div  class="col-xs-12 col-sm-8">
+            <input type="number" class="form-control" id="num" name="row[num]" disabled value="{$data['num']}" data-rule="required;number" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">认领数量:</label>
+        <div  class="col-xs-12 col-sm-8">
+            <input type="number" class="form-control"  id="claim_num" name="row[claim_num]" disabled value="{$data['claim_num']}" data-rule="required;number" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">活动单价:</label>
+        <div  class="col-xs-12 col-sm-8">
+            <input type="number" class="form-control"  id="unit_price" name="row[unit_price]" disabled value="{$data['unit_price']}" data-rule="required;number" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">注册数量:</label>
+        <div  class="col-xs-12 col-sm-8">
+            <input type="number" class="form-control"  id="reg_num" name="row[reg_num]" disabled value="{$data['reg_num']}" data-rule="required;number" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">参团人数</label>
+        <div  class="col-xs-12 col-sm-8">
+
+            <input name="row[number]" type="number"  class='form-control' disabled value="{$data['number']}" data-rule="required;number">
+        </div>
+    </div>
+<?php if($data['status']    ==  0){ ?>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">审核状态:</label>
+        <div class="col-xs-12 col-sm-8">
+            <select class='form-control' name="row[status]" data-rule="required">
+                <option value="-1" <?php if($data['status']  ==  -1){echo "selected";}?>>审核失败</option>
+                <option value="1" <?php if($data['status']  ==  1){echo "selected";}?>>审核通过</option>
+            </select>
+        </div>
+    </div>
+<?php }else{?>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">活动状态:</label>
+        <div class="col-xs-12 col-sm-8">
+            <select class='form-control' name="row[status]" data-rule="required" disabled>
+                <option value="-1" <?php if($data['status']  ==  1){echo "selected";}?>>审核未通过</option>
+                <option value="1" <?php if($data['status']  ==  1){echo "selected";}?>>组队中</option>
+                <option value="2" <?php if($data['status']  ==  2){echo "selected";}?>>认领成功</option>
+                <option value="3" <?php if($data['status']  ==  3){echo "selected";}?>>认领失败</option>
+                <option value="5" <?php if($data['status']  ==  4){echo "selected";}?>>部分完成</option>
+                <option value="6" <?php if($data['status']  ==  5){echo "selected";}?>>已完成</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">开始时间:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control datetimepicker" disabled  value="{$data['start_at']|date='Y-m-d H:i:s',###}" data-date-format="Y-MM-DD HH:mm:ss" id="1" name="row[start_at]" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">结束时间:</label>
+        <div class="col-xs-12 col-sm-8">
+            <!--            <input type="text" class="form-control datetimepicker" value="{$data['end_at']}" data-date-format="Y-MM-DD HH:mm:ss" id="value2222" name="end_at" />-->
+            <input type="text" class="form-control datetimepicker" disabled  value="{$data['end_at']|date='Y-m-d H:i:s',###}" data-date-format="Y-MM-DD HH:mm:ss" id="2" name="row[end_at]" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">完成时间:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control datetimepicker" disabled value="{$data['finished_at']|date='Y-m-d H:i:s',###}" data-date-format="Y-MM-DD HH:mm:ss" id="3" name="row[finished_at]" />
+        </div>
+    </div>
+   <?php }?>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">审核失败备注:</label>
+        <div  class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control"  <?php if($data['status']  >0  ){echo "disabled";}?>  name="row[remark]" value="{$data['remark']}"  />
+        </div>
+    </div>
+    <input name="row[mid]" type="hidden" value="{$data.mid}">
+    <?php if($data['status']!=0){?>
+    <tfoot>
+    <tr>
+        <div class="hide layer-footer">
+            <label class="control-label col-xs-12 col-sm-2"></label>
+            <div class="col-xs-12 col-sm-8">
+                <button type="reset" class="btn btn-primary btn-embossed btn-close" onclick="Layer.closeAll();">{:__('Close')}</button>
+            </div>
+        </div>
+    </tr>
+    </tfoot>
+    <?php }else{?>
+    <div class="form-group layer-footer">
+        <label class="control-label col-xs-12 col-sm-2"></label>
+        <div class="col-xs-12 col-sm-8">
+            <button type="submit" class="btn btn-success btn-embossed disabled">修改</button>
+            <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+        </div>
+    </div>
+    <?php }?>
+</form>

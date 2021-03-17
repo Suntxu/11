@@ -1,0 +1,149 @@
+<form id="qxpz-form" class="edit-form form-horizontal" role="form" data-toggle="validator" method="POST" action="">
+    <table class="table table-striped">
+        <thead>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label for="value011" class="control-label col-xs-12 col-sm-2"><span style="color: red">*</span>店铺名称</label>
+                                <div class="col-xs-12 col-sm-8">
+                                    <input type="text" class="form-control"  id="value011" name="shop[shopname]" value="{$data.shopname}"  />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label for="value" class="control-label col-xs-12 col-sm-2">店铺手机号</label>
+                                <div class="col-xs-12 col-sm-8">
+                                    <input type="text" class="form-control" id="value" name="shop[mot]"  value="{$data.mot}"  />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label for="value" class="control-label col-xs-12 col-sm-2">店铺QQ号</label>
+                                <div class="col-xs-12 col-sm-8">
+                                    <input type="text" class="form-control" id="value" name="shop[uqq]"  value="{$data.uqq}"  />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label for="value" class="control-label col-xs-12 col-sm-2">店铺SEO标题</label>
+                                <div class="col-xs-12 col-sm-8">
+                                    <input type="text" class="form-control" id="value" name="shop[seotit]"  value="{$data.seotit}"  />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label for="value" class="control-label col-xs-12 col-sm-2">店铺SEO关键字</label>
+                                <div class="col-xs-12 col-sm-8">
+                                    <input type="text" class="form-control" id="value" name="shop[seokey]"  value="{$data.seokey}"  />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label for="value" class="control-label col-xs-12 col-sm-2">简要描述</label>
+                                <div class="col-xs-12 col-sm-8">
+                                    <textarea name="shop[seodes]" class="form-control" rows="5" >{$data.seodes}</textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label for="value" class="control-label col-xs-12 col-sm-2">详细描述</label>
+                                <div class="col-xs-12 col-sm-8">
+                                    <textarea name="shop[notice]" class="form-control"  style="width: 100%; min-height: 200px; z-index: 90; " >{$data.notice}</textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <h3 style="color: red">管理操作</h3>
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label for="value" class="control-label col-xs-12 col-sm-2">店铺类型</label>
+                                <div class="col-xs-12 col-sm-8">
+                                    <div class="radio">
+                                         <label for="flag"><input id="flag"  name="shop[flag]"  {if $data.flag == 2} disabled  {/if}  {if $data.flag == '0'} checked {/if} type="radio" value="0">普通店铺</label>
+                                         <label for="flag1"><input id="flag1"  name="shop[flag]" {if $data.flag == 2} disabled  {/if} {if $data.flag == 1} checked {/if} type="radio" value="1">怀米网店铺</label>
+                                         <label for="flag2"><input id="flag2"  name="shop[flag]" {if $data.flag == 1} disabled="" {/if} {if $data.flag == 2} checked  {/if} type="radio" value="2">消保店铺</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label for="value11" class="control-label col-xs-12 col-sm-2">推荐排名</label>
+                                <div class="col-xs-12 col-sm-8">
+                                    <input type="number" class="form-control" id="value11" name="shop[pm]"  data-tip="0表示不推荐，反之从小到大排序" value="{$data.pm}"  />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label for="value22" class="control-label col-xs-12 col-sm-2">店铺信用</label>
+                                <div class="col-xs-12 col-sm-8">
+                                    <input type="number" class="form-control" id="value22" name="shop[xinyong]"  data-tip="0表示读取常规信用值，反之读取该值" value="{$data.xinyong}"  />
+                                </div>
+                            </div>
+                        </div>
+	      <!-- 记录原来的店铺类型 -->
+                        <input type="hidden" name="oldtype" value="{$data.flag}"  >
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label for="value" class="control-label col-xs-12 col-sm-2">店铺点击率</label>
+                                <div class="col-xs-12 col-sm-8">
+                                    <input type="number" class="form-control" id="value" name="shop[djl]" value="{$data.djl}"  />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label for="value" class="control-label col-xs-12 col-sm-2">备注</label>
+                                <div class="col-xs-12 col-sm-8">
+                                    <input type="text" class="form-control" id="value" name="shop[remark]" value="{$data.remark}"  />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label for="value" class="control-label col-xs-12 col-sm-2">店铺审核</label>
+                                <div class="col-xs-12 col-sm-8">
+                                    <div class="radio">
+                                        <label for="shopzt1"><input id="shopzt1"  name="shop[shopzt]" onclick="hiddenYs('shop_bj',this)" {if $data.shopzt == '1'} checked {/if} type="radio" value="1">正常开店</label> 
+                                        <label for="shopzt2"><input id="shopzt2"  name="shop[shopzt]" {if $data.shopzt == '2'} checked {/if}   disabled   onclick="hiddenYs('shop_bj',this)" type="radio" value="2">正在审核</label>
+                                        <label for="shopzt3"><input id="shopzt3"  name="shop[shopzt]"  onclick="hiddenYs('shop_bj',this)" {if $data.shopzt == '3'} checked {/if} type="radio" value="3" {if $data.shopzt == 2} disabled  {/if} >禁用</label>
+                                        <label for="shopzt4"><input id="shopzt4"  name="shop[shopzt]"  onclick="hiddenYs('shop_bj',this,'4')" {if $data.shopzt == '4'} checked {/if}  {if $data.shopzt != 2} disabled  {/if}  type="radio" value="4">拒绝申请</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group" id="shopztsm">
+                            <div class="form-group" id="shop_bj"  style="display: none;">
+                                <label for="value" class="control-label col-xs-12 col-sm-2">被拒原因</label>
+                                <div class="col-xs-12 col-sm-8">
+                                     <input type="text" id="shop_bj1" class="form-control"  name="shop[shopztsm]" placeholder="" value="{$data.shopztsm}"> 
+                                </div>
+                            </div>
+                        </div>
+                        <input type="hidden" value="{$data.userid}" name="shop[userid]" >
+                    </div>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td align="center">
+                    <button type="submit" class="btn btn-success btn-embossed">{:__('OK')}</button>
+                    <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</form>

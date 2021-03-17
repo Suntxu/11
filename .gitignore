@@ -1,0 +1,12 @@
+node_modules
+/application/config.php
+/application/database.php
+/runtime/
+/.env.sample
+/.bowerrc
+/hm_admin.sln
+/hm_admin.v12.suo
+/hm_admin.phpproj
+
+
+

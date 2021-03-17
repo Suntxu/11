@@ -1,0 +1,167 @@
+<form id="add-form"  class="form-horizontal" name=" " role="form" data-toggle="validator" method="POST" action="">
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">订单编号:</label>
+        <div  class="col-xs-12 col-sm-8">
+            <input type="text" readonly=""class='form-control' value="{$data['bh']}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">发票抬头:</label>
+        <div  class="col-xs-12 col-sm-8">
+            <input type="text" readonly="" class='form-control' value="{$data['bname']}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">用户类型:</label>
+        <div class="col-xs-12 col-sm-8">
+            <select class='form-control' disabled="" >
+                <option value="1" {if $data['utype'] == '1' } selected {/if} >个人</option>
+                <option value="2" {if $data['utype'] == '2' } selected {/if} >企业</option>
+                
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">发票类型:</label>
+        <div class="col-xs-12 col-sm-8">
+            <select class='form-control' disabled="" >
+                <option value="1" {if $data['btype'] == '1' } selected {/if} >增值税普通发票</option>
+                <option value="2" {if $data['btype'] == '2' } selected {/if} >增值税专用发票</option>
+                
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">发票金额:</label>
+        <div  class="col-xs-12 col-sm-8">
+            <input type="text" readonly="" class='form-control' value="{$data['money']}">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">发票内容:</label>
+        <div  class="col-xs-12 col-sm-8">
+            <input type="text" readonly="" class='form-control' value="{$data['bnote']}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">纳税人识别号:</label>
+        <div  class="col-xs-12 col-sm-8">
+            <input type="text" readonly="" class='form-control' value="{$data['imsi']}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">申请人:</label>
+        <div  class="col-xs-12 col-sm-8">
+            <input type="text" readonly="" class='form-control' value="{$data['uid']}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">申请时间:</label>
+        <div  class="col-xs-12 col-sm-8">
+            <input type="text" readonly="" class='form-control' value="{$data['regtime']|date='Y-m-d H:i:s',###}">
+        </div>
+    </div>
+     {if $data['statu'] != '0'}
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">审核时间:</label>
+        <div  class="col-xs-12 col-sm-8">
+            <input type="text" class='form-control' readonly="" value="{$data['autime']|date='Y-m-d H:i:s', ###}">
+        </div>
+    </div>
+     {/if}
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">收件人:</label>
+        <div  class="col-xs-12 col-sm-8">
+            <input type="text" readonly="" class='form-control' value="{$data['sjr']}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">接收邮件:</label>
+        <div  class="col-xs-12 col-sm-8">
+            <input type="text" readonly="" class='form-control' value="{$data['email']}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">联系方式、地址:</label>
+        <div  class="col-xs-12 col-sm-8">
+            <input type="text" readonly="" class='form-control' value="{$data['tel']}|{$data['address']}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">开户行及账号:</label>
+        <div  class="col-xs-12 col-sm-8">
+            <input type="text" readonly="" class='form-control' value="{$data['khh']}:{$data['khname']}">
+        </div>
+    </div>
+    {if $data['statu'] == '0' && $data['status'] != 2}
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">审核状态:</label>
+        <div class="col-xs-12 col-sm-8">
+            <select class='form-control' onclick="hiddenYs('error',this,2)" name="row[statu]" data-rule="required">
+                <option value="1">审核成功</option>
+                <option value="2">审核失败</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group" id="error" style="display: none">
+        <label class="control-label col-xs-12 col-sm-2">错误码:</label>
+        <div class="col-xs-12 col-sm-8">
+            <select class='form-control' id="error1"  name="row[error]" data-rule="required">
+                <option value="1">信息错误</option>
+                <option value="2">其他</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="c-name" class="control-label col-xs-12 col-sm-2">备注:</span></label>
+        <div  class="col-xs-12 col-sm-8">
+            <textarea name="row[remark]" rows="5" class="form-control">{$data['remark']}</textarea>
+        </div>
+    </div>
+    <input type="hidden" name="row[id]" value="{$data['id']}">
+    <input type="hidden" name="row[bid]" value="{$data['bid']}">
+    <input type="hidden" name="row[userid]" value="{$data['userid']}">
+    <div class="form-group layer-footer">
+        <label class="control-label col-xs-12 col-sm-2"></label>
+        <div class="col-xs-12 col-sm-8">
+            <button type="submit" class="btn btn-success btn-embossed disabled">修改</button>
+            <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+        </div>
+    </div>
+    {else}
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">审核状态:</label>
+        <div class="col-xs-12 col-sm-8">
+            <select class='form-control' name="row[statu]" disabled="" >
+                <option value="1" {if $data['statu'] == '1' } selected {/if} >审核成功</option>
+                <option value="2" {if $data['statu'] == '2' } selected {/if} style="color: red">审核失败</option>
+            </select>
+        </div>
+    </div>
+    {if $data['statu'] == 2}
+    <div class="form-group" id="error">
+        <label class="control-label col-xs-12 col-sm-2">错误码:</label>
+        <div class="col-xs-12 col-sm-8">
+            <select class='form-control' id="error1" disabled="" name="row[error]" data-rule="required">
+                <option value="1" {if $data['error'] == '1' } selected {/if} >信息错误</option>
+                <option value="2" {if $data['error'] == '2' } selected {/if} >其他</option>
+            </select>
+        </div>
+    </div>  
+    {/if}
+    <div class="form-group">
+        <label for="c-name" class="control-label col-xs-12 col-sm-2">审核备注:</span></label>
+        <div  class="col-xs-12 col-sm-8">
+            <textarea rows="5" readonly="" class="form-control">{$data['remark']}</textarea>
+        </div>
+    </div>
+    <div class="hide layer-footer">
+        <label class="control-label col-xs-12 col-sm-2"></label>
+        <div class="col-xs-12 col-sm-4">
+            <button type="reset" class="btn btn-primary btn-embossed btn-close" onclick="Layer.closeAll();">{:__('Close')}</button>
+            <!-- <button type="reset" class="btn btn-primary btn-embossed btn-close" onclick="doPrint();">打印</button> -->
+        </div>
+    </div>
+    {/if}
+</form>
