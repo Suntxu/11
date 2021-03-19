@@ -8,26 +8,26 @@ class Redis
 {
     protected static $handler = null;
 
-    protected $options = [
-           'host' => '115.29.141.160',
-           'port' => 6379,
-           'password' => 'Hm19@woJnE',
-           'select' => 0,
-           'timeout' => 0,
-           'expire' => 0,
-           'persistent' => false,
-           'prefix' => '',
-        ];
     // protected $options = [
-    //     'host' => '39.99.203.192',
-    //     'port' => 6379,
-    //     'password' => '9xXq15hjZe4',
-    //     'select' => 0,
-    //     'timeout' => 0,
-    //     'expire' => 0,
-    //     'persistent' => false,
-    //     'prefix' => '',
-    // ];
+    //        'host' => '115.29.141.160',
+    //        'port' => 6379,
+    //        'password' => 'Hm19@woJnE',
+    //        'select' => 0,
+    //        'timeout' => 0,
+    //        'expire' => 0,
+    //        'persistent' => false,
+    //        'prefix' => '',
+    //     ];
+    protected $options = [
+        'host' => '39.99.203.192',
+        'port' => 6379,
+        'password' => '9xXq15hjZe4',
+        'select' => 0,
+        'timeout' => 0,
+        'expire' => 0,
+        'persistent' => false,
+        'prefix' => '',
+    ];
     public function __construct($options = [])
     {
         if (!extension_loaded('redis')) {   //判断是否有扩展(如果你的apache没reids扩展就会抛出这个异常)

@@ -100,10 +100,10 @@ class Manage extends Backend
                     $list[$k]['group'] = '<span style="color:green">未过期</span>'; 
                 }elseif($v['dqsj'] < $to && $v['dqsj'] > $date){
                     //过期多少天
-                    $expire = ceil((strtotime($to) - strtotime($list[$k]['p.dqsj']))/86400);
+                    $expire = floor((strtotime($to) - strtotime($list[$k]['p.dqsj']))/86400);
                     $list[$k]['group'] = '<span style="color:orange">已过期 '.$expire.' 天</span>'; 
                 }else{
-                    $expire = ceil((strtotime($to) - strtotime($list[$k]['p.dqsj']))/86400);
+                    $expire = floor((strtotime($to) - strtotime($list[$k]['p.dqsj']))/86400);
                     $list[$k]['group'] = '<span style="color:red">已到期 '.$expire.' 天</span>'; 
                 }
                 $list[$k]['pstatu'] = '<span id="bbc_'.$v['tit'].'" class="domain_status"><img width="12" src="/assets/libs/layer/dist/theme/default/loading-1.gif"></span>';

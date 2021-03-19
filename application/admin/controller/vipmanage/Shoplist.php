@@ -150,11 +150,15 @@ class Shoplist extends Backend
                             $this->error('系统繁忙,请稍后再试!');
                         }
 
-                        $acc = Db::name('store_account')->order('id','desc')->value('account');
+                        $acc = Db::name('store_account')->where('gain_type',0)->order('account','desc')->value('account');
 
-                        $acc = $acc ? intval($acc+1) : 30001;
+                        if($acc > 99889){
+                            Db::rollback();
+                            $redis->unlock('get_shop_account_num');
+                            $this->error('店铺账号已使用完,请联系管理员！');
+                        }
 
-                        $shopParam['account'] = $this->checkShopAccount($acc);
+                        $shopParam['account'] = $this->checkShopAccount(($acc+1));
 
                         Db::name('store_account')->insert([
                             'userid' => $shopParam['userid'],
@@ -263,6 +267,27 @@ class Shoplist extends Backend
 
 
         if($this->request->isAjax()){
+            // set_time_limit(0);
+            // //批量生成店铺号
+            // $info = Db::name('storeconfig')->order('sj','asc')->column('userid');
+            
+            // foreach($info as $v){
+            //     $acc = Db::name('store_account')->where('gain_type',0)->order('account','desc')->value('account');
+            //     $acc = empty($acc) ? 30001 : $acc+1;
+                
+            //     $acc = $this->checkShopAccount($acc);
+
+            //     Db::name('storeconfig')->where('userid',$v)->setField('account',$acc);
+            //     Db::name('store_account')->insert([
+            //         'userid' => $v,
+            //         'create_time' => time(),
+            //         'account' => $acc,
+            //         'is_default' => 1,
+            //         'remark' => '默认开通店铺账号'
+            //     ]);
+                
+            // }
+
 
             list($where, $sort, $order, $offset, $limit) = $this->buildparams();
             
@@ -551,13 +576,20 @@ class Shoplist extends Backend
 
         global $remodi_db;
 
-        $flag = Db::connect($remodi_db)->name('keep_account')->where(['account' => $account,'type' => 0])->count();
+        $last = intval($account+19);
+
+        //生成20个店铺号进行筛选
+        $arr = range($account,$last);
+
+        $goodAccounts = Db::connect($remodi_db)->name('keep_account')->whereIn('account',$arr)->where('type',0)->column('account');
         
-        if($flag){
-            return self::checkShopAccount(++$account);
+        $usable = array_diff($arr,$goodAccounts); 
+        
+        if($usable){
+            return current($usable);
         }
 
-        return $account;
+        return self::checkShopAccount(++$last);
 
 
     }

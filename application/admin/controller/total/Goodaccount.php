@@ -35,7 +35,7 @@ class Goodaccount  extends Backend
 
             $total = $this->model->name('keep_account')->where($where)->count();
 
-            $list = $this->model->name('keep_account')->field('account,status,type,id')->where($where)->select(); 
+            $list = $this->model->name('keep_account')->field('account,status,type,id')->where($where)->order($sort,$order)->limit($offset,$limit)->select(); 
 
             $fun = Fun::ini();
 
