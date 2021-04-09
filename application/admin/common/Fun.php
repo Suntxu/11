@@ -85,13 +85,7 @@ class Fun
 	*/
 	public function getStatus($n,$set)
 	{	
-		$n = intval($n);
-		if(isset($set[$n])){
-			if(is_array($set)){
-				return $set[$n];	
-			}
-		}
-		return '';
+		return isset($set[$n]) ? $set[$n] : '';
 	}
 	/**
 	 * 返回截取的字符串
@@ -407,6 +401,14 @@ class Fun
         return count($tits);
 	}
 
+    /**
+     * python 接口 token 生成
+     */
+    public function getPythonQueryToken($domain){
+
+        return sha1('huaimi'.$domain.'FBIopenthedoor');
+
+    }
 
     /*******************redis锁*******************/
     /**

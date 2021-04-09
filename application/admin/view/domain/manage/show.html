@@ -47,28 +47,9 @@
             <td>注册接口类型</td>
             <td>{$data['zcs']}---{$data['api']}</td>
         </tr>
-        <tr>
+        <tr id="whios">
             <td>域名Whios信息</td>
-            <td>
-                <div class="form-group">
-                    <label for="tit" class="control-label col-xs-12 col-sm-2" style="margin-left:-2.4%;">域名DNS:</label>
-                    <div class="col-xs-12 col-sm-8">
-                        <span>{$data['whois']['dns']}</span>
-                    </div>
-                </div><br><br>
-                <div class="form-group">
-                    <label for="tit" class="control-label col-xs-12 col-sm-2" style="margin-left:-2.4%;">注册人姓名:</label>
-                    <div class="col-xs-12 col-sm-8">
-                        <span>{$data['whois']['registerName']}</span>
-                    </div>
-                </div><br><br>
-                <div class="form-group">
-                    <label for="tit" class="control-label col-xs-12 col-sm-2" style="margin-left:-2.4%;">注册人邮箱:</label>
-                    <div class="col-xs-12 col-sm-8">
-                        <span>{$data['whois']['registerEmail']}</span>
-                    </div>
-                </div><br><br>
-            </td>
+            <td><a href="/admin/domain/manage/checkwhois?tit={$data['tit']}" class="btn btn-success btn-dialog" title="域名Whios信息">查询</a></td>
         </tr>
         <tr>
             <form method="post" action="/admin/domain/manage/show" class="edit-form form-horizontal" role="form" data-toggle="validator" >

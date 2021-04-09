@@ -14,14 +14,16 @@ use app\admin\common\Fun;
  */
 class Order extends Backend
 {
-
+    protected $db = null;
     protected $model = null;
     /**
      * User模型对象
      */
     public function _initialize()
     {
+        global $remodi_db;
         parent::_initialize();
+        $this->db = Db::connect($remodi_db)->name('site_feedback');
         $this->model = Db::name('domain_orderfx');
     }
     /**
@@ -55,7 +57,8 @@ class Order extends Backend
     /**
      * 查看
      */
-    public function show($ids=''){
+    public function show($ids='')
+    {
         //回复内容
         $id = $this->request->get('id');
         if($id){
@@ -90,7 +93,7 @@ class Order extends Backend
            }
            $data['ig'] = '<a id="a'.$data['id'].'"><img id="bigimg'.$data['id'].'" style="cursor: pointer; max-width: 240px; max-height: 200px;"></a>';
            //沟通记录‘
-           $hf = ''; 
+           $hf = '';
            $user = Db::name('order_reply') -> where(['gid'=>$data['id']])->select();
            foreach($user as $k => $v){
                 if($v['author'] != '怀米工程师'){
@@ -133,6 +136,53 @@ class Order extends Backend
             return $this->view->fetch();
         }
         return $this->view->fetch();
+    }
+
+
+     /**
+     * 反馈列表
+     */
+    public function feedback()
+    {
+        if ($this->request->isAjax())
+        {
+            list($where, $sort, $order, $offset, $limit) = $this->buildparams();
+            $total = $this->db->where($where)->count();
+            $list = $this->db
+                    ->field('id,uid,uqq,type,nickname,desc,create_time,status')
+                    ->where($where)
+                    ->order($sort, $order)
+                    ->limit($offset, $limit)
+                    ->select();
+            $fun = Fun::ini();
+            foreach($list as $k=>$v){
+                $list[$k]['type'] = $fun->getStatus($v['type'],['功能改进','在线提问','其他']);
+                $list[$k]['y_status'] = $v['status'];
+                $list[$k]['status'] = $fun->getStatus($v['status'],['<span style="color: red;">未读 </span>','<span style="color: green;">已读 </span>']);
+            }
+            $result = array("total" => $total, "rows" => $list);
+            return json($result);
+        }
+        return $this->view->fetch();
+    }
+
+     /**
+     * 反馈状态
+     */
+    public function ready()
+    {
+        if ($this->request->isAjax())
+        {
+            $id = $this->request->get('id');
+
+            if(empty($id)){
+                $this->error('缺少重要参数');
+            }
+
+            $this->db->where('id',intval($id))->setField('status',1);
+
+            $this->success('消息已读');
+        }
     }
 
 }

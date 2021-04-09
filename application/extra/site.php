@@ -4,7 +4,7 @@ return array (
   'name' => '怀米网',
   'beian' => '',
   'cdnurl' => '',
-  'version' => '1.0.173',
+  'version' => '1.0.174',
   'timezone' => 'Asia/Shanghai',
   'forbiddenip' => '',
   'languages' => 

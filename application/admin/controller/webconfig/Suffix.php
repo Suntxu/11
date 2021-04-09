@@ -34,7 +34,7 @@ class Suffix extends Backend
             list($where, $sort, $order, $offset, $limit) = $this->buildparams();
             $total = $this->model->alias('h')->where($where)->count();
             //获取已优惠的数量
-            $field = ',(select sum(success_num)  from '.PREFIX.'reg_discount where hz = h.name1 and time between h.yhsj1 and h.yhsj2  ) as snum';
+            $field = ',(select sum(success_num)  from '.PREFIX.'reg_discount where hz = h.name1 and api_id = h.aid and time between h.yhsj1 and h.yhsj2  ) as snum';
             $list = $this->model->alias('h')
                     ->field('name1,xh,ysje,money,yhsj1,yhsj2,xfmoney,xfxfyg,xfsj1,xfsj2,regbrokerage,sj,id,res_pirce,discounts,cost,aid'.$field)
                     ->where($where)->order($sort,$order)->limit($offset, $limit)

@@ -54,7 +54,7 @@ return [
         1 => 'godaddy','namebright','netcn','nsi','xb','xw','22cn','dy','zgsj','bizcn',
         'nh','rb','pheenix','maff','moniker','enom','cndns','mydomain','encirca','zzy',
         'aligj','hexonet','nawang','namesilo','17ex','reg','gathernames','66cn','nwhk','gname',
-        'ename','35hl',
+        'ename','35hl','juming',
         106 => 'gd'
     ],
 

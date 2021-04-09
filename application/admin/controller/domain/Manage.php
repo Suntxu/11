@@ -1,12 +1,13 @@
 <?php
 
 namespace app\admin\controller\domain;
-
 use app\common\controller\Backend;
 use think\Db;
 use app\admin\common\Fun;
 use think\Config;
 use app\admin\common\sendMail;
+use fast\Http;
+
 /**
  * 推广员管理
  *
@@ -15,7 +16,7 @@ use app\admin\common\sendMail;
 class Manage extends Backend
 {
     protected $model = null;
-    protected $noNeedRight = ['updateStatus','getDomainHz','getDomainType','queryDomainStatys','getOutZcsList'];
+    protected $noNeedRight = ['checkwhois','updateStatus','getDomainHz','getDomainType','queryDomainStatys','getOutZcsList'];
     /**
      * User模型对象
      */
@@ -48,7 +49,7 @@ class Manage extends Backend
             }
 
             $filter = json_decode($this->request->param('filter'),true);
-            
+
             if(empty($filter)){
                 $total = $this->model->count();
             }else{
@@ -56,7 +57,7 @@ class Manage extends Backend
                 if(isset($filter['p.parse_status']) && $filter['p.parse_status'] == 2 ){
                     $suserids = Db::name('storeconfig')->where(['flag' => 1,'shopzt' => 1])->column('userid');
                     if($suserids){
-                        $def .= ' and p.userid in ('.implode(',',$suserids).') ';                        
+                        $def .= ' and p.userid in ('.implode(',',$suserids).') ';
                     }
                 }
                 $total =  $this->model->alias('p')->join('domain_user u','p.userid=u.id','left')
@@ -97,14 +98,14 @@ class Manage extends Backend
                 $list[$k]['p.infoZR'] = $fun->getStatus($v['infoZR'],['<span style="color:gray">未过户</span>','<span style="color:green">过户成功</span>','<span style="color:red">过户失败</span>','<span style="color:orange;">过户中</span>','<span style="color:red">过户成功,实名失败</span>']);
                 $list[$k]['p.hz'] = ltrim($v['hz'],'.');
                 if($v['dqsj'] >= $to){
-                    $list[$k]['group'] = '<span style="color:green">未过期</span>'; 
+                    $list[$k]['group'] = '<span style="color:green">未过期</span>';
                 }elseif($v['dqsj'] < $to && $v['dqsj'] > $date){
                     //过期多少天
-                    $expire = floor((strtotime($to) - strtotime($list[$k]['p.dqsj']))/86400);
-                    $list[$k]['group'] = '<span style="color:orange">已过期 '.$expire.' 天</span>'; 
+                    $expire = ceil((strtotime($to) - strtotime($list[$k]['p.dqsj']))/86400);
+                    $list[$k]['group'] = '<span style="color:orange">已过期 '.$expire.' 天</span>';
                 }else{
-                    $expire = floor((strtotime($to) - strtotime($list[$k]['p.dqsj']))/86400);
-                    $list[$k]['group'] = '<span style="color:red">已到期 '.$expire.' 天</span>'; 
+                    $expire = ceil((strtotime($to) - strtotime($list[$k]['p.dqsj']))/86400);
+                    $list[$k]['group'] = '<span style="color:red">已到期 '.$expire.' 天</span>';
                 }
                 $list[$k]['pstatu'] = '<span id="bbc_'.$v['tit'].'" class="domain_status"><img width="12" src="/assets/libs/layer/dist/theme/default/loading-1.gif"></span>';
                 $list[$k]['out_zcs'] = empty($outList[$v['out_zcs']]) ? '--' : $outList[$v['out_zcs']];
@@ -116,7 +117,7 @@ class Manage extends Backend
         return $this->view->fetch();
     }
     /**
-     * 域名详情 
+     * 域名详情
      */
     public function show(){
         if($this->request->isPost()){
@@ -128,7 +129,7 @@ class Manage extends Backend
             $oldRecordId = Db::name('domain_record')->whereIn('id',$rids)->field('id,RecordId')->select();
             $oldVlue = array_combine(array_column($oldRecordId,'id'),array_column($oldRecordId,'RecordId'));
             $newsVlue = array_combine($rids,$RecordIds);
-            //计算差集 
+            //计算差集
             $updateArr = array_diff_assoc($newsVlue,$oldVlue);
             if($updateArr){
                 foreach ($updateArr as $k => $v) {
@@ -139,7 +140,7 @@ class Manage extends Backend
         }
         $ids = $this->request->get('ids');
         if($ids){
-            
+
             $data = Db::name('domain_pro_n')
                     ->field('tit,zcsj,dqsj,inserttime,status,zt,pushid,len,api_id,zcs')
                     ->where(['id' => $ids])
@@ -151,11 +152,6 @@ class Manage extends Backend
             $data['zt'] =  Fun::ini()->getStatus($data['zt'],['--','<span style="color:blue">发布一口价</span>','<span style="color:blue;">打包一口价</span>',4=>'<span style="color:blue;">push域名中</span>',5=>'<span style="color:gray;">转回原注册商</span>',9=>'<span style="color:green;">正常状态</span>']);
             $data['status'] = Fun::ini()->getStatus($data['status'],['<span style="color:green">正常</span>',1=>'<span style="color:red">域名被hold</span>',4=>'<span style="color:red">冻结中</span>']);
             $data['inserttime'] = date('Y-m-d H:i:s',$data['inserttime']);
-             // 获取DNS 解析记录 域名模板
-            $info = Fun::ini()->getWhois($data['tit']);
-            $data['whois']['dns'] = empty($info['DNS']) ? '已隐藏' : $info['DNS'];
-            $data['whois']['registerName'] = empty($info['联系人']) ? '已隐藏' : $info['联系人'];
-            $data['whois']['registerEmail'] = empty($info['联系邮箱']) ? '已隐藏' : $info['联系邮箱'];
             // 获取 当前的解析
             $data['parse'] = Db::name('domain_record')->field('RecordId,id,RR,Type,Value,Line,Status,TTL')->where(['tit'=>$data['tit']])->select();
             $this->view->assign('data',$data);
@@ -175,7 +171,7 @@ class Manage extends Backend
     }
    //动态加载域名类型
    public function getDomainType(){
-        
+
         $dtype = Fun::ini()->getDomainType();
         $data = [];
         $i = 0;
@@ -194,10 +190,10 @@ class Manage extends Backend
         return $data;
 
     }
-    
+
     // 冻结解冻域名
     public function updateStatus(){
-        if($this->request->isAjax()){  
+        if($this->request->isAjax()){
 
             $param = $this->request->post();
 
@@ -252,7 +248,7 @@ class Manage extends Backend
             }
         }
         return ['code'=>1,'msg'=>'访问出错'];
-       
+
     }
     /**
      * 查询域名状态
@@ -283,7 +279,7 @@ class Manage extends Backend
 
     }
 
-    
+
     /**
      * 冻结域名发送通知
      */
@@ -298,9 +294,9 @@ class Manage extends Backend
                 if($vv['userid'] == $v['id']){
                     $uinfos[$k]['tit'][] = $vv['tit'];
                 }
-            }   
+            }
         }
-     
+
         $send = new sendMail();
         foreach($uinfos as $v){
             $send->domainFrezee($v['id'],$v['uid'],$status,$v['tit'],$cause);
@@ -308,6 +304,72 @@ class Manage extends Backend
 
     }
 
+
+    /**
+     * 查看DNS
+     */
+    public function checkwhois($tit)
+    {
+        if(empty($tit)){
+            $this->error('域名参数缺失');
+        }
+
+        $url = PYTHON_API_URL_WIN.'/api/msg/whois';
+
+        $params=array('token'=> Fun::ini()->getPythonQueryToken($tit) ,'url'=>$tit);
+
+        try{
+
+            $data = Http::post($url,$params);
+
+        }catch(Exception $e){
+            $this->error($e->getMessage());
+        }
+
+        if(empty($data)){
+            $this->error('接口返回信息错误');
+        }
+
+        $list=json_decode($data,true);
+
+        if(empty($list['code'])){
+            $this->error('接口返回信息错误');
+        }
+
+        if($list['code']=='1'){
+            empty($list['data']['registrar']) ? $list['data']['registrar']='已隐藏':$list['data']['registrar'];
+
+            empty($list['data']['registrar_url']) ? $list['data']['registrar_url']='已隐藏':$list['data']['registrar_url'];
+
+            empty($list['data']['registrar_abuse_contact_email']) ? $list['data']['registrar_abuse_contact_email']='已隐藏':$list['data']['registrar_abuse_contact_email'];
+
+            empty($list['data']['registrar_abuse_contact_phone']) ? $list['data']['registrar_abuse_contact_phone']='已隐藏':$list['data']['registrar_abuse_contact_phone'];
+
+            empty($list['data']['registrant']) ? $list['data']['registrant']='已隐藏':$list['data']['registrant'];
+
+            empty($list['data']['registrant_contact_email']) ? $list['data']['registrant_contact_email']='已隐藏':$list['data']['registrant_contact_email'];
+
+            empty($list['data']['creation_date']) ? $list['data']['creation_date']='已隐藏':date($list['data']['creation_date']);
+
+            empty($list['data']['registration_time']) ? $list['data']['registration_time']='已隐藏':date($list['data']['registration_time']);
+
+            empty($list['data']['updated_date']) ? $list['data']['updated_date']='已隐藏':date($list['data']['updated_date']);
+
+            empty($list['data']['registry_expiry_date']) ? $list['data']['registry_expiry_date']='已隐藏':date($list['data']['registry_expiry_date']);
+
+            empty($list['data']['registrar_whois_server']) ? $list['data']['registrar_whois_server']='已隐藏':$list['data']['registrar_whois_server'];
+
+            empty($list['data']['name_server']) ? $list['data']['name_server']='已隐藏':$list['data']['name_server'];
+
+            empty($list['data']['domain_status']['ok']) ? $list['data']['domain_status']['ok']='已隐藏':$list['data']['domain_status']['ok'];
+        }
+        if($list['code']=='-1'){
+            $this->error($list['msg']);
+        }
+
+        $this->view->assign('data',$list['data']);
+        return $this->view->fetch();
+    }
 
 
 }

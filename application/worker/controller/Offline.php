@@ -49,27 +49,22 @@ class Offline extends Server
 	*/
 	public function ExportDomain(){
 		global $reserve_db;
-
 		$task = $this->redis->lLen('export_domain_operate_id');
 
 		if($task > 0){
 
 			$taskid = $this->redis->lRange('export_domain_operate_id',0,-1);
-
 			foreach($taskid as $v){
 
 				$action = $this->redis->get('export_domain_action_'.$v);
+				$actions = explode('_',$action);
+				if($actions[0] == 'reserve'){ //预定库
+                    $db2 = Db::connect($reserve_db)->name('domain_pro_reserve');
+                }
 
-				if($action == 'reservedomain'){
-					$db2 = Db::connect($reserve_db)->name('domain_pro_reserve');
-				}elseif(in_array($action,['reservedomain_other'])){
-					$db2 = Db::connect($reserve_db)->name('domain_pro_other_reserve_'.date('Ymd'));
-				}
-				
 				$data = $this->redis->hgetall('export_domain_operate_id_'.$v);
                 if($data){
                     $sql = json_decode($data['sql'],true);
-
                     //写入头部
                     $head = $this->redis->hgetall('export_domain_head_'.$v);
 

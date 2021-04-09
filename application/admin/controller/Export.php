@@ -23,8 +23,8 @@ class Export extends Backend
     private $q_field = null;
 
     private $join = null;
-    private $alias = false; 
-    
+    private $alias = false;
+
 
     private $suffix = null;
 
@@ -38,8 +38,8 @@ class Export extends Backend
 
     /**
      * 首页
+     * action 为reserve_ 开头 自动读取预定库
      */
-        
     public function index(){
 
         $param = $this->request->get();
@@ -54,7 +54,7 @@ class Export extends Backend
             }
 
             list($where, $sort, $order, $offset, $limit,$group,$special_condition) = $this->buildparams();
-            
+
             call_user_func('self::'.$param['action'],[$group,$special_condition]);
 
             if($this->join){
@@ -62,7 +62,7 @@ class Export extends Backend
             }else{
                 $count = $this->model->where($where)->where($this->def)->count();
             }
-            
+
             $limit = 10000;
             $num = ceil($count / $limit);
             $data = [];
@@ -76,7 +76,7 @@ class Export extends Backend
                 }
                 $data[] = $sql;
             }
-            
+
             $insert = ['userid' => - $this->auth->id,'createtime' => time(),'name' => $param['name'].$this->suffix];
 
             $id = Db::name('domain_export')->insertGetId($insert);
@@ -94,8 +94,8 @@ class Export extends Backend
     /**
      * 预定过期删除域名
      */
-    private function reservedomain($swhere){
-        
+    private function reserve_domain($swhere){
+
         global $reserve_db;
 
         $this->model = Db::connect($reserve_db)->name('domain_pro_reserve');
@@ -111,12 +111,34 @@ class Export extends Backend
         }
 
     }
+    /**
+     * 预释放列表
+     */
+     private function reserve_release($swhere){
+
+        global $reserve_db;
+
+        $this->model = Db::connect($reserve_db)->name('domain_pro_reserve_pre_'.date('Ymd'));
+
+        $this->q_field = 'tit,reg_time,del_time';
+
+        $this->head = ['域名','注册时间','删除时间'];
+
+        $this->suffix = '_预释放列表';
+
+        if($swhere[0]){
+          $this->def .= ' and hz = "'.ltrim($swhere[0],'.').'"';
+        }
+
+
+
+    }
 
     /**
      * 其他后缀预定域名
      */
-    private function reservedomain_other($swhere){
-        
+    private function reserve_otherhz($swhere){
+
         global $reserve_db;
 
         $this->model = Db::connect($reserve_db)->name('domain_pro_other_reserve_'.date('Ymd'));
@@ -126,14 +148,14 @@ class Export extends Backend
         $this->head = ['域名','注册时间','删除时间','备案性质','主办单位名称','备案号'];
 
         $this->suffix = '_其他后缀预定域名过期列表';
-        
+
         if($swhere[0]){
           $this->def .= ' and hz = "'.ltrim($swhere[0],'.').'"';
         }
 
         if($swhere[1] == 1){
             $this->def .= ' and  icp_serial != ""';
-        }elseif($where[1] == 2){
+        }elseif($swhere[1] == 2){
             $this->def .= ' and  icp_serial = ""';
         }
 
@@ -145,17 +167,19 @@ class Export extends Backend
     private function domainpro($swhere){
 
         $this->model = Db::name('domain_pro_n');
-        
+
         $this->join = [['domain_user u','p.userid=u.id','left']];
-            
+
         $this->q_field = 'p.tit';
-        
+
         $this->alias = 'p';
 
         $this->head = ['域名'];
 
         $this->suffix = '_全部域名列表';
-        
+
+        $this->def .= ' and p.inserttime < '.time();
+
         if($swhere[0]){
 
             $to = date('Y-m-d H:i');
@@ -176,6 +200,23 @@ class Export extends Backend
             }
         }
     }
-    
+
+    /**
+     * 解析记录列表
+     */
+    private function analysis($swhere){
+
+        $this->model = Db::name('domain_record');
+
+        $this->q_field = 'tit,RR,Type,Value,Line,Status,time';
+
+        $this->head = ['域名','主机记录','记录类型','记录值','解析线路','状态','解析时间'];
+
+        $this->suffix = '_解析记录列表';
+
+        if($swhere[0]){
+            $this->def .= ' and hz = "'.ltrim($swhere[0],'.').'"';
+        }
+    }
 
 }

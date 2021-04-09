@@ -31,11 +31,16 @@ class AdminLog extends Model
     public static function record($title = '')
     {
         $url = request()->url();
-        $action = trim(strrchr($url,'/'),'/'); //访问方法
-        $fieldAction = ['roletree','getcategory','getDomainHz','checkSelfDomain','checkpack','selectpage','getSelectName','getUser','getRegisterUserName','getDisposeTask','getDomainType','getcate','getTypeList'];//过滤方法
+        $action = request()->action(true);
+        $fieldAction = ['roletree','getcategory','getDomainHz','checkSelfDomain','checkpack','selectpage','getSelectName','getUser','getRegisterUserName','getDisposeTask','getDomainType','getcate','getTypeList','queryDomainStatys','getApi','Jump'];//过滤方法
         if(in_array($action,$fieldAction)){
            return false;
         }
+
+        if(strpos($url,'ajax/upload') || strpos($url,'ajax/uploadUser')){
+            return false;
+        }
+
         $auth = Auth::instance();
         $admin_id = $auth->isLogin() ? $auth->id : 0;
         $username = $auth->isLogin() ? $auth->username : __('Unknown');

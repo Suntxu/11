@@ -102,6 +102,17 @@ class Setuser extends Backend
         // 查询是否已经存在数据
         $serc = Db::name('user_service')->where('userid',$id)->field('online')->find();
         $uinfo = $this->model->field('zt,uid,id')->where('id',$id)->find();
+
+        if(!preg_match('/^1[23456789]\d{9}$/',$params['mot'])){
+            return $this->error('请输入正确手机号');
+        }
+
+        $motCount = $this->model->where('mot',$params['mot'])->count();
+
+        if($motCount >= 5){
+            $this->error('该手机号已绑定了5个用户,请换个手机号！');
+        }
+
         $redis = new Redis();
         if($params['special'] == 1){
             $seri = $this->request->post('serv/a'); //专属客服属性

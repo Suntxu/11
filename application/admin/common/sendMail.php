@@ -179,10 +179,13 @@ class sendMail
             $msg = '【 '.$remark.' 】承诺信息未通过,需要去 用户中心-》财务管理-》提现记录: 当前记录右侧【承诺资料】查看原因及重新提交!';
         }
         
-        $txtt = "尊敬的用户，您好！<br> 您在怀米网申请提现:账号/卡号: <span style='color: red;'>{$txkh}</span> <span style='color:red'>{$msg}</span>;<br><span style='color:green: ;'>如果您未在怀米网上注册过账户,请忽略该邮件！</span><br>如果您对本次通知内容、操作过程有任何疑问，请联系官网客服。<br>";
+        $txtt = "尊敬的用户，您好！<br> 您在怀米网提现申请触发系统风控检测,提现账号/卡号: <span style='color: red;'>{$txkh}</span> <span style='color:red'>{$msg}</span>;<br><span style='color:green: ;'>如果您未在怀米网上注册过账户,请忽略该邮件！</span><br>如果您对本次通知内容、操作过程有任何疑问，请联系官网客服。<br>";
         $txtta = "此为系统邮件，请勿回复。来自怀米网 - 国内专业域名交易平台 - <a href='".WEBURL."' >".WEBURL."</a>，详情可登陆 (<a href='".WEBURL."user/'>管理中心</a>) 查看。";
         $title = '提现补充信息通知';
-        $this->redisemail($userid,$uid,$title.'【'.WEBNAME.'】',$txtt.$txtta);
+
+        $this->sendSiteMessage($userid,$title,$txtt,46);
+
+        $this->redisemail($userid,$uid,$title.'【'.WEBNAME.'】',$txtt.$txtta,$title,$txtt,46);
     }
 
     /**
@@ -200,7 +203,7 @@ class sendMail
         $txtt = "尊敬的用户，您好！<br> {$msg} <br><span style='color:green: ;'>如果您未在怀米网上注册过账户,请忽略该邮件！</span><br>如果您对本次通知内容、操作过程有任何疑问，请联系官网客服。<br>";
         $txtta = "此为系统邮件，请勿回复。来自怀米网 - 国内专业域名交易平台 - <a href='".WEBURL."' >".WEBURL."</a>，详情可登陆 (<a href='".WEBURL."user/'>管理中心</a>) 查看。";
         $title = '店铺号状态通知';
-        $this->redisemail($userid,$uid,$title.'【'.WEBNAME.'】',$txtt.$txtta);
+        $this->redisemail($userid,$uid,$title.'【'.WEBNAME.'】',$txtt.$txtta,$title,$txtt,46);
     }
 
     /**
@@ -222,6 +225,27 @@ class sendMail
         
         $this->redisemail($userid,$uid,$title.'【'.WEBNAME.'】',$txtt.$txtta,$title,$txtt,46);
     }
+
+    /**
+     * 发送站内消息
+     */
+    protected function sendSiteMessage($userid,$tit,$con,$type){
+
+        $id = Db::name('domain_msg')->insertGetId([
+            'tit' => $tit,
+            'con' => $con,
+            'create_time' => time(),
+            'type' => $type,
+            'all' => 0,
+        ]);
+        Db::table(PREFIX.'domain_msgStu')->insert([
+            'cid' => $id,
+            'userid' => $userid,
+            'status' => 0,
+        ]);
+
+    }
+
     /*
     缓存邮箱队列，默认用1号库
     邮箱内容，其它的为消息字段

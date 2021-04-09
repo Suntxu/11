@@ -1,0 +1,59 @@
+<style type="text/css">
+    @media (max-width: 375px) {
+        .edit-form tr td input{width:100%;}
+        .edit-form tr th:first-child,.edit-form tr td:first-child{
+            width:20%;
+        }
+        .edit-form tr th:last-child,.edit-form tr td:last-child{
+            display: none;
+        }
+    }
+    .sf:hover{
+        color: orange;
+    }
+    #f1:hover{
+        color: #0073EA;
+    }
+   /* #ylsz .form-control{
+        width:70%;
+    }*/
+    .row{
+        margin-left: -5px;
+        margin-right: -15px;
+    }
+</style>
+<form id="edit-form" class="edit-form form-horizontal" role="form" data-toggle="validator" enctype="multipart/form-data" method="POST" action="/admin/domain/violation/manual/index">
+    <h3>{$tits ? '上报' : '添加预'}违规域名</h3>
+        <div class="form-group">
+            <label for="c-avatar" class="control-label col-xs-12 col-sm-2">处罚动作<span style="color: red;">:</label>
+            <div class="col-xs-12 col-sm-8">
+                <label for="jztype"><input id="jztype" name="punish_type" checked  type="radio" value="">请选择</label>
+                <label for="jztype1"><input id="jztype1" name="punish_type"  type="radio" value="0">hold</label>
+                <label for="jztype2"><input id="jztype2" name="punish_type"  type="radio" value="1">警告</label>
+            </div>
+        </div>
+        <input type="hidden" name="add_type" value="{$tits ? 1 : 0}">
+        <div class="form-group">
+            <label for="c-avatar" class="control-label col-xs-12 col-sm-2">处罚原因<span style="color: red;">:</label>
+            <div class="col-xs-12 col-sm-4">
+                <select class="form-control" name="type_cause">
+                    <option value="">请选择</option>
+                    <option value="0">网站存在欺诈侵权类违法违规内容</option>
+                    <option value="1">网站存在赌博类违法违规内容</option>
+                    <option value="2">网站存在色情低俗类违法违规内容</option>
+                    <option value="3">网站存在国家政策类违法违规内容</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="bh" class="control-label col-xs-12 col-sm-2">域名<span style="color: red;">:</label>
+            <div class="col-xs-12 col-sm-8">
+                <textarea name="ttxt" id="domain" style="width: 400px;" rows="7" placeholder="一次最多可填入1000个域名,域名之间请用回车隔开"{if $tits} readonly {/if}>{php}foreach($tits as $v){ echo $v."\n"; }{/php}</textarea>
+            </div>
+        </div>
+    <div class="form-group" style="margin-left: 17% ;margin-top: 3%;">
+        <button type="submit" class="btn btn-success btn-embossed">{:__('OK')}</button>
+        <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+    </div>
+</form>
+

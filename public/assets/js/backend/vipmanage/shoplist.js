@@ -25,6 +25,7 @@
                             },formatter:Table.api.formatter.alink,url:'vipmanage/shoplist/modi',fieldvaleu:'t1.userid',fieldname:'ids',tit:'编辑', },
                         { field: 't1.userid', title: '用户ID'},
                         { field: 't3.uid', title: '账号',},
+                        { field: 'special_condition', title: '默认店铺号',},
                         { field: 't1.shopzt', title: '店铺状态',formatter: Table.api.formatter.status,searchList:{1:'正常开店',2:'正在审核',3:'禁用',4:'审核被拒'},notit:true,},
                         { field: 't1.flag', title: '店铺类型',formatter: Table.api.formatter.status,notit:true,searchList:{0:'普通店铺',2:'消保店铺',1:'怀米网店铺'},},
                         { field: 'sellernum', title: '一口价域名(在售)',operate:false,sortable:true,formatter:Table.api.formatter.alinks,url:'/admin/domain/yjdomain/',fieldvaleu:['t3.uid','1',],fieldname:['uid','p.status'],tit:'一口价在售域名',},
@@ -70,13 +71,14 @@
                                     url: function(res){
                                        return '/admin/vipmanage/shoplist/account?u.uid='+res['t3.uid']+'&shopname='+res['t1.shopname'];
                                     },
-                                    success: function (data,ret) {
-                                        if(ret.code==1){
-                                            $('.btn-refresh').click();
-                                        }else{
-                                            layer.msg(ret.msg);
-                                        }
-                                        return false;
+                                },{
+                                    name: '店铺关联',
+                                    text: '店铺关联',
+                                    title: '店铺关联',
+                                    classname: 'btn btn-xs btn-info btn-magic dialogit',
+                                    icon: 'fa fa-hand-stop-o fa-fw',
+                                    url: function(res){
+                                        return '/admin/vipmanage/shoplist/relevance?u.uid='+res['t3.uid'];
                                     },
                                 },{
                                     name: '退保',
@@ -115,7 +117,6 @@
                 showFooter: true,
                 extend: {
                     index_url: 'vipmanage/shoplist/account',
-                    // del_url: 'vipmanage/shoplist/accountdel',
                     table: 'user',
                 }
             });
@@ -198,6 +199,36 @@
                     ] 
                 ],
             }); 
+            // 为表格绑定事件
+            Table.api.bindevent(table);
+        },
+        relevance: function () {
+            // 初始化表格参数配置
+            Table.api.init({
+                showFooter: true,
+                extend: {
+                    index_url: 'vipmanage/shoplist/relevance',
+                    table: 'user',
+                }
+            });
+            var table = $("#table");
+            var id = null;
+            // 初始化表格
+            table.bootstrapTable({
+                url: $.fn.bootstrapTable.defaults.extend.index_url,
+                sortName: 'r.id',
+                orderName:'asc',
+                escape: false,
+                columns: [
+                    [
+                        { field: 'u.uid', title: '用户'},
+                        { field: 'u1.uid', title: '被关联用户'},
+                        { field: 'relevance_account', title: '被关联店铺号',},
+                        { field: 'r.create_time', title: '关联时间',operate: 'INT',sortable:true,addclass: 'datetimerange', formatter: Table.api.formatter.datetime},
+                        { field: 'r.status', title: '状态',searchList:{0:'正常',1:'禁用'},},
+                    ]
+                ],
+            });
             // 为表格绑定事件
             Table.api.bindevent(table);
         },

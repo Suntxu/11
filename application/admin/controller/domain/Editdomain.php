@@ -27,7 +27,7 @@ class Editdomain extends Backend
         $this->model = Db::name('domain_pro_trade');
     }
     /**
-     * 
+     *
      * 查看
      */
     public function index()
@@ -48,6 +48,18 @@ class Editdomain extends Backend
                 $this->error('最多可修改5000个域名');
             }
             unset($row['ttxt']);
+
+            $row['baidu_sl'] = empty($row['baidu_sl']) ? '' : intval($row['baidu_sl']);
+
+            $row['sogou_sl'] = empty($row['sogou_sl']) ? '' : intval($row['sogou_sl']);
+
+            if($row['baidu_sl']<0){
+                 $this->error('百度收录不能设置小于0的值');
+            }
+            if($row['sogou_sl']<0){
+                 $this->error('搜狗收录不能设置小于0的值');
+            }
+
             // 查找域名是否存在
             if(isset($row['status']) || isset($row['money']) || $row['operate'] == 1){
                 $flag = true;
@@ -66,7 +78,6 @@ class Editdomain extends Backend
                 if(empty($row) && empty($attr[0])){
                     $this->error('请选择要修改的项');
                 }
-
                 //限制同一个用户的域名
                 if(isset($row['status']) || isset($row['money']) || isset($row['operate'])){
                     if(count($userids) > 1){
@@ -84,11 +95,18 @@ class Editdomain extends Backend
                     if(isset($attr['txt'])){
                         $attr['txt'] = '';
                     }
+                    if(isset($attr['baidu_sl'])){
+                        $attr['baidu_sl'] =0;
+                    }
+                    if(isset($attr['sogou_sl'])){
+                        $attr['sogou_sl'] =0;
+                    }
                     $row = array_merge($row,$attr);
                 }
-
                 $logmsg = $this->parseParam($row);
+
                 $domainChunk = array_chunk($domainPro, 1000);
+
                 Db::startTrans();
 
                 Db::name('domain_operate_record')->insert([
@@ -112,7 +130,7 @@ class Editdomain extends Backend
 
                 }
 
-                $this->success('操作成功','reload');  
+                $this->success('操作成功','reload');
             }else{
                 $this->error('请选择出售中的域名');
             }
@@ -183,19 +201,21 @@ class Editdomain extends Backend
             'txt' => ['域名简介',['']],
             'money' => ['出售价格',['']],
             'lock' => ['域名状态',['','域名hold']],
+            'baidu_sl'=>['百度收录',['']],
+            'sogou_sl'=>['搜狗收录',['']],
         ];
-        
+        // dump($data);die;
         foreach($data as $k => $v){
             if(empty($v)){
                 $reset .= $arr[$k][0].',';
             }else{
-                if($k == 'txt' || $k == 'money'){
+                if($k == 'txt' || $k == 'money' ||$k=='baidu_sl'||$k=='sogou_sl'){
                     $str .= $arr[$k][0].' :'.$v.';';
                 }else{
                     $str .= $arr[$k][0].':'.$arr[$k][1][$v].';';
                 }
             }
-            
+
         }
         if($reset){
             $reset = '重置属性:'.rtrim($reset,',').';';

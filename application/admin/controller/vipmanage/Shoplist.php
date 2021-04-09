@@ -7,6 +7,7 @@ use think\Db;
 use app\admin\common\Fun;
 use app\admin\library\Redis;
 use app\admin\common\sendMail;
+use think\Exception;
 
 
 /**
@@ -32,26 +33,34 @@ class Shoplist extends Backend
     {
         if ($this->request->isAjax())
         {
-            list($where, $sort, $order, $offset, $limit,$paytime) = $this->buildparams();
+            list($where, $sort, $order, $offset, $limit,$paytime,$account) = $this->buildparams();
             $def = ' 1 = 1 ';
             if($paytime){
                 $times = explode(' - ',$paytime);
                 $def .= ' and paytime between "'.$times[0].'" and  "'.$times[1].'"';
             }
+            $acc = '';
+            if($account){
+                $userid = Db::name('store_account')->where('account',trim($account))->value('userid');
+                $userid = $userid ? $userid : -1;
+                $acc .= 't1.userid = '.$userid;
+
+            }
+
             //根据条件统计总金额
             $field = '(select count(*) from '.PREFIX.'domain_pro_trade where status=1 and userid = t1.userid) as sellernum,sum(if(`status` = 1,money,null)) as sellermoney,count(if(`status` = 1,1,null)) as ysellernum';
-            $total = Db::name('storeconfig')->alias('t1')->join('domain_user t3','t1.userid=t3.id')->join('domain_order t2','t3.id=t2.selleruserid','left')->where($where)->where($def)->group('t1.userid')->count();
+            $total = Db::name('storeconfig')->alias('t1')->join('domain_user t3','t1.userid=t3.id')->join('domain_order t2','t3.id=t2.selleruserid','left')->where($where)->where($acc)->where($def)->group('t1.userid')->count();
 
             $list = Db::name('storeconfig')->alias('t1')->join('domain_user t3','t1.userid=t3.id')->join('domain_order t2','t3.id=t2.selleruserid','left')
-                ->field('t1.userid,t3.uid,t1.shopzt,t1.shopname,t1.pm,t2.paytime,t1.flag,t1.deposit,'.$field)
-                ->where($where)->where($def)->group('t1.userid')
+                ->field('t1.account,t1.userid,t3.uid,t1.shopzt,t1.shopname,t1.pm,t2.paytime,t1.flag,t1.deposit,'.$field)
+                ->where($where)->where($def)->where($acc)->group('t1.userid')
                 ->order($sort,$order)->limit($offset,$limit)
                 ->select();
-            $userids = array_column($list,'userid');
-//            $sellernum = Db::name('domain_pro_trade')->where('status',1)->whereIn('userid',$userids)->group('userid')->column('count(*)','userid');
-            $buynum = Db::name('domain_order')->where('status',1)->where($def)->whereIn('selleruserid',$userids)->group('selleruserid')->column('count(distinct userid)','selleruserid');
 
+            $userids = array_column($list,'userid');
+            $buynum = Db::name('domain_order')->where('status',1)->where($def)->whereIn('selleruserid',$userids)->group('selleruserid')->column('count(distinct userid)','selleruserid');
             $sql = $this -> setWhere();
+
             if(strlen($sql) == 12){
                 $ge = "select count(*) as n,sum(money) as znum,count(distinct userid) as zbuy from ".PREFIX."domain_order where status=1 and ".$def;
             }else{
@@ -73,6 +82,7 @@ class Shoplist extends Backend
                 $v['geshu'] =  $geshu[0]['n'];
                 $v['zje'] =  $geshu[0]['znum'];
                 $v['zbuy'] = $geshu[0]['zbuy'];
+                $v['special_condition'] = $v['account'];
                 $v['pn'] = isset($buynum[$v['userid']]) ? $buynum[$v['userid']] : 0;
                 $v['t1.flag'] = $fun->getStatus($v['flag'],['普通店铺','<span style="color:red">怀米网店铺</span>','消保店铺']);
                 $v['t1.shopzt'] = $fun->getStatus($v['shopzt'],['--','<span style="color:green">正常开店</span>','<span style="color:red">正在审核</span>','<span style="color:red">禁用</span>','<span style="color:red">审核被拒</span>']);
@@ -93,12 +103,11 @@ class Shoplist extends Backend
                 $this->error('店铺名字不能为空');
             }
 
+            $shopParam['shopzt'] = isset($shopParam['shopzt']) ? $shopParam['shopzt'] : 2;
 
             $addAccount = false;
             
             $accCount = Db::name('store_account')->where('userid',$shopParam['userid'])->count();
-
-
             if($shopParam['shopzt'] == 1 || $shopParam['shopzt'] == 3){
                 //修改店铺参数
                 $odltype = $this->request->post('oldtype');
@@ -135,7 +144,7 @@ class Shoplist extends Backend
                 }
 
             }
-            
+
             $redis = new Redis();
 
             Db::startTrans();
@@ -147,15 +156,16 @@ class Shoplist extends Backend
                         $lock = $redis->lock('get_shop_account_num',10);
                         if(!$lock){
                             Db::rollback();
-                            $this->error('系统繁忙,请稍后再试!');
+                            throw new Exception('系统繁忙,请稍后再试!');
                         }
 
-                        $acc = Db::name('store_account')->where('gain_type',0)->order('account','desc')->value('account');
+                        $acc = Db::name('store_account')->where('gain_type',0)->where('remark != "默认开通店铺账号"')->order('account','desc')->value('account');
 
+                        $acc = empty($acc) ? 30010 : $acc;
                         if($acc > 99889){
                             Db::rollback();
                             $redis->unlock('get_shop_account_num');
-                            $this->error('店铺账号已使用完,请联系管理员！');
+                            throw new Exception('店铺账号已使用完,请联系管理员！');
                         }
 
                         $shopParam['account'] = $this->checkShopAccount(($acc+1));
@@ -165,6 +175,7 @@ class Shoplist extends Backend
                             'create_time' => time(),
                             'account' => $shopParam['account'],
                             'is_default' => 1,
+                            'remark' => '默认生成店铺号',
                         ]);
 
                 }
@@ -265,35 +276,13 @@ class Shoplist extends Backend
      */
     public function account(){
 
-
         if($this->request->isAjax()){
-            // set_time_limit(0);
-            // //批量生成店铺号
-            // $info = Db::name('storeconfig')->order('sj','asc')->column('userid');
-            
-            // foreach($info as $v){
-            //     $acc = Db::name('store_account')->where('gain_type',0)->order('account','desc')->value('account');
-            //     $acc = empty($acc) ? 30001 : $acc+1;
-                
-            //     $acc = $this->checkShopAccount($acc);
-
-            //     Db::name('storeconfig')->where('userid',$v)->setField('account',$acc);
-            //     Db::name('store_account')->insert([
-            //         'userid' => $v,
-            //         'create_time' => time(),
-            //         'account' => $acc,
-            //         'is_default' => 1,
-            //         'remark' => '默认开通店铺账号'
-            //     ]);
-                
-            // }
-
 
             list($where, $sort, $order, $offset, $limit) = $this->buildparams();
             
             $total = Db::name('store_account')->alias('a')->join('domain_user u','a.userid=u.id')->join('storeconfig s','a.userid=s.userid')
                     ->where($where)
-                    ->count();            
+                    ->count();
 
             $list = Db::name('store_account')->alias('a')->join('domain_user u','a.userid=u.id')->join('storeconfig s','a.userid=s.userid')
                     ->field('a.id,a.endtime,a.status,a.create_time,a.account,a.is_default,a.gain_type,a.remark,u.uid,s.shopname')
@@ -395,7 +384,7 @@ class Shoplist extends Backend
                 try{
 
                     if($params['is_default'] == 1){
-                        Db::name('store_account')->where('userid',$userid)->setField('is_default',0);
+                        Db::name('store_account')->where(['userid' => $userid,'is_default' => 1])->setField('is_default',0);
                         Db::name('storeconfig')->where('userid',$userid)->setField('account',$params['account']);
                     }
                     Db::name('store_account')->insert([
@@ -415,7 +404,7 @@ class Shoplist extends Backend
                     $this->error($e->getMessage());
                 }
 
-                Db::commit();
+            Db::commit();
 
                 $this->success('添加成功');
 
@@ -457,24 +446,27 @@ class Shoplist extends Backend
             }
 
             $remark = isset($params['remark']) ? $params['remark'] : '';
+            Db::startTrans();
 
             if($params['status'] == 0 && $info['is_default'] == 1){
 
                 $old = Db::name('store_account')->where(['userid' => $info['userid'],'gain_type' => 0])->value('account');
 
-                Db::startTrans();
                     Db::name('store_account')->where('id',$params['id'])->update(['status' => 1,'is_default' => 0,'remark' => $remark]);
                     Db::name('store_account')->where(['userid' => $info['userid'],'gain_type' => 0])->setField('is_default',1);
                     Db::name('storeconfig')->where('userid',$info['userid'])->setField('account',$old);
-                Db::commit();
 
             }else{
 
                 Db::name('store_account')->where('id',$params['id'])->update(['status' => $status,'remark' => $remark]);
 
             }
+            //修改关联表
+            Db::name('store_relevance')->where('relevance_account',$info['account'])->setField('status',$status);
 
-            
+            Db::commit();
+
+
 
             $uid = Db::name('domain_user')->where('id',$info['userid'])->value('uid');
 
@@ -547,6 +539,8 @@ class Shoplist extends Backend
                     $old = Db::name('store_account')->where(['userid' => $info['userid'],'gain_type' => 0])->value('account');
                     Db::name('storeconfig')->where('userid',$info['userid'])->setField('account',$old);
                 }
+                //修改关联表
+                Db::name('store_relevance')->where('relevance_account',$info['account'])->delete();
 
             }catch(Exception $e){
                 Db::rollback();
@@ -567,6 +561,39 @@ class Shoplist extends Backend
 
     }
 
+    /**
+     * 店铺号关联
+     */
+    public function relevance(){
+
+        if($this->request->isAjax()){
+
+            list($where, $sort, $order, $offset, $limit) = $this->buildparams();
+
+            $total = Db::name('store_relevance')->alias('r')->join('domain_user u','r.userid=u.id')->join('domain_user u1','r.relevance_userid=u1.id')
+                ->where($where)
+                ->count();
+
+            $list = Db::name('store_relevance')->alias('r')->join('domain_user u','r.userid=u.id')->join('domain_user u1','r.relevance_userid=u1.id')
+                ->field('relevance_account,status,create_time,u.uid,u1.uid as u1id')
+                ->where($where)
+                ->order($sort,$order)
+                ->limit($offset,$limit)
+                ->select();
+
+            $fun = Fun::ini();
+            foreach($list as &$v){
+                $v['r.status'] = $fun->getStatus($v['status'],['正常','禁用']);
+                $v['r.create_time'] = $v['create_time'];
+                $v['u.uid'] = $v['uid'];
+                $v['u1.uid'] = $v['u1id'];
+            }
+            $result = array("total" => $total, "rows" => $list);
+            return json($result);
+
+        }
+        return $this->view->fetch();
+    }
 
     /**
      * 检测店铺号是否可用
@@ -584,9 +611,15 @@ class Shoplist extends Backend
         $goodAccounts = Db::connect($remodi_db)->name('keep_account')->whereIn('account',$arr)->where('type',0)->column('account');
         
         $usable = array_diff($arr,$goodAccounts); 
-        
+
         if($usable){
-            return current($usable);
+            //判断店铺号是否已存在
+            $shops = Db::name('storeconfig')->whereIn('account',$usable)->order('account','asc')->column('account');
+            $shopuse = array_diff($usable,$shops);
+
+            if($shopuse){
+                return current($shopuse);
+            }
         }
 
         return self::checkShopAccount(++$last);

@@ -1,0 +1,39 @@
+<form id="add-form" class="form-horizontal form-ajax" role="form" data-toggle="validator" method="POST" action="/admin/vipmanage/recode/alteration/customeredit">
+    <div class="form-group">
+        <label for="bc" class="control-label col-xs-12 col-sm-2">用户名</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="username" name="row[username]" value=""  placeholder="请输入用户名进行查询" />
+        </div>
+        <input type="button" value="查询" id="check" class="btn btn-success btn-embossed">
+    </div>
+    <div class="form-group">
+        <label for="bc" class="control-label col-xs-12 col-sm-2">账户当前所有者</label>
+        <div class="col-xs-12 col-sm-8">
+         <input type="text" class="form-control" id="zh_syz" name="" value=""  readonly="readonly" />
+        </div>
+        <a class="dialogit" title="实名信息查看" id="dq_id" style="cursor: pointer;">查看</a>
+    </div>
+    <div class="form-group">
+        <label for="bc" class="control-label col-xs-12 col-sm-2">变更账户所有者</label>
+        <div class="col-xs-12 col-sm-8">
+            <select class="form-control" id="bg_zh" name="row[bg_id]">
+            </select>
+        </div>
+        <a class="dialogit" title="实名信息查看" id="bg_id" style="cursor: pointer;">查看</a>
+    </div>
+    <div class="form-group">
+        <label for="bc" class="control-label col-xs-12 col-sm-2">变更原因</label>
+        <div class="col-xs-12 col-sm-8">
+          <input type="text" class="form-control" id="reason" value="" name="row[reason]" />
+        </div>
+    </div>
+    <div class="form-group hidden layer-footer">
+        <label class="control-label col-xs-12 col-sm-2"></label>
+        <div class="col-xs-12 col-sm-8">
+            <button type="submit" class="btn btn-success btn-embossed">{:__('Submit')}</button>
+            <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+        </div>
+    </div>
+</form>
+
+

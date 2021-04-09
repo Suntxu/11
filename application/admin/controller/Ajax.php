@@ -159,15 +159,18 @@ class Ajax extends Backend
             $splInfo = $file->validate(['ext'=>'jpg,jpeg,png','size' => $size])->move(ROOT_PATH . '/public/' . $uploadDir.'/', $fileName);
 
 
-        }else if($zdypath == 'oss') {
+        }else if($zdypath == 'oss') { //oss直接终止
 
             $uploadDir = date('Ymd');
             $OssBecket = new OssApi();
-            $loadUrl = $uploadDir.'/'.$fileName;
+            $loadUrl = 'operate/'.$uploadDir.'/'.$fileName;
             $res = $OssBecket->uploadFile(OSS_BUCKET_NAME,$loadUrl,$file->getPathname());
-            $storage = 'ali';
             if($res['code'] == 1){
                 $this->error($res['msg']);
+            }else{
+                $this->success(__('Upload successful'), null, [
+                    'url' => '/'.$uploadDir .'/'. $fileName,
+                ]);
             }
 
         }else{

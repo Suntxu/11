@@ -34,7 +34,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                                         return '/admin/total/goodaccount/history?account='+res.account+'&type='+res.a_type;
                                     }
                                 }] 
-                            }
+                        }
                     ]
                 ],
             });//00125

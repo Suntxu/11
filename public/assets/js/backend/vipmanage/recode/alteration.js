@@ -4,15 +4,16 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
         index: function () {
             // 初始化表格参数配置
             Table.api.init({
-                showFooter: true,
+                // showFooter: true,
                 extend: {
                     index_url: 'vipmanage/recode/alteration/index',
+                    modify_url: 'vipmanage/recode/alteration/modify',
                     table: 'user',
                 }
             });
             var table = $("#table");
             // 初始化表格
-            table.bootstrapTable({  
+            table.bootstrapTable({
                 url: $.fn.bootstrapTable.defaults.extend.index_url,
                 pk: 'id',
                 sortName:'a.id',
@@ -24,12 +25,13 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                         {field: 'rz_id', title: '实名信息(新)',operate:false},
                         {field: 'old_rz_id', title: '实名信息(旧)',operate:false},
                         {field: 'a.status', title: '状态',searchList: {0:'已提交',1:'审核通过',2:'审核未通过'}},
+                        {field: 'a.oper', title: '提交类型',searchList: {0:'用户提交',1:'客服提交'}},
                         {field: 'a.time', title: '申请时间',operate: 'INT',sortable:true,addclass: 'datetimerange', formatter: Table.api.formatter.datetime},
                         {field: 'update_time', title: '审核时间',operate: 'INT',sortable:true,addclass: 'datetimerange', formatter: Table.api.formatter.datetime},
                         {field: 'reason', title: '变更原因',operate:'like'},
                         {field: 'check_reason', title: '审核备注',operate:false},
                         {field: 'ip', operate:false, title: 'IP地址',formatter:Table.api.formatter.alink,url:'http://www.baidu.com/s',fieldvaleu:'ip',fieldname:'wd',tit:'Ip归属地查询',},
-                        {field: 'operate', title: __('Operate'), table: table, 
+                        {field: 'operate', title: __('Operate'), table: table,
                             events: Table.api.events.operate,
                             formatter: Table.api.formatter.operate,
                             buttons: [{
@@ -61,9 +63,9 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                                 extend:function(res){
                                     return 'onclick="audit(\''+res.id+'\',2)"';
                                 },
-                            }] 
+                            }]
                         }
-                    ] 
+                    ]
                 ],
             });
             // 为表格绑定事件
@@ -73,6 +75,45 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
             Controller.api.bindevent();
         },
         edit: function () {
+            Controller.api.bindevent();
+        },
+        modify:function(){
+                    $("#check").click(function(){
+                        $("#bg_zh").empty();
+                        $("#zh_syz").empty();
+                        var username=$('#username').val();
+                        layer.load();
+                        $.post('/admin/vipmanage/recode/alteration/modify',{username:username},function(res){
+                        layer.closeAll('loading');
+                        if(res.code == 0){
+                            layer.msg(res.msg);
+                            return false;
+                        }
+                        for(var i=0;i<=res.length;i++){
+                                if(res[i].default==1){
+                                    $('#zh_syz').val(res[i].group);
+                                    $('#dq_id').attr("href","/admin/vipmanage/realaudit/edit?ids="+res[i].id);
+                                    continue;
+                                }
+                                html="";
+                                html+="<option value="+res[i].id+">"+res[i].group+"</option>";
+                                $("#bg_zh").append(html);
+                        }
+                    },'json');
+                });
+                    $('#bg_id').click(function(){
+                        if(!$("#bg_zh").val()){
+                             layer.msg('查看变更账户所有者为空');
+                            return false;
+                        }
+                        $('#bg_id').attr("href","/admin/vipmanage/realaudit/edit?ids="+$("#bg_zh").val());
+                    });
+                    $('#dq_id').click(function(){
+                        if(!$("#zh_syz").val()){
+                             layer.msg('查看当前账户所有者为空');
+                            return false;
+                        }
+                    });
             Controller.api.bindevent();
         },
         api: {
