@@ -59,7 +59,7 @@
                         { field: 't1.pm', title: '店铺推荐',operate:false,sortable:true,formatter:Table.api.formatter.onclk,fieldname:'t1.pm',hz:true,affair:'onblur="updatePm(this)"',},
                         { field: 'group', title: '交易时间',operate:'RANGE', visible: false,addClass:'datetimerange selll'},
                         { field: 't1.deposit', title: '保证金',operate:'BETWEEN'},
-                        {field: 'operate', title: __('Operate'), table: table,
+                        {field: 'operate', title: __('Operate'), table: table,width:230,
                                 events: Table.api.events.operate,
                                 formatter: Table.api.formatter.operate,
                                 buttons: [{
@@ -226,6 +226,8 @@
                         { field: 'relevance_account', title: '被关联店铺号',},
                         { field: 'r.create_time', title: '关联时间',operate: 'INT',sortable:true,addclass: 'datetimerange', formatter: Table.api.formatter.datetime},
                         { field: 'r.status', title: '状态',searchList:{0:'正常',1:'禁用'},},
+                        { field: 'rel_status', title: '关联状态',searchList:{0:'关联中',1:'取消'},},
+                        { field: 'remark', title: '备注',operate:false},
                     ]
                 ],
             });

@@ -52,7 +52,7 @@
                                 return '统计：';//在第一列开头写上总计、统计之类
                             }},
                         { field: 'c.tit', title: '域名',operate:'TEXT',},
-                        { field: 'special_condition', title: '后缀',visible:false, searchList: $.getJSON('domain/manage/getDomainHz'),},
+                        { field: 'group', title: '后缀',visible:false, searchList: $.getJSON('domain/manage/getDomainHz'),},
                         { field: 'c.pack', title: '交易类型',visible:false, formatter: Table.api.formatter.status, searchList:{'not exists':'一口价域名','exists':'打包域名'}},
                         { field: 'pack_num', title: '域名数量',operate:false,},
                         { field: 's.uid', title: '卖家账号',},
@@ -86,8 +86,9 @@
                             }
                         },
                         { field: 'zbn', title: '备案质保',operate:false},
-                        { field: 'group', title: '备案质保',visible:false,formatter: Table.api.formatter.status, searchList:{1:'非质保订单',2:'质保订单',3:'质保期内订单'}},
-                        { field: 'c.qetime', title: '质保到期时间',sortable:true,operate: 'INT',addclass: 'datetimerange',formatter: Table.api.formatter.datetime},
+                        { field: 'u1.uid', title: '店铺关联账号',},
+                        // { field: 'group', title: '备案质保',visible:false,formatter: Table.api.formatter.status, searchList:{1:'非质保订单',2:'质保订单',3:'质保期内订单'}},
+                        // { field: 'c.qetime', title: '质保到期时间',sortable:true,operate: 'INT',addclass: 'datetimerange',formatter: Table.api.formatter.datetime},
                         // { field: 'c.status', title: '交易状态',formatter: Table.api.formatter.status, searchList:{1:'已完成'}},
                         // { field: 'operate', title: __('Operate'), table: table, events: Table.api.events.operate, formatter: Table.api.formatter.operate }
                     ] 

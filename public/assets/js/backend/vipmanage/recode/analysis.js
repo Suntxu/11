@@ -22,6 +22,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                 columns: [
                     [
                         // {checkbox:true, title:'选择'},
+                        {field: 'group', title: '用户名',visible:false},
                         {field: 'tit', title: '域名',operate:'TEXT'},
                         {field: 'RR', title: '主机记录',},
                         {field: 'Type', title : '记录类型',searchList:Type},

@@ -113,7 +113,7 @@ class Shoplist extends Backend
                 $odltype = $this->request->post('oldtype');
 
                 if( $odltype == 0 && $shopParam['shopzt'] == 1 && in_array($shopParam['flag'],[1,2])){
-                    $shopParam['cols_param'] = 'txt,zcsj,dqsj,icptrue,security,icp_org,sogou_pr,zcs';
+                    $shopParam['cols_param'] = 'txt,dqsj,icptrue,security,icp_org,sogou_pr,zcs'; //zcsj,
                 }
                 //卖家交易锁
                 Fun::ini()->lockKey($shopParam['userid'].'_domain_transaction') || $this->error('系统繁忙,请稍后再试!');
@@ -194,7 +194,7 @@ class Shoplist extends Backend
         if(!intval($ids)){
             $this->error('参数有误');
         }
-        $data = Db::name('storeconfig')->field('userid,shopname,img,notice,uqq,mot,seotit,seokey,seodes,sj,pm,xinyong,flag,shopzt,shopztsm,djl,remark')
+        $data = Db::name('storeconfig')->alias('s')->join('domain_user u','s.userid=u.id')->field('s.userid,s.shopname,s.img,s.notice,s.uqq,u.mot,s.seotit,s.seokey,s.seodes,s.sj,s.pm,s.xinyong,s.flag,s.shopzt,s.shopztsm,s.djl,s.remark')
             ->where('userid',$ids)
             ->find();
         $this->view->assign('data',$data);
@@ -462,7 +462,7 @@ class Shoplist extends Backend
 
             }
             //修改关联表
-            Db::name('store_relevance')->where('relevance_account',$info['account'])->setField('status',$status);
+            Db::name('store_relevance')->where(['relevance_account' => $info['account'],'rel_status' => 0])->setField('status',$status);
 
             Db::commit();
 
@@ -540,7 +540,7 @@ class Shoplist extends Backend
                     Db::name('storeconfig')->where('userid',$info['userid'])->setField('account',$old);
                 }
                 //修改关联表
-                Db::name('store_relevance')->where('relevance_account',$info['account'])->delete();
+                Db::name('store_relevance')->where(['relevance_account' => $info['account'],'rel_status' => 0])->update(['rel_status' => 1,'remark' => '系统删除店铺号']);
 
             }catch(Exception $e){
                 Db::rollback();
@@ -575,7 +575,7 @@ class Shoplist extends Backend
                 ->count();
 
             $list = Db::name('store_relevance')->alias('r')->join('domain_user u','r.userid=u.id')->join('domain_user u1','r.relevance_userid=u1.id')
-                ->field('relevance_account,status,create_time,u.uid,u1.uid as u1id')
+                ->field('relevance_account,status,create_time,rel_status,remark,u.uid,u1.uid as u1id')
                 ->where($where)
                 ->order($sort,$order)
                 ->limit($offset,$limit)
@@ -584,6 +584,7 @@ class Shoplist extends Backend
             $fun = Fun::ini();
             foreach($list as &$v){
                 $v['r.status'] = $fun->getStatus($v['status'],['正常','禁用']);
+                $v['rel_status'] = $fun->getStatus($v['rel_status'],['关联中','已取消']);
                 $v['r.create_time'] = $v['create_time'];
                 $v['u.uid'] = $v['uid'];
                 $v['u1.uid'] = $v['u1id'];

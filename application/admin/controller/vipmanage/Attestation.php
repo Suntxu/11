@@ -72,7 +72,7 @@ class Attestation extends Backend
 
             foreach($list as $k=>$v){
 
-                if( $v['info_status'] != 2 || !in_array($v['auth_status'],[0,1,4]) || $v['name'] == '商务中国' || $v['name'] == '35互联' || $v['name'] == '腾讯云' || $v['ifreal'] == 1){ 
+                if( $v['info_status'] != 2 || !in_array($v['auth_status'],[0,1,4]) || $v['name'] == '商务中国' || $v['name'] == '35互联' || $v['name'] == '腾讯云' || $v['name'] == '190' || $v['ifreal'] == 1){
                     $list[$k]['op'] = '--';
                 }else if($v['cid'] != 107){
                     $url = '/admin/vipmanage/attestation/resetreal/ids/'.$v['id'];
@@ -162,22 +162,26 @@ class Attestation extends Backend
 
         if($this->request->isAjax()){
 
-            $outList = Config::get('out_register');
-            $this->checkOut($outList);
 
             list($where, $sort, $order, $offset, $limit) = $this->buildparams();
 
-            $total = Db::name('outinfo_list')->alias('o')->join('user_renzhengapi r','r.id=o.rz_id')->join('domain_api a','a.id=r.api_id')
-                ->where($where)
-                ->count();
             $list = Db::name('outinfo_list')->alias('o')->join('user_renzhengapi r','r.id=o.rz_id')->join('domain_api a','a.id=r.api_id')
-                ->field('o.id as oid,r.id,o.reg_id,o.out_reg_id,o.info_status,o.auth_status,o.auth_remark,o.info_remark,o.createtime,o.out_code,a.ifreal,o.createtime')
-                ->where($where)->order($sort,$order)->limit($offset,$limit)
+                ->field('o.id as oid,r.id,o.reg_id,o.out_reg_id,o.info_status,o.auth_status,o.auth_remark,o.info_remark,o.createtime,o.out_code,a.ifreal')
+                ->where($where)->order($sort,$order)
                 ->select();
+
+            $outList = Config::get('out_register');
+
+            $info = $this->getOutData($outList,array_column($list,'out_code'));
+
+            $data = array_merge($list,$info);
+            $total = count($data);
+            //分页后的数据
+            $pageData = array_slice($data,$offset,$limit);
+
             $zcs = $this->getCates();
             $fun = Fun::ini();
-
-            foreach($list as &$v){
+            foreach($pageData as &$v){
                 $v['o.zcs'] = isset($zcs[$v['reg_id']]) ? $zcs[$v['reg_id']] : '--';
                 if(!in_array($v['auth_status'],[0,1,4]) || $v['o.zcs'] == '商务中国' || $v['ifreal'] == 1 ){
                     $v['op'] = '--';
@@ -186,10 +190,9 @@ class Attestation extends Backend
                     $v['op'] = '<button type="button" onclick="real(\''.$url.'\')" class="btn btn-xs btn-success" title="重新实名">重新实名</button>&nbsp;';
                 }
 
-
                 if($v['auth_status'] != 3){
 
-                    $yurl = '/admin/vipmanage/attestation/updateStatus?id='.$v['oid'].'&status='.$v['auth_status'].'&flag=out&pstatus=3';
+                    $yurl = '/admin/vipmanage/attestation/updateStatus?id='.$v['oid'].'&status='.$v['auth_status'].'&rz_id='.$v['id'].'&pstatus=3';
 
                     if($v['op'] == '--'){
                         $v['op'] = '<button type="button" onclick="real(\''.$yurl.'\')" class="btn btn-xs btn-del btn-success" title="实名成功">实名成功</button>&nbsp;';
@@ -201,7 +204,7 @@ class Attestation extends Backend
 
                 if($v['auth_status'] != 1 && $v['auth_status'] != 4){
                     
-                    $yurl = '/admin/vipmanage/attestation/updateStatus?id='.$v['oid'].'&status='.$v['auth_status'].'&flag=out&pstatus=4';
+                    $yurl = '/admin/vipmanage/attestation/updateStatus?id='.$v['oid'].'&status='.$v['auth_status'].'&rz_id='.$v['id'].'&pstatus=4';
 
                     if($v['op'] == '--'){
                         $v['op'] = '<button type="button" onclick="real(\''.$yurl.'\')" class="btn btn-xs btn-del btn-danger" title="实名失败">实名失败</button>&nbsp;';
@@ -215,52 +218,18 @@ class Attestation extends Backend
 
                 $v['o.info_status'] =  $fun->getStatus($v['info_status'],[1=>'创建失败','创建成功',9=>'申请手动添加']);
 //                $v['email_status'] =  $fun->getStatus($v['email_status'],['未认证',2=>'已认证']);
-                $v['o.createtime'] = $v['createtime'];
+                $v['o.createtime'] = isset($v['createtime']) ? $v['createtime'] : '';
                 $aa = json_decode($v['auth_remark'],true);
                 $v['o.auth_remark'] = empty($aa) ? $v['auth_remark'] :  $aa;
                 $v['out_reg_id'] = empty($outList[$v['out_reg_id']]) ? '--' : $outList[$v['out_reg_id']];
 
             }
-            $result = array("total" => $total, "rows" => $list);
+
+            $result = array("total" => $total, "rows" => $pageData);
             return json($result);
         }
         $this->view->assign('id',$ids);
         return $this->view->fetch();
-    }
-
-    /**
-     * 检测并添加不存在的外部注册商
-     */
-    private function checkOut($outList){
-        $param = json_decode($this->request->param('filter'),true);
-        if(empty($param['rz_id'])){
-            $this->error('缺少重要id参数');
-        }
-        $list = Db::name('outinfo_list')->where('rz_id',$param['rz_id'])->column('out_code');
-        //获取未添加的外部注册商
-        $extra = array_diff($outList,$list);
-
-        if($extra){
-            $apiInfo = Db::name('user_renzhengapi z')->join('domain_api a','z.api_id=a.id')
-                ->field('z.info_status,z.info_remark,z.createtime,z.userid,a.regid as reg_id')
-                ->where('z.id',$param['rz_id'])
-                ->find();
-            if(empty($apiInfo)){
-                $this->error('模板获取失败');
-            }
-            $inserts = [];
-            foreach($extra as $k => $v){
-
-                $apiInfo['out_reg_id'] = $k;
-                $apiInfo['rz_id'] = $param['rz_id'];
-                $apiInfo['auth_status'] = 1;
-                $apiInfo['auth_remark'] = '默认添加外部注册商,需要重新手动提交!';
-                $apiInfo['out_code'] = $v;
-                $inserts[] = $apiInfo;
-            }
-            Db::name('outinfo_list')->insertAll($inserts);
-        }
-
     }
 
     /**
@@ -361,9 +330,16 @@ class Attestation extends Backend
         $imgpath1 = IMGURL.'alireal/'.$imgpath1;
 
         if($flag){
-            $finfo = Db::name('outinfo_list')->where('id',$flag)->field('id as out_id,out_reg_id,out_code')->find();
-            if(empty($finfo)){
-                $this->error('外部注册商id错误');
+            if($flag < 0){ // 负数 插入
+                $finfo['out_reg_id'] = abs($flag);
+                list($oid,$outName) = $this->insertOut($ids,$finfo['out_reg_id']);
+                $finfo['out_id'] = $oid;
+                $finfo['out_code'] = $outName;
+            }else{
+                $finfo = Db::name('outinfo_list')->where('id',$flag)->field('id as out_id,out_reg_id,out_code')->find();
+                if(empty($finfo)){
+                    $this->error('外部注册商id错误');
+                }
             }
             $apiInfo = array_merge($apiInfo,$finfo);
 
@@ -474,8 +450,11 @@ class Attestation extends Backend
             }
 
 
-            if(isset($param['flag']) && $param['flag'] == 'out'){
+            if(isset($param['rz_id'])){
                 $table = 'outinfo_list';
+                if($id < 0){ //插入
+                    list($id,$outName) = $this->insertOut(intval($param['rz_id']),abs($id));
+                }
             }else{
                 $table = 'user_renzhengapi';
             }
@@ -493,6 +472,84 @@ class Attestation extends Backend
         }
 
     }
+
+    /**
+     * 插入外部注册商模板
+     * @rzid  int  模板id
+     * @rouRegId int 外部注册商id
+     */
+    private function insertOut($rzId,$outRegId){
+
+        $outList = Config::get('out_register');
+
+        isset($outList[$outRegId]) || $this->error('外部注册商id错误');
+
+        $apiInfo = Db::name('user_renzhengapi z')->join('domain_api a','z.api_id=a.id')
+            ->field('z.info_status,z.info_remark,z.createtime,z.userid,a.regid as reg_id')
+            ->where('z.id',$rzId)
+            ->find();
+        if(empty($apiInfo)){
+            $this->error('模板获取失败');
+        }
+        $apiInfo['out_reg_id'] = $outRegId;
+        $apiInfo['rz_id'] = $rzId;
+        $apiInfo['auth_status'] = 1;
+        $apiInfo['auth_remark'] = '';
+        $apiInfo['out_code'] = $outList[$outRegId];
+        $id = Db::name('outinfo_list')->insertGetId($apiInfo);
+        return [$id,$outList[$outRegId]];
+    }
+
+    /**
+     * 获取不存在的外部注册商
+     * @outList array 全部外部注册商
+     * @outCodes array 已存在的数据code
+     */
+    private function getOutData($outList,$outCodes){
+        $param = json_decode($this->request->param('filter'),true);
+        if(empty($param['rz_id'])){
+            $this->error('缺少重要id参数');
+        }
+        //获取未添加的外部注册商
+        $extra = array_diff($outList,$outCodes);
+        $data = [];
+        if($extra ){
+            if(isset($param['o.auth_status']) && $param['o.auth_status'] != 1){
+                return $data;
+            }
+
+            $apiInfo = Db::name('user_renzhengapi z')->join('domain_api a','z.api_id=a.id')
+                ->field('z.info_status,z.info_remark,z.userid,a.regid as reg_id,a.ifreal')
+                ->where('z.id',$param['rz_id'])
+                ->find();
+            if(empty($apiInfo)){
+                $this->error('模板获取失败');
+            }
+            foreach($extra as $k => $v){
+                //判断条件 注册商id
+                if(isset($param['out_reg_id']) && $param['out_reg_id'] != $k){
+                    continue;
+                }
+                if(isset($param['out_code']) && $param['out_code'] != $v){
+                    continue;
+                }
+                if((isset($param['o.info_status']) && $param['o.info_status'] != $apiInfo['info_status'])){
+                    continue;
+                }
+
+                $data[$k] = $apiInfo;
+                $data[$k]['oid'] = -$k;
+                $data[$k]['out_reg_id'] = $k;
+                $data[$k]['auth_status'] = 1;
+                $data[$k]['out_code'] = $v;
+                $data[$k]['auth_remark'] = '默认添加外部注册商,需要重新手动提交!';
+                $data[$k]['id'] = $param['rz_id'];
+            }
+
+        }
+        return $data;
+    }
+
 
 
 }

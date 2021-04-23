@@ -30,8 +30,8 @@
             <li class="" id="j2"><a href="#txjk" data-toggle="tab">金钱管理</a></li>
             <li class="" id="j3"><a href="#zfjk"  data-toggle="tab">积分管理</a></li>
             <li class="" id="j4"><a href="#rebates"  data-toggle="tab">返利设置</a></li>
-            <li class="" id="j4"><a href="#other"  data-toggle="tab">其他设置</a></li>
             <li class="" id="j5"><a href="#jlcx" data-toggle="tab">记录查询</a></li>
+            <li class="" id="j6"><a href="#ysffd" data-toggle="tab">预释放上级返点</a></li>
         </ul>
     </div>
     <div class="panel-body">
@@ -186,7 +186,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        
+
                                         <h3 style="color: red">管理操作</h3>
                                         <div class="form-group">
                                             <label for="value" class="control-label col-xs-12 col-sm-2">状态变更</label>
@@ -203,14 +203,15 @@
                                             <div class="form-group"  >
                                                 <label class="control-label col-xs-12 col-sm-2">禁用天数:</label>
                                                 <div class="col-xs-12 col-sm-8">
-                                                    <input type="text" class="form-control"  {if $data.zt == 3} disabled {/if} value="{if isset($data.dis_days)} {$data.dis_days} {else} 0 {/if}" name="dis_days"  />
+                                                    <input type="text" class="form-control"  {if $data.zt == 3 && $data.dis_aac_flag} disabled {/if} value="{if isset($data.dis_days)} {$data.dis_days} {else}0{/if}" name="dis_days"  />
                                                     <span style="font-size: 12px;color: red;">禁用信息提交后无法修改,请确认后在填写!</span>
                                                 </div>
                                             </div>
+                                            <input type="hidden" name="dis_aac_flag" value="{$data.dis_aac_flag|default=1}">
                                             <div class="form-group" >
                                                 <label class="control-label col-xs-12 col-sm-2">禁用原因:</label>
                                                 <div class="col-xs-12 col-sm-8">
-                                                    <input type="text"  {if $data.zt == 3} disabled {/if} class="form-control" value="{if isset($data.dis_remark)} {$data.dis_remark} {else} {/if}" name="dis_remark"  />
+                                                    <input type="text"  {if $data.zt == 3 && $data.dis_aac_flag} disabled {/if} class="form-control" value="{if isset($data.dis_remark)} {$data.dis_remark} {else} {/if}" name="dis_remark"  />
                                                 </div>
                                             </div>
                                         </div>
@@ -281,7 +282,7 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        
+
                                         <div class="form-group">
                                             <label for="valueXX" class="control-label col-xs-12 col-sm-2">金额</label>
                                             <div class="col-xs-12 col-sm-8">
@@ -453,57 +454,6 @@
                 </form>
             </div>
         </div>
-        <!--其他设置 -->
-        <div class="tab-pane fade" id="other">
-            <div class="widget-body no-padding">
-                <form id="txjk-form1" class="edit-form form-horizontal" role="form" data-toggle="validator" method="POST" action="{:url('/admin/vipmanage/setuser/edit?flag=other')}">
-                    <table class="table table-striped">
-                        <thead>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>
-                                <div class="row">
-                                    <h3>会员账号</h3>
-                                    <div class="form-group">
-                                        <label for="value" class="control-label col-xs-12 col-sm-2">&nbsp;</label>
-                                        <div class="col-xs-12 col-sm-8">
-                                            {$data.uid}
-                                        </div>
-                                    </div>
-                                    <h4>0元配置</h4>
-                                    <div class="form-group">
-                                        <label for="value" class="control-label col-xs-12 col-sm-2">大批量域名转回</label>
-                                        <div class="col-xs-12 col-sm-8">
-                                            <div class="col-xs-12 col-sm-8">
-                                                <div class="radio">
-                                                    <label for="restiu1"><input id="restiu1"  name="other[restiu]" {if $data.restiu == 1} checked {/if} type="radio" value="1">开启</label>
-                                                    <label for="restiu2"><input id="restiu2"  name="other[restiu]" {if empty($data.restiu)} checked {/if} type="radio" value="0">不开启</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <input type="hidden" value="{$data.id}" name="id" >
-                                </div>
-                            </td>
-                        </tr>
-                        </tbody>
-                        <tfoot>
-                        <tr>
-                            <td align="center">
-                                {if $data.zt == 6}
-                                <button type="reset" style="margin-top:3%;margin-left: -14%;" class="btn btn-danger btn-embossed" disabled="disabled">该用户已注销</button>
-                                {else}
-                                <button type="submit" class="btn btn-success btn-embossed">{:__('OK')}</button>
-                                <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
-                                {/if}
-                            </td>
-                        </tr>
-                        </tfoot>
-                    </table>
-                </form>
-            </div>
-        </div>
         <!-- 记录查询 -->
         <!-- 实名认证 -->
         <div class="tab-pane fade" id="jlcx">
@@ -562,4 +512,55 @@
             </form>
         </div>
     </div>
+     <!--预释放上级返点 -->
+        <div class="tab-pane fade" id="ysffd">
+            <div class="widget-body no-padding">
+                <form id="ysffd-form1" class="edit-form form-horizontal" role="form" data-toggle="validator" method="POST" action="{:url('/admin/vipmanage/setuser/edit?flag=release')}">
+                    <table class="table table-striped">
+                        <thead>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>
+                                {if $spec }
+                                <div class="row">
+                                    <h3>上级怀米大使</h3>
+                                    <div class="form-group">
+                                        <label for="value" class="control-label col-xs-12 col-sm-2">&nbsp;</label>
+                                        <div class="col-xs-12 col-sm-8" id="uid">
+                                            {$spec}
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="value" class="control-label col-xs-12 col-sm-2">阿里云释放:<br></label>
+                                        <div class="col-xs-12 col-sm-8">
+                                            <input type="number" class="form-control" name="release[rebate]" value="{$release[66]['rebate'] | default=1}"  />
+                                            <br><span style="color: red;">默认带%,默认2位小数！</span>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" value="{$data.id}" name="id" >
+                                </div>
+
+                            </td>
+                        </tr>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <td align="center">
+                                {if $data.zt == 6}
+                                <button type="reset" style="margin-top:3%;margin-left: -14%;" class="btn btn-danger btn-embossed" disabled="disabled">该用户已注销</button>
+                                {else}
+                                <button type="submit" class="btn btn-success btn-embossed">{:__('OK')}</button>
+                                <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+                                {/if}
+                            </td>
+                        </tr>
+                        {else}
+                                    <h4 style="text-align: center;">暂无怀米大使</h4>
+                        {/if}
+                        </tfoot>
+                    </table>
+                </form>
+            </div>
+        </div>
 </div>

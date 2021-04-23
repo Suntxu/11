@@ -1,0 +1,45 @@
+<style type="text/css">
+    @media (max-width: 375px) {
+        .edit-form tr td input{width:100%;}
+        .edit-form tr th:first-child,.edit-form tr td:first-child{
+            width:20%;
+        }
+        .edit-form tr th:last-child,.edit-form tr td:last-child{
+            display: none;
+        }
+    }
+    .sf:hover{
+        color: orange;
+    }
+    #f1:hover{
+        color: #0073EA;
+    }
+    .row{
+        margin-left: -5px;
+        margin-right: -15px;
+    }
+</style>
+<div class="panel panel-default panel-intro">
+    <div class="panel-heading">
+        {:build_heading(null, false)}
+        <ul class="nav nav-tabs">
+            <li class="active" id="j0"><a href="#jbpz" id="clickpz" onclick="inlineIframeLoad('/admin/vipmanage/realaudit/index?uid={$uid}','jbpz')" data-toggle="tab">实名信息</a></li>
+            <li class="" id="j2"><a href="#jxjl" data-toggle="tab" onclick="inlineIframeLoad('/admin/vipmanage/recode/alteration/index?uid={$uid}','jxjl')">更换模板记录</a></li>
+            <li class="" id="j3"><a href="#txjk" data-toggle="tab" onclick="inlineIframeLoad('/admin/vipmanage/attestation/index?uid={$uid}','txjk')">域名模板</a></li>
+            <li class="" id="j4"><a href="#ztask" data-toggle="tab" onclick="inlineIframeLoad('/admin/vipmanage/recode/transfer/index?spec={$uid}&r.tasktype=1','ztask')">主任务记录</a></li>
+        </ul>
+    </div>
+    <div class="panel-body">
+        <div id="myTabContent" class="tab-content">
+            <div class="tab-pane fade active in" id="jbpz">
+            </div>
+            <div class="tab-pane fade  in" id="jxjl">
+            </div>
+            <div class="tab-pane fade  in" id="txjk">
+            </div>
+            <div class="tab-pane fade  in" id="ztask">
+            </div>
+        </div>
+
+    </div>
+</div>

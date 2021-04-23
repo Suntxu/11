@@ -16,7 +16,7 @@ class Users extends Backend
 {
     protected $noNeedRight = ['getUserName'];
     protected $model = null;
-   
+
     public function _initialize()
     {
         parent::_initialize();
@@ -28,15 +28,9 @@ class Users extends Backend
     public function index()
     {
         //设置过滤方法
-        if ($this->request->isAjax()) {   
-
+        if ($this->request->isAjax()) {
             list($where, $sort, $order, $offset, $limit,$group,$special_condition,$spec,$uid) = $this->buildparams();
             $def = ' 1 = 1 ';
-            if($group == 1){
-                $def .= ' and c.restiu = 1 ';
-            }elseif($group === 0){
-                $def .= ' and (c.restiu = 0 or c.restiu is null) ';
-            }
             if($uid){
                 $def .= ' and (u.uid like "%'.str_replace('@','~',trim($uid)).'%"  or u.uid like "%'.trim($uid).'%" )';
             }
@@ -93,16 +87,16 @@ class Users extends Backend
             }
 
 
-            $total = $this->model->alias('u')->join('domain_user_config c','u.id=c.userid','left')->join('storeconfig s','u.id = s.userid','left')->join('domain_promotion_relation p','p.userid=u.id ','left')
+            $total = $this->model->alias('u')->join('storeconfig s','u.id = s.userid','left')->join('domain_promotion_relation p','p.userid=u.id ','left')
                 ->where($where)->where($def)
                 ->count();
 
             //统计每个用户的总流水
             $to = ',( select sum(money) from '.PREFIX.'flow_record where userid = u.id ) as zflow,( select abs(sum(money)) from '.PREFIX.'flow_record where userid = u.id and money < 0 ) as xflow';
-            
-            $list = $this->model->alias('u')->join('domain_user_config c','u.id=c.userid','left')->join('storeconfig s','u.id = s.userid','left')->join('domain_promotion_relation p','p.userid=u.id ','left')
+
+            $list = $this->model->alias('u')->join('storeconfig s','u.id = s.userid','left')->join('domain_promotion_relation p','p.userid=u.id ','left')
                 ->where($where)->where($def)
-                ->field('u.id,u.uqq,u.uid,u.uip,u.sj,u.jf,u.money1,u.zt,u.mot,u.baomoney1,u.special,c.restiu,s.flag,p.relation_id as puserid'.$to)
+                ->field('u.id,u.qh,u.uqq,u.uid,u.uip,u.sj,u.jf,u.money1,u.zt,u.mot,u.baomoney1,u.special,s.flag,p.relation_id as puserid'.$to)
                 ->order($sort,$order)
                 ->limit($offset, $limit)
                 ->select();
@@ -118,7 +112,7 @@ class Users extends Backend
                 }else{
                     $v['spec'] = '否';
                 }
-                
+
                 $v['u.uqq'] = $v['uqq'];
                 $v['u.money1'] = sprintf('%.2f',$v['money1']);
                 $v['u.mot'] = $v['mot'];
@@ -131,13 +125,12 @@ class Users extends Backend
                     $v['special_status'] = $v['uid'];
                 }
 
-                $v['group'] = $v['restiu'];
                 $sfzsm = Db::name('user_renzheng')->where('userid = '.$v['id'])->column('status');
-                if(in_array(2,$sfzsm)){ 
+                if(in_array(2,$sfzsm)){
                     $v['special_condition'] = '通过认证';
-                }elseif(in_array(0,$sfzsm)){ 
+                }elseif(in_array(0,$sfzsm)){
                     $v['special_condition'] = '审核中';
-                }elseif(in_array(1,$sfzsm)){ 
+                }elseif(in_array(1,$sfzsm)){
                     $v['special_condition'] = '认证失败';
                 }elseif(in_array(9,$sfzsm)){
                     $v['special_condition'] = '已删除';
@@ -159,12 +152,12 @@ class Users extends Backend
      */
     public function del($ids='')
     {
-       if($ids){
+        if($ids){
             $this->model->whereIn('id',$ids)->delete();
             $this->success('删除成功');
-       }else{
+        }else{
             $this->error('缺少重要参数');
-       }
+        }
     }
     /**
      * 跳转到后台
@@ -188,7 +181,7 @@ class Users extends Backend
             return json(['code'=>1,'msg'=>'参数错误']);
         }
     }
-    
+
     /**
      * 解除冻结
      */
@@ -212,7 +205,7 @@ class Users extends Backend
     public function relieveRemote(){
 
         if($this->request->isAjax()){
-            
+
             $id = $this->request->get('userid','','intval');
             if(empty($id)){
                 $this->error('缺少重要参数');
@@ -244,25 +237,19 @@ class Users extends Backend
     public function modiMot(){
 
         if($this->request->isAjax()){
-
             $params = $this->request->post();
-
             if(empty($params['userid']) || empty($params['mot'])){
                 $this->error('缺少重要参数');
             }
-
             if(!preg_match('/^1[23456789]\d{9}$/',$params['mot'])){
                 $this->error('请填写正确手机号');
             }
-
-            Db::name('domain_user')->where('id',$params['userid'])->setField('mot',$params['mot']);
-
+            Db::name('domain_user')->where('id',$params['userid'])->update(['mot'=>$params['mot'],'qh'=>$params['qh']]);
             $this->success('操作成功');
 
         }
 
     }
-
 
     /**
      * 根据uid获取userid

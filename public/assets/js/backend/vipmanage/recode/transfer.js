@@ -26,8 +26,8 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                     [
                     
                         {field: 'r.id', title: '任务ID',},
-                        {field: 'u.id', title: '用户ID',},
-                        {field: 'uid', title: '用户名',},
+                        {field: 'r.userid', title: '用户ID/管理员',},
+                        {field: 'spec', title: '用户名/管理员',},
                         {field: 'r.tasktype', title: '操作类型',formatter: Table.api.formatter.status,searchList: {1:'更换信息模板',2:'注册域名',3:'修改dns',4:'域名续费',5:'批量解析',6:'批量删除解析',7:'批量找回域名'}},
                         {field: 'dcount', title: '域名数量',sortable:true,operate:false,footerFormatter: function (data) {
                                 var field = 'znum';

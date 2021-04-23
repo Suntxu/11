@@ -12,12 +12,13 @@ use app\admin\common\Fun;
 class Auctionlog extends Backend
 {
     protected $model = null;
+
     public function _initialize()
     {
         parent::_initialize();
         $this->model = Db::name('domain_auction_record');
     }
-    
+
     /**
      * 查看
      */
@@ -59,7 +60,30 @@ class Auctionlog extends Backend
             }
             return json(['total'=>$total,'rows'=>$list]);
         }
-        $this->view->assign('id',$this->request->get('id'));
+
+        $get = $this->request->get();
+        $source = 0;
+        if (isset($get['dialog']) && $get['dialog'] == 1) {
+            $source = 1;
+        }
+        $get['id'] = empty($get['id']) ? 0 : intval($get['id']);
+        $end_time = '无';
+        $api_id = '无';
+        $type = '无';
+        if ($get['id']) {
+            $info = Db::name('domain_auction_info')->field('end_time,api_id,type')->where('id',$get['id'])->find();
+            $end_time = date('Y-m-d H:i:s',$info['end_time']);
+            if ($info['api_id']) {
+                $data = $this->getApis();
+                $api_id = $data[$info['api_id']];
+            }
+            if ($info['type'] == 0) {
+                $type = '预定';
+            }else if($info['type'] == 1){
+                $type = '预释放';
+            }
+        }
+        $this->view->assign(['id'=>$get['id'],'source'=>$source,'end_time'=>$end_time,'api_id'=>$api_id,'type'=>$type]);
         return $this->view->fetch();
     }
 

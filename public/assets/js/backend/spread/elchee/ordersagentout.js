@@ -14,12 +14,17 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
             // 初始化表格
             table.bootstrapTable({
                 url: $.fn.bootstrapTable.defaults.extend.index_url,
-                pk: 'id',
+                pk: 'cid',
                 sortName: 'c.id',
                 orderName: 'desc',
                 escape: false, //转义空格
                 columns: [
                     [
+                        { checkbox: true,formatter:function(value, row, index){
+                            if (row.status === 1 && row.rebate_type == 2){
+                                return {disabled: true};
+                            }
+                        }},
                         { field: 'c.bc', title: '订单批次',formatter: Table.api.formatter.search,footerFormatter: function (data) {
                                 return '统计：';//在第一列开头写上总计、统计之类
                             }  },
@@ -27,7 +32,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                         { field: 'u1.uid', title: '分销用户',},
                         { field: 'c.status', title: '状态',defaultValue:1,searchList: {0:'未付款',1:'已付款',2:'待处理',9:'已取消'}},
                         { field: 'paytime', title: '付款时间',addclass:'datetimerange',sortable: true,operate: 'INT',formatter: Table.api.formatter.datetime},
-                        { field: 'out_time', title: '外部付款时间',addclass:'datetimerange',sortable: true,operate: 'INT',formatter: Table.api.formatter.datetime},
+                        // { field: 'out_time', title: '外部付款时间',addclass:'datetimerange',sortable: true,operate: 'INT',formatter: Table.api.formatter.datetime},
                         { field: 'c.money', title: '订单金额',operate: 'BETWEEN',sortable: true,
                             footerFormatter: function (data) {
                                 var field = 'zje';
@@ -46,6 +51,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                                 return total_sum.toFixed(2);
                             }
                         },
+                        { field: 'pmoney', title: '金额明细',operate: false},
                         { field: 'c.rebate_type', title: '返款状态',searchList: {0:'未反款',1:'已通知',2:'已返款'}},
                         { field: 'tit', title: '域名',operate: 'TEXT', formatter:Table.api.formatter.alink,flag:'text',align:'left',fwhere:[1],finame:['is_sift'],ys:['orange'], pdtxt:['(精选)'], st:['font'],},
                         { field: 'sxf', title: '手续费',operate: false,sortable:true,
@@ -77,7 +83,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                         },
                         { field: 'jm_id', title: '聚名卖家id',},
                         { field: 'u2.uid', title: '销售用户',},
-                        { field: 'operate', title: __('Operate'), table: table, 
+                        { field: 'operate', title: __('Operate'), table: table,
                                 events: Table.api.events.operate,
                                 formatter: Table.api.formatter.operate,
                                 buttons: [{
@@ -125,7 +131,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                                         }
                                         return false;
                                     }
-                                }] 
+                                }]
                         }
                     ]
                 ],
@@ -190,10 +196,29 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
             bindevent: function () {
                 Form.api.bindevent($("form[role=form]"));
             }
-        }
+        },
     };
     return Controller;
 });
+
+/*批量修改状态*/
+function operation(status){
+    var object = $('#table').bootstrapTable('getAllSelections');
+    var ids = '';
+    $.each(object,function (index,obj) {
+        ids += obj.cid + ',';
+    })
+    layer.load(1);
+    ids = ids.substring(0,ids.length-1)
+    $.get('/admin/spread/elchee/ordersagentout/upmodi',{id:ids,status:status},function(res){
+        layer.closeAll('loading');
+        layer.msg(res.msg);
+        if(res.code==1){
+            $('.btn-refresh').click();
+        }
+        return false;
+    },'json');
+}
 
 /**
  * 查看打包域名

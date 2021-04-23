@@ -5,6 +5,8 @@ namespace app\admin\controller\domain;
 use app\common\controller\Backend;
 use think\Db;
 use app\admin\library\Redis;
+use app\admin\common\Fun;
+
 /**
  * 系统配置
  *
@@ -31,9 +33,8 @@ class Updns extends Backend
                 $this->error('请选对应的API');
             }
             // 域名
-            $av=str_replace("\r","",$params['txt']);
-            $a=preg_split("/\n/",$av);
-            $a = array_filter($a);
+            $a = Fun::ini()->moreRow($params['txt']);
+
             // 过滤数据库中的域名
             $domainList = Db::name('domain_pro_n')->whereIn('tit',$a)->column('tit');
             if($domainList){

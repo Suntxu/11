@@ -1,0 +1,42 @@
+<form id="add-form" class="form-horizontal form-ajax" role="form" data-toggle="validator" method="POST" action="" style="height: 470px">
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">用户:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-category_id"  data-field="uid" placeholder="请输入用户名"  class="form-control " name="row[uid]" type="text"  data-rule="required">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">转回金额:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="number" class="form-control" id="value" name="row[free_money]" value="" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">开始时间:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control datetimepicker" data-date-format="Y-MM-DD HH:mm:ss" id="value2222" name="row[start_time]" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">结束时间:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control datetimepicker" data-date-format="Y-MM-DD HH:mm:ss" id="value2222" name="row[over_time]" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">状态</label>
+        <div class="col-xs-12 col-sm-8">
+            <div class="radio">
+                <label for="t1"><input id="t1" checked name="row[status]"  type="radio" value="1">启用</label>
+                <label for="t2"><input id="t2" name="row[status]" type="radio" value="0">禁用</label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group hidden layer-footer">
+        <label class="control-label col-xs-12 col-sm-2"></label>
+        <div class="col-xs-12 col-sm-8">
+            <button type="submit" class="btn btn-success btn-embossed disabled">{:__('OK')}</button>
+            <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+        </div>
+    </div>
+</form>

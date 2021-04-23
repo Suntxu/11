@@ -15,7 +15,9 @@ class Actionsearchrecord  extends Backend
 {
 
     protected $model = null;
-    
+    private $topSearchType = [0,1,2,3];
+    private $domainSearchType = [4,5,6,7];
+
     public function _initialize()
     {
         global $remodi_db;    
@@ -34,7 +36,7 @@ class Actionsearchrecord  extends Backend
             
             list($where, $sort, $order, $offset, $limit) = $this->buildparams();
 
-            $total = $this->model->where($where)->group('type')->count();
+            $total = $this->model->where($where)->whereIn('type',$this->topSearchType)->group('type')->count();
 
             $now = strtotime('now');
             //今日数量
@@ -46,7 +48,7 @@ class Actionsearchrecord  extends Backend
             //本月
             $field .= 'count(case when create_time between '.strtotime('-'.date('j').' day '.date('Y-m-d')).' and '.$now.' then 1 end) as mcount';
 
-            $list = $this->model->field('type,count(*) as zcount,'.$field)->where($where)->group('type')->select(); 
+            $list = $this->model->field('type,count(*) as zcount,'.$field)->where($where)->whereIn('type',$this->topSearchType)->group('type')->select();
 
             $fun = Fun::ini();
 
@@ -69,17 +71,17 @@ class Actionsearchrecord  extends Backend
      */
     public function details(){
 
-        if ($this->request->isAjax()) {   
-            
+        if ($this->request->isAjax()) {
+
             list($where, $sort, $order, $offset, $limit) = $this->buildparams();
             // ->join('domain_user u','r.userid = u.id','left')
             $total = $this->model->alias('r')
-                        ->where($where)
+                        ->where($where)->whereIn('r.type',$this->topSearchType)
                         ->count();
             // ->join('domain_user u','r.userid = u.id','left')
             $list = $this->model->alias('r')
                         ->field('r.type,r.ip,r.create_time,r.data,r.total,r.userid')
-                        ->where($where)->order($sort,$order)
+                        ->where($where)->whereIn('r.type',$this->topSearchType)->order($sort,$order)
                         ->limit($offset, $limit)
                         ->select();
 
@@ -102,7 +104,44 @@ class Actionsearchrecord  extends Backend
             $result = array("total" => $total, "rows" => $list);
             return json($result);
         }
+        return $this->view->fetch();
 
+    }
+
+    /**
+     * 页面搜索
+     */
+    public function pagesearch(){
+
+        if ($this->request->isAjax()) {
+
+            list($where, $sort, $order, $offset, $limit) = $this->buildparams();
+            // ->join('domain_user u','r.userid = u.id','left')
+            $total = $this->model->alias('r')
+                ->where($where)->whereIn('r.type',$this->domainSearchType)
+                ->count();
+            // ->join('domain_user u','r.userid = u.id','left')
+            $list = $this->model->alias('r')
+                ->field('r.type,r.ip,r.create_time,r.data,r.total,r.userid')
+                ->where($where)->whereIn('r.type',$this->domainSearchType)->order($sort,$order)
+                ->limit($offset, $limit)
+                ->select();
+
+            $fun = Fun::ini();
+
+            foreach($list as &$v){
+
+                $v['r.type'] = $fun->getStatus($v['type'],[4 => '一口价域名','打包一口价','精选域名','店铺列表']);
+
+                $v['r.create_time'] = $v['create_time'];
+
+                $v['r.userid'] = $v['userid'];
+
+                $v['r.data'] = $v['data'];
+            }
+            $result = array("total" => $total, "rows" => $list);
+            return json($result);
+        }
         return $this->view->fetch();
 
 

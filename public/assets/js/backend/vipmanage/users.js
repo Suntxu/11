@@ -38,78 +38,77 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                         {field: 'u.sj', title: '注册时间',operate: 'RANGE', addclass: 'datetimerange', formatter: Table.api.formatter.datetime},
                         {field: 'spec', title: '是否员工推广',formatter: Table.api.formatter.status, notit:true, searchList:{0:'否',1:'是'},},
                         {field: 'u.uip', title: '注册IP',operate:'LIKE',formatter:Table.api.formatter.alink,url:'http://www.baidu.com/s',fieldvaleu:'uip',fieldname:'wd',tit:'Ip归属地查询',},
-                        {field: 'group', title: '0元转回用户',visible:false,formatter: Table.api.formatter.status, searchList:{'not exists':'否',1:'是'}},
                         {field: 'operate', title: __('Operate'), table: table,
-                                events: Table.api.events.operate,
-                                formatter: Table.api.formatter.operate,
-                                width:200,
-                                buttons: [{
-                                    name: '新前台',
-                                    text: '新前台',
-                                    title: '新前台',
-                                    classname: 'btn btn-xs btn-ajax btn-success  ',
-                                    url: '/admin/vipmanage/users/Jump?flag=new',
-                                    error: function (data,ret) {
-                                        if(ret.code==0){
-                                            window.open(ret.weburl+'api/apioperate/goadmin?sign='+ret.token+'&uid='+ret.uid+'&time='+ret.time+'&admin_id='+ret.admin_id);
-                                        }else{
-                                            layer.msg(ret.msg);
-                                        }
-                                        return false;
-                                    },
-                                },{
-                                    name:'解除冻结',
-                                    text: '解除冻结',
-                                    title:'解除冻结',
-                                    classname:'btn btn-xs btn-ajax btn-warning',
-                                    url:function(res){
-                                        return '/admin/vipmanage/users/Unfreeze?userid='+res.id;
-                                    },
-                                    visible:function(res){
-                                        if(res.zt == 4){
-                                            return true;
-                                        }
-                                    },
-                                    success: function (data, ret) {
-                                        Layer.msg(ret.msg);
-                                        window.setTimeout(function(){
-                                            $('.btn-refresh').click();
-                                        },1500);
-                                        return false;
-                                    },
-                                    error: function (data, ret) {
-                                        Layer.msg(ret.msg);
-                                        return false;
+                            events: Table.api.events.operate,
+                            formatter: Table.api.formatter.operate,
+                            width:200,
+                            buttons: [{
+                                name: '新前台',
+                                text: '新前台',
+                                title: '新前台',
+                                classname: 'btn btn-xs btn-ajax btn-success  ',
+                                url: '/admin/vipmanage/users/Jump?flag=new',
+                                error: function (data,ret) {
+                                    if(ret.code==0){
+                                        window.open(ret.weburl+'api/apioperate/goadmin?sign='+ret.token+'&uid='+ret.uid+'&time='+ret.time+'&admin_id='+ret.admin_id);
+                                    }else{
+                                        layer.msg(ret.msg);
                                     }
-                                },{
-                                    name:'解除异地限制',
-                                    text: '解除限制',
-                                    title:'解除异地限制',
-                                    classname:'btn btn-xs btn-ajax btn-danger',
-                                    url:function(res){
-                                        return '/admin/vipmanage/users/relieveRemote?userid='+res.id;
-                                    },
-                                    success: function (data, ret) {
-                                        Layer.msg(ret.msg);
-                                        window.setTimeout(function(){
-                                            $('.btn-refresh').click();
-                                        },1500);
-                                        return false;
-                                    },
-                                    error: function (data, ret) {
-                                        Layer.msg(ret.msg);
-                                        return false;
+                                    return false;
+                                },
+                            },{
+                                name:'解除冻结',
+                                text: '解除冻结',
+                                title:'解除冻结',
+                                classname:'btn btn-xs btn-ajax btn-warning',
+                                url:function(res){
+                                    return '/admin/vipmanage/users/Unfreeze?userid='+res.id;
+                                },
+                                visible:function(res){
+                                    if(res.zt == 4){
+                                        return true;
                                     }
-                                },{
-                                    name:'修改手机号',
-                                    text: '修改手机号',
-                                    title:'修改手机号',
-                                    classname:'btn btn-xs btn-info',
-                                    extend:function(res){
-                                        return 'onclick="updateMot('+res.id+')"';
-                                    },                                    
-                                }],
-                          },
+                                },
+                                success: function (data, ret) {
+                                    Layer.msg(ret.msg);
+                                    window.setTimeout(function(){
+                                        $('.btn-refresh').click();
+                                    },1500);
+                                    return false;
+                                },
+                                error: function (data, ret) {
+                                    Layer.msg(ret.msg);
+                                    return false;
+                                }
+                            },{
+                                name:'解除异地限制',
+                                text: '解除限制',
+                                title:'解除异地限制',
+                                classname:'btn btn-xs btn-ajax btn-danger',
+                                url:function(res){
+                                    return '/admin/vipmanage/users/relieveRemote?userid='+res.id;
+                                },
+                                success: function (data, ret) {
+                                    Layer.msg(ret.msg);
+                                    window.setTimeout(function(){
+                                        $('.btn-refresh').click();
+                                    },1500);
+                                    return false;
+                                },
+                                error: function (data, ret) {
+                                    Layer.msg(ret.msg);
+                                    return false;
+                                }
+                            },{
+                                name:'修改手机号',
+                                text: '修改手机号',
+                                title:'修改手机号',
+                                classname:'btn btn-xs btn-info',
+                                extend:function(res){
+                                    return 'onclick="updateMot('+res.id+ ',' + res.qh + ',' + res.mot +')"';
+                                },
+                            }],
+                        },
                     ]
                 ],
             });
@@ -146,17 +145,28 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
     };
     return Controller;
 });
-
 /**
  * 快速修改手机号
  */
-function updateMot(id){
-
+function updateMot(id,qh,mot){
+    if (qh === 0) {
+        qh = '86';
+    }
+    layer.load(1);
+    layer.closeAll('loading');
     layer.prompt({title: '请输入要修改的手机号', formType: 0}, function(text, index){
+        var Areacode = $('#Areacode').val();
+        if (!Areacode) {
+            layer.msg('区号不能为空');
+            return false;
+        }
+        if (isNaN(Areacode)) {
+            layer.msg('请输入正确的区号');
+            return false;
+        }
         layer.close(index);
-        
         layer.load(1);
-        $.post('/admin/vipmanage/users/modiMot',{userid:id,mot:text},function(res){
+        $.post('/admin/vipmanage/users/modiMot',{userid:id,mot:text,qh:Areacode},function(res){
             layer.closeAll('loading');
             layer.msg(res.msg);
             if(res.code == 1){
@@ -164,13 +174,18 @@ function updateMot(id){
                     $('.btn-refresh').click();
                 },1500);
             }
-            console.log(res);
             return false;
-
         },'json');
-    
     });
-
-
+    $('.layui-layer-prompt').css('width','350px');
+    $('.layui-layer-input').before('<input type="text" style="width:36px" id="Areacode" class="layui-layer-input"><span style="margin-top:10px;" class="float">&nbsp-&nbsp</span>');
+    $('.layui-layer-input').addClass('float');
+    $('.float').css('float','left');
+    $('#layui-layer1').css('width','380px');
+    $('#layui-layer1').css('height','180px');
+    $('.layui-layer-content').append('<span style="float:left;color:red;font-size:10px;margin-top: 5px" >修改非大陆的手机号,请仔细检查区号是否正确!</span>');
+    $('.layui-layer-content').css('margin-left','5%');
+    $('.layui-layer-input').val(mot);
+    $('#Areacode').val(qh);
 
 }

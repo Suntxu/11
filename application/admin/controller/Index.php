@@ -239,6 +239,9 @@ class Index extends Backend
             //待审核的认证换绑记录
             $count['accounts_update'] = Db::name('accounts_update')->where('status',0)->count();
 
+            //待审核的域名属性修改
+            $count['domain_attr_update'] = Db::name('domain_pro_trade_update')->where('status',0)->count();
+
         }else{
             if(in_array(440,$rules) && !in_array(12, $groupPids) ){
                 $count['shopzt'] = Db::name('storeconfig')->where('shopzt',2)->count();
@@ -334,6 +337,12 @@ class Index extends Backend
                 //待审核的认证换绑记录
                 $count['accounts_update'] = Db::name('accounts_update')->where('status',0)->count();
             }
+            if(in_array(730,$rules)){
+                //待审核的域名属性修改
+                $count['domain_attr_update'] = Db::name('domain_pro_trade_update')->where('status',0)->count();
+            }
+
+
 
         }
         $groupIds = array_unique(array_column($gids,'group_id'));

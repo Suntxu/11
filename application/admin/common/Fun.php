@@ -281,7 +281,7 @@ class Fun
 	public function csvFile($header,$contet,$filename=''){
 
 		$filename = empty($filename) ? time().'.csv' : $filename;
-        
+
         mb_convert_variables('GB2312','ASCII,UTF-8',$header);
 
 		header('Content-Type: application/vnd.ms-excel');   //header设置
@@ -291,7 +291,7 @@ class Fun
         $fp = fopen('php://output','a');
         
         fputcsv($fp,$header);
-        
+
         foreach($contet as $k => $v){
         	$row = array_map(function($n){ return iconv('UTF-8','GB2312//IGNORE',$n); }, $v);
             fputcsv($fp,$row);
@@ -349,6 +349,30 @@ class Fun
 		}		
 		die;
 	}
+
+    /**
+     * 下载word文档
+     */
+    public function wordFile($contet,$filename=""){
+
+        $filename = empty($filename) ? uniqid().'.doc' : $filename;
+
+        header("Cache-Control: no-cache, must-revalidate");
+        header("Pragma: no-cache");
+        header("Content-Type: application/octet-stream");
+        header("Content-Disposition: attachment; filename=$filename");
+
+        $html = '<html xmlns:v="urn:schemas-microsoft-com:vml"
+                xmlns:o="urn:schemas-microsoft-com:office:office"
+                xmlns:w="urn:schemas-microsoft-com:office:word" 
+                xmlns:m="http://schemas.microsoft.com/office/2004/12/omml" 
+                xmlns="http://www.w3.org/TR/REC-html40">';
+        $html .= '<head><meta charset="UTF-8" /></head>';
+
+        echo $html . '<body>'.$contet .'</body></html>';
+        die;
+
+    }
 
 	/**
 	 * 查询域名状态

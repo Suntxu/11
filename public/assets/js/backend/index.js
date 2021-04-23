@@ -528,6 +528,9 @@ function getDisposeTask(){
             if(res.data.recycle_task){
                 html+= '您有<span style="color:red"> '+res.data.recycle_task+' </span>批回收域名待处理！<a href="/admin/domain/recycle/recylist?t.status=2" title="待处理--域名回收" class="btn-addtabs" onclick="closeTip()" >查看详情>></a><br>';
             }
+            if(res.data.domain_attr_update){
+                html+= '您有<span style="color:red"> '+res.data.domain_attr_update+' </span>条域名属性修改需要审核！<a href="/admin/domain/attributeupdate?dptu.status=0" title="待处理--属性修改" class="btn-addtabs" onclick="closeTip()" >查看详情>></a><br>';
+            }
             // if(res.data.update_35){
             //     html+= '您有<span style="color:red"> '+res.data.update_35+' </span>条手动过户记录未处理！<a href="/admin/domain/ownership" title="未处理--手动模板过户" class="btn-addtabs" onclick="closeTip()" >查看详情>></a><br>';
             // }

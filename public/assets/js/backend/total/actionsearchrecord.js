@@ -76,6 +76,39 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
             // 为表格绑定事件
             Table.api.bindevent(table);
         },
+        pagesearch: function () {
+            // 初始化表格参数配置
+            Table.api.init({
+                extend: {
+                    index_url: 'total/actionsearchrecord/pageSearch',
+                    table: 'user',
+                }
+            });
+
+            var table = $("#table");
+            // 初始化表格
+            table.bootstrapTable({
+                url: $.fn.bootstrapTable.defaults.extend.index_url,
+                pk: 'id',
+                sortName:'r.id',
+                escape: false, //转义空格
+                pageList: [10, 25, 50,100,200, 'All'],
+                columns: [
+                    [
+                        {field: 'r.userid', title: '用户ID',sortable:true},
+                        // {field: 'u.uid', title: '用户',},
+                        {field: 'r.type', title: '类型',searchList:{4:'一口价域名',5:'打包一口价',6:'精选域名',7:'店铺列表'}},
+                        {field: 'r.data', title: '关键词',operate:'like',width:800},
+                        {field: 'total', title: '结果数',operate:false,sortable:true},
+                        {field: 'r.create_time', title: '访问时间',operate: 'INT',sortable:true,addclass: 'datetimerange', formatter: Table.api.formatter.datetime},
+                        {field: 'ip', title: '登录IP',operate:false,formatter:Table.api.formatter.alink,url:'http://www.baidu.com/s',fieldvaleu:'l.uip',fieldname:'wd',tit:'Ip归属地查询',},
+                    ]
+                ],
+
+            });
+            // 为表格绑定事件
+            Table.api.bindevent(table);
+        },
         add: function () {
             Controller.api.bindevent();
         },

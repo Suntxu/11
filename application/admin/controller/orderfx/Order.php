@@ -35,14 +35,14 @@ class Order extends Backend
         {
             list($where, $sort, $order, $offset, $limit) = $this->buildparams();
             $total = $this->model->alias('o')->join('domain_helptype h','o.type=h.id')
-                    ->where($where)
-                    ->count();
+                ->where($where)
+                ->count();
             $list = $this->model->alias('o')->join('domain_helptype h','o.type=h.id')
-                    ->field('o.*,h.name1')
-                    ->where($where)
-                    ->order($sort, $order)
-                    ->limit($offset, $limit)
-                    ->select();
+                ->field('o.*,h.name1')
+                ->where($where)
+                ->order($sort, $order)
+                ->limit($offset, $limit)
+                ->select();
             $fun = Fun::ini();
             foreach($list as $k=>$v){
                 $list[$k]['type'] = $v['name1'];
@@ -88,47 +88,47 @@ class Order extends Backend
                 $img = [];
             }
             $data['img'] = '';
-           foreach($img as $v){
+            foreach($img as $v){
                 $data['img'] .= '<img src="'.WEBURL.'uploads/workorder/'.$v.'" onclick="bigImg(this,'.$data['id'].')"  style="width: 29px;height: 29px;cursor: pointer;" >';
-           }
-           $data['ig'] = '<a id="a'.$data['id'].'"><img id="bigimg'.$data['id'].'" style="cursor: pointer; max-width: 240px; max-height: 200px;"></a>';
-           //沟通记录‘
-           $hf = '';
-           $user = Db::name('order_reply') -> where(['gid'=>$data['id']])->select();
-           foreach($user as $k => $v){
+            }
+            $data['ig'] = '<a id="a'.$data['id'].'"><img id="bigimg'.$data['id'].'" style="cursor: pointer; max-width: 240px; max-height: 200px;"></a>';
+            //沟通记录‘
+            $hf = '';
+            $user = Db::name('order_reply') -> where(['gid'=>$data['id']])->select();
+            foreach($user as $k => $v){
                 if($v['author'] != '怀米工程师'){
                     $hf .= '<div class="jllist user " >';
                 }else{
                     $hf .= '<div class="jllist">';
                 }
                 if($v['author'] != '怀米工程师'){
-                     $topimg = Db::name('domain_user')->where(['uid'=>$v['author']])->value('topimg');
-                     $hf .= '<img class="touxiang" src="';
-                     if($topimg){
+                    $topimg = Db::name('domain_user')->where(['uid'=>$v['author']])->value('topimg');
+                    $hf .= '<img class="touxiang" src="';
+                    if($topimg){
                         $hf .= WEBURL.'uploads/headimg/'.$topimg.'">';
-                     }else{
+                    }else{
                         $hf .= WEBURL.'static/images/header.png">';
-                     }
-                     $hf .= '<div class="guke">'.$v['author'].'  '.$v['con'];
-                     if(!empty($v['file'])){
+                    }
+                    $hf .= '<div class="guke">'.$v['author'].'  '.$v['con'];
+                    if(!empty($v['file'])){
                         $img = explode(',',rtrim($v['file'],','));
-                     }else{
+                    }else{
                         $img =[];
-                     }
-                     foreach($img as $kk => $vv){
+                    }
+                    foreach($img as $kk => $vv){
                         $hf .= ' <img src="'.WEBURL.'uploads/workorder/'.$vv.'" onclick="bigImg(this,'.$v['id'].')"  style="width: 29px;height: 29px;cursor: pointer;" >';
-                     }
+                    }
                 }else{
                     $hf .= '<img class="touxiang" src="'.WEBURL.'static/images/image/hm.jpg" />';
                     $hf .= '<div class="guke">'.$v['author'].' &nbsp;&nbsp; '.$v['con'];
-                     if(!empty($v['file'])){
+                    if(!empty($v['file'])){
                         $img = explode(',',rtrim($v['file'],','));
-                     }else{
+                    }else{
                         $img =[];
-                     }
-                     foreach($img as $kk => $vv){
+                    }
+                    foreach($img as $kk => $vv){
                         $hf .= ' <img src="/uploads/'.$vv.'" onclick="bigImg(this,'.$v['id'].')"  style="width: 29px;height: 29px;cursor: pointer;" >';
-                     }
+                    }
                 }
                 $hf .= ' <p><span class="time dtsj">'.date('Y-m-d  H:i:s',$v['time']).'</span></p></div><div><br><a id="a'.$v['id'].'"><img id="bigimg'.$v['id'].'" style="cursor: pointer; max-width: 320px; max-height: 280px;"></a></div></div>';
             }
@@ -136,53 +136,6 @@ class Order extends Backend
             return $this->view->fetch();
         }
         return $this->view->fetch();
-    }
-
-
-     /**
-     * 反馈列表
-     */
-    public function feedback()
-    {
-        if ($this->request->isAjax())
-        {
-            list($where, $sort, $order, $offset, $limit) = $this->buildparams();
-            $total = $this->db->where($where)->count();
-            $list = $this->db
-                    ->field('id,uid,uqq,type,nickname,desc,create_time,status')
-                    ->where($where)
-                    ->order($sort, $order)
-                    ->limit($offset, $limit)
-                    ->select();
-            $fun = Fun::ini();
-            foreach($list as $k=>$v){
-                $list[$k]['type'] = $fun->getStatus($v['type'],['功能改进','在线提问','其他']);
-                $list[$k]['y_status'] = $v['status'];
-                $list[$k]['status'] = $fun->getStatus($v['status'],['<span style="color: red;">未读 </span>','<span style="color: green;">已读 </span>']);
-            }
-            $result = array("total" => $total, "rows" => $list);
-            return json($result);
-        }
-        return $this->view->fetch();
-    }
-
-     /**
-     * 反馈状态
-     */
-    public function ready()
-    {
-        if ($this->request->isAjax())
-        {
-            $id = $this->request->get('id');
-
-            if(empty($id)){
-                $this->error('缺少重要参数');
-            }
-
-            $this->db->where('id',intval($id))->setField('status',1);
-
-            $this->success('消息已读');
-        }
     }
 
 }

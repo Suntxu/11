@@ -66,7 +66,7 @@ define(['jquery', 'bootstrap', 'backend', 'form', 'table'], function ($, undefin
                         {field: 'o.info_status', title:'模板状态', formatter: Table.api.formatter.status, custom: {'创建失败':'danger','创建成功':'success','申请手动添加':'info'}, searchList: {1:'创建失败',2:'创建成功',9:'申请手动添加'},},
                         {field: 'o.info_remark', title:'模板认证失败原因',operate:false},
                         {field: 'out_code', title:'注册商编码',},
-                        {field: 'o.createtime',title: '创建时间',addclass: 'datetimerange',sortable:true,operate: false,formatter: Table.api.formatter.datetime},
+                        {field: 'o.createtime',title: '创建时间',addclass: 'datetimerange',operate: false,formatter: Table.api.formatter.datetime},
                         {field: 'op', title: __('Operate'),width:200,operate:false}
                     ]
                 ],

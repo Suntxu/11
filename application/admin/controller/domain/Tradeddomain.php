@@ -13,7 +13,6 @@ use app\admin\common\Fun;
 class Tradeddomain extends Backend
 {
 
-    protected $relationSearch = false;
     protected $model = null;
     /**
      * User模型对象
@@ -31,34 +30,22 @@ class Tradeddomain extends Backend
     {
         if ($this->request->isAjax())
         {
-            //如果发送的来源是Selectpage，则转发到Selectpage
-            if ($this->request->request('keyField'))
-            {
-                return $this->selectpage();
-            }
-            list($where, $sort, $order, $offset, $limit,$group,$special_condition) = $this->buildparams();
-            $defindwhere = ' 1 = 1 ';
-            if(isset($group)){
-                if($group == 2){
-                    $defindwhere .= 'and c.qetime > 0';
-                }elseif($group == 3){
-                    $defindwhere .= 'and c.qetime != 0 and c.qetime > '.time();
-                }else{
-                    $defindwhere .= 'and c.qday = 0';
-                }
-            }
-            if($special_condition){
-                $defindwhere .= ' and REPLACE(c.tit,substring_index(c.tit,".",1),"") = "'.$special_condition.'"  ';
+
+            list($where, $sort, $order, $offset, $limit,$hz) = $this->buildparams();
+            $defindwhere = ' c.status = 1 ';
+
+            if($hz){
+                $defindwhere .= ' and REPLACE(c.tit,substring_index(c.tit,".",1),"") = "'.$hz.'"  ';
             }
 
             $total = $this->model
-                    ->alias('c')->join('domain_user u','c.userid=u.id','left')->join('domain_user s','c.selleruserid=s.id','left')
-                    ->where($where)->where(['c.status'=>1])->where($defindwhere)
+                    ->alias('c')->join('domain_user u','c.userid=u.id','left')->join('domain_user s','c.selleruserid=s.id','left')->join('domain_user u1','c.relshop_userid=u1.id','left')
+                    ->where($where)->where($defindwhere)
                     ->count();
             $list = $this->model
-                    ->alias('c')->join('domain_user u','c.userid=u.id','left')->join('domain_user s','c.selleruserid=s.id','left')
-                    ->field('c.id,c.tit,s.uid as suid,c.paytime,u.uid as uuid,c.money,c.bc,c.pack,c.sxf,c.qday,c.qetime,c.qmoney')
-                    ->where($where)->where($defindwhere)->where(['c.status'=>1])->order($sort, $order)->limit($offset, $limit)
+                    ->alias('c')->join('domain_user u','c.userid=u.id','left')->join('domain_user s','c.selleruserid=s.id','left')->join('domain_user u1','c.relshop_userid=u1.id','left')
+                    ->field('c.id,c.tit,s.uid as suid,c.paytime,u.uid as uuid,c.money,c.bc,c.pack,c.sxf,c.qday,c.qmoney,u1.uid as u1id')
+                    ->where($where)->where($defindwhere)->order($sort, $order)->limit($offset, $limit)
                     ->select();
             //根据条件统计总金额
             $sql = $this -> setWhere();
@@ -69,25 +56,23 @@ class Tradeddomain extends Backend
                 if($defindwhere){
                     $defindwhere = ' and '.$defindwhere;
                 }
-                $conm = 'SELECT sum(c.money) as n,sum(c.sxf) as f FROM '.PREFIX.'domain_order as c LEFT JOIN '.PREFIX.'domain_user as u ON c.userid=u.id LEFT JOIN '.PREFIX.'domain_user as s ON c.selleruserid=s.id '.$sql.' AND c.status = 1'.$defindwhere;
-                $conm1 = 'SELECT count(DISTINCT c.userid) AS n FROM '.PREFIX.'domain_order as c LEFT JOIN '.PREFIX.'domain_user as u ON c.userid=u.id LEFT JOIN '.PREFIX.'domain_user as s ON c.selleruserid=s.id '.$sql.' AND c.status = 1 '.$defindwhere;
+                $conm = 'SELECT sum(c.money) as n,sum(c.sxf) as f FROM '.PREFIX.'domain_order as c LEFT JOIN '.PREFIX.'domain_user as u ON c.userid=u.id LEFT JOIN '.PREFIX.'domain_user as s ON c.selleruserid=s.id left join '.PREFIX.'domain_user u1 on c.relshop_userid = u1.id '.$sql.' AND c.status = 1'.$defindwhere;
+                $conm1 = 'SELECT count(DISTINCT c.userid) AS n FROM '.PREFIX.'domain_order as c LEFT JOIN '.PREFIX.'domain_user as u ON c.userid=u.id LEFT JOIN '.PREFIX.'domain_user as s ON c.selleruserid=s.id left join '.PREFIX.'domain_user u1 on c.relshop_userid = u1.id '.$sql.' AND c.status = 1 '.$defindwhere;
             }
             
             $res = Db::query($conm);
             $res1 = Db::query($conm1);
             // 字段 交易类型(连接的domain_pro的jyfs 或者在购物车增加一个字段) 交易状态
             $arr = [];
-            $fun = Fun::ini();
             foreach($list as $k=>$v){
 
                 $arrs = explode('.',$v['tit']);
-                $arr[$k]['special_condition'] =  str_replace($arrs[0],'',$v['tit']);
+                $arr[$k]['group'] =  str_replace($arrs[0],'',$v['tit']);
                 $arr[$k]['c.tit'] = $v['tit'];
                 $arr[$k]['s.uid'] = $v['suid'];
                 $arr[$k]['c.paytime'] = $v['paytime'];
                 $arr[$k]['u.uid'] = $v['uuid'];
                 $arr[$k]['c.money'] = $v['money'];
-                $arr[$k]['c.status'] = '已完成'; //交易状态
                 $arr[$k]['zje'] = $res[0]['n'];
                 $arr[$k]['people'] = $res1[0]['n'];
                 $arr[$k]['c.bc'] = $v['bc'];
@@ -95,8 +80,7 @@ class Tradeddomain extends Backend
                 $arr[$k]['id'] = $v['id'];
                 $arr[$k]['sxf'] = sprintf('%.2f',$v['sxf']);
                 $arr[$k]['zsfx'] = $res[0]['f'];
-                $arr[$k]['c.qetime'] = $v['qetime'];
-                // $arr[$k]['c.dttype'] = $fun->getStatus($v['dttype'],[1=>'一口价','合作方一口价']);
+                $arr[$k]['u1.uid'] = $v['u1id'];
                 if(empty($v['qday'])){
                     $arr[$k]['group'] = '非质保';
                     $arr[$k]['zbn'] = '非质保';

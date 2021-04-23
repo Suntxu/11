@@ -18,22 +18,21 @@ class Outshop extends Backend
     protected $model = null;
 
     public function _initialize()
-    {   
+    {
         parent::_initialize();
 
         global $remodi_db;
-
         $this->model = Db::connect($remodi_db)->name('outshop_config');
     }
-    
+
     /**
      * 查看
      */
     public function index()
-    {   
+    {
         //设置过滤方法
         if ($this->request->isAjax())
-        {   
+        {
             list($where, $sort, $order, $offset, $limit) = $this->buildparams();
             $total = $this->model->where($where)->count();
             $list = $this->model->field('id,shopid,discount,type,create_time')->where($where)->order($sort,$order)->limit($offset, $limit)->select();
@@ -51,7 +50,7 @@ class Outshop extends Backend
      */
     public function add()
     {
-       
+
         if ($this->request->isPost()){
             $params = $this->request->post("row/a");
             if ($params){
@@ -62,7 +61,7 @@ class Outshop extends Backend
                 if($flag){
                     $this->error('相同的合作商类型店铺ID不能相同');
                 }
-                
+
                 $params['min_price'] = empty($params['min_price']) ? 0.00 : floatval($params['min_price']);
                 $params['max_price'] = empty($params['max_price']) ? 0.00 : floatval($params['max_price']);
 
@@ -107,7 +106,7 @@ class Outshop extends Backend
                     Db::name('domain_pro_trade_out')->where('money',['>=',$params['min_price']],['<=', $params['max_price']])->where('shopid',$params['shopid'])->delete();
                 }
                 $this->model->update($params);
-                
+
                 Db::commit();
 
                 $this->success('添加成功');
@@ -124,21 +123,74 @@ class Outshop extends Backend
      */
     public function del($ids='')
     {
-       if($ids){
+        if($ids){
 
             $shopids = $this->model->whereIn('id',$ids)->column('shopid');
 
             Db::startTrans();
 
-                $this->model->whereIn('id',$ids)->delete($ids);
+            $this->model->whereIn('id',$ids)->delete($ids);
 
-                Db::name('domain_pro_trade_out')->whereIn('shopid',$shopids)->delete();
+            Db::name('domain_pro_trade_out')->whereIn('shopid',$shopids)->delete();
 
             Db::commit();
 
             $this->success('删除成功');
-       }else{
+        }else{
             $this->error('缺少重要参数');
-       }
+        }
+    }
+
+    //修改折扣率
+    public function updateDiscountRate(){
+        if ($this->request->isPost()){
+            $params = $this->request->post();
+            if (empty($params['id'])) {
+                return json(['msg'=>'重要参数错误']);
+            }
+            $cos = empty($params['remark']) ? 0 : floatval($params['remark']);
+            if(empty($cos)){
+                return json(['msg'=>'重要参数错误']);
+            }
+
+
+            $id = $this->model->whereIn('id',$params['id'])->column('id');
+            if ($id) {
+                $res = $this->model->whereIn('id',$id)->update(['discount'=>sprintf("%.2f",$cos)]);
+                if ($res) {
+                    return json(['msg'=>'修改成功']);
+                }else{
+                    return json(['msg'=>'修改失败']);
+                }
+            }
+            return json(['msg'=>'请选择正确的信息']);
+        }
+    }
+
+    //修改区间值
+    public function updateZoneValue(){
+        if ($this->request->isPost()){
+            $params = $this->request->post();
+            if (empty($params['id'])) {
+                return json(['msg'=>'重要参数错误']);
+            }
+
+            $min = empty($params['remark']) ? 0 : sprintf('%.2f',floatval($params['remark']));
+            $max = empty($params['max_price']) ? 0 :  sprintf('%.2f',floatval($params['max_price']));
+            if(empty($min) || empty($max)){
+                return json(['msg'=>'金额信息有误']);
+            }
+
+            $id = $this->model->whereIn('id',$params['id'])->column('id');
+            if ($id) {
+                $res = $this->model->whereIn('id',$id)->update(['min_price'=>$min,'max_price'=>$max]);
+                if ($res) {
+                    return json(['msg'=>'修改成功']);
+                }else{
+                    return json(['msg'=>'修改失败']);
+                }
+            }
+            return json(['msg'=>'请选择正确的信息']);
+        }
     }
 }

@@ -367,7 +367,7 @@ class Manage extends Backend
             $this->error($list['msg']);
         }
 
-        $this->view->assign('data',$list['data']);
+        $this->view->assign(['data' => $list['data'],'tit' => $tit]);
         return $this->view->fetch();
     }
 

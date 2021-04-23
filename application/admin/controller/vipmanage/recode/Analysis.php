@@ -31,11 +31,19 @@ class Analysis extends Backend
             if(empty($filter)){
                 $this->error('请设置搜索条件后查询数据');
             }
-            list($where, $sort, $order, $offset, $limit) = $this->buildparams();
-            $total = $this->model->where($where)->count();
+            list($where, $sort, $order, $offset, $limit,$uid) = $this->buildparams();
+
+            $def = '';
+            if($uid){
+                $userid = Db::name('domain_user')->where('uid',trim($uid))->value('id');
+                $def = ' userid = '.($userid ? $userid : 0);
+            }
+
+
+            $total = $this->model->where($where)->where($def)->count();
             $list = $this->model
                          ->field('tit,RR,Type,Value,Line,Status,time')
-                         ->where($where)->order($sort,$order)->limit($offset, $limit)
+                         ->where($where)->where($def)->order($sort,$order)->limit($offset, $limit)
                          ->select();
             $fun = Fun::ini();
             $line=array('default'=>'默认','unicom'=>'联通','telecom'=>'电信','mobile'=>'移动','edu'=>'中国教育网',
@@ -44,6 +52,7 @@ class Analysis extends Backend
             foreach($list as &$v){
                 $v['Status'] = $fun->getStatus($v['Status'],$status);
                 $v['Line']=$fun->getStatus($v['Line'],$line);
+                $v['group'] = '';
             }
             $result = array("total" => $total, "rows" => $list);
             return json($result);

@@ -1,0 +1,107 @@
+<style type="text/css">
+    @media (max-width: 375px) {
+        .edit-form tr td input{width:100%;}
+        .edit-form tr th:first-child,.edit-form tr td:first-child{
+            width:20%;
+        }
+        .edit-form tr th:last-child,.edit-form tr td:last-child{
+            display: none;
+        }
+    }
+    .sf:hover{
+        color: orange;
+    }
+    #f1:hover{
+        color: #0073EA;
+    }
+    .row{
+        margin-left: -5px;
+        margin-right: -15px;
+    }
+</style>
+<div class="panel panel-default panel-intro">
+    <div class="panel-heading">
+        {:build_heading(null, false)}
+        <ul class="nav nav-tabs">
+            <li class="active" id="j0"><a href="#jbpz" id="clickpz" data-toggle="tab">域名基本信息</a></li>
+            {if $data}
+                <li class="" id="j2"><a href="#jxjl" data-toggle="tab" onclick="inlineIframeLoad('/admin/vipmanage/recode/analysis?group={$uid}&tit={$tit}','jxjl')">解析记录</a></li>
+                <li class="" id="j3"><a href="#txjk" data-toggle="tab" onclick="inlineIframeLoad('/admin/vipmanage/recode/parselog/index?r.tit={$tit}&u.uid={$uid}','txjk')">解析日志</a></li>
+                <li class="" id="j4"><a href="#whiosinfo" data-toggle="tab" onclick="inlineIframeLoad('/admin/domain/manage/checkwhois?tit={$tit}','whiosinfo')">whios</a></li>
+                <li class="" id="j5"><a href="http://ping.chinaz.com/{$tit}" target="_blank" >ping</a></li>
+            <li class="" id="j4"><a href="#ztask" data-toggle="tab" onclick="inlineIframeLoad('/admin/vipmanage/recode/transfer/index?spec={$uid}&r.tasktype=5','ztask')">主任务记录</a></li>
+
+            {/if}
+
+        </ul>
+    </div>
+    <div class="panel-body">
+        <div id="myTabContent" class="tab-content">
+            <div class="tab-pane fade active in" id="jbpz">
+                <div class="widget-body no-padding">
+                    {if $data}
+                        <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th width="112px">标题</th>
+                            <th>数值</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>域名</td>
+                            <td>
+                                {$data['tit']}&nbsp;&nbsp;&nbsp;&nbsp;
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>入库时间</td>
+                            <td>{$data['inserttime']}</td>
+                        </tr>
+                        <tr>
+                            <td>注册时间</td>
+                            <td>{$data['zcsj']}</td>
+                        </tr>
+                        <tr>
+                            <td>到期时间</td>
+                            <td>{$data['dqsj']}</td>
+                        </tr>
+                        <tr>
+                            <td>长度</td>
+                            <td>{$data['len']}</td>
+                        </tr>
+                        <tr>
+                            <td>交易状态</td>
+                            <td>{$data['zt']}</td>
+                        </tr>
+                        <tr>
+                            <td>冻结状态</td>
+                            <td>{$data['status']}</td>
+                        </tr>
+                        <tr>
+                            <td>push状态</td>
+                            <td>{$data['pushid'] > 0 ? 'PUSH中':'正常'}</td>
+                        </tr>
+                        <tr>
+                            <td>注册接口类型</td>
+                            <td>{$data['zcs']}---{$data['api']}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    {else}
+                        <div style="color: red;font-weight: 700;font-size: 18px;margin: 20px;">域名不存在或域名归属已发生改变,请删除后重新添加!</div>
+                    {/if}
+                </div>
+            </div>
+            <div class="tab-pane fade  in" id="jxjl">
+            </div>
+            <div class="tab-pane fade  in" id="txjk">
+            </div>
+            <div class="tab-pane fade  in" id="whiosinfo">
+            </div>
+            <div class="tab-pane fade  in" id="ztask">
+            </div>
+        </div>
+
+    </div>
+</div>

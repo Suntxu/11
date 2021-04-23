@@ -68,6 +68,17 @@ class Manually extends Backend
                 $this->error('用户:'.rtrim($nuid,',').'已经成为怀米大使了！');
             }
 
+            //查询上级是否为怀米大使
+            $d = Db::name('domain_promotion_relation')->whereIn('userid',$userids)->column('userid');
+            if($d){
+                $ruserids = array_unique($d);
+                $ruid = '';
+                foreach($ruserids as $v){
+                    $ruid .= $uarr[$v].',';
+                }
+                $this->error('用户:'.rtrim($ruid,',').'已有上级怀米大使！');
+            }
+
             $time = time();
             $arr = [];
             foreach($userids as $v){

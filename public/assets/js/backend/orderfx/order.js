@@ -42,65 +42,6 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
         show: function () {
             Controller.api.bindevent();
         },
-        feedback: function () {
-            // 初始化表格参数配置
-            Table.api.init({
-                // showFooter: true,
-                extend: {
-                    feedback_url:'orderfx/order/feedback' ,
-                    table: 'user',
-                }
-            });
-            var table = $("#table");
-            var id = null;
-             // 初始化表格
-            table.bootstrapTable({
-                url: $.fn.bootstrapTable.defaults.extend.feedback_url,
-                pk: 'id',
-                sortName: 'id',
-                orderName: 'desc',
-                escape: false, //转义空格
-                columns: [
-                    [
-                        { field: 'uid', title: '用户名',sortable: true,},
-                        { field: 'uqq', title: 'QQ号', sortable: true,},
-                        { field: 'type', title: '反馈类型',searchList: {0:'功能改进',1:'在线提问',2:'其他'},},
-                        { field: 'nickname', title: '昵称',sortable: true,},
-                        { field: 'desc', title: '反馈内容',operate:false,},
-                        { field: 'create_time', title: '提交时间',operate: 'RANGE',addclass: 'datetimerange',formatter:Table.api.formatter.datetime,},
-                        { field: 'status', title: '阅读状态',searchList: {0:'未读',1:'已读'}},
-                        {field: 'operate', title: __('Operate'), table: table,
-                            events: Table.api.events.operate,
-                            formatter: Table.api.formatter.operate,
-                            buttons: [{
-                                name:'已读',
-                                text: '已读',
-                                title:'已读',
-                                classname:'btn btn-xs btn-ajax btn-warning',
-                                visible:function(res){
-                                  if(res.y_status == 0){
-                                      return true;
-                                  }
-                                  return false;
-                                },
-                                url: function(res){
-                                    return '/admin/orderfx/order/ready?id='+res.id;
-                                },
-                                success: function (data,ret) {
-                                    layer.msg(ret.msg);
-                                    if(ret.code==1){
-                                        $('.btn-refresh').click();
-                                    }
-                                    return false;
-                                },
-                            }]
-                        }
-                    ]
-                ],
-            });
-            // 为表格绑定事件
-            Table.api.bindevent(table);
-        },
         api: {
             bindevent: function () {
                 Form.api.bindevent($("form[role=form]"));

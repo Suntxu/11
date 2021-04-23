@@ -31,7 +31,7 @@ class Inspection extends Backend
             $total =  $this->connect->name('domain_violation_oneself')->where($where)->count();
 
             $list = $this->connect->name('domain_violation_oneself')
-                    ->field('id,tit,uid,type,cause,create_time,is_redirect,registrar,img_path')
+                    ->field('id,tit,uid,type,cause,create_time,is_redirect,registrar,img_path,is_img')
                     ->where($where)
                     ->order($sort, $order)->limit($offset, $limit)
                     ->select();
@@ -54,6 +54,9 @@ class Inspection extends Backend
                 if(mb_strlen($v['cause']) > 7){
                     $v['cause'] = $fun->returntitdian($v['cause'],7).'<span style="cursor:pointer;margin-left:10px;color:grey;"  onclick="showRemark(\''.$v['cause'].'\')" >查看更多</span>';
                 }
+                $v['is_img'] = $fun->getStatus($v['is_img'],['<span style="color: red;">未截图</span>','<span style="color: gray;">未上传</span>','<span style="color: green;">已上传</span>']);
+                $v['c_tit'] = $v['tit']; //批量拷贝使用
+                $v['tit'] = '<span style="cursor:pointer;color:#66B3FF;" onclick="copyData(\''.$v['tit'].'\')">'.$v['tit'].'</span>';
             }
             $result = array("total" => $total, "rows" => $list);
             return json($result);

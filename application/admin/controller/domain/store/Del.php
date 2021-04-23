@@ -33,6 +33,10 @@ class Del extends Backend
     public function index()
     {
         if ($this->request->isPost()) {
+
+            set_time_limit(300);
+
+            global $remodi_db;
             $row = $this->request->post("row/a");
             if(!$row['ttxt']){
                 $this->error('请输入要出库的域名');
@@ -70,8 +74,12 @@ class Del extends Backend
                 if($recycle){
                     $this->error('该批包含回收中的域名,不可出库!'.implode(',',$recycle));
                 }
-                Db::startTrans();
                 $domainPron = array_chunk($domainPro,500);
+
+                $connect = Db::connect($remodi_db);
+
+                Db::startTrans();
+                $connect->startTrans();
 
                 foreach($domainPron as $item){
                     // 解除包
@@ -86,17 +94,22 @@ class Del extends Backend
                             }
                         }
                         if($packids){
-                            
+
                             $packids = array_unique($packids);
                             // 查下域名的ID
                             $domainId = Db::name('domain_pro_trade')->whereIn('id|pack_id',$packids)->column('did');
-
-                            Db::name('domain_pro_trade')->whereIn('id|pack_id',$packids)->delete();
-                            // 改变主表状态
-                            Db::name('domain_pro_n')->whereIn('id',$domainId)->setField('zt',9);
+                            if($domainId){
+                                Db::name('domain_pro_trade')->whereIn('id|pack_id',$packids)->delete();
+                                // 改变主表状态
+                                Db::name('domain_pro_n')->whereIn('id',$domainId)->setField('zt',9);
+                            }
                         }
-                        
                     }
+
+                    //记录域名库
+                    $tinfo = $this->model->field('tit,hz,zcs,api_id,sysgroupid,zcsj,dqsj,inserttime,status,zt,pushid,dtype,len,infoid,infoZR,userid,special,parse_status,child_type,out_zcs')->whereIn('tit',$item)->select();
+                    $rinfo = Db::name('domain_record')->field('domain_id,RecordId,RR,Type,Value,TTL,Priority,Line,Status,Locked,Weight,userid,time,tit')->whereIn('tit',$item)->select();
+                    $ainfo = Db::name('action_record')->field('remark,stauts,newstime,uip,userid,tit')->whereIn('tit',$item)->select();
                     $this->model->whereIn('tit',$item)->delete();
                     // 删除购物车表 和  订单表
                     Db::name('domain_cart')->whereIn('tit',$item)->delete();
@@ -104,24 +117,21 @@ class Del extends Backend
                     Db::name('domain_order')->where('status != 1')->whereIn('tit',$item)->delete();
                     // 删除解析日志
                     Db::name('domain_record')->whereIn('tit',$item)->delete();
+                    Db::name('action_record')->whereIn('tit',$item)->delete();
                     // 删除一口价
                     Db::name('domain_pro_trade')->whereIn('tit',$item)->delete();
+
+                    $connect->name('domain_pro_n')->insertAll($tinfo);
+                    $connect->name('domain_record')->insertAll($rinfo);
+                    $connect->name('action_record')->insertAll($ainfo);
+
                 }
 
                 array_walk($domainPro,'self::waikArr',$duid); //把用户名用^拼接到域名里面
                 // 插入记录
                 Db::name('domain_operate_record')->insert(['create_time'=>time(),'tit'=>implode(',',$domainPro),'operator_id'=>$this->auth->id,'value' => '出库']);
                 Db::commit();
-
-                //暂时排除打包域名
-                //$syncInfo = Db::name('domain_pro_trade')->whereIn('tit',$domainPro)->whereIn('type',[0,1])->column('tit');
-//                    if($syncInfo){
-//                        $redis = new Redis(['select' => 3]);
-//                        $key = 'delete_admin_sync_agent_data'.time().rand(1111,9999);
-//                        $redis->RPush('sync_agent_domain',$key);
-//                        $redis->hmset($key,$syncInfo);
-//                    }
-
+                $connect->commit();
                 $this->success('操作成功','reload');
             }
             $this->error('请输入数据库存在的域名','reload');

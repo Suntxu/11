@@ -32,10 +32,21 @@ class Setuser extends Backend
         $id = intval($this->request->get('id'));
         if($id){
             // u2.ali_rebate_first_a,u2.ali_rebate_first_b,
-            $data = $this->model->alias('u1')->join('domain_user_config u2','u1.id=u2.userid','left')
-                ->field('u1.*,u2.restiu')
-                ->where('u1.id',$id)
-                ->find();
+            $data = $this->model->where('id',$id)->find();
+            $relation = DB::name('domain_promotion_relation')->where('userid',$id)->value('relation_id');
+            if($relation){
+                $spec = $this->model->where('id',$relation)->value('uid');
+                // 获取预释放上级返点信息
+                $yushifang = Db::name('domain_reserve_rebate_hmds')->field('zcs,rebate')->where('userid',$id)->select();
+                $release=[];
+                foreach($yushifang as $v){
+                    $release[$v['zcs']] = $v;
+                }
+            }else{
+                $spec = "";
+                $release="";
+            }
+
             // 获取客服内容
             $servei = Db::name('user_service')->where('userid',$data['id'])->find();
             if($servei['img']){
@@ -44,9 +55,10 @@ class Setuser extends Backend
 
             //获取冻结原因
             if($data['zt'] == 3){
-                $disInfo = Db::name('user_disable_record')->field('dis_days,remark as dis_remark')->where(['type' => 1,'userid' => $data['id']])->order('id','desc')->find();
+                $disInfo = Db::name('user_disable_record')->field('dis_days,remark as dis_remark,dis_time')->where(['type' => 1,'userid' => $data['id']])->order('id','desc')->find();
                 $data['dis_days'] = empty($disInfo['dis_days']) ? 0 : $disInfo['dis_days'];
                 $data['dis_remark'] = empty($disInfo['dis_remark']) ? '' : $disInfo['dis_remark'];
+                $data['dis_aac_flag'] = (!empty($disInfo['dis_time']) && $disInfo['dis_time'] > time()) ? true : false;
             }
             //获取返利配置信息
             $rinfo = Db::name('domain_reserve_rebate_config')->field('zcs,rebate_a,rebate_b')->where('userid',$id)->select();
@@ -55,7 +67,7 @@ class Setuser extends Backend
                 $rebate[$v['zcs']] = $v;
             }
 
-            $this->view->assign(['data'=>$data,'serv' => $servei,'rebate' => $rebate]);
+            $this->view->assign(['data'=>$data,'serv' => $servei,'rebate' => $rebate,'spec'=>$spec,'release'=>$release]);
             return $this->view->fetch();
         }
         return $this -> error('无效参数');
@@ -86,6 +98,9 @@ class Setuser extends Backend
             case 'other':
                 $this->setOther($id);
                 break;
+            case 'release':
+                $this->setRelease($id);
+                break;
             default:
                 $this->error('非法参数');
                 break;
@@ -102,17 +117,6 @@ class Setuser extends Backend
         // 查询是否已经存在数据
         $serc = Db::name('user_service')->where('userid',$id)->field('online')->find();
         $uinfo = $this->model->field('zt,uid,id')->where('id',$id)->find();
-
-        if(!preg_match('/^1[23456789]\d{9}$/',$params['mot'])){
-            return $this->error('请输入正确手机号');
-        }
-
-        $motCount = $this->model->where('mot',$params['mot'])->count();
-
-        if($motCount >= 5){
-            $this->error('该手机号已绑定了5个用户,请换个手机号！');
-        }
-
         $redis = new Redis();
         if($params['special'] == 1){
             $seri = $this->request->post('serv/a'); //专属客服属性
@@ -141,31 +145,53 @@ class Setuser extends Backend
                 $redis->del('hm_service_list_'.$id);
             }
         }
-
+        $dis_aac_flag = $this->request->post('dis_aac_flag',true);
         //禁用/恢复用户
-        if(isset($params['zt']) && $params['zt'] != $uinfo['zt']){
+        if(isset($params['zt']) && ($params['zt'] != $uinfo['zt'] || ($params['zt'] == 3 && $uinfo['zt'] == 3) && !$dis_aac_flag)){
+            $time = time();
             $dremark = $this->request->post('dis_remark','');
             $disDays = intval($this->request->post('dis_days',0));
-            if($params['zt'] == 3 && (empty($dremark) || empty($disDays)) ){
-                $this->error('请填写禁用天数和原因');
+            if($params['zt'] == 3){
+                if(empty($disDays)){
+                    $this->error('请填写禁用天数');
+                }
+                if(empty($dremark)){
+                    $this->error('请填写禁用原因');
+                }
+                if($uinfo['zt'] == 3){
+                    Db::name('user_disable_record')->where(['userid' => $id,'flag' => 0])->where('dis_time','<',time())->setField('flag',1);
+                    Db::name('user_disable_record')->insert([
+                        'userid' => $id,
+                        'type' => 0,
+                        'remark' => '',
+                        'create_time' => $time,
+                        'dis_days' => 0,
+                        'admin_id' => $this->auth->id,
+                        'dis_time' => $time,
+                        'flag' => 1,
+                    ]);
+                }
+                $redis = new Redis();
+                $key = $redis->get('login_'.$id);
+                $redis->del($key);
+            }else if($params['zt'] == 1){ //如果恢复正常 改变标识
+                Db::name('user_disable_record')->where('userid',$id)->setField('flag',1);
+                $disDays = 0;
+                $dremark = '';
             }
+
             Db::name('user_disable_record')->insert([
                 'userid' => $id,
                 'type' => ($params['zt'] == 3 ? 1 : 0),
                 'remark' => $dremark,
-                'create_time' => time(),
+                'create_time' => $time,
                 'dis_days' => $disDays,
                 'admin_id' => $this->auth->id,
                 'dis_time' => strtotime('+'.$disDays.' day'),
+                'flag' => ($params['zt'] == 1 ? 1 : 0),
             ]);
-            //如果恢复正常 改变标识
-            if($params['zt'] == 1){
-                Db::name('user_disable_record')->where('userid',$id)->setField('flag',1);
-            }else{ //强制前台退出登录
-                $redis = new Redis();
-                $key = $redis->get('login_'.$id);
-                $redis->del($key);
-            }
+
+
         }
         //密码加密
         if(empty($params['pwd'])){
@@ -324,6 +350,7 @@ class Setuser extends Backend
 
         //获取已设置的信息
         $setInfo = Db::name('domain_reserve_rebate_config')->where('userid',$id)->whereIn('zcs',array_keys($rebates))->column('zcs');
+
         $update = [];
         foreach($setInfo as $v){
             $update[] = ['zcs' => $v,'rebate_a' => $rebates[$v]['rebate_a'],'rebate_b' => $rebates[$v]['rebate_b']];
@@ -362,6 +389,25 @@ class Setuser extends Backend
             }
         }
         $this->success('修改成功');
+    }
+
+    /**
+     * 预释放上级列表
+     */
+    public function setRelease($id){
+        $release = $this->request->post('release/a');
+
+        if($release['rebate'] < 0 || $release['rebate'] >= 20){
+            $this->error('预释放返点比例不能小于0或不超过20');
+        }
+        $hmds_id = Db::name('domain_reserve_rebate_hmds')->where(['userid'=>$id,'zcs'=> 66])->value('id');
+        if($hmds_id){
+            DB::name('domain_reserve_rebate_hmds')->where('id',$hmds_id)->setField('rebate',$release['rebate']);
+            $this->success('设置成功');
+        }else{
+            DB::name('domain_reserve_rebate_hmds')->insert(['userid' => $id,'zcs' => 66,'rebate' => $release['rebate']]);
+            $this->success('设置成功');
+        }
     }
 
 }
