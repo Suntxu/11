@@ -34,7 +34,7 @@ class Intolist extends Backend
             list($where, $sort, $order, $offset, $limit) = $this->buildparams();
             //带别名 为了防止从资金明细跳过来报错
             $total = $this->model->alias('b')->where($where)->count();
-            $list = $this->model->alias('b')->field('remark,bath,audit,targetuser,reg_id,email,subdate,finishdate,id,dcount,special,(select moneynum from '.PREFIX.'domain_baomoneyrecord where type=1 and status = 1 and infoid=id) as moneynum')
+            $list = $this->model->alias('b')->field('remark,bath,audit,targetuser,reg_id,email,subdate,finishdate,id,dcount,special,(select moneynum from '.PREFIX.'domain_baomoneyrecord where type=1 and status = 1 and infoid=b.id) as moneynum')
                     ->where($where)->order($sort,$order)->limit($offset, $limit)
                     ->select();
             $sql = $this -> setWhere();

@@ -44,7 +44,7 @@ class Tradeddomain extends Backend
                     ->count();
             $list = $this->model
                     ->alias('c')->join('domain_user u','c.userid=u.id','left')->join('domain_user s','c.selleruserid=s.id','left')->join('domain_user u1','c.relshop_userid=u1.id','left')
-                    ->field('c.id,c.tit,s.uid as suid,c.paytime,u.uid as uuid,c.money,c.bc,c.pack,c.sxf,c.qday,c.qmoney,u1.uid as u1id')
+                    ->field('c.id,c.tit,s.uid as suid,c.paytime,u.uid as uuid,c.money,c.bc,c.pack,c.sxf,c.qmoney,u1.uid as u1id')
                     ->where($where)->where($defindwhere)->order($sort, $order)->limit($offset, $limit)
                     ->select();
             //根据条件统计总金额
@@ -81,13 +81,6 @@ class Tradeddomain extends Backend
                 $arr[$k]['sxf'] = sprintf('%.2f',$v['sxf']);
                 $arr[$k]['zsfx'] = $res[0]['f'];
                 $arr[$k]['u1.uid'] = $v['u1id'];
-                if(empty($v['qday'])){
-                    $arr[$k]['group'] = '非质保';
-                    $arr[$k]['zbn'] = '非质保';
-                }else{
-                    $arr[$k]['zbn'] = $v['qday'].'天 = '.$v['qmoney'].'元';
-                    $arr[$k]['group'] = '质保';
-                }
                 // 打包数量
                 if(empty($v['pack'])){
                     $arr[$k]['pack_num'] ='--';

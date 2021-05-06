@@ -486,6 +486,9 @@ function getDisposeTask(){
             if(res.data.tixian_sf){
                 html+= '您有<span style="color:red"> '+res.data.tixian_sf+' </span>条提现申请需要处理！<a href="/admin/vipmanage/tx/index?t.zt=5" title="需要处理提现--会员提现 " class="btn-addtabs" onclick="closeTip()" >查看详情>></a><br>';
             }
+            if(res.data.domain_report){
+                html+= '您有<span style="color:red"> '+res.data.domain_report+' </span>条域名举报需要处理！<a href="/admin/domain/report/index?status=0" title="需要处理举报--域名举报 " class="btn-addtabs" onclick="closeTip()" >查看详情>></a><br>';
+            }
             if(res.data.txpromise){
                 html+= '您有<span style="color:red"> '+res.data.txpromise+' </span>条提现承诺信息需要审核！<a href="/admin/vipmanage/recode/txpromise/index?p.status=0" title="需要审核--提现承诺信息 " class="btn-addtabs" onclick="closeTip()" >查看详情>></a><br>';
             }

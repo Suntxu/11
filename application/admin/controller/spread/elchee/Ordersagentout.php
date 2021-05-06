@@ -48,7 +48,7 @@ class Ordersagentout extends Backend
             if(strlen($sql) == 12){
                 $conm = 'SELECT sum(c.money) as n,sum(c.agent_cost) as s,sum(c.sxf) as f,sum(c.tmoney) as t,sum(c.zcs_money) as z FROM '.PREFIX.'domain_order_fx c inner join '.PREFIX.'domain_user u on c.userid=u.id ';
             }else{
-                $conm = 'SELECT sum(c.money) as n,sum(c.agent_cost) as s,sum(c.sxf) as f,sum(c.tmoney) as t,sum(c.zcs_money) as z FROM '.PREFIX.'domain_order_fx c inner join '.PREFIX.'domain_user u on c.userid=u.id left join '.PREFIX.'domain_user u2 on c.hm_id=u2.id left join '.PREFIX.'domain_user u1 on c.topid=u1.id '.$sql;
+                $conm = 'SELECT sum(c.money) as n,sum(c.final_money) as s,sum(c.sxf) as f,sum(c.tmoney) as t,sum(c.zcs_money) as z FROM '.PREFIX.'domain_order_fx c inner join '.PREFIX.'domain_user u on c.userid=u.id left join '.PREFIX.'domain_user u2 on c.hm_id=u2.id left join '.PREFIX.'domain_user u1 on c.topid=u1.id '.$sql;
             }
 
             $res = Db::query($conm);

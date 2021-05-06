@@ -61,6 +61,9 @@ class Shoplist extends Backend
             $buynum = Db::name('domain_order')->where('status',1)->where($def)->whereIn('selleruserid',$userids)->group('selleruserid')->column('count(distinct userid)','selleruserid');
             $sql = $this -> setWhere();
 
+            //店铺关联判断
+            $rels = Db::name('store_relevance')->whereIn('userid',$userids)->column('distinct userid');
+
             if(strlen($sql) == 12){
                 $ge = "select count(*) as n,sum(money) as znum,count(distinct userid) as zbuy from ".PREFIX."domain_order where status=1 and ".$def;
             }else{
@@ -87,6 +90,7 @@ class Shoplist extends Backend
                 $v['t1.flag'] = $fun->getStatus($v['flag'],['普通店铺','<span style="color:red">怀米网店铺</span>','消保店铺']);
                 $v['t1.shopzt'] = $fun->getStatus($v['shopzt'],['--','<span style="color:green">正常开店</span>','<span style="color:red">正在审核</span>','<span style="color:red">禁用</span>','<span style="color:red">审核被拒</span>']);
                 $v['upaytime'] = $paytime;
+                $v['rel'] = in_array($v['userid'],$rels);
             }
             $result = array("total" => $total, "rows" => $list);
             return json($result);

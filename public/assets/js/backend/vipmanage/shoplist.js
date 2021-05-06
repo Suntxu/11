@@ -77,6 +77,9 @@
                                     title: '店铺关联',
                                     classname: 'btn btn-xs btn-info btn-magic dialogit',
                                     icon: 'fa fa-hand-stop-o fa-fw',
+                                    visible:function(res){
+                                        return res.rel;
+                                    },
                                     url: function(res){
                                         return '/admin/vipmanage/shoplist/relevance?u.uid='+res['t3.uid'];
                                     },

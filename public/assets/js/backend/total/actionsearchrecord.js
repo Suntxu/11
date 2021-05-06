@@ -98,7 +98,11 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                         {field: 'r.userid', title: '用户ID',sortable:true},
                         // {field: 'u.uid', title: '用户',},
                         {field: 'r.type', title: '类型',searchList:{4:'一口价域名',5:'打包一口价',6:'精选域名',7:'店铺列表'}},
-                        {field: 'r.data', title: '关键词',operate:'like',width:800},
+                        {field: 'r.data', title: '关键词',operate:'like',align:'left',width:800, cellStyle:function(){
+                            return {
+                                'css':{'word-break':'break-all'}
+                            };
+                        }},
                         {field: 'total', title: '结果数',operate:false,sortable:true},
                         {field: 'r.create_time', title: '访问时间',operate: 'INT',sortable:true,addclass: 'datetimerange', formatter: Table.api.formatter.datetime},
                         {field: 'ip', title: '登录IP',operate:false,formatter:Table.api.formatter.alink,url:'http://www.baidu.com/s',fieldvaleu:'l.uip',fieldname:'wd',tit:'Ip归属地查询',},

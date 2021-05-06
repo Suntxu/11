@@ -85,7 +85,6 @@
                                 return '手续费:'+total_sum.toFixed(0);
                             }
                         },
-                        { field: 'zbn', title: '备案质保',operate:false},
                         { field: 'u1.uid', title: '店铺关联账号',},
                         // { field: 'group', title: '备案质保',visible:false,formatter: Table.api.formatter.status, searchList:{1:'非质保订单',2:'质保订单',3:'质保期内订单'}},
                         // { field: 'c.qetime', title: '质保到期时间',sortable:true,operate: 'INT',addclass: 'datetimerange',formatter: Table.api.formatter.datetime},
