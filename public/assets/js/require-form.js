@@ -143,6 +143,7 @@ define(['jquery', 'bootstrap', 'upload', 'validator'], function ($, undefined, U
             datetimepicker: function (form) {
                 //绑定日期时间元素事件
                 if ($(".datetimepicker", form).size() > 0) {
+                    
                     require(['bootstrap-datetimepicker'], function () {
                         var options = {
                             format: 'YYYY-MM-DD HH:mm:ss',
@@ -167,6 +168,29 @@ define(['jquery', 'bootstrap', 'upload', 'validator'], function ($, undefined, U
             },
             daterangepicker: function (form) {
                 //绑定日期时间元素事件
+                if ($('.defaultTime').length === 1) {
+                    var time = new Date().getTime();
+                    var timeformat = {
+                        timePicker: false,
+                        autoUpdateInput: false,
+                        timePickerSeconds: true,
+                        timePicker24Hour: true,
+                        autoApply: true,
+                        locale: {
+                            format: 'YYYY-MM-DD HH:mm:ss',
+                            customRangeLabel: __("Custom Range"),
+                            applyLabel: __("Apply"),
+                            cancelLabel: __("Clear"),
+                        },
+                    };
+                    var start_time = Moment().subtract(29, 'days').startOf('day');
+                    start_time = start_time.format(timeformat.locale.format);
+                    var end_time = Moment().endOf('day');
+                    end_time = end_time.format(timeformat.locale.format);
+                    $('.defaultTime').val(start_time + ' - ' + end_time);
+                    $(".form-commonsearch").find('button[type=submit]').trigger('click');
+                }
+                
                 if ($(".datetimerange", form).size() > 0) {
                     require(['bootstrap-daterangepicker'], function () {
                         var ranges = {};
@@ -192,9 +216,7 @@ define(['jquery', 'bootstrap', 'upload', 'validator'], function ($, undefined, U
                         };
                         ranges['清除'] = [Moment().startOf('day'), Moment().endOf('day')]; //添加清除时间选项 2020/11/11 Mrlu
                         var origincallback = function (start, end) {
-                            
                             $(this.element).val(start.format(options.locale.format) + " - " + end.format(options.locale.format));
-                            // $(this.element).val(start.format(options.locale.format) + " - " + end.format(options.locale.format));
                             $(this.element).trigger('blur');
                         };
                         $(".datetimerange", form).each(function () {
@@ -202,7 +224,7 @@ define(['jquery', 'bootstrap', 'upload', 'validator'], function ($, undefined, U
                             $(this).on('apply.daterangepicker', function (ev, picker) {
                                 callback.call(picker, picker.startDate, picker.endDate);
                                 if(picker.chosenLabel == '清除'){
-                                $(this).val('').trigger('blur');
+                                    $(this).val('').trigger('blur');
                                     
                                 }
                             });
