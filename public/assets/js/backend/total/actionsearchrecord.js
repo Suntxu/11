@@ -104,7 +104,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                             };
                         }},
                         {field: 'total', title: '结果数',operate:false,sortable:true},
-                        {field: 'r.create_time', title: '访问时间',operate: 'INT',sortable:true,addclass: 'datetimerange', formatter: Table.api.formatter.datetime},
+                        {field: 'r.create_time', title: '访问时间',operate: 'INT',sortable:true,addclass: 'datetimerange', formatter: Table.api.formatter.datetime,defaultValue:getTimeFrame()},
                         {field: 'ip', title: '登录IP',operate:false,formatter:Table.api.formatter.alink,url:'http://www.baidu.com/s',fieldvaleu:'l.uip',fieldname:'wd',tit:'Ip归属地查询',},
                     ]
                 ],

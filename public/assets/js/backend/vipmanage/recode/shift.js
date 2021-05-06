@@ -25,7 +25,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                         { field: 'r.tit', title: '域名',operate:'TEXT'},
                         { field: 'u1.uid', title: '操作用户',},
                         { field: 'u.uid', title: '目标用户',},
-                        { field: 'r.createtime', title: '转移时间',operate: 'INT', addclass: 'datetimerange',formatter: Table.api.formatter.datetime,sortable:true,},
+                        { field: 'r.createtime', title: '转移时间',operate: 'INT', addclass: 'datetimerange',formatter: Table.api.formatter.datetime,sortable:true,defaultValue:getTimeFrame()},
                         { field: 'api_id', title: '接口商',searchList: $.getJSON('webconfig/regapi/getRegisterUserName'),},
                         { field: 'remark', title: '备注',operate:false},
                         { field: 'uip', title: '登录IP',operate: false,formatter:Table.api.formatter.alink,url:'http://www.baidu.com/s',fieldvaleu:'uip',fieldname:'wd',tit:'Ip归属地查询',},

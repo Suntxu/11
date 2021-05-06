@@ -25,7 +25,7 @@
                                 return '统计：';//在第一列开头写上总计、统计之类
                             }},
                         { field: 'uid', title: '会员账号',},
-                        { field: 'd.sj', title: '交易时间',addclass: 'datetimerange',sortable:true,operate: 'RANGE',},
+                        { field: 'd.sj', title: '交易时间',addclass: 'datetimerange',sortable:true,operate: 'RANGE',defaultValue:getTimeFrame()},
                         { field: 'd.money1', title: '金额',sortable:true,operate: 'BETWEEN',
                             footerFormatter: function (data) {
                                 var field = 'zje';

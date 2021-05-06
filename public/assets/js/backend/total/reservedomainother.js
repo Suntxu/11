@@ -25,7 +25,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                         { field: 'len', title: '长度',operate:'BETWEEN',sortable:true},
                         // { field: 'domain_type', title: '类型',operate: 'RLIKE',searchList: $.getJSON('domain/manage/getDomainType'),},
                         { field: 'reg_time', title: '注册时间',addclass: 'datetimerange',sortable:true,operate: 'INT',formatter: Table.api.formatter.datetime},
-                        { field: 'del_time', title: '删除时间',addclass: 'datetimerange',sortable:true,operate: 'INT',formatter: Table.api.formatter.datetime},
+                        { field: 'del_time', title: '删除时间',addclass: 'datetimerange',sortable:true,operate: 'INT',formatter: Table.api.formatter.datetime,defaultValue:getTimeFrame()},
                         { field: 'icp_serial', title: '备案号',},
                         { field: 'icp_org', title: '备案性质',},
                         { field: 'special_condition', title: '是否备案',visible:false,searchList: {1:'已备案',2:'未备案'}},

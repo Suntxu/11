@@ -60,7 +60,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                         {field: 'attc', title: '特殊属性',formatter: Table.api.formatter.status,searchList: {'0':'未设置','1':'二级不死','2':'大站','3':'绿标'}},
                         {field: 'zcs', title: '注册商',searchList: $.getJSON('category/getcategory?type=api&xz=parent') },
                         {field: 'api_id', title: '接口商',searchList: $.getJSON('webconfig/regapi/getRegisterUserName'),},
-                        {field: 'c.create_time', title: '支付时间',operate: 'INT', addclass: 'datetimerange',sortable:true,formatter: Table.api.formatter.datetime },
+                        {field: 'c.create_time', title: '支付时间',operate: 'INT', addclass: 'datetimerange',sortable:true,formatter: Table.api.formatter.datetime,defaultValue:getTimeFrame()},
                     ]
                 ],
                 queryParams: function (params) {

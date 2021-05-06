@@ -25,7 +25,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                         {field: 'u.uid', title: '用户名',footerFormatter: function (data) {
                                 return '统计：';//在第一列开头写上总计、统计之类
                             }},
-                        {field: 'r.createtime', title: '任务提交时间',operate: 'INT',sortable:true, addclass: 'datetimerange', formatter: Table.api.formatter.datetime},
+                        {field: 'r.createtime', title: '任务提交时间',operate: 'INT',sortable:true, addclass: 'datetimerange', formatter: Table.api.formatter.datetime,defaultValue:getTimeFrame()},
                         {field: 'd.tit', title: '域名',operate: 'TEXT',},
                         {field: 'd.money', title: '单价',operate: false,sortable:true,footerFormatter: function (data) {
                                 var field = 'zje';

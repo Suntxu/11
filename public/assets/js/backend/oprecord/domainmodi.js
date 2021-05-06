@@ -23,7 +23,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                         { field: 'special_condition', title: '归属用户',},
                         { field: 'show', title: '详情',operate:false},
                         { field: 'ext', title: '备注',operate:false},
-                        { field: 'time', title: '操作时间',addclass:'datetimerange',operate:'INT',formatter: Table.api.formatter.datetime},
+                        { field: 'time', title: '操作时间',addclass:'datetimerange',operate:'INT',formatter: Table.api.formatter.datetime,defaultValue:getTimeFrame()},
                         { field: 'group', title: '操作者',},
                         { field: 'type', title: '操作类型',operate:false, formatter: Table.api.formatter.status,searchList: {0:'域名出库',1:'冻结操作',2:'修改微信cookie',3:'手动补单',4:'域名入库',5:'注册域名退款',6:'修改一口价属性',7:'手动过户',8:'修改一口价价格'},},
                     ]

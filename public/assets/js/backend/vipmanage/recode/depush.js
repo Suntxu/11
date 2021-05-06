@@ -63,7 +63,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                         {field: 'r.status', title: 'push状态',formatter: Table.api.formatter.status,searchList: {0:'push中',1:'对方已拒绝',2:'对方已接收push',3:'已撤销'}},
                         // {field: 'r.type', title: 'push类型',formatter: Table.api.formatter.status,notit:true,searchList: {0:'普通',1:'回收'}},
 
-                        {field: 'pushtime', title: '发起时间',operate: 'INT', addclass: 'datetimerange', formatter: Table.api.formatter.datetime},
+                        {field: 'pushtime', title: '发起时间',operate: 'INT', addclass: 'datetimerange', formatter: Table.api.formatter.datetime,defaultValue:getTimeFrame()},
                         {field: 'jytime', title: '交易时间',operate: 'INT', addclass: 'datetimerange',formatter: Table.api.formatter.datetime},
                         {field: 'r.remark', title: '备注',operate: false,},
                     ]

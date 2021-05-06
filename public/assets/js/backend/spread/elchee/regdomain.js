@@ -26,7 +26,7 @@
                             }  },
                         { field: 'u.uid', title: '注册用户'},
                         { field: 'u1.uid', title: '推广人',},
-                        { field: 'd.createtime', title: '注册时间',addclass:'datetimerange',sortable: true,operate: 'INT',},
+                        { field: 'd.createtime', title: '注册时间',addclass:'datetimerange',sortable: true,operate: 'INT',defaultValue:getTimeFrame()},
                         { field: 'd.money', title: '注册金额',operate: 'BETWEEN',sortable: true,
                             footerFormatter: function (data) {
                                 var field = 'zje';
