@@ -9,14 +9,13 @@
  * @param  {INT}    lag 第几个时间选项 今天 昨天 最近7天..
  * @param  {string} eid 要选择的时间字段 用于清空当前时间条件
  * @return {[type]}     [description]
- * 21/04/09 优化方法 不需要再传eid
  */
 function fastDateSearch(vla,lag,eid){
-    // if(lag == 6){ //清空
-    //     $('#'+eid).val('');
-    // }else{
+    if(lag == 6){ //清空
+        $('#'+eid).val('');
+    }else{
         $($('.ranges ul').get(vla)).children('li').get(lag).click();
-    // }
+    }
     $('.btn-success').each(function(i,n){
         if($(n).attr('formnovalidate') != 'undefined'){
             $(n).click();
@@ -187,16 +186,17 @@ function copyData(content){
         $('#copyData').val(content);
     }else{
         $('body').append('<textarea id="copyData" style="opacity: 0;">'+content+'</textarea>');
-        // $('body').append('<input style="opacity: 0;" id="copyData" value="'+content+'">');
     }
     $('#copyData').select();
     document.execCommand("Copy");
     layer.msg('复制成功');
 
 }
+
+
 /**
  * 几个字后用..显示
- */
+*/
 function subStringShowDot(str,len){
     
     len = len ? len : 10;
@@ -209,13 +209,27 @@ function subStringShowDot(str,len){
 }
 
 /**
- * 内嵌标签 加载 iframe
- * @url
- */
-function inlineIframeLoad(url,eventId,height){
-    if(!$('#'+eventId).find('iframe').length){
-        height = height ? height : '430px';
-        html = '<iframe src="'+url+'" style="width: 100%;height: '+height+';" frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling-x="no" scrolling-y="auto" allowtransparency="yes"></iframe>';
-        $('#'+eventId).html(html);
-    }
+ * 获取一个月内的时间范围
+*/
+function getTimeFrame(){
+    var timeformat = {
+        timePicker: false,
+        autoUpdateInput: false,
+        timePickerSeconds: true,
+        timePicker24Hour: true,
+        autoApply: true,
+        locale: {
+            format: 'YYYY-MM-DD HH:mm:ss',
+            customRangeLabel: __("Custom Range"),
+            applyLabel: __("Apply"),
+            cancelLabel: __("Clear"),
+        },
+    };
+    var start_time = Moment().subtract(29, 'days').startOf('day');
+    start_time = start_time.format(timeformat.locale.format);
+    var end_time = Moment().endOf('day');
+    end_time = end_time.format(timeformat.locale.format);
+    return start_time + ' - ' + end_time;
 }
+
+
