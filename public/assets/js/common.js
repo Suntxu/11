@@ -209,8 +209,20 @@ function subStringShowDot(str,len){
 }
 
 /**
+ * 内嵌标签 加载 iframe
+ * @url
+ */
+function inlineIframeLoad(url,eventId,height){
+    if(!$('#'+eventId).find('iframe').length){
+        height = height ? height : '430px';
+        html = '<iframe src="'+url+'" style="width: 100%;height: '+height+';" frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling-x="no" scrolling-y="auto" allowtransparency="yes"></iframe>';
+        $('#'+eventId).html(html);
+    }
+}
+
+/**
  * 获取一个月内的时间范围
-*/
+ */
 function getTimeFrame(){
     var timeformat = {
         timePicker: false,
@@ -231,5 +243,3 @@ function getTimeFrame(){
     end_time = end_time.format(timeformat.locale.format);
     return start_time + ' - ' + end_time;
 }
-
-
