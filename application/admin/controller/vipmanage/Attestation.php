@@ -72,14 +72,14 @@ class Attestation extends Backend
 
             foreach($list as $k=>$v){
 
-                if( $v['info_status'] != 2 || !in_array($v['auth_status'],[0,1,4]) || $v['name'] == '商务中国' || $v['name'] == '35互联' || $v['name'] == '腾讯云' || $v['name'] == '190' || $v['ifreal'] == 1){
+                if( $v['info_status'] != 2 || !in_array($v['auth_status'],[0,1,4]) || $v['cid'] == 74 || $v['cid'] == 86 || $v['cid'] == 111 || $v['cid'] == 113 || $v['ifreal'] == 1){
                     $list[$k]['op'] = '--';
                 }else if($v['cid'] != 107){
                     $url = '/admin/vipmanage/attestation/resetreal/ids/'.$v['id'];
                     $list[$k]['op'] = '<button type="button" onclick="real(\''.$url.'\')" class="btn btn-xs btn-success" title="重新实名">重新实名</button>&nbsp;';
                 }
 
-                if($v['name'] == 'Centralnic' || $v['name'] == 'RRP' || ($v['name'] == '商务中国'  &&  in_array($v['auth_status'],[0,1,4])  ) || (($v['name'] == '中资源' || $v['name'] == '35互联' || $v['name'] == '腾讯云' || $v['name'] == '190') && in_array($v['auth_status'],[1,4]) )  ){
+                if($v['cid'] == 75 || $v['cid'] == 68 || ($v['cid'] == 74  &&  in_array($v['auth_status'],[0,1,4])  ) || (($v['cid'] == 83 || $v['cid'] == 86 || $v['cid'] == 111 || $v['cid'] == 113) && in_array($v['auth_status'],[1,4]) )  ){
                     $url = '/admin/vipmanage/attestation/del/ids/'.$v['id'];
                     if(empty($list[$k]['op']) || $list[$k]['op'] == '--'){
                         $list[$k]['op'] = '<button type="button" onclick="real(\''.$url.'\')" class="btn btn-xs btn-del btn-warning" title="删除">删除</button>&nbsp;';
