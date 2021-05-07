@@ -45,6 +45,8 @@ class Export extends Backend
         $param = $this->request->get();
          if($this->request->isAjax() || isset($param['even']) ){ //evem 即时导出
 
+
+
             if(!method_exists( 'app\admin\controller\Export', $param['action'])){
                 return ['code' => 1,'msg' => '类型有误!'];
             }
@@ -62,7 +64,6 @@ class Export extends Backend
             }else{
                 $count = $this->model->where($where)->where($this->def)->count();
             }
-
             $limit = 10000;
             $num = ceil($count / $limit);
             $data = [];
@@ -91,11 +92,11 @@ class Export extends Backend
             exit(json_encode(['code' => 0,'msg' => '任务提交成功']));
         }
     }
+
     /**
      * 预定过期删除域名
      */
     private function reserve_domain($swhere){
-
         global $reserve_db;
 
         $this->model = Db::connect($reserve_db)->name('domain_pro_reserve');
@@ -201,22 +202,58 @@ class Export extends Backend
         }
     }
 
-    /**
-     * 解析记录列表
-     */
-    private function analysis($swhere){
+    /*
+        域名注册
+    */
+    public function domain_registration(){
+        $param = $this->request->get();
+        if($this->request->isAjax() ){
 
-        $this->model = Db::name('domain_record');
+            if($param['action'] !== 'domain_registration'){
+                return ['code' => 1,'msg' => '类型有误!'];
+            }
 
-        $this->q_field = 'tit,RR,Type,Value,Line,Status,time';
+            if(!preg_match('/^[\x{4e00}-\x{9fa5}A-Za-z0-9_]+$/u', $param['name'])){
+                return ['code' => 1,'msg' => '文件名只支持中文字母数字下划线组成'];
+            }
+            list($where, $sort, $order, $offset, $limit ) = $this->buildparams();
+            $this->model = Db::name('Task_record');
+            $count = $this->model->table(PREFIX.'Task_record')->alias('r')
+                ->join(PREFIX.'Task_Detail'.' d','r.id = d.taskid','right')
+                ->join('domain_user u','r.userid=u.id')
+                ->where($where)
+                ->where('d.TaskStatusCode = 2 and r.tasktype = 2')
+                ->count();
 
-        $this->head = ['域名','主机记录','记录类型','记录值','解析线路','状态','解析时间'];
+            $limit = 10000;
+            $num = ceil($count / $limit);
+            $data = [];
+            for($i = 0;$i < $num; $i++){
+                $start = $limit * $i;
+                $sql = $this->model->table(PREFIX.'Task_record')->alias('r')
+                ->join(PREFIX.'Task_Detail'.' d','r.id = d.taskid','right')
+                ->join('domain_user u','r.userid=u.id')
+                ->field('uid,d.tit,d.money,r.cos_price,r.createtime,d.CreateTime,d.hz,r.uip')
+                ->where($where)
+                ->where('d.TaskStatusCode = 2 and r.tasktype = 2')
+                ->fetchSql(1)
+                ->limit($start, $limit)
+                ->select();
+                $data[] = $sql;
+            }
+            $insert = ['userid' => - $this->auth->id,'createtime' => time(),'name' => $param['name']. '域名注册列表'];
+            $id = Db::name('domain_export')->insertGetId($insert);
+            $head = ['用户名','域名','单价','成本价','任务提交时间','注册完成时间','后缀','注册IP'];
+            $insert['sql'] = json_encode($data);
+            $redis = new Redis(['select' => 7]);
+            $redis->rpush('export_domain_operate_id',$id);
+            $redis->hmset('export_domain_operate_id_'.$id,$insert);
+            $redis->hmset('export_domain_head_'.$id,$head);
+            $redis->set('export_domain_action_'.$id,$param['action']);
+            exit(json_encode(['code' => 0,'msg' => '任务提交成功']));
 
-        $this->suffix = '_解析记录列表';
-
-        if($swhere[0]){
-            $this->def .= ' and hz = "'.ltrim($swhere[0],'.').'"';
         }
+
     }
 
 }
