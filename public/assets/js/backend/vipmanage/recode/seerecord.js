@@ -22,7 +22,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                     [
                         {field: 'tit', title: '域名',operate:'TEXT'},
                         {field: 'uid', title: '用户名',},
-                        {field: 'l.time', title: '访问时间',operate: 'INT', addclass: 'datetimerange', formatter: Table.api.formatter.datetime,sortable:true},
+                        {field: 'l.time', title: '访问时间',operate: 'INT', addclass: 'datetimerange', formatter: Table.api.formatter.datetime,sortable:true,defaultValue:getTimeFrame()},
                     ]
                 ],
                 queryParams: function (params) {

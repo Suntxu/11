@@ -63,7 +63,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                         {field: 'c.type', title: '订单类型',formatter: Table.api.formatter.status,searchList: {'0':'正常订单','1':'满减订单','2':'微信活动订单','9':'打包域名订单'}},
                         {field: 'c.sptype', title: '订单来源',searchList: {'0':'官网','1':'推广员','2':'怀米大使','3':'分销系统'}},
                         {field: 'is_sift', visible:false, title: '是否为精选订单',formatter: Table.api.formatter.status,searchList: {'0':'否','1':'是'}},
-                        {field: 'c.sj', title: '订单创建时间',operate: 'RANGE', addclass: 'datetimerange',sortable:true, },
+                        {field: 'c.sj', title: '订单创建时间',operate: 'RANGE', addclass: 'datetimerange',sortable:true,defaultValue:getTimeFrame() },
                         {field: 'paytime', title: '订单支付时间',operate: 'RANGE', addclass: 'datetimerange',sortable:true,},
                         {field: 'operate', title: __('Operate'), table: table,
                                 events: Table.api.events.operate,

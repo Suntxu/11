@@ -44,7 +44,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                             }, 0);
                             return total_sum.toFixed(2);
                         }},
-                        {field: 'r.createtime', title: '任务提交时间',operate: 'INT', sortable:true, addclass: 'datetimerange', formatter: Table.api.formatter.datetime},
+                        {field: 'r.createtime', title: '任务提交时间',operate: 'INT', sortable:true, addclass: 'datetimerange', formatter: Table.api.formatter.datetime,defaultValue:getTimeFrame()},
 
                         {field: 'group', title: '注册完成时间',operate: 'INT',sortable:true, addclass: 'datetimerange', formatter: Table.api.formatter.datetime},
 

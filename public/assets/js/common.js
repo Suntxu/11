@@ -27,7 +27,7 @@ function fastDateSearch(vla,lag,eid){
 }
 
 /**
- * 提交特殊条件  
+ * 提交特殊条件
  */
 function submitSpecial(self){
     var id = $(self).data('value');
@@ -91,12 +91,25 @@ function showRemark(tit){
 function offlineExport(action){
 
     layer.prompt({title: '请输入要生成的文件名', formType: 2}, function(text, index){
-        layer.close(index);
-        layer.load(1);
+        // layer.close(index);
+        // layer.load(1);
         var param = getSearchParams();
         $.get('/admin/export/index',{filter:JSON.stringify(param['filter']),op:JSON.stringify(param['op']),action:action,name:text},function(res){
             layer.closeAll('loading');
-            console.log(res);
+            layer.msg(res.msg);
+        },'json');
+    });
+}
+/**
+ * 离线导出注册域名
+ */
+function domainRegistration(action){
+    layer.prompt({title: '请输入要生成的文件名', formType: 2}, function(text, index){
+        layer.close(index);
+        layer.load(1);
+        var param = getSearchParams();
+        $.get('/admin/export/domain_registration',{filter:JSON.stringify(param['filter']),op:JSON.stringify(param['op']),action:action,name:text},function(res){
+            layer.closeAll('loading');
             layer.msg(res.msg);
         },'json');
     });
@@ -123,11 +136,11 @@ function getSearchParams(){
             if(o == 'BETWEEN' || o == 'THOUSANDS'){ //值包含逗号
                 var value_begin = $.trim($(".form-commonsearch [name='" + n[0] + "']:first").val());
                 var value_end = $.trim($(".form-commonsearch [name='" + n[0] + "']:last").val());
-                filter[n[0]] = value_begin + ',' +value_end; 
+                filter[n[0]] = value_begin + ',' +value_end;
                 //如果是时间筛选，将operate置为RANGE
                 if ($(".form-commonsearch [name='" + n[0] + "']:first").hasClass("datetimepicker")) {
                     o = 'RANGE';
-                }   
+                }
             }else if(o == 'RANGE' || o == "INT"){
                 filter[n[0]] = $.trim($(".form-commonsearch [name='" + n[0] + "']").val());
 
@@ -198,9 +211,9 @@ function copyData(content){
  * 几个字后用..显示
 */
 function subStringShowDot(str,len){
-    
+
     len = len ? len : 10;
-    
+
     if(str.length <= len){
         return str;
     }

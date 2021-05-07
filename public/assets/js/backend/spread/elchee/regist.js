@@ -26,7 +26,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                             }  },
                         { field: 'u.uid', title: '注册用户'},
                         { field: 'u1.uid', title: '推广人',},
-                        { field: 'r.createtime', title: '注册时间',addclass:'datetimerange',sortable: true,operate: 'INT',
+                        { field: 'r.createtime', title: '注册时间',addclass:'datetimerange',sortable: true,operate: 'INT',defaultValue:getTimeFrame(),
                             footerFormatter: function (data) {
                                 var field = 'zje1';
                                 var total_sum = data.reduce(function (sum, row) {

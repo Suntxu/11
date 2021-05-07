@@ -57,7 +57,7 @@
                         { field: 'pack_num', title: '域名数量',operate:false,},
                         { field: 's.uid', title: '卖家账号',},
                         // { field: 'c.dttype', title: '交易类型',addClass:'ztsea',formatter: Table.api.formatter.status, notit:true, searchList:{1:'一口价',2:'合作方一口价'}},
-                        { field: 'c.paytime', title: '交易时间',operate: 'RANGE',addclass: 'datetimerange selll',},
+                        { field: 'c.paytime', title: '交易时间',operate: 'RANGE',addclass: 'datetimerange selll',defaultValue:getTimeFrame()},
                         { field: 'u.uid', title: '买家账号',sortable:true,
                             footerFormatter: function (data) {
                                 var field = 'people';

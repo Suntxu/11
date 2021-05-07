@@ -25,7 +25,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                         {field: 'tit', title: '域名',operate:'TEXT'},
                         {field: 'remark', title: '解析备注',operate:false},
                         // {field: 'r.remark', title: '解析类型', operate:'LIKE', formatter: Table.api.formatter.status,searchList: {'新增':'新增','修改':'修改','删除':'删除'},},
-                        {field: 'newstime', title: '解析时间',operate: 'INT', addclass: 'datetimerange', formatter: Table.api.formatter.datetime},
+                        {field: 'newstime', title: '解析时间',operate: 'INT', addclass: 'datetimerange', formatter: Table.api.formatter.datetime,defaultValue:getTimeFrame()},
                         {field: 'uip', title: 'IP地址',operate: false,formatter:Table.api.formatter.alink,url:'http://www.baidu.com/s',fieldvaleu:'r.uip',fieldname:'wd',tit:'Ip归属地查询',},
                     ]
                 ],

@@ -22,7 +22,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                         { field: 'group', title: '后缀',formatter: Table.api.formatter.status,searchList: $.getJSON('domain/manage/getDomainHz'),},
                         { field: 'zcsj', title: '注册时间',addclass: 'datetimerange',sortable:true,operate: 'RANGE',formatter: Table.api.formatter.datetime},
                         { field: 'dqsj', title: '到期时间',addclass: 'datetimerange',sortable:true,operate: 'RANGE',formatter: Table.api.formatter.datetime},
-                        { field: 'r.del_time', title: '删除时间',addclass: 'datetimerange',sortable:true,operate: 'INT',formatter: Table.api.formatter.datetime},
+                        { field: 'r.del_time', title: '删除时间',addclass: 'datetimerange',sortable:true,operate: 'INT',formatter: Table.api.formatter.datetime,defaultValue:getTimeFrame()},
                     ]
                 ],
                 

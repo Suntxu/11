@@ -29,7 +29,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                         {field: 'moneynum', title: '冻结金额',operate:false,sortable:true},
                         {field: 'status', title: '状态',sortable:true, formatter:Table.api.formatter.status,searchList:{0:'冻结中',1:'扣除',2:'还原'},custom:{'冻结中':'info','扣除':'danger','还原':'success'},},
                         {field: 'type', title: '冻结类型',sortable:true,formatter:Table.api.formatter.status,searchList:{0:'系统扣除',1:'转回原注册商',2:'提现',3:'发票申请',4:'店铺保证金',5:'域名预订',6:'域名竞价',7:'域名竞拍额外冻结资金',8:'预释放',9:'拼团',10:'批量注册',12:'域名续费',13:'委托购买'},custom:{'系统扣除':'danger','转回原注册商':'danger','提现':'pink','发票申请':'gray','店铺保证金':'danger','域名预订':'danger','域名竞价':'orange','域名竞拍额外冻结':'warning','预释放':'success','拼团':'red','域名注册冻结':'red','域名续费':'orange','委托购买':'orange'},},
-                        {field: 'b.sj', title: '添加时间',sortable:true,operate: 'RANGE', addclass: 'datetimerange',},
+                        {field: 'b.sj', title: '添加时间',sortable:true,operate: 'RANGE', addclass: 'datetimerange',defaultValue:getTimeFrame()},
                         {field: 'sremark', title: '说明',operate:false,},
                         {field: 'uip', title: '用户IP',operate:false,formatter:Table.api.formatter.alink,url:'http://www.baidu.com/s',fieldvaleu:'l.uip',fieldname:'wd',tit:'Ip归属地查询',},
                         // {field: 'showurl', title: '操作',operate:false,notit:true},

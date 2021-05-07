@@ -23,7 +23,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                 columns: [
                     [
                         { field: 'uid', title: '用户名',operate:'TEXT',formatter:Table.api.formatter.alink,url:'/admin/vipmanage/setuser/index',fieldvaleu:'userid',fieldname:'id',tit:'用户设置',},
-                        { field: 'r.sj', title: '交易时间',addclass: 'datetimerange',sortable:true,operate: 'RANGE',},
+                        { field: 'r.sj', title: '交易时间',addclass: 'datetimerange',sortable:true,operate: 'RANGE',defaultValue:getTimeFrame()},
                         { field: 'money', title: '交易金额',sortable:true,operate: 'BETWEEN',},
                         { field: 'product', title: '交易类型',sortable:true, addClass:'blogroll',formatter: Table.api.formatter.status,searchList: {'0':'域名','2':'充值','3':'手续费','4':'提现','5':'佣金提现','6':'违约金','7':'返利','8':'退款','1':'其他'},},
                         { field: 'subtype', title: '交易子类型',sortable:true,addClass:'blogroll_child',formatter: Table.api.formatter.status,searchList: {}},
