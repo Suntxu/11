@@ -203,56 +203,65 @@ class Export extends Backend
     }
 
     /*
-        域名注册
+        域名注册  1308589611@qq.com
     */
     public function domain_registration(){
-        $param = $this->request->get();
-        if($this->request->isAjax() ){
 
-            if($param['action'] !== 'domain_registration'){
-                return ['code' => 1,'msg' => '类型有误!'];
-            }
+        $this->model = Db::table(PREFIX.'Task_record')->where('d.TaskStatusCode = 2 and r.tasktype = 2');
+        $this->join = [[PREFIX.'Task_Detail'.' d','r.id = d.taskid','right']];
+        $this->join[] = ['domain_user u','r.userid=u.id','left'];
+        $this->q_field = 'uid,d.tit,d.money,r.cos_price,r.createtime,d.CreateTime,d.hz,r.uip';
+        $this->alias = 'r';
+        $this->head = ['用户名','域名','单价','成本价','任务提交时间','注册完成时间','后缀','注册IP'];
+        $this->suffix = '_用户注册列表';
 
-            if(!preg_match('/^[\x{4e00}-\x{9fa5}A-Za-z0-9_]+$/u', $param['name'])){
-                return ['code' => 1,'msg' => '文件名只支持中文字母数字下划线组成'];
-            }
-            list($where, $sort, $order, $offset, $limit ) = $this->buildparams();
-            $this->model = Db::name('Task_record');
-            $count = $this->model->table(PREFIX.'Task_record')->alias('r')
-                ->join(PREFIX.'Task_Detail'.' d','r.id = d.taskid','right')
-                ->join('domain_user u','r.userid=u.id')
-                ->where($where)
-                ->where('d.TaskStatusCode = 2 and r.tasktype = 2')
-                ->count();
+        // $param = $this->request->get();
+        // if($this->request->isAjax() ){
 
-            $limit = 10000;
-            $num = ceil($count / $limit);
-            $data = [];
-            for($i = 0;$i < $num; $i++){
-                $start = $limit * $i;
-                $sql = $this->model->table(PREFIX.'Task_record')->alias('r')
-                ->join(PREFIX.'Task_Detail'.' d','r.id = d.taskid','right')
-                ->join('domain_user u','r.userid=u.id')
-                ->field('uid,d.tit,d.money,r.cos_price,r.createtime,d.CreateTime,d.hz,r.uip')
-                ->where($where)
-                ->where('d.TaskStatusCode = 2 and r.tasktype = 2')
-                ->fetchSql(1)
-                ->limit($start, $limit)
-                ->select();
-                $data[] = $sql;
-            }
-            $insert = ['userid' => - $this->auth->id,'createtime' => time(),'name' => $param['name']. '域名注册列表'];
-            $id = Db::name('domain_export')->insertGetId($insert);
-            $head = ['用户名','域名','单价','成本价','任务提交时间','注册完成时间','后缀','注册IP'];
-            $insert['sql'] = json_encode($data);
-            $redis = new Redis(['select' => 7]);
-            $redis->rpush('export_domain_operate_id',$id);
-            $redis->hmset('export_domain_operate_id_'.$id,$insert);
-            $redis->hmset('export_domain_head_'.$id,$head);
-            $redis->set('export_domain_action_'.$id,$param['action']);
-            exit(json_encode(['code' => 0,'msg' => '任务提交成功']));
+        //     if($param['action'] !== 'domain_registration'){
+        //         return ['code' => 1,'msg' => '类型有误!'];
+        //     }
 
-        }
+        //     if(!preg_match('/^[\x{4e00}-\x{9fa5}A-Za-z0-9_]+$/u', $param['name'])){
+        //         return ['code' => 1,'msg' => '文件名只支持中文字母数字下划线组成'];
+        //     }
+        //     list($where, $sort, $order, $offset, $limit ) = $this->buildparams();
+        //     $this->model = Db::name('Task_record');
+        //     $count = $this->model->table(PREFIX.'Task_record')->alias('r')
+        //         ->join(PREFIX.'Task_Detail'.' d','r.id = d.taskid','right')
+        //         ->join('domain_user u','r.userid=u.id')
+        //         ->where($where)
+        //         ->where('d.TaskStatusCode = 2 and r.tasktype = 2')
+        //         ->count();
+
+        //     $limit = 10000;
+        //     $num = ceil($count / $limit);
+        //     $data = [];
+        //     for($i = 0;$i < $num; $i++){
+        //         $start = $limit * $i;
+        //         $sql = $this->model->table(PREFIX.'Task_record')->alias('r')
+        //         ->join(PREFIX.'Task_Detail'.' d','r.id = d.taskid','right')
+        //         ->join('domain_user u','r.userid=u.id')
+        //         ->field('uid,d.tit,d.money,r.cos_price,r.createtime,d.CreateTime,d.hz,r.uip')
+        //         ->where($where)
+        //         ->where('d.TaskStatusCode = 2 and r.tasktype = 2')
+        //         ->fetchSql(1)
+        //         ->limit($start, $limit)
+        //         ->select();
+        //         $data[] = $sql;
+        //     }
+        //     $insert = ['userid' => - $this->auth->id,'createtime' => time(),'name' => $param['name']. '域名注册列表'];
+        //     $id = Db::name('domain_export')->insertGetId($insert);
+        //     $head = ['用户名','域名','单价','成本价','任务提交时间','注册完成时间','后缀','注册IP'];
+        //     $insert['sql'] = json_encode($data);
+        //     $redis = new Redis(['select' => 7]);
+        //     $redis->rpush('export_domain_operate_id',$id);
+        //     $redis->hmset('export_domain_operate_id_'.$id,$insert);
+        //     $redis->hmset('export_domain_head_'.$id,$head);
+        //     $redis->set('export_domain_action_'.$id,$param['action']);
+        //     exit(json_encode(['code' => 0,'msg' => '任务提交成功']));
+
+        // }
 
     }
 
