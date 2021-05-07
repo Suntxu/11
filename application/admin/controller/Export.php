@@ -208,7 +208,7 @@ class Export extends Backend
     public function domain_registration(){
 
         $this->model = Db::table(PREFIX.'Task_record')->where('d.TaskStatusCode = 2 and r.tasktype = 2');
-        $this->join = [[PREFIX.'Task_Detail'.' d','r.id = d.taskid','right']];
+        $this->join[] = [PREFIX.'Task_Detail'.' d','r.id = d.taskid','right'];
         $this->join[] = ['domain_user u','r.userid=u.id','left'];
         $this->q_field = 'uid,d.tit,d.money,r.cos_price,r.createtime,d.CreateTime,d.hz,r.uip';
         $this->alias = 'r';
