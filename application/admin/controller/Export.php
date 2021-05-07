@@ -46,7 +46,7 @@ class Export extends Backend
          if($this->request->isAjax() || isset($param['even']) ){ //evem 即时导出
 
 
-            
+
             if(!method_exists( 'app\admin\controller\Export', $param['action'])){
                 return ['code' => 1,'msg' => '类型有误!'];
             }
@@ -56,7 +56,7 @@ class Export extends Backend
             }
 
             list($where, $sort, $order, $offset, $limit,$group,$special_condition) = $this->buildparams();
-            
+
             call_user_func('self::'.$param['action'],[$group,$special_condition]);
 
             if($this->join){
@@ -69,7 +69,7 @@ class Export extends Backend
             $data = [];
             for($i = 0;$i < $num; $i++){
                 $start = $limit * $i;
-            
+
                 if($this->join){
                     $sql = $this->model->alias($this->alias)->join($this->join)->where($where)->where($this->def)->field($this->q_field)->limit($start,$limit)->fetchSql(1)->select();
                 }else{
@@ -201,18 +201,18 @@ class Export extends Backend
             }
         }
     }
-    
+
     /*
-        域名注册  1308589611@qq.com
+        域名注册
     */
     public function domain_registration(){
         $param = $this->request->get();
         if($this->request->isAjax() ){
-            
+
             if($param['action'] !== 'domain_registration'){
                 return ['code' => 1,'msg' => '类型有误!'];
             }
-            
+
             if(!preg_match('/^[\x{4e00}-\x{9fa5}A-Za-z0-9_]+$/u', $param['name'])){
                 return ['code' => 1,'msg' => '文件名只支持中文字母数字下划线组成'];
             }
@@ -224,7 +224,7 @@ class Export extends Backend
                 ->where($where)
                 ->where('d.TaskStatusCode = 2 and r.tasktype = 2')
                 ->count();
-            
+
             $limit = 10000;
             $num = ceil($count / $limit);
             $data = [];
@@ -240,7 +240,7 @@ class Export extends Backend
                 ->limit($start, $limit)
                 ->select();
                 $data[] = $sql;
-            }  
+            }
             $insert = ['userid' => - $this->auth->id,'createtime' => time(),'name' => $param['name']. '域名注册列表'];
             $id = Db::name('domain_export')->insertGetId($insert);
             $head = ['用户名','域名','单价','成本价','任务提交时间','注册完成时间','后缀','注册IP'];
@@ -251,9 +251,9 @@ class Export extends Backend
             $redis->hmset('export_domain_head_'.$id,$head);
             $redis->set('export_domain_action_'.$id,$param['action']);
             exit(json_encode(['code' => 0,'msg' => '任务提交成功']));
-                
+
         }
-     
+
     }
 
 }
