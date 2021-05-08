@@ -37,7 +37,7 @@ define("WEBURL",'http://my-dve.huaimi.com/');
 
 define("WEBNAME",'怀米网');
 //第2个数据库
-global $db2,$record_db,$reserve_db,$remodi_db;
+global $db2,$record_db,$reserve_db,$remodi_db,$violation_db;
 $db2 = [
     // 数据库类型
     'type'            =>  'mysql',
@@ -119,6 +119,27 @@ $remodi_db = [
     'prefix'          => 'yj_',
 
 ];
+
+//违规域名库
+$violation_db = [
+    // 数据库类型
+    'type'            =>  'mysql',
+    // 服务器地址
+    'hostname'        => '103.222.190.53',
+    // 数据库名
+    'database'        => 'aq_53_huaimi_com',
+    // 用户名
+    'username'        => 'aq_53_huaimi_com',
+    // 密码
+    'password'        =>'tNpfE7FWZhseckhX',
+    // 端口
+    'hostport'        => '3306',
+    // 数据库编码默认采用utf8
+    'charset'         =>'utf8',
+    // 数据库表前缀
+    'prefix'          => '',
+
+];
 /**
 
  * 表名前缀
@@ -142,6 +163,9 @@ define('ALI_Region_ID','cn-shanghai');
 define('ALI_AccessKey_ID','LTAIFvR702GIR5rc');
 
 define('ALI_Secret','41zVTPa7Ie25K0TyyV80d0pNNTsMwh');
+
+//Python接口地址
+define('PYTHON_API_URL_WIN','http://39.100.121.81:8893');//windows服务器
 
 //***********end
 
