@@ -22,7 +22,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                 columns: [
                     [
                         {field: 'u.uid', title: '用户名',},
-                        {field: 'l.sj', title: '登录时间',operate: 'RANGE', addclass: 'datetimerange', formatter: Table.api.formatter.datetime,defauleValue:getTimeFrame},
+                        {field: 'l.sj', title: '登录时间',operate: 'RANGE', addclass: 'datetimerange', formatter: Table.api.formatter.datetime,defauleValue:getTimeFrame()},
                         {field: 'l.country', title: '国家/地区',},
                         {field: 'l.city', title: '城市',},
                         {field: 'l.type', title: '登陆类型',searchList:{0:'正常登陆',1:'手机号(异地)',2:'邮箱',3:'身份证',4:'IP白名单'}},
