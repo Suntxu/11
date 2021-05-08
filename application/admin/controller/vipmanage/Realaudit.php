@@ -74,6 +74,9 @@ class Realaudit extends Backend
                 if($msg){
                     $list[$k]['remark'] = $msg['msg'];
                 }
+                if ($v['status'] == 1) {
+                    $list[$k]['manmage'] = "&nbsp;&nbsp;<a href='javascript:;' onclick='setStat({$v['id']})'>删除</a>";
+                }
             }
             $result = array("total" => $total, "rows" => $list);
             return json($result);
@@ -200,6 +203,27 @@ class Realaudit extends Backend
         return $this->view->fetch();
     }
 
+    /*
+     * 删除
+     */
+    public function delrenzheng(){
+        if($this->request->isPost()){
+            $id = $this->request->post('id');
+            if (empty($id)){
+                return json(['code'=>0,'msg'=>'参数错误']);
+            }
+            $data = Db::name('user_renzheng')->where(['id'=>$id,'status'=>1])->value('id');
+            if (!$data){
+                return json(['code'=>0,'msg'=>'数据不存在或状态已更改,请刷新后重试']);
+            }
+            $res = Db::name('user_renzheng')->where('id',$id)->delete();
+            if ($res){
+                return json(['code'=>1,'msg'=>'删除成功']);
+            }else{
+                return json(['code'=>1,'msg'=>'删除失败']);
+            }
+        }
 
+    }
 
 }
