@@ -94,7 +94,7 @@ class Orders extends Backend
 
                 $v['remark'] = ' <span onclick="showRemark(\''.$v['remark'].'\')" style="color:#52a8f1;cursor: pointer;">查看</span>';;                    
 
-                if($v['reging_num'] == 0 || $v['end_time'] < $time){
+                if($v['reging_num'] == 0 || $v['end_time'] > $time){
                     //可注册数量
                     $kto = $v['domain_total'] - $v['success_num'] - $v['reging_num'];
                     if($kto){
