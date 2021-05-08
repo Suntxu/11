@@ -111,3 +111,8 @@ function setStat(id){
         });
     })
 }
+
+
+
+
+
