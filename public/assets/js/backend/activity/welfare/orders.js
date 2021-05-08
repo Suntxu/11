@@ -84,7 +84,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                                         return 'onclick="opEndtime('+res.id+')"';
                                     },
                                     visible:function(res){
-                                        if(res.domain_total == (res.success_num + res.reging_num)){
+                                        if(res.domain_total == (res.success_num + res.reging_num) || res.status == 2){
                                             return false;
                                         }
                                         return true;
