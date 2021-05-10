@@ -63,7 +63,7 @@
             <div class="col-xs-12 col-sm-8">
                 {foreach  $data['img_path'] as $k => $v}
                 <img style="width: 29px;height: 29px;cursor: pointer;" onclick="bigImg(this,{$k})" src="{$Think.SPREAD_URL}{$v}">
-                <a target="_blank" id="a{$k}" style="cursor: pointer; max-width: 240px; max-height: 200px;"><img id="bigimg{$k}"></a>
+                <a target="_blank" id="a{$k}"><img style="cursor: pointer; max-width: 240px; max-height: 200px;" id="bigimg{$k}"></a>
                 {/foreach}
             </div>
         </div>
