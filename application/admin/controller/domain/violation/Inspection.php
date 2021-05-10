@@ -116,7 +116,9 @@ class Inspection extends Backend
                 }
                 $reqParam['type'] = 1;
             }
-
+//            echo '<pre>';
+//            print_r($reqParam);
+//            die;
             //调用接口
             $result = json_decode(Http::post(PYTHON_API_URL.'/batch/api/scan',$reqParam),true);
 
