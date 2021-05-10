@@ -87,7 +87,7 @@ class Inspection extends Backend
             }
 
             $reqParam['uid'] = $uid;
-            $reqParam['analysis'] = (isset($param['punish_type']) && $param['punish_type'] == 1) ? 2 : 1;
+            $reqParam['analysis'] = (isset($param['punish_type']) && $param['punish_type'] == 1) ? 1 : 2;
 
             if($tits){
                 if(count($tits) > 1000){
