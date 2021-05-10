@@ -57,7 +57,17 @@
             <input type="text" class="form-control"  value="{$data.desc}"  readonly="readonly"/>
         </div>
     </div>
-
+    {if $data['img_path']}
+        <div class="form-group">
+            <label for="bc" class="control-label col-xs-12 col-sm-2">上传图片:</label>
+            <div class="col-xs-12 col-sm-8">
+                {foreach  $data['img_path'] as $k => $v}
+                    <img style="width: 29px;height: 29px;cursor: pointer;" onclick="bigImg(this,{$k})" src="{$Think.SPREAD_URL}{$v}">
+                    <img id="bigimg{$k}">
+                {/foreach}
+            </div>
+        </div>
+    {/if}
 
     <div class="form-group hidden layer-footer">
         <label class="control-label col-xs-12 col-sm-2"></label>

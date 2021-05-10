@@ -65,7 +65,11 @@ class Feedback extends Backend
             $this->db->where('id',intval($params['id']))->update(['status'=>$params['status'],'cnstatus'=>$params['cnstatus'],'money'=>$params['money']]);
             $this->success('状态修改成功');
         }
-        $data=$this->db->where('id',intval($ids))->field('id,status,cnstatus,money,uid,uqq,type,nickname,desc')->find();
+        $data=$this->db->where('id',intval($ids))->field('id,status,cnstatus,money,uid,uqq,type,nickname,desc,img_path')->find();
+        if($data['img_path']){
+            $data['img_path'] = explode(',',$data['img_path']);
+        }
+
         $this->assign('data',$data);
         return $this->view->fetch();
     }
