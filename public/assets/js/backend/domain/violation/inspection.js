@@ -6,6 +6,7 @@
             Table.api.init({
                 extend: {
                     index_url: 'domain/violation/inspection/index',
+                    add_url: 'domain/violation/inspection/add',
                     edit_url: 'domain/violation/manual/index',
                     del_url: 'domain/violation/inspection/del',
                     table: 'user',

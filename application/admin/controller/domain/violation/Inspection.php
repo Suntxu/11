@@ -5,6 +5,7 @@ namespace app\admin\controller\domain\violation;
 use app\common\controller\Backend;
 use think\Db;
 use app\admin\common\Fun;
+use fast\Http;
 /**
  * 自查违规域名上报管理列表
  */
@@ -60,6 +61,67 @@ class Inspection extends Backend
             }
             $result = array("total" => $total, "rows" => $list);
             return json($result);
+        }
+        return $this->view->fetch();
+    }
+
+
+    /**
+     * 手动添加
+     */
+    public function add(){
+
+        if($this->request->isAjax()){
+            $param = $this->request->post();
+            $uid = empty($param['uid']) ? '' : trim($param['uid']);
+
+            $tits = empty($param['domain']) ? '' : Fun::ini()->moreRow($param['domain']);
+
+            if(!$uid){
+                $this->error('请填写用户名');
+            }
+
+            $userid = Db::name('domain_user')->where('uid',$uid)->value('id');
+            if(empty($userid)){
+                $this->error('用户不存在,请确认！');
+            }
+
+            $reqParam['uid'] = $uid;
+            $reqParam['analysis'] = (isset($param['punish_type']) && $param['punish_type'] == 1) ? 2 : 1;
+
+            if($tits){
+                if(count($tits) > 1000){
+                    $this->error('最多可输入1000个域名');
+                }
+
+                $udomains = Db::name('domain_pro_n')->where('userid',$userid)->whereIn('tit',$tits)->column('tit');
+                if(!$udomains){
+                    $this->error('该批域名不存在'.$uid.'账户下面');
+                }
+                if($diffDomains = array_diff($tits,$udomains)){
+                    $this->error('域名:'.implode(',',$diffDomains).' 不存在'.$uid.'账户中');
+                }
+
+                $tis = $this->connect->name('domain_violation_oneself')->where(['userid' => $userid,'is_img' => 2])->whereIn('tit',$tits)->column('tit');
+                if($tis){
+                    $this->error('域名：'.implode(',',$tis).'已有违规截图！');
+                }
+
+                $reqParam['domains'] = implode(',',$tits).',';
+            }else{
+                $ucount = Db::name('domain_pro_n')->where('userid',$userid)->count();
+                if($ucount == 0){
+                    $this->error('该账户下面没有域名,请确认！');
+                }
+            }
+
+            //调用接口
+            $result = json_decode(Http::post(PYTHON_API_URL.'/batch/api/scan',$reqParam),true);
+            if(isset($result['code']) && $result['code'] == 1){
+                $this->success('提交成功,正在扫描中！');
+            }
+            $this->error('接口返回失败');
+
         }
         return $this->view->fetch();
     }
