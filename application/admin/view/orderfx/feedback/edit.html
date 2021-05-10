@@ -62,8 +62,8 @@
             <label for="bc" class="control-label col-xs-12 col-sm-2">上传图片:</label>
             <div class="col-xs-12 col-sm-8">
                 {foreach  $data['img_path'] as $k => $v}
-                <a href="{$Think.SPREAD_URL}{$v}" target="_blank"><img style="width: 29px;height: 29px;cursor: pointer;" onclick="bigImg(this,{$k})" src="{$Think.SPREAD_URL}{$v}"></a>
-                <a target="_blank" id="a{$k}"><img id="bigimg{$k}"></a>
+                <img style="width: 29px;height: 29px;cursor: pointer;" onclick="bigImg(this,{$k})" src="{$Think.SPREAD_URL}{$v}">
+                <a target="_blank" id="a{$k}" style="cursor: pointer; max-width: 240px; max-height: 200px;"><img id="bigimg{$k}"></a>
                 {/foreach}
             </div>
         </div>
