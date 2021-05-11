@@ -166,6 +166,7 @@ define('ALI_Secret','41zVTPa7Ie25K0TyyV80d0pNNTsMwh');
 
 //Python接口地址
 define('PYTHON_API_URL_WIN','http://39.100.121.81:8893');//windows服务器
+define('PYTHON_API_URL','http://103.222.190.53:8895');
 
 //***********end
 

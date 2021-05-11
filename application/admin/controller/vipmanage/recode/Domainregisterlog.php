@@ -26,7 +26,7 @@ class Domainregisterlog extends Backend
             $filter = $this->request->get("filter", '');
             $filter = json_decode($filter, TRUE);
             if(empty($filter['d.tit']) ){
-                $this->error('请设置搜索条件域名后查询数据');
+                $this->error('请设置域名搜索条件域名后查询数据');
             }
 
             list($where, $sort, $order, $offset, $limit ) = $this->buildparams();
@@ -52,8 +52,8 @@ class Domainregisterlog extends Backend
             foreach ($list as $k => $v){
                 $list[$k]['d.api_id'] = isset($v['api_id']) ? $apis[$v['api_id']]['tit'] : '';
 //                $list[$k]['r.zcs'] = isset($v['zcs']) ? $zcs[$v['zcs']] : '';
-                $list[$k]['r.status'] = $fun->getStatus($v['status'],['执行中','执行成功']);
-                $list[$k]['d.TaskStatusCode'] = $fun->getStatus($v['TaskStatusCode'],['等待执行','执行中','执行成功','执行失败',9 => '已退款']);
+                $list[$k]['r.status'] = $fun->getStatus($v['status'],['<span style="color: red;">执行中</span>','<span style="color: green;">已完成</span>']);
+                $list[$k]['d.TaskStatusCode'] = $fun->getStatus($v['TaskStatusCode'],['<span style="color: gray;">等待执行</span>','<span style="color: red;">执行中</span>','<span style="color: green;">执行成功</span>','<span style="color: red;">执行失败</span>',9 => '<span style="color: orange;">已退款</span>']);
                 $list[$k]['d.tit'] = $v['tit'];
                 $list[$k]['u.uid'] = $v['uid'];
                 $list[$k]['d.ErrorMsg'] = $v['ErrorMsg'];

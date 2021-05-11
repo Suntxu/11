@@ -245,4 +245,24 @@ function getTimeFrame(){
     return start_time + ' - ' + end_time;
 }
 
+/**
+ *点击放大图片
+ * @param self
+ * @param id
+ */
+function bigImg(self,id){
+
+    var src = self.getAttribute('src');
+    if(document.getElementById('bigimg'+id).getAttribute('src') == src){
+        document.getElementById('bigimg'+id).setAttribute('src','');
+        document.getElementById('a'+id).setAttribute('href','');
+        document.getElementById('a'+id).setAttribute('target','');
+    }else{
+        document.getElementById('bigimg'+id).setAttribute('src',src);
+        document.getElementById('a'+id).setAttribute('href',src);
+        document.getElementById('a'+id).setAttribute('target','blank');
+    }
+
+}
+
 
