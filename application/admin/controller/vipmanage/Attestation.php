@@ -589,10 +589,17 @@ class Attestation extends Backend
                 else
                     return ['code' => 1,'msg' => '模板邮箱未验证，请先验证邮箱'];
             }
-
-            $info['base64'] = $this->imagexs($api_info['regid'],$info['image1']);
+            $base64 = $this->imagexs($api_info['regid'],$info['image1']);
+            if (!$base64){
+                return ['code' => 1,'msg' => '身份证图片裁剪失败'];
+            }
+            $info['base64'] = $base64;
             if($info['renzheng'] == 1){
-                $info['base64_qy'] = $this->imagexs($api_info['regid'],$info['image2']);
+                $base64_qy = $this->imagexs($api_info['regid'],$info['image2']);
+                if (!$base64_qy){
+                    return ['code' => 1,'msg' => '营业执照图片裁剪失败'];
+                }
+                $info['base64_qy'] = $base64_qy;
             }
             $uid = Db::name('domain_user')->where('id',$data['userid'])->value('uid');
             $info['api_id'] = $data['api_id'];
@@ -612,12 +619,10 @@ class Attestation extends Backend
     public function imagexs($regid,$image){
         $fun = Fun::ini();
         if($regid == 88){
-            list($r,$filename) = $fun->resizeImage(IMGURL.'alireal'.'/'.$image,1950,1950);
-            $base64 = $fun->base64EncodeImage($filename,1);
-            if($r)	unlink($filename);
-            return $base64;
+            $filename = $fun->resizeImage(IMGURL.'alireal'.'/'.$image,1950,1950);
+            return  $filename;
         }
-        return $fun->base64EncodeImage($this->upolad_url.'/'.$image,1);
+        return $fun->base64EncodeImage(IMGURL.'alireal' . '/'.$image,1);
     }
 }
 
