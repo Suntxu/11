@@ -140,10 +140,8 @@ class Redis
      * @param array|string $value string以','号分隔字段
      * @return array|bool
      */
-    public function hMget($key,$field)
+    public function hMget($key,array $field)
     {
-        if(!is_array($field))
-            $field=explode(',', $field);
         return self::$handler->hMget($key,$field);
     }
 
