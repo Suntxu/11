@@ -22,6 +22,7 @@ class Attestation extends Backend
 
     public function _initialize()
     {
+        $this->upolad_url = IMGURL.'alireal';
         parent::_initialize();
     }
     /**
@@ -66,7 +67,6 @@ class Attestation extends Backend
                     ->order($sort, $order)
                     ->limit($offset, $limit)
                     ->select();
-
             $redis = new Redis();
             $fun = Fun::ini();
 
@@ -80,11 +80,11 @@ class Attestation extends Backend
                 }
 
                 if($v['cid'] == 75 || $v['cid'] == 68 || ($v['cid'] == 74  &&  in_array($v['auth_status'],[0,1,4])  ) || (($v['cid'] == 83 || $v['cid'] == 86 || $v['cid'] == 111 || $v['cid'] == 113) && in_array($v['auth_status'],[1,4]) )  ){
-                    $url = '/admin/vipmanage/attestation/del/ids/'.$v['id'];
+                    $url = '/admin/vipmanage/attestation/oneaddinfo?id=' . $v['id'];
                     if(empty($list[$k]['op']) || $list[$k]['op'] == '--'){
-                        $list[$k]['op'] = '<button type="button" onclick="real(\''.$url.'\')" class="btn btn-xs btn-del btn-warning" title="删除">删除</button>&nbsp;';
+                        $list[$k]['op'] = '<button type="button" onclick="real(\''.$url.'\')" class="btn btn-xs btn-del btn-warning" title="添加信息模板">添加信息模板</button>&nbsp;';
                     }else{
-                        $list[$k]['op'] .= '<button type="button" onclick="real(\''.$url.'\')" class="btn btn-xs btn-del btn-warning" title="删除">删除</button>&nbsp;';
+                        $list[$k]['op'] .= '<button type="button" onclick="real(\''.$url.'\')" class="btn btn-xs btn-del btn-warning" title="添加信息模板">添加信息模板</button>&nbsp;';
                     }
                 }
                 if($v['cid'] == 107){
@@ -550,8 +550,78 @@ class Attestation extends Backend
         return $data;
     }
 
+    /*
+     * 添加信息模板
+     * */
 
+    public function oneaddinfo(){
+        if($this->request->isAjax()){
+            $id = $this->request->param('id');
+            $data = Db::name('user_renzhengapi')
+                ->where('id',$id)
+                ->field('id,info_status,email,api_id,info_id,userid')
+                ->find();
+            if(empty($data)){
+                return ['code' => 1,'msg' => '参数错误，请刷新页面'];
+            }
 
+            $redis = new Redis();
+            $r_info = $redis->hMget('infotemplate_data_'.$data['id'].'_'.$data['api_id'],'info_id');
+
+            if($r_info['info_id'] > 0){
+                return ['code' => 0,'msg' => '添加信息模板任务提交成功'];
+            }
+
+            $info = Db::table(PREFIX.'domain_infoTemplate')
+                ->alias('t1')
+                ->join('user_renzheng t3','t1.renzheng_id = t3.id')
+                ->where(['t1.userid' => $data['userid'],'t1.id' => $data['info_id']])
+                ->field('t1.id as info_id,t1.Telephone,t1.Email,t3.*,t1.RegistrantProfileId')
+                ->find();
+            $api_info = $redis->hGetAll('Api_Info_'.$data['api_id']);
+
+            $emailVerify = [];
+
+            if($api_info['regid'] == 88 || $api_info['regid'] == 110){
+                $info['Email'] = !$data['email'] ? $info['Email'] : $data['email'];
+                $emailVerify = Db::name('emailverify_record')->where(['email' => $info['Email'],'status' => 1])->field('verifytime,ip')->find();
+                if($emailVerify){
+                    $info['verifyIp'] = $emailVerify['ip'];
+                    $info['verifyTime'] = $emailVerify['verifytime'];
+                }
+                else
+                    return ['code' => 1,'msg' => '模板邮箱未验证，请先验证邮箱'];
+            }
+
+            $info['base64'] = $this->imagexs($api_info['regid'],$info['image1']);
+            if($info['renzheng'] == 1){
+                $info['base64_qy'] = $this->imagexs($api_info['regid'],$info['image2']);
+            }
+            $uid = Db::name('domain_user')->where('id',$data['userid'])->value('uid');
+            $info['api_id'] = $data['api_id'];
+            $info['sendemail'] = $uid;
+            $redis->hMset('infotemplate_data_'.$data['id'].'_'.$data['api_id'],$info);
+            $redis->RPush('infotemplate_id',$data['id'].'_'.$data['api_id']);
+            if($api_info['regid'] == 110){
+                /* 添加国域模板成功后的邮箱验证 */
+                $redis->rpush('emailverify_record_'.$api_info['regid'],$info['Email'].'/'.$data['api_id']);
+            }
+            Db::name('user_renzhengapi')->where('id',$id)->delete();
+            return ['code' => 0,'msg' => '添加信息模板成功'];
+
+        }
+    }
+
+    public function imagexs($regid,$image){
+        if($regid == 88){
+            list($r,$filename) = resize_image($this->upolad_url.'/'.$image,1950,1950);
+            $base64 = $this->base64EncodeImage($filename,1);
+            if($r)	unlink($filename);
+            return $base64;
+        }
+        $fun = Fun::ini();
+        return $fun->base64EncodeImage($this->upolad_url.'/'.$image,1);
+    }
 }
 
 

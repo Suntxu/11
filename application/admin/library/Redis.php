@@ -132,7 +132,21 @@ class Redis
     {
         return self::$handler->hGetAll($key);
     }
- 
+
+
+    /**
+     * 为hash表多个字段设定值。
+     * @param string $key
+     * @param array|string $value string以','号分隔字段
+     * @return array|bool
+     */
+    public function hMget($key,$field)
+    {
+        if(!is_array($field))
+            $field=explode(',', $field);
+        return self::$handler->hMget($key,$field);
+    }
+
     /**
      * 获取值长度
      * @param string $key
