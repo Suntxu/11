@@ -40,7 +40,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                         {field: 'account', title: '账户余额',sortable:true,operate:'BETWEEN'},
                         {field: 'bh', title: '代金券编号',formatter:Table.api.formatter.alink,url:'/admin/spread/expand/voucherrecord',fieldvaleu:'bh',fieldname:'bh',tit:'代金券使用记录',},
                         {field: 'v_r_money', title: '使用金额',sortable:true,operate:'BETWEEN'},
-                        {field: 'r.createtime', title: '开始时间',operate: 'INT', addclass: 'datetimerange',formatter: Table.api.formatter.datetime,sortable:true,defaultValue:getTimeFrame()},
+                        {field: 'r.createtime', title: '开始时间',operate: 'INT', addclass: 'datetimerange',formatter: Table.api.formatter.datetime,sortable:true},
                         {field: 'special_condition', title: '注册类型',formatter: Table.api.formatter.status, searchList:{0:'普通',1:'拼团',2:'限量',3:'注册包'}},
                         {field: 'r.status', title: '执行进度',formatter: Table.api.formatter.status,searchList: {0:'任务执行中',1:'任务执行完成'}},
                         {field: 'r.ltype', title: '提交来源',formatter: Table.api.formatter.status,searchList: {0:'官网',1:'分销系统'}},
