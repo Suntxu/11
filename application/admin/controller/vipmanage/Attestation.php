@@ -22,7 +22,6 @@ class Attestation extends Backend
 
     public function _initialize()
     {
-        $this->upolad_url = IMGURL.'alireal';
         parent::_initialize();
     }
     /**
@@ -580,8 +579,6 @@ class Attestation extends Backend
                 ->find();
             $api_info = $redis->hGetAll('Api_Info_'.$data['api_id']);
 
-            $emailVerify = [];
-
             if($api_info['regid'] == 88 || $api_info['regid'] == 110){
                 $info['Email'] = !$data['email'] ? $info['Email'] : $data['email'];
                 $emailVerify = Db::name('emailverify_record')->where(['email' => $info['Email'],'status' => 1])->field('verifytime,ip')->find();
@@ -613,14 +610,13 @@ class Attestation extends Backend
     }
 
     public function imagexs($regid,$image){
-
+        $fun = Fun::ini();
         if($regid == 88){
-            list($r,$filename) = resize_image($this->upolad_url.'/'.$image,1950,1950);
-            $base64 = $this->base64EncodeImage($filename,1);
+            list($r,$filename) = $fun->resizeImage(IMGURL.'alireal'.'/'.$image,1950,1950);
+            $base64 = $fun->base64EncodeImage($filename,1);
             if($r)	unlink($filename);
             return $base64;
         }
-        $fun = Fun::ini();
         return $fun->base64EncodeImage($this->upolad_url.'/'.$image,1);
     }
 }
