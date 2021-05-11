@@ -272,6 +272,7 @@ class Redis
      * 查询集合中所有成员
      */
     public function smembers($key){
+        
         return self::$handler->smembers($key);
     }
 

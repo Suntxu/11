@@ -613,6 +613,7 @@ class Attestation extends Backend
     }
 
     public function imagexs($regid,$image){
+
         if($regid == 88){
             list($r,$filename) = resize_image($this->upolad_url.'/'.$image,1950,1950);
             $base64 = $this->base64EncodeImage($filename,1);
