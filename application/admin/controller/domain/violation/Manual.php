@@ -46,7 +46,11 @@ class Manual extends Backend
                 ->field('n.tit,n.userid,u.uid')->whereIn('n.tit',$domains)
                 ->select();
             if(empty($pinfo)){
-                $this->error('域名不存在库中');
+                //查看是否解析域名
+                $pinfo = $this->connect->name('domain_violation_oneself')->field('tit,uid,userid')->whereIn('tit',$domains)->where('add_type',1)->select();
+                if(empty($pinfo)){
+                    $this->error('域名不存在库中');
+                }
             }
 
             if(empty($params['add_type'])){
