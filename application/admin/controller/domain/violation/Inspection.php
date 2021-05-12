@@ -82,10 +82,10 @@ class Inspection extends Backend
                 $this->error('请填写用户名');
             }
 
-//            $userid = Db::name('domain_user')->where('uid',$uid)->value('id');
-//            if(empty($userid)){
-//                $this->error('用户不存在,请确认！');
-//            }
+            $userid = Db::name('domain_user')->where('uid',$uid)->value('id');
+            if(empty($userid)){
+                $this->error('用户不存在,请确认！');
+            }
 
             $reqParam['uid'] = $uid;
             $reqParam['analysis'] = (isset($param['punish_type']) && $param['punish_type'] == 1) ? 1 : 2;
@@ -111,15 +111,15 @@ class Inspection extends Backend
                 $reqParam['domains'] = implode(',',$tits);
                 $reqParam['type'] = 2;
             }else{
-//                $ucount = Db::name('domain_pro_n')->where('userid',$userid)->count();
-//                if($ucount == 0){
-//                    $this->error('该账户下面没有域名,请确认！');
-//                }
+                $ucount = Db::name('domain_pro_n')->where('userid',$userid)->count();
+                if($ucount == 0){
+                    $this->error('该账户下面没有域名,请确认！');
+                }
                 $reqParam['type'] = 1;
             }
 
             //调用接口
-            $result = json_decode(Http::post('http://103.222.190.53:8082/img/api/scan',$reqParam),true);
+            $result = json_decode(Http::post(PYTHON_API_URL.':8082/img/api/scan',$reqParam),true);
 
             if(isset($result['code']) && $result['code'] == 1){
                 $this->success('提交成功,正在扫描中！');

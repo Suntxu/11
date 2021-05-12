@@ -31,6 +31,7 @@
                         { field: 'img_path', title: '违规截图',operate:false,formatter:Table.api.formatter.image},
                         { field: 'is_redirect', title: '是否重定向',searchList:{0:'否',1:'是'}},
                         { field: 'is_img', title: '是否截图',searchList:{0:'未截图',1:'未上传',2:'已上传'}},
+                        { field: 'add_type', title: '添加类型',searchList:{0:'自查',1:'手动'}},
                         { field: 'registrar', title: '注册商', searchList: $.getJSON('category/getcategory?type=api&xz=parent') },
                         { field: 'create_time', title: '查询时间',operate: 'INT',addclass: 'datetimerange',sortable:true,formatter: Table.api.formatter.datetime},
                         { field: 'operate', title: __('Operate'), table: table, events: Table.api.events.operate, formatter: Table.api.formatter.operate }
