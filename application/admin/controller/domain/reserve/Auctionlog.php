@@ -34,10 +34,10 @@ class Auctionlog extends Backend
             }elseif($group == 3){
                 $def = 'i.end_time < '.$time;
             }
-            $total = $this->model->alias('r')->join('domain_auction_info i','r.auction_id=i.id')->join('domain_user u','r.userid=u.id','left')
+            $total = $this->model->alias('r')->join('domain_auction_info i','r.auction_id=i.id','left')->join('domain_user u','r.userid=u.id','left')
                 ->where($where)->where($def)
                 ->count();
-            $list = $this->model->alias('r')->join('domain_auction_info i','r.auction_id=i.id')->join('domain_user u','r.userid=u.id','left')
+            $list = $this->model->alias('r')->join('domain_auction_info i','r.auction_id=i.id','left')->join('domain_user u','r.userid=u.id','left')
                 ->field('i.tit,r.money,r.time,u.uid,r.res_money,i.start_time,i.end_time,i.status,r.otype') //i.money as imoney,
                 ->where($where)->where($def)->order($sort,$order)
                 ->limit($offset,$limit)
