@@ -38,7 +38,7 @@ class Auctionlog extends Backend
                 ->where($where)->where($def)
                 ->count();
             $list = $this->model->alias('r')->join('domain_auction_info i','r.auction_id=i.id','left')->join('domain_user u','r.userid=u.id','left')
-                ->field('i.tit,r.money,r.time,u.uid,r.res_money,i.start_time,i.end_time,i.status,r.otype') //i.money as imoney,
+                ->field('i.tit,r.money,r.time,u.uid,r.res_money,i.start_time,i.end_time,i.status,r.otype,i.inner') //i.money as imoney,
                 ->where($where)->where($def)->order($sort,$order)
                 ->limit($offset,$limit)
                 ->select();
@@ -54,6 +54,7 @@ class Auctionlog extends Backend
                 }else{
                     $v['group'] = '<span style="color:blue">已结束</span>';
                 }
+                $v['i.inner'] = $fun->getStatus($v['inner'],['正常竞价','<span style="color: orange;">内部竞价</span>']);
                 $v['i.status'] = $fun->getStatus($v['status'],['进行中','<span style="color:yellowgreen;">竞价成功</span>','<span style="color:red;">竞价失败</span>','<span style="color:darkgreen;">交割成功</span>','<span style="color:orange;">内部竞价</span>']);
                 $v['r.otype'] = $fun->getStatus($v['otype'],['预定','预释放']);
                 $v['r.money'] = $v['money'];

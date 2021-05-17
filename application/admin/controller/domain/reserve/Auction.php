@@ -47,7 +47,7 @@ class Auction extends Backend
                     ->where($where)->where($def)
                     ->find();
             $list = $this->model->alias('i')->join('domain_user u','i.lx_userid=u.id','left')
-                ->field('u.uid,i.api_id,i.tit,i.cur_money,i.start_time,i.end_time,i.money,i.transferprice,i.type,i.status,i.id,i.hz,i.ptime,i.lx_userid,i.outer_price')
+                ->field('u.uid,i.inner,i.api_id,i.tit,i.cur_money,i.start_time,i.end_time,i.money,i.transferprice,i.type,i.status,i.id,i.hz,i.ptime,i.lx_userid,i.outer_price')
                 ->where($where)->where($def)->order($sort,$order)
                 ->limit($offset,$limit)
                 ->select();
@@ -70,6 +70,9 @@ class Auction extends Backend
                 }else{
                     $v['group'] = '<span style="color:blue">已结束</span>';
                 }
+
+                $v['i.inner'] = $fun->getStatus($v['inner'],['正常竞价','<span style="color: orange;">内部竞价</span>']);
+
                 $v['i.ptime'] = $v['ptime'];
                 $v['i.status'] = $fun->getStatus($v['status'],['进行中','<span style="color:yellowgreen;">竞价成功</span>','<span style="color:red;">竞价失败</span>','<span style="color:darkgreen;">交割成功</span>','<span style="color:orange;">内部竞价</span>']);
                 $v['i.type'] = $fun->getStatus($v['type'],['预定','预释放']);

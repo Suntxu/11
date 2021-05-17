@@ -25,6 +25,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                         { field: 'res_money', title: '当前底价',operate: 'BETWEEN',sortable:true},
                         { field: 'r.otype', title: '预定类型',formatter: Table.api.formatter.status, notit:true, searchList:{0:'预定',1:'预释放'},},
                         { field: 'i.status', title: '竞拍状态',formatter: Table.api.formatter.status, notit:true, searchList:{0:'进行中',1:'竞价成功',2:'竞价失败',3:'交割成功',4:'内部竞价'},},
+                        { field: 'i.inner', title: '竞价类型',searchList:{0:'正常竞价',1:'内部竞价'},},
                         { field: 'group', title: '竞拍进度',formatter: Table.api.formatter.status, notit:true, searchList:{1:'未开始',2:'进行中',3:'已结束'},},
                     ]
                 ],
