@@ -93,7 +93,7 @@
                     var type = 3;
                 }
                 $.each(table.bootstrapTable('getSelections'),function(index ,row){
-                    var url = '/admin/total/illegal/exportInfo?userid=' + row.userid + '&tit=' + row.tit+'&type='+type;
+                    var url = '/admin/total/issue/illegal/exportInfo?userid=' + row.userid + '&tit=' + row.tit+'&type='+type;
                     var elemIF = document.createElement("iframe");
                     elemIF.src = url;
                     elemIF.style.display = "none";
