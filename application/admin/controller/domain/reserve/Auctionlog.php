@@ -69,7 +69,7 @@ class Auctionlog extends Backend
         if(isset($get['id'])){
             $get['id'] = $get['id'] === '0' ? -1 : intval($get['id']);
         }else{
-            $get['id'] = 0;
+            $get['id'] = '';
         }
         $end_time = '无';
         $api_id = '无';
