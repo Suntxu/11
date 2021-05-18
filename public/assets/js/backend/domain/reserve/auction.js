@@ -70,7 +70,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                         { field: 'i.api_id', title: '接口商',searchList: $.getJSON('webconfig/regapi/getRegisterUserName')},
                         { field: 'i.ptime', title: '预计交割时间',addclass:'datetimerange',operate:'INT',formatter: Table.api.formatter.datetime},
                         { field: 'i.status', title: '竞拍状态',formatter: Table.api.formatter.status, notit:true, searchList:{0:'进行中',1:'竞价成功',2:'竞价失败',3:'交割成功',4:'内部竞价'},},
-                        { field: 'i.inner', title: '竞价类型',searchList:{0:'正常竞价',1:'内部竞价'},},
+                        { field: 'special_status', title: '竞价类型',visible:false,searchList:{1:'内部竞价'}},
                         { field: 'group', title: '结束状态',formatter: Table.api.formatter.status, notit:true, searchList:{1:'未开始',2:'进行中',3:'已结束'},},
                         { field: 'spec',title:'是否返利用户',searchList:{1:'返利用户',2:'非返利用户'},visible:false},
                     ] 
