@@ -87,7 +87,13 @@
                                 }, 0);
                                 return '怀米大使数量:'+total_sum;
                             }},
-                        { field: 'r.into', title: '订单类型',formatter: Table.api.formatter.status,searchList: {'0':'正常订单','1':'闯入订单'},notit:true},
+                        { field: 'r.into', title: '订单类型',formatter: Table.api.formatter.status,searchList: {'0':'正常订单','1':'闯入订单'},notit:true,footerFormatter: function (data) {
+                                var field = 'noElchTotal';
+                                var total_sum = data.reduce(function (sum, row) {
+                                    return parseFloat(row[field]);
+                                }, 0);
+                                return '非怀米大使订单数量:'+total_sum;
+                            }},
                         { field: 'r.pstatus', title: '交割状态',formatter: Table.api.formatter.status,searchList: {'0':'未支付','1':'未交割','2':'交割失败','3':'已交割','4':'违约'},notit:true},
                         { field: 'r.time', title: '订单创建时间',addclass:'datetimerange',operate:'INT',formatter: Table.api.formatter.datetime,sortable:true },
                         { field: 'i.dtype', title: '域名类型',operate: 'RLIKE',searchList:$.getJSON('domain/manage/getDomainType'),
