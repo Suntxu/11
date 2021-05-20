@@ -44,6 +44,16 @@ class Orders extends Backend
                 ->where($where)->where($def)
                 ->find();
            
+            //得标数
+            $bidTotal = $this->model->alias('r')->join('domain_user u','u.id=r.userid')->join('domain_order_reserve_info i','r.tit=i.tit')->join('domain_auction_info a','a.id=r.auction_id','left')->join('domain_user ut','ut.id = r.tuserid','left')
+                ->where($where)->where($def)->where('r.status',7)
+                ->count();
+            
+            //怀米大使数量
+            $elcheeTotal = $this->model->alias('r')->join('domain_user u','u.id=r.userid')->join('domain_order_reserve_info i','r.tit=i.tit')->join('domain_auction_info a','a.id=r.auction_id','left')->join('domain_user ut','ut.id = r.tuserid')
+                ->where($where)->where($def)
+                ->count('distinct r.tuserid');
+
             $total = $this->model->alias('r')->join('domain_user u','u.id=r.userid')->join('domain_order_reserve_info i','r.tit=i.tit')->join('domain_auction_info a','a.id=r.auction_id','left')->join('domain_user ut','ut.id = r.tuserid','left')
                     ->where($where)->where($def)
                     ->count();        
@@ -84,6 +94,8 @@ class Orders extends Backend
                 $v['group'] = $v['hz'];
                 $v['r.tit'] = $v['tit'];
                 $v['r.money'] = $v['money'];
+                $v['bidTotal'] = $bidTotal;
+                $v['elcheeTotal'] = $elcheeTotal;
                 if($v['status'] == 7){
                     $v['r.pstatus'] = $fun->getStatus($v['pstatus'],['<span style="color: red">未支付</span>','<span style="color: orangered">未交割</span>','<span style="color: orange">交割失败</span>','<span style="color: green">已交割</span>','<span style="color: gray">违约</span>']);
                 }else{

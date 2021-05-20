@@ -45,7 +45,14 @@
                                 return '统计：';//在第一列开头写上总计、统计之类
                             }},
                         { field: 'group', title: '后缀',searchList: $.getJSON('domain/manage/getDomainHz'),},
-                        { field: 'i.del_time', title: '域名删除时间',addclass:'datetimerange',operate:'INT',formatter: Table.api.formatter.datetime,sortable:true},
+                        { field: 'i.del_time', title: '域名删除时间',addclass:'datetimerange',operate:'INT',formatter: Table.api.formatter.datetime,sortable:true,
+                            footerFormatter: function (data) {
+                                var field = 'bidTotal';
+                                var total_sum = data.reduce(function (sum, row) {
+                                    return parseFloat(row[field]);
+                                }, 0);
+                                return '得标:'+total_sum;
+                            }},
                         { field: 'u.uid', title: '用户名',
                             footerFormatter: function (data) {
                                 var field = 'ple';
@@ -72,7 +79,14 @@
                                 }, 0);
                                 return '实付总金额:'+total_sum.toFixed(2);
                             }},
-                        { field: 'r.status', title: '订单状态',formatter: Table.api.formatter.status,searchList: {'0':'进行中','1':'已预定','2':'竞拍中','3':'预定失败','7':'得标','8':'未得标','10':'外部得标'},notit:true},
+                        { field: 'r.status', title: '订单状态',formatter: Table.api.formatter.status,searchList: {'0':'进行中','1':'已预定','2':'竞拍中','3':'预定失败','7':'得标','8':'未得标','10':'外部得标'},notit:true,
+                            footerFormatter: function (data) {
+                                var field = 'elcheeTotal';
+                                var total_sum = data.reduce(function (sum, row) {
+                                    return parseFloat(row[field]);
+                                }, 0);
+                                return '怀米大使数量:'+total_sum;
+                            }},
                         { field: 'r.into', title: '订单类型',formatter: Table.api.formatter.status,searchList: {'0':'正常订单','1':'闯入订单'},notit:true},
                         { field: 'r.pstatus', title: '交割状态',formatter: Table.api.formatter.status,searchList: {'0':'未支付','1':'未交割','2':'交割失败','3':'已交割','4':'违约'},notit:true},
                         { field: 'r.time', title: '订单创建时间',addclass:'datetimerange',operate:'INT',formatter: Table.api.formatter.datetime,sortable:true },
