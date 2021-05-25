@@ -84,7 +84,7 @@
                                     name: '店铺关联',
                                     text: '店铺关联',
                                     title: '店铺关联',
-                                    classname: 'btn btn-xs btn-info btn-magic dialogit',
+                                    classname: 'btn btn-xs btn-info ',
                                     icon: 'fa fa-hand-stop-o fa-fw',
                                     visible:function(res){
                                         return res.rel;
