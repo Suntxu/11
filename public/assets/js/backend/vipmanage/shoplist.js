@@ -75,7 +75,7 @@
                                     name: '店铺主页',
                                     text: '店铺主页',
                                     title: '店铺主页',
-                                    classname: 'btn btn-xs btn-info btn-magic dialogit',
+                                    classname: 'btn btn-xs btn-info btn-magic',
                                     icon: 'fa fa-hand-stop-o fa-fw',
                                     url: function(res){
                                         return res['wwwurl']+res['special_condition'];
@@ -84,7 +84,7 @@
                                     name: '店铺关联',
                                     text: '店铺关联',
                                     title: '店铺关联',
-                                    classname: 'btn btn-xs btn-info ',
+                                    classname: 'btn btn-xs btn-info btn-magic dialogit',
                                     icon: 'fa fa-hand-stop-o fa-fw',
                                     visible:function(res){
                                         return res.rel;
