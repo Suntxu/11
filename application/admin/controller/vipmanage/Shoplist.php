@@ -91,6 +91,7 @@ class Shoplist extends Backend
                 $v['t1.shopzt'] = $fun->getStatus($v['shopzt'],['--','<span style="color:green">正常开店</span>','<span style="color:red">正在审核</span>','<span style="color:red">禁用</span>','<span style="color:red">审核被拒</span>']);
                 $v['upaytime'] = $paytime;
                 $v['rel'] = in_array($v['userid'],$rels);
+                $v['wwwurl'] = SPREAD_URL;
             }
             $result = array("total" => $total, "rows" => $list);
             return json($result);

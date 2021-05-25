@@ -43,7 +43,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                                 return '实付总金额:'+total_sum.toFixed(2);
                             }
                         },
-                        { field: 'end_time', title: '结束时间',addclass:'datetimerange',operate:'INT',formatter: Table.api.formatter.datetime,
+                        { field: 'end_time', title: '结束时间',addclass:'datetimerange',sortable:true,operate:'INT',formatter: Table.api.formatter.datetime,
                             footerFormatter: function (data) {
                                 var field = 'zreta';
                                 var total_sum = data.reduce(function (sum, row) {
