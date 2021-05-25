@@ -42,7 +42,7 @@ class Auction extends Backend
                 $def .= ' and lx_userid '.$fl.' ('.implode(',',$userdis).') ';
             }
             if($special_status == 1){
-                $def .= ' and i.outer_price > 0 and i.cur_money  > i.outer_price  and i.userid > 0';
+                $def .= ' and i.outer_price > 0 and i.cur_money  > i.outer_price  and i.lx_userid > 0';
             }
 
 
