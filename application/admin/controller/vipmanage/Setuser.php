@@ -31,7 +31,6 @@ class Setuser extends Backend
     {
         $id = intval($this->request->get('id'));
         if($id){
-            // u2.ali_rebate_first_a,u2.ali_rebate_first_b,
             $data = $this->model->where('id',$id)->find();
             $relation = DB::name('domain_promotion_relation')->where('userid',$id)->value('relation_id');
             if($relation){
@@ -60,14 +59,9 @@ class Setuser extends Backend
                 $data['dis_remark'] = empty($disInfo['dis_remark']) ? '' : $disInfo['dis_remark'];
                 $data['dis_aac_flag'] = (!empty($disInfo['dis_time']) && $disInfo['dis_time'] > time()) ? true : false;
             }
-            //获取返利配置信息
-            $rinfo = Db::name('domain_reserve_rebate_config')->field('zcs,rebate_a,rebate_b')->where('userid',$id)->select();
-            $rebate = [];
-            foreach($rinfo as $v){
-                $rebate[$v['zcs']] = $v;
-            }
-
-            $this->view->assign(['data'=>$data,'serv' => $servei,'rebate' => $rebate,'spec'=>$spec,'release'=>$release]);
+            //获取内部竞价配置
+            $qzRebate = Db::name('domain_prereg_reba_config')->field('inner_1,inner_2,pre_66,pre_1000')->where('userid',$id)->find();
+            $this->view->assign(['data'=>$data,'serv' => $servei,'spec'=>$spec,'release'=>$release,'qzRebate' => $qzRebate]);
             return $this->view->fetch();
         }
         return $this -> error('无效参数');
@@ -92,14 +86,14 @@ class Setuser extends Backend
             case 'socre':
                 $this->setIntegral($id);
                 break;
-            case 'rebates':
-                $this->setRebates($id);
-                break;
             case 'other':
                 $this->setOther($id);
                 break;
             case 'release':
                 $this->setRelease($id);
+                break;
+            case 'qznbjj':
+                $this->interiorReba($id);
                 break;
             default:
                 $this->error('非法参数');
@@ -340,39 +334,6 @@ class Setuser extends Backend
         Db::commit();
         $this->success('操作成功');
     }
-
-    /**
-     *返利设置
-     */
-    public function setRebates($id){
-
-        $rebates = $this->request->post('rebates/a');
-
-        //获取已设置的信息
-        $setInfo = Db::name('domain_reserve_rebate_config')->where('userid',$id)->whereIn('zcs',array_keys($rebates))->column('zcs');
-
-        $update = [];
-        foreach($setInfo as $v){
-            $update[] = ['zcs' => $v,'rebate_a' => $rebates[$v]['rebate_a'],'rebate_b' => $rebates[$v]['rebate_b']];
-            unset($rebates[$v]);
-        }
-        //获取需要插入的信息
-        $insert = [];
-        foreach($rebates as $k => $v){
-            if($v['rebate_a'] > 0 || $v['rebate_b'] > 0){
-                $insert[] = ['userid' => $id,'zcs' => $k,'rebate_a' => $v['rebate_a'],'rebate_b' => $v['rebate_b'] ];
-            }
-        }
-
-        foreach($update as $v){
-            Db::name('domain_reserve_rebate_config')->where(['userid' => $id,'zcs' => $v['zcs']])->update($v);
-        }
-        if($insert){
-            Db::name('domain_reserve_rebate_config')->insertAll($insert);
-        }
-
-        $this->success('修改成功');
-    }
     /**
      *其他设置
      */
@@ -410,4 +371,25 @@ class Setuser extends Backend
         }
     }
 
+    /**
+     * 竞价返点设置
+     */
+    public function interiorReba($id){
+
+        $params = $this->request->post('prereg/a');
+        $params = array_map(function($v){
+            return empty($v) ? 0.00 : floatval($v);
+        },$params);
+
+        //查看是否设置
+        $flag = Db::name('domain_prereg_reba_config')->where('userid',$id)->value('id');
+        if($flag){ //修改
+            Db::name('domain_prereg_reba_config')->where('userid',$id)->update($params);
+        }else{ //添加
+            $params['userid'] = $id;
+            Db::name('domain_prereg_reba_config')->insert($params);
+        }
+
+        $this->success('设置成功');
+    }
 }
