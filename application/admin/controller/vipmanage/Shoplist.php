@@ -113,10 +113,9 @@ class Shoplist extends Backend
             $addAccount = false;
             
             $accCount = Db::name('store_account')->where('userid',$shopParam['userid'])->count();
+            $odltype = $this->request->post('oldtype');
             if($shopParam['shopzt'] == 1 || $shopParam['shopzt'] == 3){
                 //修改店铺参数
-                $odltype = $this->request->post('oldtype');
-
                 if( $odltype == 0 && $shopParam['shopzt'] == 1 && in_array($shopParam['flag'],[1,2])){
                     $shopParam['cols_param'] = 'txt,dqsj,icptrue,security,icp_org,sogou_pr,zcs'; //zcsj,
                 }
@@ -193,6 +192,24 @@ class Shoplist extends Backend
             }
             Db::commit();
             $redis->unlock('get_shop_account_num');
+            //发送邮件
+            $oldStatus = $this->request->post('oldstatus');
+            if($oldStatus != $shopParam['shopzt']){
+                if($odltype == 2){
+                    if($shopParam['flag'] == 2){
+                        $shopParam['shopzt'] = 6;
+                    }else if($shopParam['flag'] == 0){
+                        $shopParam['shopzt'] = 5;
+                    }
+                }
+
+                $obj = new sendMail();
+                $uid = Db::name('domain_user')->where('id',$shopParam['userid'])->value('uid');
+                $obj->shopStatus($shopParam['userid'],$uid,$shopParam['shopzt'],$shopParam['shopname'],$shopParam['shopztsm']);
+
+            }
+
+
             $this->success('修改成功');
         }
         $ids = $this->request->get('ids');
