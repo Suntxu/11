@@ -21,8 +21,8 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                         {field: 'uid', title: '用户名'},
                         {field: 'inner_1', title: '内外部差价第一名',operate:'BETWEEN',sortable:true},
                         {field: 'inner_2', title: '内外部差价第二名',operate:'BETWEEN',sortable:true},
-                        {field: 'pre_66', title: '外部阿里云预释放',operate:'BETWEEN',sortable:true},
-                        {field: 'pre_1000', title: '外部怀米网预释放',operate:'BETWEEN',sortable:true},
+                        {field: 'pre_66', title: '阿里云预释放外部价格',operate:'BETWEEN',sortable:true},
+                        {field: 'pre_1000', title: '怀米网预释放外部价格',operate:'BETWEEN',sortable:true},
                     ]
                 ],
             });

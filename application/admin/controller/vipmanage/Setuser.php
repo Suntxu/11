@@ -385,9 +385,14 @@ class Setuser extends Backend
         $flag = Db::name('domain_prereg_reba_config')->where('userid',$id)->value('id');
         if($flag){ //修改
             Db::name('domain_prereg_reba_config')->where('userid',$id)->update($params);
-        }else{ //添加
-            $params['userid'] = $id;
-            Db::name('domain_prereg_reba_config')->insert($params);
+        }else{
+            //是否没修改
+            $f = array_filter($params);
+            if($f){
+                //添加
+                $params['userid'] = $id;
+                Db::name('domain_prereg_reba_config')->insert($params);
+            }
         }
 
         $this->success('设置成功');
