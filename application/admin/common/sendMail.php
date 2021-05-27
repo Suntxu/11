@@ -282,14 +282,14 @@ class sendMail
         $key = $time.rand(100000,999999).$userid;
         $redis->RPush('email_task_id',$key);//存入队列
         $redis->hMset('email_data_'.$key,['title' => $title,'content' => $content,'email' => $email,'msgtit' => $msgtit,'msgcontent' => $msgcontent,'type' => $type,'userid' => $userid,'time' => $time]);
-         echo '<pre>';
-         $test = $redis->lrange('email_task_id',0,-1);
-         foreach($test as $k => $v){
-             print_r($redis->hgetall('email_data_'.$v));
-             $redis->lrem('email_task_id',0,$v);
-             $redis->del('email_data_'.$v);
-         }
-         die;
+         // echo '<pre>';
+         // $test = $redis->lrange('email_task_id',0,-1);
+         // foreach($test as $k => $v){
+         //     print_r($redis->hgetall('email_data_'.$v));
+         //     $redis->lrem('email_task_id',0,$v);
+         //     $redis->del('email_data_'.$v);
+         // }
+         // die;
     }    
 }
 	
