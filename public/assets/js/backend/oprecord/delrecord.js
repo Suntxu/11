@@ -106,10 +106,18 @@ function showDetail(selp){
           }
         }
         html += '</table>';
+        var num = tits.split("\r\n").length-1;
         html+= '<textarea style="opacity:0;" id="copy_content">'+tits+'</textarea>';
+        var titleHtml;
+        if (num > 1){
+            titleHtml = '域名列表<a style="margin-left: 10px;color: #FFFFFF" href="javascript:;" onclick="copytit()">复制域名</a>';
+        }else{
+            titleHtml = '域名列表';
+        }
+
         layer.open({
             type: 1,
-            title: '域名列表',
+            title: titleHtml,
             area:'450px',
             shadeClose: true,
             move:false,
