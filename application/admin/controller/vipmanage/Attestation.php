@@ -70,51 +70,29 @@ class Attestation extends Backend
             $fun = Fun::ini();
 
             foreach($list as $k=>$v){
-
+                $list[$k]['op'] = '';
                 if( $v['info_status'] != 2 || !in_array($v['auth_status'],[0,1,4]) || $v['cid'] == 74 || $v['cid'] == 86 || $v['cid'] == 111 || $v['cid'] == 113 || $v['ifreal'] == 1){
-                    $list[$k]['op'] = '--';
+//                    $list[$k]['op'] .= '--';
                 }else if($v['cid'] != 107){
                     $url = '/admin/vipmanage/attestation/resetreal/ids/'.$v['id'];
-                    $list[$k]['op'] = '<button type="button" onclick="real(\''.$url.'\')" class="btn btn-xs btn-success" title="重新实名">重新实名</button>&nbsp;';
+                    $list[$k]['op'] .= '<button type="button" onclick="real(\''.$url.'\')" class="btn btn-xs btn-success" title="重新实名">重新实名</button>&nbsp;';
                 }
 
-                if($v['cid'] == 75 || $v['cid'] == 68 || ($v['cid'] == 74  &&  in_array($v['auth_status'],[0,1,4])  ) || (($v['cid'] == 83 || $v['cid'] == 86 || $v['cid'] == 111 || $v['cid'] == 113) && in_array($v['auth_status'],[1,4]) )  ){
+                if($v['cid'] == 75 || $v['cid'] == 68 || ($v['cid'] == 74  &&  in_array($v['auth_status'],[0,1,4])  ) || (($v['cid'] == 83 || $v['cid'] == 86 || $v['cid'] == 111 || $v['cid'] == 113) && in_array($v['auth_status'],[1,4]) ) || $v['info_status'] == 1 ){
                     $url = '/admin/vipmanage/attestation/oneaddinfo?id=' . $v['id'];
-                    if(empty($list[$k]['op']) || $list[$k]['op'] == '--'){
-                        $list[$k]['op'] = '<button type="button" onclick="real(\''.$url.'\')" class="btn btn-xs btn-del btn-warning" title="添加信息模板">添加信息模板</button>&nbsp;';
-                    }else{
-                        $list[$k]['op'] .= '<button type="button" onclick="real(\''.$url.'\')" class="btn btn-xs btn-del btn-warning" title="添加信息模板">添加信息模板</button>&nbsp;';
-                    }
+                    $list[$k]['op'] .= '<button type="button" onclick="real(\''.$url.'\')" class="btn btn-xs btn-del btn-warning" title="添加信息模板">添加信息模板</button>&nbsp;';
                 }
                 if($v['cid'] == 107){
-                    if( empty($list[$k]['op']) || $list[$k]['op'] == '--'){
-                        $list[$k]['op'] = '<a href="/admin/vipmanage/attestation/slist/ids/'.$v['id'].'" class="btn btn-xs btn-warning dialogit" title="查看外部模板">查看</a>&nbsp;';
-                    }else{
-                        $list[$k]['op'] .= '<a href="/admin/vipmanage/attestation/slist/ids/'.$v['id'].'" class="btn btn-xs btn-warning dialogit" title="跳转">查看</a>&nbsp;';
-                    }
+                    $list[$k]['op'] .= '<a href="/admin/vipmanage/attestation/slist/ids/'.$v['id'].'" class="btn btn-xs btn-warning dialogit" title="跳转">查看</a>&nbsp;';
                 }
-
-                
-
                 if($v['auth_status'] != 3){
                     $yurl = '/admin/vipmanage/attestation/updateStatus?id='.$v['id'].'&status='.$v['auth_status'].'&pstatus=3';
-                    if( empty($list[$k]['op']) || $list[$k]['op'] == '--'){
-                        $list[$k]['op'] = '<button type="button" onclick="real(\''.$yurl.'\')" class="btn btn-xs btn-del btn-success" title="实名成功">实名成功</button>&nbsp;';
-                    }else{
-                        $list[$k]['op'] .= '<button type="button" onclick="real(\''.$yurl.'\')" class="btn btn-xs btn-del btn-success" title="实名成功">实名成功</button>&nbsp;';
-                    }
-                    
+                    $list[$k]['op'] .= '<button type="button" onclick="real(\''.$yurl.'\')" class="btn btn-xs btn-del btn-success" title="实名成功">实名成功</button>&nbsp;';
                 }
 
                 if($v['auth_status'] != 1 && $v['auth_status'] != 4){
-
                     $yurl = '/admin/vipmanage/attestation/updateStatus?id='.$v['id'].'&status='.$v['auth_status'].'&pstatus=4';
-                    if( empty($list[$k]['op']) || $list[$k]['op'] == '--'){
-                        $list[$k]['op'] = '<button type="button" onclick="real(\''.$yurl.'\')" class="btn btn-xs btn-del btn-danger" title="实名失败">实名失败</button>&nbsp;';
-                    }else{
-                        $list[$k]['op'] .= '<button type="button" onclick="real(\''.$yurl.'\')" class="btn btn-xs btn-del btn-danger" title="实名失败">实名失败</button>&nbsp;';
-                    }
-                    
+                    $list[$k]['op'] .= '<button type="button" onclick="real(\''.$yurl.'\')" class="btn btn-xs btn-del btn-danger" title="实名失败">实名失败</button>&nbsp;';
                 }
 
                 $list[$k]['auth_status'] = $fun->getStatus($v['auth_status'],['<font color="#e74c3c">未实名</font>','<font color="#e74c3c">实名提交失败</font>','<font color="#3498db">提交成功</font>','<font color="#18bc9c">认证成功</font>','<font color="#e74c3c">注册商实名失败</font>',9=>'<font color="#e74c3c">实名查询结果时模板不存在</font>']);
@@ -552,7 +530,6 @@ class Attestation extends Backend
     /*
      * 添加信息模板
      * */
-
     public function oneaddinfo(){
         if($this->request->isAjax()){
             $id = $this->request->param('id');
@@ -565,7 +542,7 @@ class Attestation extends Backend
             }
 
             $redis = new Redis();
-            $r_info = $redis->hMget('infotemplate_data_'.$data['id'].'_'.$data['api_id'],'info_id');
+            $r_info = $redis->hMget('infotemplate_data_'.$data['id'].'_'.$data['api_id'],['info_id']);
 
             if($r_info['info_id'] > 0){
                 return ['code' => 0,'msg' => '添加信息模板任务提交成功'];
@@ -577,6 +554,9 @@ class Attestation extends Backend
                 ->where(['t1.userid' => $data['userid'],'t1.id' => $data['info_id']])
                 ->field('t1.id as info_id,t1.Telephone,t1.Email,t3.*,t1.RegistrantProfileId')
                 ->find();
+            if(empty($info)){
+                return ['code' => 1,'msg' => '数据获取失败'];
+            }
             $api_info = $redis->hGetAll('Api_Info_'.$data['api_id']);
 
             if($api_info['regid'] == 88 || $api_info['regid'] == 110){
@@ -604,6 +584,7 @@ class Attestation extends Backend
             $uid = Db::name('domain_user')->where('id',$data['userid'])->value('uid');
             $info['api_id'] = $data['api_id'];
             $info['sendemail'] = $uid;
+
             $redis->hMset('infotemplate_data_'.$data['id'].'_'.$data['api_id'],$info);
             $redis->RPush('infotemplate_id',$data['id'].'_'.$data['api_id']);
             if($api_info['regid'] == 110){

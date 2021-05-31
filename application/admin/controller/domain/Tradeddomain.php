@@ -31,11 +31,16 @@ class Tradeddomain extends Backend
         if ($this->request->isAjax())
         {
 
-            list($where, $sort, $order, $offset, $limit,$hz) = $this->buildparams();
+            list($where, $sort, $order, $offset, $limit,$hz,$rel) = $this->buildparams();
             $defindwhere = ' c.status = 1 ';
 
             if($hz){
                 $defindwhere .= ' and REPLACE(c.tit,substring_index(c.tit,".",1),"") = "'.$hz.'"  ';
+            }
+            if($rel == 1){
+                $defindwhere .= ' and relshop_userid = 0 ';
+            }elseif($rel == 2){
+                $defindwhere .= ' and relshop_userid > 0 ';
             }
 
             $total = $this->model
@@ -81,6 +86,7 @@ class Tradeddomain extends Backend
                 $arr[$k]['sxf'] = sprintf('%.2f',$v['sxf']);
                 $arr[$k]['zsfx'] = $res[0]['f'];
                 $arr[$k]['u1.uid'] = $v['u1id'];
+                $arr[$k]['special_condition'] = '';
                 // 打包数量
                 if(empty($v['pack'])){
                     $arr[$k]['pack_num'] ='--';

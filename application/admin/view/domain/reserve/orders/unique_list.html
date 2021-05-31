@@ -14,14 +14,6 @@
                         <a href="javascript:;" class="btn btn-danger"  onclick="fastDateSearch(1,4)">本月</a>
                         <a href="javascript:;" class="btn btn-danger"  onclick="fastDateSearch(1,5)">上月</a>
                         <a href="javascript:;" class="btn btn-danger"  onclick="fastDateSearch(1,6,'r\\.time')">全部</a>
-
-                        <a id="multire" href="/admin/domain/reserve/orders/uniquelist" style="margin-left: 20px;" class="btn btn-warning dialogit {:$auth->id == 1 ? '':'hide'}" btn-dialog="tab"  data-toggle="tooltip" title="" data-table-id="table" data-original-title="单域名展示"><i class="fa fa-pencil"></i> 单域名展示</a>
-                        <div class="dropdown btn-group {:$auth->check('domain/delrecord/multi')?'':'hide'}">
-                            <ul class="dropdown-menu text-left" role="menu">
-                                <li><a class="btn btn-link btn-multi btn-disabled disabled" href="javascript:;" data-params="status=normal"><i class="fa fa-eye"></i> {:__('Set to normal')}</a></li>
-                                <li><a class="btn btn-link btn-multi btn-disabled disabled" href="javascript:;" data-params="status=hidden"><i class="fa fa-eye-slash"></i> {:__('Set to hidden')}</a></li>
-                            </ul>
-                        </div>
                     </div>
                     <table id="table" class="table table-striped table-bordered table-hover" width="100%"></table>
                 </div>

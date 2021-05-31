@@ -191,6 +191,31 @@ class sendMail
     /**
      * 店铺账号操作邮件
      */
+    public function shopStatus($userid,$uid,$status,$shopName,$remark=''){
+        if($status == 1){ //正常使用
+            $msg = '您的店铺 <span style="color:red;">'.$shopName.'</span> 已经恢复正常状态';
+        }elseif($status == 3) { //禁用
+            $msg = '您的店铺 <span style="color:red;">'.$shopName.'</span> 已被禁止使用,具体原因请联系官网客服!';
+        }else if($status == 4){ //拒绝申请
+            $msg = '您店铺 <span style="color:red;">'.$shopName.'</span> 的开店申请已被拒绝,原因:<br><span style="color:red;"> '.$remark.'</span> !';
+        }else if($status == 5){
+            $msg = '您店铺 <span style="color:red;">'.$shopName.'</span> 的消保店铺申请已被拒绝,原因:<br><span style="color:red;"> '.$remark.'</span> !';
+        }else if($status == 6){
+            $msg = '您店铺 <span style="color:red;">'.$shopName.'</span> 的消保店铺已通过申请!';
+        }
+        
+        $txtt = "尊敬的用户，您好！<br> {$msg} <br><span style='color:green: ;'>如果您未在怀米网上注册过账户,请忽略该邮件！</span><br>如果您对本次通知内容、操作过程有任何疑问，请联系官网客服。<br>";
+        $txtta = "此为系统邮件，请勿回复。来自怀米网 - 国内专业域名交易平台 - <a href='".WEBURL."' >".WEBURL."</a>，详情可登陆 (<a href='".WEBURL."user/'>管理中心</a>) 查看。";
+        $title = '店铺状态变更通知';
+        $this->redisemail($userid,$uid,$title.'【'.WEBNAME.'】',$txtt.$txtta,$title,$txtt,46);
+    }
+
+    /**
+     * 店铺状态变更
+     */
+    /**
+     * 店铺账号操作邮件
+     */
     public function shopAccount($userid,$uid,$status,$account,$remark=''){
         if($status == 0){ //启用
             $msg = '您的店铺账号 <span style="color:red;">'.$account.'</span> 已恢复正常状态,可以去 店铺管理->店铺账号 设置默认属性';
@@ -199,12 +224,13 @@ class sendMail
         }else{//删除
             $msg = '您的店铺账号 <span style="color:red;">'.$account.'</span> 已被手动删除,原因:<br><span style="color:red;"> '.$remark.'</span> !<br>如果该店铺号为默认店铺号,默认店铺号则会发生重置!';
         }
-        
+
         $txtt = "尊敬的用户，您好！<br> {$msg} <br><span style='color:green: ;'>如果您未在怀米网上注册过账户,请忽略该邮件！</span><br>如果您对本次通知内容、操作过程有任何疑问，请联系官网客服。<br>";
         $txtta = "此为系统邮件，请勿回复。来自怀米网 - 国内专业域名交易平台 - <a href='".WEBURL."' >".WEBURL."</a>，详情可登陆 (<a href='".WEBURL."user/'>管理中心</a>) 查看。";
         $title = '店铺号状态通知';
         $this->redisemail($userid,$uid,$title.'【'.WEBNAME.'】',$txtt.$txtta,$title,$txtt,46);
     }
+
 
     /**
      * 域名冻结
@@ -256,14 +282,14 @@ class sendMail
         $key = $time.rand(100000,999999).$userid;
         $redis->RPush('email_task_id',$key);//存入队列
         $redis->hMset('email_data_'.$key,['title' => $title,'content' => $content,'email' => $email,'msgtit' => $msgtit,'msgcontent' => $msgcontent,'type' => $type,'userid' => $userid,'time' => $time]);
-        // echo '<pre>';
-        // $test = $redis->lrange('email_task_id',0,-1);
-        // foreach($test as $k => $v){
-        //     print_r($redis->hgetall('email_data_'.$v));
-        //     $redis->lrem('email_task_id',0,$v);
-        //     $redis->del('email_data_'.$v);
-        // }
-        // die;
+         // echo '<pre>';
+         // $test = $redis->lrange('email_task_id',0,-1);
+         // foreach($test as $k => $v){
+         //     print_r($redis->hgetall('email_data_'.$v));
+         //     $redis->lrem('email_task_id',0,$v);
+         //     $redis->del('email_data_'.$v);
+         // }
+         // die;
     }    
 }
 	

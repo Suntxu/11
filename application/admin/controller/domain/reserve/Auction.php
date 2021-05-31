@@ -22,7 +22,7 @@ class Auction extends Backend
      */
     public function index(){
         if ($this->request->isAjax()){
-            list($where, $sort, $order, $offset, $limit,$group,$special_condition,$spec) = $this->buildparams();
+            list($where, $sort, $order, $offset, $limit,$group,$special_condition,$spec,$special_status) = $this->buildparams();
             $time = time();
             $def = '1 = 1';
             if($group == 1){ //未开始
@@ -41,6 +41,10 @@ class Auction extends Backend
                 $fl = $spec == 1 ? ' in ' : ' not in ';
                 $def .= ' and lx_userid '.$fl.' ('.implode(',',$userdis).') ';
             }
+            if($special_status == 1){
+                $def .= ' and i.outer_price > 0 and i.cur_money  > i.outer_price  and i.lx_userid > 0';
+            }
+
 
             $total = $this->model->alias('i')->join('domain_user u','i.lx_userid=u.id','left')
                     ->field('count(*) as n,sum(i.cur_money) as c,sum(i.transferprice) as d,sum(i.outer_price) as o')
@@ -70,6 +74,9 @@ class Auction extends Backend
                 }else{
                     $v['group'] = '<span style="color:blue">已结束</span>';
                 }
+
+                $v['special_status'] = '内部竞价';
+
                 $v['i.ptime'] = $v['ptime'];
                 $v['i.status'] = $fun->getStatus($v['status'],['进行中','<span style="color:yellowgreen;">竞价成功</span>','<span style="color:red;">竞价失败</span>','<span style="color:darkgreen;">交割成功</span>','<span style="color:orange;">内部竞价</span>']);
                 $v['i.type'] = $fun->getStatus($v['type'],['预定','预释放']);

@@ -24,20 +24,24 @@ class Auctionlog extends Backend
      */
     public function index(){
         if ($this->request->isAjax()){
-            list($where, $sort, $order, $offset, $limit,$group) = $this->buildparams();
+            list($where, $sort, $order, $offset, $limit,$group,$special_condition) = $this->buildparams();
             $time = time();
-            $def = '';
+            $def = '1 = 1 ';
             if($group == 1){ //未开始
-                $def = '  i.start_time > '.$time;
+                $def .= ' and i.start_time > '.$time;
             }elseif($group == 2){ //进行中
-                $def = 'i.start_time < '.$time.' and end_time > '.$time;
+                $def .= ' and i.start_time < '.$time.' and end_time > '.$time;
             }elseif($group == 3){
-                $def = 'i.end_time < '.$time;
+                $def .= ' and i.end_time < '.$time;
             }
-            $total = $this->model->alias('r')->join('domain_auction_info i','r.auction_id=i.id')->join('domain_user u','r.userid=u.id','left')
+            if($special_condition == 1){
+                $def .= ' and i.cur_money  > i.outer_price';
+            }
+
+            $total = $this->model->alias('r')->join('domain_auction_info i','r.auction_id=i.id','left')->join('domain_user u','r.userid=u.id','left')
                 ->where($where)->where($def)
                 ->count();
-            $list = $this->model->alias('r')->join('domain_auction_info i','r.auction_id=i.id')->join('domain_user u','r.userid=u.id','left')
+            $list = $this->model->alias('r')->join('domain_auction_info i','r.auction_id=i.id','left')->join('domain_user u','r.userid=u.id','left')
                 ->field('i.tit,r.money,r.time,u.uid,r.res_money,i.start_time,i.end_time,i.status,r.otype') //i.money as imoney,
                 ->where($where)->where($def)->order($sort,$order)
                 ->limit($offset,$limit)
@@ -54,6 +58,7 @@ class Auctionlog extends Backend
                 }else{
                     $v['group'] = '<span style="color:blue">已结束</span>';
                 }
+                $v['special_condition'] = '内部竞价';
                 $v['i.status'] = $fun->getStatus($v['status'],['进行中','<span style="color:yellowgreen;">竞价成功</span>','<span style="color:red;">竞价失败</span>','<span style="color:darkgreen;">交割成功</span>','<span style="color:orange;">内部竞价</span>']);
                 $v['r.otype'] = $fun->getStatus($v['otype'],['预定','预释放']);
                 $v['r.money'] = $v['money'];
@@ -66,7 +71,11 @@ class Auctionlog extends Backend
         if (isset($get['dialog']) && $get['dialog'] == 1) {
             $source = 1;
         }
-        $get['id'] = empty($get['id']) ? 0 : intval($get['id']);
+        if(isset($get['id'])){
+            $get['id'] = $get['id'] === '0' ? -1 : intval($get['id']);
+        }else{
+            $get['id'] = '';
+        }
         $end_time = '无';
         $api_id = '无';
         $type = '无';

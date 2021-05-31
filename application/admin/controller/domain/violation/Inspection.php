@@ -32,7 +32,7 @@ class Inspection extends Backend
             $total =  $this->connect->name('domain_violation_oneself')->where($where)->count();
 
             $list = $this->connect->name('domain_violation_oneself')
-                    ->field('id,tit,uid,type,cause,create_time,is_redirect,registrar,img_path,is_img')
+                    ->field('id,tit,uid,type,cause,create_time,is_redirect,registrar,img_path,is_img,add_type')
                     ->where($where)
                     ->order($sort, $order)->limit($offset, $limit)
                     ->select();
@@ -56,6 +56,7 @@ class Inspection extends Backend
                     $v['cause'] = $fun->returntitdian($v['cause'],7).'<span style="cursor:pointer;margin-left:10px;color:grey;"  onclick="showRemark(\''.$v['cause'].'\')" >查看更多</span>';
                 }
                 $v['is_img'] = $fun->getStatus($v['is_img'],['<span style="color: red;">未截图</span>','<span style="color: gray;">未上传</span>','<span style="color: green;">已上传</span>']);
+                $v['add_type'] = $fun->getStatus($v['add_type'],['<span style="color: red;">自动</span>','<span style="color:orange;">手动</span>']);
                 $v['c_tit'] = $v['tit']; //批量拷贝使用
                 $v['tit'] = '<span style="cursor:pointer;color:#66B3FF;" onclick="copyData(\''.$v['tit'].'\')">'.$v['tit'].'</span>';
             }
@@ -118,7 +119,7 @@ class Inspection extends Backend
             }
 
             //调用接口
-            $result = json_decode(Http::post(PYTHON_API_URL.'/batch/api/scan',$reqParam),true);
+            $result = json_decode(Http::post(PYTHON_API_URL.':8082/img/api/scan',$reqParam),true);
 
             if(isset($result['code']) && $result['code'] == 1){
                 $this->success('提交成功,正在扫描中！');
