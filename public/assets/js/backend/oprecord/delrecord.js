@@ -105,6 +105,8 @@ function showDetail(selp){
               html += '<tr><td style="padding-left:8%;">'+erg[0]+'</td><tr>';
           }
         }
+
+
         html += '</table>';
         var num = tits.split("\r\n").length-1;
         html+= '<textarea style="opacity:0;" id="copy_content">'+tits+'</textarea>';
@@ -114,6 +116,8 @@ function showDetail(selp){
         }else{
             titleHtml = '域名列表';
         }
+
+
 
         layer.open({
             type: 1,

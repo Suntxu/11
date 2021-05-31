@@ -7,11 +7,15 @@
                     <div id="toolbar" class="toolbar">
                         {:build_toolbar('refresh')}
 
+
+
                         {foreach $tableName as $v}
                         <a href="javascript:;" class="btn btn-success" data-value="{$v}" data-field="spec" onclick="submitSpecial(this)" id="{$v}">{$v}年</a>
                         {/foreach}
                         &nbsp;&nbsp;&nbsp;&nbsp;
 
+
+                        
                         <a href="javascript:;" class="btn btn-success" onclick="fastDateSearch(0,0)" >今天</a>
                         <a href="javascript:;" class="btn btn-danger"  onclick="fastDateSearch(0,1)" >昨天</a>
                         <a href="javascript:;" class="btn btn-danger"  onclick="fastDateSearch(0,2)">最近7天</a>

@@ -32,10 +32,12 @@ class Userrenewlog extends Backend
             if($spre){
                 $condition = " and d.tit like '%{$spre}' ";
             }
+
             if($special_condition){
                 $apiids = $this->getApis($special_condition);
                 $condition .= ' and d.api_id in ('.implode(',',$apiids).')';
             }
+
             $total = $this->model->table(PREFIX.'Task_record')->alias('r')->join(PREFIX.'Task_Detail_4'.$year.' d','r.id = d.taskid','left')->join('domain_user u','r.userid=u.id','left')
                 ->where($where)->where(' d .TaskStatusCode = 2 and r.tasktype = 4 '.$condition)
                 ->count();
@@ -44,6 +46,7 @@ class Userrenewlog extends Backend
                 ->where($where)->where(' d .TaskStatusCode = 2 and r.tasktype = 4 '.$condition)
                 ->order($sort,$order)->limit($offset, $limit)
                 ->select();
+
             $arr = [];
             // 单价总金额
             //根据条件统计总金额
