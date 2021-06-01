@@ -91,14 +91,14 @@ function showDetail(selp){
       var html = '<table class="layui-table" style="width:400px;margin:10px 5px;" lay-size="sm">';
       var tit = ret.data.split(',');
       if(tit[0].indexOf('^') == -1){
-        html += '<tr><th style="padding-left:8%;">域名</th></tr>';
+        html += '<tr><th style="padding-left:8%;">域名 <div style="display: inline-block">(<span style="color: red;">'+tit.length+'</span>)</div></th></tr>';
       }else{
-        html += '<tr><th style="padding-left:8%;">域名</th><th style="padding-left:8%;">用户</th></tr>';
+        html += '<tr><th style="padding-left:8%;">域名 <div style="display: inline-block">(<span style="color: red;">'+tit.length+'</span>)</div></th><th style="padding-left:8%;">用户</th></tr>';
       }
-      var tits = '';
+      var tits = new Array;
       for(var i  in tit){
           erg = tit[i].split('^'); //分离用户名和状态
-          tits += erg[0]+"\r\n";
+          tits.push(erg[0]);
           if(erg[1]){
               html += '<tr><td style="padding-left:8%;">'+erg[0]+'</td><td style="padding-left:8%;">'+erg[1]+'</td><tr>';
           }else{
@@ -106,19 +106,9 @@ function showDetail(selp){
           }
         }
 
-
         html += '</table>';
-        var num = tits.split("\r\n").length-1;
-        html+= '<textarea style="opacity:0;" id="copy_content">'+tits+'</textarea>';
-        var titleHtml;
-        if (num > 1){
-            titleHtml = '域名列表<a style="margin-left: 10px;color: #FFFFFF" href="javascript:;" onclick="copytit()">复制域名</a>';
-        }else{
-            titleHtml = '域名列表';
-        }
-
-
-
+        var titleHtml = '域名列表';
+        titleHtml += '<button style="margin-bottom: 5px;margin-left: 5px;" onclick="copyData(\''+tits.join("\\n")+'\')" class="btn btn-warning btn-xs">复制</button>';
         layer.open({
             type: 1,
             title: titleHtml,
