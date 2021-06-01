@@ -69,14 +69,6 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
     return Controller;
 });
 
-//拷贝内容
-function copytit(){
-  var domains = document.getElementById("copy_content");
-  domains.select(); // 选择对象
-  document.execCommand("Copy"); // 执行浏览器复制命令
-  layer.msg('域名复制成功!');
-
-}
 /**
  * 查看详情
  */
