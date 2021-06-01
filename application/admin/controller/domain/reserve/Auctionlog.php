@@ -71,11 +71,8 @@ class Auctionlog extends Backend
         if (isset($get['dialog']) && $get['dialog'] == 1) {
             $source = 1;
         }
-        if(isset($get['id'])){
-            $get['id'] = $get['id'] === '0' ? -1 : intval($get['id']);
-        }else{
-            $get['id'] = '';
-        }
+        $get['id'] = isset($get['id']) ? $get['id'] : '';
+
         $end_time = '无';
         $api_id = '无';
         $type = '无';

@@ -20,7 +20,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                 escape: false, //转义空格
                 columns: [
                     [
-                        { field: 'r.tit', title: '域名',operate:'TEXT', formatter:Table.api.formatter.alink,url:'/admin/domain/reserve/auctionlog/index/',fieldvaleu:'aid',fieldname:'id',tit:'竞拍记录', footerFormatter: function (data) {
+                        { field: 'r.tit', title: '域名',operate:'TEXT', footerFormatter: function (data) {
                                 return '统计：';//在第一列开头写上总计、统计之类
                             }},
                         { field: 'zprice', title: '域名实际金额',operate:false,

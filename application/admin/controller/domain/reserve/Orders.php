@@ -73,6 +73,11 @@ class Orders extends Backend
             $dtype = $fun->getDomainType();
             $apis = $this->getApis();
             foreach($list as $k=>&$v){
+                if($v['aid']){
+                    $v['r.tit'] = '<a href="/admin/domain/reserve/auctionlog/index/?id='.$v['aid'].'" class="dialogit" title="竞拍记录">'.$v['tit'].'</a>';
+                }else{
+                    $v['r.tit'] = $v['tit'];
+                }
                 $v['aid'] = empty($v['aid']) ? 0 : $v['aid'];
                 $v['r.channel'] = $v['channel'].'号';
                 $v['r.yj'] = $v['yj'];
@@ -96,7 +101,6 @@ class Orders extends Backend
                     }
                 }
                 $v['group'] = $v['hz'];
-                $v['r.tit'] = $v['tit'];
                 $v['r.money'] = $v['money'];
                 $v['bidTotal'] = $bidTotal;
                 $v['elcheeTotal'] = $elcheeTotal;

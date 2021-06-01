@@ -55,7 +55,11 @@ class Preorders extends Backend
             
             foreach($list as $k=>&$v){
                 $v['r.api_id'] = empty($apis[$v['api_id']]) ? '--' : $apis[$v['api_id']];
-                $v['aid'] = empty($v['aid']) ? 0 : $v['aid'];
+                if($v['aid']){
+                    $v['r.tit'] = '<a href="/admin/domain/reserve/auctionlog/index/?id='.$v['aid'].'" class="dialogit" title="竞拍记录">'.$v['tit'].'</a>';
+                }else{
+                    $v['r.tit'] = $v['tit'];
+                }
                 $v['r.yj'] = $v['yj'];
                 $v['ut.uid'] = $v['tuid'];
                 $v['u.uid'] = $v['uid'];
@@ -85,7 +89,6 @@ class Preorders extends Backend
                 }
                 $v['yuding'] = $this->model->where(['tit' => $v['tit'],'endtime' => $v['endtime']])->count();
                 $v['group'] = $v['hz'];
-                $v['r.tit'] = $v['tit'];
                 $v['r.money'] = $v['money'];
                 $v['r.fmoney'] = $v['fmoney'];
                 $v['i.del_time'] = $v['del_time'];
