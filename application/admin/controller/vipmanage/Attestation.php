@@ -78,10 +78,17 @@ class Attestation extends Backend
                     $list[$k]['op'] .= '<button type="button" onclick="real(\''.$url.'\')" class="btn btn-xs btn-success" title="重新实名">重新实名</button>&nbsp;';
                 }
 
-                if($v['cid'] == 75 || $v['cid'] == 68 || ($v['cid'] == 74  &&  in_array($v['auth_status'],[0,1,4])  ) || (($v['cid'] == 83 || $v['cid'] == 86 || $v['cid'] == 111 || $v['cid'] == 113) && in_array($v['auth_status'],[1,4]) ) || $v['info_status'] == 1 ){
-                    $url = '/admin/vipmanage/attestation/oneaddinfo?id=' . $v['id'];
-                    $list[$k]['op'] .= '<button type="button" onclick="real(\''.$url.'\')" class="btn btn-xs btn-del btn-warning" title="添加信息模板">添加信息模板</button>&nbsp;';
+                if($v['cid'] == 75 || $v['cid'] == 68 || ($v['cid'] == 74  &&  in_array($v['auth_status'],[0,1,4])  ) || in_array($v['auth_status'],[1,4])  ){
+                    $url = '/admin/vipmanage/attestation/del/ids/'.$v['id'];
+                    $list[$k]['op'] .= '<button type="button" onclick="real(\''.$url.'\')" class="btn btn-xs btn-del btn-warning" title="删除">删除</button>&nbsp;';
+
+                    if($this->auth->id == 1){
+                        $url = '/admin/vipmanage/attestation/oneaddinfo?id=' . $v['id'];
+                        $list[$k]['op'] .= '<button type="button" onclick="real(\''.$url.'\')" class="btn btn-xs btn-del btn-warning" title="添加信息模板">添加信息模板</button>&nbsp;';
+                    }
+
                 }
+
                 if($v['cid'] == 107){
                     $list[$k]['op'] .= '<a href="/admin/vipmanage/attestation/slist/ids/'.$v['id'].'" class="btn btn-xs btn-warning dialogit" title="跳转">查看</a>&nbsp;';
                 }
