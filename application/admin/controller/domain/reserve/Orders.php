@@ -135,6 +135,11 @@ class Orders extends Backend
 
         if ($this->request->isAjax()){
             list($where, $sort, $order, $offset, $limit,$group,$nouid) = $this->buildparams();
+            $param = json_decode($this->request->get('filter'),true);
+            if(empty($param)){
+                $this->error('搜索后展示数据');
+            }
+
             $def = 'r.type = 0 ';
             if($group){
                 $def .= ' and i.hz = "'.ltrim($group,'.').'"';
