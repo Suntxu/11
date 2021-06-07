@@ -76,7 +76,7 @@ $(document).on("change", ".blogroll", function () {
                 5:{10:'怀米大使'},
                 6:{13:'域名预定',14:'域名拼团'},
                 7:{15:'域名竞价'},
-                8:{17:'注册域名退款'},
+                8:{17:'注册域名退款',22:'一口价退款'},
             };
     var aa =  child[$(this).val()];
     var option = '<option value="">选择</option>';

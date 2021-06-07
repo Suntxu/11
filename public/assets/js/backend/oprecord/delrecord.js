@@ -32,7 +32,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                         { field: 'group', title: '域名搜索',visible: false,},
                         { field: 'create_time', title: '操作时间',addclass:'datetimerange',operate:'INT',formatter: Table.api.formatter.datetime},
                         { field: 'nickname', title: '操作者',},
-                        { field: 'type', title: '操作类型',formatter: Table.api.formatter.status,searchList: {0:'域名出库',1:'冻结操作',2:'修改微信cookie',3:'手动补单',4:'域名入库',5:'注册域名退款',6:'修改一口价属性',7:'手动过户',8:'域名续费',9:'解除异地限制'},},
+                        { field: 'type', title: '操作类型',formatter: Table.api.formatter.status,searchList: {0:'域名出库',1:'冻结操作',2:'修改微信cookie',3:'手动补单',4:'域名入库',5:'注册域名退款',6:'修改一口价属性',7:'手动过户',8:'域名续费',9:'解除异地限制',10:'一口价退款'},},
                         { field: 'value', title: '操作值',operate:'LIKE'},
                     ]
                 ],

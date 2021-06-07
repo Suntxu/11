@@ -51,7 +51,7 @@ class Delrecord extends Backend
                 if(mb_strlen($v['value']) > 15){
                     $v['value'] = $fun->returntitdian($v['value'],15).'<span class="show_value" style="cursor:pointer;color:#3c8dbc;" onclick="showRemark(\''.$v['value'].'\')" >查看</span>';
                 }
-                $v['type'] = $fun->getStatus($v['type'],['域名出库','冻结操作','修改微信cookie','手动补单','域名入库','注册域名退款','修改一口价属性','手动过户','域名续费','解除异地限制']);
+                $v['type'] = $fun->getStatus($v['type'],['域名出库','冻结操作','修改微信cookie','手动补单','域名入库','注册域名退款','修改一口价属性','手动过户','域名续费','解除异地限制','一口价退款']);
 
 
             }

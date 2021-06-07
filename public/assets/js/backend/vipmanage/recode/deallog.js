@@ -59,11 +59,11 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                             }},
                         {field: 's.uid', title: '卖家账号',formatter:Table.api.formatter.alink,url:'/admin/vipmanage/setuser/index',fieldvaleu:'selleruserid',fieldname:'id',tit:'用户设置',},
                         {field: 'p.flag', title: '店铺类型',formatter: Table.api.formatter.status, notit:true, searchList:{0:'普通店铺',1:'怀米网店铺',2:'消保店铺'},},
-                        {field: 'c.status', title: '交易状态',formatter: Table.api.formatter.status,searchList: {'0':'支付中','1':'支付成功'}},
+                        {field: 'c.status', title: '交易状态',searchList: {'0':'支付中','1':'支付成功','2':'已退款'}},
                         {field: 'c.type', title: '订单类型',formatter: Table.api.formatter.status,searchList: {'0':'正常订单','1':'满减订单','2':'微信活动订单','9':'打包域名订单'}},
                         {field: 'c.sptype', title: '订单来源',searchList: {'0':'官网','1':'推广员','2':'怀米大使','3':'分销系统'}},
                         {field: 'is_sift', visible:false, title: '是否为精选订单',formatter: Table.api.formatter.status,searchList: {'0':'否','1':'是'}},
-                        {field: 'c.sj', title: '订单创建时间',operate: 'RANGE', addclass: 'datetimerange',sortable:true,defaultValue:getTimeFrame() },
+                        {field: 'c.sj', title: '订单创建时间',operate: 'RANGE', addclass: 'datetimerange',sortable:true,},//defaultValue:getTimeFrame()
                         {field: 'paytime', title: '订单支付时间',operate: 'RANGE', addclass: 'datetimerange',sortable:true,},
                         {field: 'operate', title: __('Operate'), table: table,
                                 events: Table.api.events.operate,
@@ -72,7 +72,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                                     name: '买家用户中心',
                                     text: '买家用户中心',
                                     title: '买家用户中心',
-                                    classname: 'btn btn-xs  btn-ajax',
+                                    classname: 'btn btn-xs btn-info  btn-ajax',
                                     icon: 'fa fa-magic',
                                     url: '/admin/vipmanage/usersop/Jump?flag=new',
                                     error: function (data,ret) {
@@ -83,6 +83,29 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                                         }
                                         return false;
                                     },
+                                },{
+                                    name: '退款',
+                                    text: '退款',
+                                    title: '退款',
+                                    classname: 'btn btn-xs btn-warning btn-ajax',
+                                    icon: 'fa fa-cny fa-fw',
+                                    url:function(res){
+                                        return '/admin/vipmanage/recode/deallog/refund?id='+res.cid;
+                                    },
+                                    visible:function(res){
+                                        return res.flag;
+                                    },
+                                    success: function (data, ret) {
+                                        Layer.msg(ret.msg);
+                                        window.setTimeout(function(){
+                                            $('.btn-refresh').click();
+                                        },1500);
+                                        return false;
+                                    },
+                                    error: function (data, ret) {
+                                        Layer.msg(ret.msg);
+                                        return false;
+                                    }
                                 }],
                           },
 
