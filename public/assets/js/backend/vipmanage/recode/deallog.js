@@ -74,6 +74,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                                     title: '买家用户中心',
                                     classname: 'btn btn-xs btn-info  btn-ajax',
                                     icon: 'fa fa-magic',
+                                    comfirm:'是否要进行退款操作?',
                                     url: '/admin/vipmanage/usersop/Jump?flag=new',
                                     error: function (data,ret) {
                                         if(ret.code==0){

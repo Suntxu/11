@@ -202,8 +202,20 @@ class Deallog extends Backend
                     'subtype' => 0,
                     'uip' => '系统操作',
                     'money' => $money,
+                    'info' => $info['tit'],
                     'userid' => $info['userid'],
                     'balance' => ($bmoney + $money),
+                ]);
+                Db::name('flow_record')->insert([
+                    'sj' => date('Y-m-d H:i:s'),
+                    'infoid' => $info['bc'],
+                    'product' => 8,
+                    'subtype' => 0,
+                    'uip' => '系统操作',
+                    'money' => -$money,
+                    'info' => $info['tit'],
+                    'userid' => $info['selleruserid'],
+                    'balance' => ($smoney - $money),
                 ]);
                 //插入管理员操作记录
                 Db::name('domain_operate_record')->insert([
