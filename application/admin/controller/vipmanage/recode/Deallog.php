@@ -192,13 +192,15 @@ class Deallog extends Backend
                 Db::name('domain_user')->where('id',$info['userid'])->setInc('money1',$money);
                 //更换域名归属
                 Db::name('domain_pro_n')->whereIn('tit',$tits)->setField('userid',$info['selleruserid']);
+                //更换域名归属
+                $this->model->where('id',$oid)->setField('status',2);
                 //插入资金明细
                 Db::name('flow_record')->insert([
                     'sj' => date('Y-m-d H:i:s'),
                     'infoid' => $info['bc'],
                     'product' => 8,
                     'subtype' => 22,
-                    'uip' => '',
+                    'uip' => '系统操作',
                     'money' => $money,
                     'userid' => $info['userid'],
                     'balance' => ($bmoney + $money),
