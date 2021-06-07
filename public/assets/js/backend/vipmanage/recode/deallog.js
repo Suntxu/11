@@ -89,7 +89,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                                     title: '退款',
                                     classname: 'btn btn-xs btn-warning btn-ajax',
                                     icon: 'fa fa-cny fa-fw',
-                                    comfirm:'是否要进行退款操作?',
+                                    confirm:'是否要进行退款操作?',
                                     url:function(res){
                                         return '/admin/vipmanage/recode/deallog/refund?id='+res.cid;
                                     },
