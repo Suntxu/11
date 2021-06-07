@@ -30,7 +30,7 @@ class Save extends Backend
      */
     // protected $noNeedRight = ['check'];
     
-    private $aliyun_DNS = [68,71,72,73,75,77,79,83,85,88,91,108,112];
+    private $aliyun_DNS = [68,71,72,73,75,77,79,83,85,88,91,108,112,113,114,115];
 
 
     public function _initialize()
