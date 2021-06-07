@@ -46,15 +46,10 @@ class Hmhold extends Backend
             $apis = $this->getApis(-1);
             $ktit = [];
             $reg_domain = [];
-            $nitice = ['域名未过户',2 => '域名过户任务失败','域名过户任务执行中'];
             $msg = '';
             foreach($domainList as $v){
                 if($v['infoid'] == '0'){
                     $msg .= $v['tit'].' 域名未过户;';
-                    continue;
-                }
-                if(isset($nitice[$v['infoZR']])){
-                    $msg .= $v['tit'].' '.$nitice[$v['infoZR']].';';
                     continue;
                 }
                 $api_info = $apis[$v['api_id']];
