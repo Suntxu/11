@@ -199,7 +199,7 @@ class Deallog extends Backend
                     'sj' => date('Y-m-d H:i:s'),
                     'infoid' => $info['bc'],
                     'product' => 8,
-                    'subtype' => 22,
+                    'subtype' => 0,
                     'uip' => '系统操作',
                     'money' => $money,
                     'userid' => $info['userid'],
