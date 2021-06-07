@@ -168,7 +168,7 @@ class Deallog extends Backend
             $money = $info['final_money'] - $info['sxf'];
 
             //锁定买卖家余额
-            if(Fun::ini()->lockMoney($info['userid']) &&  Fun::ini()->lockMoney($info['selleruserid'])){
+            if(!Fun::ini()->lockMoney($info['userid']) &&  !Fun::ini()->lockMoney($info['selleruserid'])){
                 $this->error('系统繁忙,请稍后操作');
             }
 
