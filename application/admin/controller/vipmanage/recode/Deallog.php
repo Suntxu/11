@@ -33,7 +33,7 @@ class Deallog extends Backend
 
             list($where, $sort, $order, $offset, $limit,$tits,$hz) = $this->buildparams();
 
-            $def = ' c.status in (0,1) ';
+            $def = ' c.status in (0,1,2) ';
             if($tits){
                 $TextAv=str_replace("\r","",$tits);
                 $Text=preg_split("/\n/",$TextAv);
