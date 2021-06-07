@@ -66,8 +66,6 @@ class Sensitiveword extends Backend
                	$params['create_time'] = time();
                 $this->model->insert($params);
 
-                $this->cacheData();
-
                 $this->success('添加成功');  
             }
         }
@@ -97,8 +95,8 @@ class Sensitiveword extends Backend
                	}
                	
                 $this->model->update($params);
-                $this->cacheData();
-                $this->success('修改成功');  
+
+                $this->success('修改成功');
             }
         }
 
@@ -113,32 +111,11 @@ class Sensitiveword extends Backend
     {
        if($ids){
             $this->model->delete($ids);
-            $this->cacheData();
             $this->success('删除成功');
        }else{
             $this->error('缺少重要参数');
        }
       
     }
-
-    /**
-     * 缓存数据
-     */
-    private function cacheData($type = 0){
-
-        if($type == 0){
-            $key = 'page_search_sensitiveword';
-        }
-    	
-    	$data = $this->model->where(['type' => $type,'status' => 0])->column('title');
-        $redis = new Redis();
-        if($data){
-            $redis->set($key,json_encode($data),300);
-        }else{
-            $redis->del($key);
-        }
-    }
-
-
 
 }
