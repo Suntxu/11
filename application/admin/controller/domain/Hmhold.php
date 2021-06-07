@@ -48,10 +48,6 @@ class Hmhold extends Backend
             $reg_domain = [];
             $msg = '';
             foreach($domainList as $v){
-                if($v['infoid'] == '0'){
-                    $msg .= $v['tit'].' 域名未过户;';
-                    continue;
-                }
                 $api_info = $apis[$v['api_id']];
                 if(!$api_info){
                     $this->error('接口商:'.$v['api_id'].' 信息获取失败');
