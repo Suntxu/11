@@ -63,7 +63,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                         {field: 'c.type', title: '订单类型',formatter: Table.api.formatter.status,searchList: {'0':'正常订单','1':'满减订单','2':'微信活动订单','9':'打包域名订单'}},
                         {field: 'c.sptype', title: '订单来源',searchList: {'0':'官网','1':'推广员','2':'怀米大使','3':'分销系统'}},
                         {field: 'is_sift', visible:false, title: '是否为精选订单',formatter: Table.api.formatter.status,searchList: {'0':'否','1':'是'}},
-                        {field: 'c.sj', title: '订单创建时间',operate: 'RANGE', addclass: 'datetimerange',sortable:true,},//defaultValue:getTimeFrame()
+                        {field: 'c.sj', title: '订单创建时间',operate: 'RANGE', addclass: 'datetimerange',sortable:true,defaultValue:getTimeFrame()},
                         {field: 'paytime', title: '订单支付时间',operate: 'RANGE', addclass: 'datetimerange',sortable:true,},
                         {field: 'operate', title: __('Operate'), table: table,
                                 events: Table.api.events.operate,
@@ -74,7 +74,6 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                                     title: '买家用户中心',
                                     classname: 'btn btn-xs btn-info  btn-ajax',
                                     icon: 'fa fa-magic',
-                                    comfirm:'是否要进行退款操作?',
                                     url: '/admin/vipmanage/usersop/Jump?flag=new',
                                     error: function (data,ret) {
                                         if(ret.code==0){
@@ -90,6 +89,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                                     title: '退款',
                                     classname: 'btn btn-xs btn-warning btn-ajax',
                                     icon: 'fa fa-cny fa-fw',
+                                    comfirm:'是否要进行退款操作?',
                                     url:function(res){
                                         return '/admin/vipmanage/recode/deallog/refund?id='+res.cid;
                                     },

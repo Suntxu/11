@@ -184,6 +184,8 @@ class Deallog extends Backend
             //获取买家金额
             $bmoney = Db::name('domain_user')->where('id',$info['userid'])->value('money1');
 
+            $sj = date('Y-m-d H:i:s');
+
             Db::startTrans();
             try{
                 //扣除卖家实际得到的金额
@@ -196,7 +198,7 @@ class Deallog extends Backend
                 $this->model->where('id',$oid)->setField('status',2);
                 //插入资金明细
                 Db::name('flow_record')->insert([
-                    'sj' => date('Y-m-d H:i:s'),
+                    'sj' => $sj,
                     'infoid' => $info['bc'],
                     'product' => 8,
                     'subtype' => 0,
@@ -207,7 +209,7 @@ class Deallog extends Backend
                     'balance' => ($bmoney + $money),
                 ]);
                 Db::name('flow_record')->insert([
-                    'sj' => date('Y-m-d H:i:s'),
+                    'sj' => $sj,
                     'infoid' => $info['bc'],
                     'product' => 8,
                     'subtype' => 0,
@@ -215,7 +217,7 @@ class Deallog extends Backend
                     'money' => -$money,
                     'info' => $info['tit'],
                     'userid' => $info['selleruserid'],
-                    'balance' => ($smoney - $money),
+                    'balance' => ($smoney['money1'] - $money),
                 ]);
                 //插入管理员操作记录
                 Db::name('domain_operate_record')->insert([
