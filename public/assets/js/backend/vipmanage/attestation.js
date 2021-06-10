@@ -96,7 +96,7 @@ function real(url){
     layer.confirm('确定要操作吗？', {
         btn: ['确定','取消'] //按钮
     }, function(){
-        $.get(url,{},function(data){
+        $.post(url,{},function(data){
             layer.closeAll('loading');
             layer.msg(data.msg);
             if(data.code == 0){

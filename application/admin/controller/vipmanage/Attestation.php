@@ -286,7 +286,6 @@ class Attestation extends Backend
      * 重新实名认证
      */
     public function resetreal($ids,$flag=null){
-
         $apiInfo = Db::table(PREFIX.'domain_infoTemplate')->alias('t1')->join('user_renzhengapi t2','t1.id=t2.info_id','right')->join('user_renzheng t3','t1.renzheng_id = t3.id')
                     ->field('t2.api_id,t2.id,t2.system_id,t3.renzheng,t3.renzhengno,t3.buslicence,t3.image1,t3.image2,t3.image3,t3.xing,t3.ming,t3.busname,t2.userid')
                     ->where(['t2.id' => $ids])
@@ -416,8 +415,7 @@ class Attestation extends Backend
     public function updateStatus(){
 
         if($this->request->isAjax()){
-            $param = $this->request->get();
-
+            $param = $this->request->param();
             $id = empty($param['id']) ? 0 : intval($param['id']);
 
             
