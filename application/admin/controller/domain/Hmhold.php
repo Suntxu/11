@@ -33,16 +33,18 @@ class Hmhold extends Backend
             if(count($domains) > 500){
                 $this->error('一批最多可输入500个域名');
             }
+            //过滤已提交的域名
+            $ll = Db::connect($remodi_db)->name('domain_hold_record')->whereIn('tit',$domains)->where('status',0)->column('tit');
+            if($ll){
+                $domains = array_diff($domains,$ll);
+            }
 
             // 过滤数据库中的域名
             $domainList = Db::name('domain_pro_n')->field('zcs,api_id,tit,infoid,infoZR,userid')->whereIn('tit',$domains)->select();
             if(empty($domainList)){
-                $this->error('请输入域名库存在的域名!');
+                $this->error('请输入域名库存在的域名或域名已提交hold!');
             }
-            $ll = Db::connect($remodi_db)->name('domain_hold_record')->whereIn('tit',array_column($domainList,'tit'))->where('status',0)->column('tit');
-            if($ll){
-                $this->error(implode(',',$ll).' 域名已提交hold ');
-            }
+
             $apis = $this->getApis(-1);
             $ktit = [];
             $reg_domain = [];
