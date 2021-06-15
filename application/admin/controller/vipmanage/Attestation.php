@@ -116,7 +116,7 @@ class Attestation extends Backend
                 $list[$k]['RegistrantType'] =  $fun->getStatus($v['RegistrantType'],[1=>'个人',2=>'企业']);
 
                 if(mb_strlen($v['info_remark']) > 15){
-                    $list[$k]['info_remark'] = $fun->returntitdian($v['info_remark'],15).'<span class="show_value" style="cursor:pointer;color:#3c8dbc;" onclick="showRemark('.$v['info_remark'].')" >查看</span>';
+                    $list[$k]['info_remark'] = $fun->returntitdian($v['info_remark'],15).'<span class="show_value" style="cursor:pointer;color:#3c8dbc;" onclick="showRemark(\''.$v['info_remark'].'\')" >查看</span>';
                 }
 
                 if($v['ifreal'] == 1){
@@ -130,7 +130,7 @@ class Attestation extends Backend
                         $aa = json_decode($v['auth_remark'],true);
                         $list[$k]['auth_remark'] = empty($aa) ? $v['auth_remark'] :  $aa;
                         if(mb_strlen($v['auth_remark']) > 15){
-                            $list[$k]['auth_remark'] = $fun->returntitdian($v['auth_remark'],15).'<span class="show_value" style="cursor:pointer;color:#3c8dbc;" onclick="showRemark('.$v['auth_remark'].')" >查看</span>';
+                            $list[$k]['auth_remark'] = $fun->returntitdian($v['auth_remark'],15).'<span class="show_value" style="cursor:pointer;color:#3c8dbc;" onclick="showRemark(\''.$v['auth_remark'].'\')" >查看</span>';
                         }
                     }
                 }
