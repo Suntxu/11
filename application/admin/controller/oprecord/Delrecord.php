@@ -37,10 +37,15 @@ class Delrecord extends Backend
                     ->select();
             $fun = Fun::ini();
             foreach($list as $k=>&$v){
-                if($v['type'] == 3){
+                if(in_array($v['type'],[3,10])){
                     $value = explode('：',$v['value']);
                     $ddbh = empty($value[1]) ? '' :trim($value[1]);
-                    $v['tit1'] = "<a href='/admin/vipmanage/recode/payrank?ddbh={$ddbh}' data-toggle='tooltip' class='dialogit'>详情</a>";
+                    if($v['type'] == 3){
+                        $url = '/admin/vipmanage/recode/payrank?d.sj= &ddbh='.$ddbh;
+                    }else if($v['type'] == 10){
+                        $url = '/admin/vipmanage/recode/deallog?c.sj= &&oid='.$ddbh;
+                    }
+                    $v['tit1'] = "<a href='{$url}' data-toggle='tooltip' class='dialogit'>详情</a>";
                 }elseif(in_array($v['type'],[0,1,4,6,7,8])){
                     $v['tit1'] = '<span  style="cursor:pointer;color:#3c8dbc;" data-id="'.$v['id'].'" onclick="showDetail(this)">查看</span>';
                 }elseif($v['type'] == 5){

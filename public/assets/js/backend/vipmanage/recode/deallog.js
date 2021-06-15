@@ -128,6 +128,10 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                    var eid = $("#eid").val();
                     if (eid != '')
                        filter['c.entrust_id'] = eid;
+                    var oid = $("#oid").val();
+                    if (oid != '')
+                        filter['c.id'] = oid;
+
                     params.filter = JSON.stringify(filter);
                     params.op = JSON.stringify(op);
                     return params;

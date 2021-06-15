@@ -41,7 +41,6 @@ class Deallog extends Backend
                 if(count($Text) > 300){
                     $Text = array_splice($Text,0,300);
                 }
-                $tits = '"'.implode('","',$Text).'"';
                 $def .= ' and (c.tit in("'.implode('","',$Text).'") ';
                 foreach($Text as $v){
                     $def .= ' or find_in_set("'.$v.'",c.pack) ';
@@ -103,7 +102,6 @@ class Deallog extends Backend
                 }else{
                     $list[$k]['flag'] = false;
                 }
-
             }
             $result = array("total" => $total, "rows" => $list);
             return json($result);
@@ -114,6 +112,7 @@ class Deallog extends Backend
             'ids'   =>empty($requ['u.uid']) ? '' : $requ['u.uid'],
             'bc'   =>empty($requ['c.bc']) ? '' : $requ['bc'],
             'eid'   =>empty($requ['eid']) ? '' : $requ['eid'], //委托购买id
+            'oid' => empty($requ['oid']) ? '' : $requ['oid'], // 订单id
         ]);
         return $this->view->fetch();
     }
@@ -147,7 +146,7 @@ class Deallog extends Backend
                 $this->error('参数有误');
             }
 
-            $info = $this->model->field('bc,userid,tit,type,selleruserid,pack,final_money,sxf')->where(['id' => $oid,'status' => 1])->where('sptype != 3')->find();
+            $info = $this->model->field('id,bc,userid,tit,type,selleruserid,pack,final_money,sxf')->where(['id' => $oid,'status' => 1])->where('sptype != 3')->find();
             if(empty($info)){
                 $this->error('该订单不存在或状态已发生改变');
             }
@@ -225,7 +224,7 @@ class Deallog extends Backend
                     'tit'=> $info['tit'],
                     'operator_id' => $this->auth->id,
                     'type' => 10,
-                    'value' => '一口价交易退款'
+                    'value' => '订单id：'.$info['id'],
                 ]);
 
             }catch(\Exception $e){
