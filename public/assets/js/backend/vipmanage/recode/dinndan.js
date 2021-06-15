@@ -29,7 +29,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                         { field: 'subtype', title: '交易子类型',sortable:true,addClass:'blogroll_child',formatter: Table.api.formatter.status,searchList: {}},
                         { field: 'balance', title: '所剩余额',operate:false,},
                         { field: 'info', title: '包含信息',},
-                        { field: 'r.uip', title: 'IP',operate: false,formatter:Table.api.formatter.alink,url:'http://www.baidu.com/s',fieldvaleu:'r.uip',fieldname:'wd',tit:'Ip归属地查询',},
+                        { field: 'uip', title: 'IP',operate: false},
                         { field: 'showurl', title: '链接',operate: false},
                     ]
                 ],
