@@ -31,8 +31,7 @@ define(['jquery', 'bootstrap', 'backend', 'form', 'table'], function ($, undefin
                         {field: 'group', title:'实名名称',},
                         {field: 'RegistrantType', title:'模板类型',searchList: {1:"个人",2:'企业'},},
                         {field: 'info_status', title:'模板状态', formatter: Table.api.formatter.status, custom: {'创建失败':'danger','创建成功':'success','申请手动添加':'info'}, searchList: {1:'创建失败',2:'创建成功',9:'申请手动添加'},},
-                        {field: 'info_remark', title:'模板认证失败原因',operate:false},
-                        {field: 'email_status', title:'邮箱状态', formatter: Table.api.formatter.status,searchList: {0:"未认证",2:'已认证'},},
+                        {field: 'info_remark', title:'添加模板失败原因',operate:false},
                         {field: 'r.createtime',title: '创建时间',addclass: 'datetimerange',sortable:true,operate: false,formatter: Table.api.formatter.datetime},
                         {field: 'op', title: __('Operate'),width:200, operate:false}
                     ]

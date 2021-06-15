@@ -61,7 +61,7 @@ class Attestation extends Backend
                     ->join('domain_api a','r.api_id=a.id','left')
                     ->join('category c','c.id=a.regid','left')
                     ->join('user_renzheng re','t.renzheng_id=re.id','left')
-                    ->field('r.system_id,t.id as tid,r.id,u.uid,a.tit,c.name,r.auth_status,r.info_status,r.auth_remark,r.info_remark,r.createtime,r.email_status,a.ifreal,t.title,info_id,t.RegistrantType,re.xing,re.ming,re.busname,r.api_id,c.id as cid')
+                    ->field('r.system_id,t.id as tid,r.id,u.uid,a.tit,c.name,r.auth_status,r.info_status,r.auth_remark,r.info_remark,r.createtime,a.ifreal,t.title,info_id,t.RegistrantType,re.xing,re.ming,re.busname,r.api_id,c.id as cid')
                     ->where($where)->where($def)
                     ->order($sort, $order)
                     ->limit($offset, $limit)
@@ -78,7 +78,7 @@ class Attestation extends Backend
                     $list[$k]['op'] .= '<button type="button" onclick="real(\''.$url.'\')" class="btn btn-xs btn-success" title="重新实名">重新实名</button>&nbsp;';
                 }
 
-                if($v['cid'] == 75 || $v['cid'] == 68 || ($v['cid'] == 74  &&  in_array($v['auth_status'],[0,1,4])  ) || in_array($v['auth_status'],[1,4])  ){
+                if(!in_array($v['auth_status'],[2,3])){
 //                    $url = '/admin/vipmanage/attestation/del/ids/'.$v['id'];
 //                    $list[$k]['op'] .= '<button type="button" onclick="real(\''.$url.'\')" class="btn btn-xs btn-del btn-warning" title="删除">删除</button>&nbsp;';
                     $url = '/admin/vipmanage/attestation/oneaddinfo?id=' . $v['id'];
@@ -102,7 +102,6 @@ class Attestation extends Backend
                 $list[$k]['auth_status'] = $fun->getStatus($v['auth_status'],['<font color="#e74c3c">未实名</font>','<font color="#e74c3c">实名提交失败</font>','<font color="#3498db">提交成功</font>','<font color="#18bc9c">认证成功</font>','<font color="#e74c3c">注册商实名失败</font>',9=>'<font color="#e74c3c">实名查询结果时模板不存在</font>']);
               
                 $list[$k]['info_status'] =  $fun->getStatus($v['info_status'],[1=>'创建失败','创建成功',9=>'申请手动添加']);
-                $list[$k]['email_status'] =  $fun->getStatus($v['email_status'],['未认证',2=>'已认证']);
                 $list[$k]['r.createtime'] = $v['createtime'];
                 $list[$k]['c.id'] = $v['name'];
                 $list[$k]['a.id'] = $v['tit'];
@@ -115,7 +114,11 @@ class Attestation extends Backend
                 }
 
                 $list[$k]['RegistrantType'] =  $fun->getStatus($v['RegistrantType'],[1=>'个人',2=>'企业']);
-                
+
+                if(mb_strlen($v['info_remark']) > 15){
+                    $list[$k]['info_remark'] = $fun->returntitdian($v['info_remark'],15).'<span class="show_value" style="cursor:pointer;color:#3c8dbc;" onclick="showRemark('.$v['info_remark'].')" >查看</span>';
+                }
+
                 if($v['ifreal'] == 1){
                     $list[$k]['auth_remark'] = '不需要实名认证';
                 }else{
@@ -126,7 +129,9 @@ class Attestation extends Backend
                     }else{
                         $aa = json_decode($v['auth_remark'],true);
                         $list[$k]['auth_remark'] = empty($aa) ? $v['auth_remark'] :  $aa;
-
+                        if(mb_strlen($v['auth_remark']) > 15){
+                            $list[$k]['auth_remark'] = $fun->returntitdian($v['auth_remark'],15).'<span class="show_value" style="cursor:pointer;color:#3c8dbc;" onclick="showRemark('.$v['auth_remark'].')" >查看</span>';
+                        }
                     }
                 }
             }
