@@ -54,17 +54,28 @@ class Sensitiveword extends Backend
                 if(empty($params['title'])){
                     $this->error('敏感词不能为空');
                 }
-               
-               	if(mb_strlen($params['title']) > 50){
-               		$this->error('敏感词长度不得超过50字符');
-               	}
 
-               	$exists = $this->model->where(['type' => 0,'title' => $params['title']])->count();
-               	if($exists){
-               		$this->error('该敏感词已经存在');
+                $tits = Fun::ini()->moreRow($params['title']);
+
+                if(count($tits) > 100){
+                    $this->error('敏感词一次最多提交100个域名');
+                }
+                array_walk($tits,function ($n){
+                    if(mb_strlen($n) > 50){
+                        $this->error($n.'长度不得超过50字符');
+                    }
+                });
+
+               	$existsTits = $this->model->whereIn('title',$tits)->where('type',0)->column('title');
+               	if($existsTits){
+               		$this->error('敏感词 '.implode(',',$existsTits).' 已经存在!');
                	}
-               	$params['create_time'] = time();
-                $this->model->insert($params);
+                $params['create_time'] = time();
+                $inserts = array_map(function($n) use ($params) {
+               	    return ['status' => $params['status'],'title' => $n,'create_time' => $params['create_time']];
+                },$tits);
+
+                $this->model->insertAll($inserts);
 
                 $this->success('添加成功');  
             }
