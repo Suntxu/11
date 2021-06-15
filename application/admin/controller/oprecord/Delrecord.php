@@ -43,7 +43,7 @@ class Delrecord extends Backend
                     if($v['type'] == 3){
                         $url = '/admin/vipmanage/recode/payrank?d.sj= &ddbh='.$ddbh;
                     }else if($v['type'] == 10){
-                        $url = '/admin/vipmanage/recode/deallog?c.sj= &&oid='.$ddbh;
+                        $url = '/admin/vipmanage/recode/deallog?c.sj= &oid='.$ddbh;
                     }
                     $v['tit1'] = "<a href='{$url}' data-toggle='tooltip' class='dialogit'>详情</a>";
                 }elseif(in_array($v['type'],[0,1,4,6,7,8])){
