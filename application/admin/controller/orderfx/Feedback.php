@@ -96,7 +96,7 @@ class Feedback extends Backend
             if(!in_array($param['status'],[1,2])){
                 $this->error('参数不在合法范围');
             }
-            $flag = $this->db->where(['id' => $param['id'],'status' => 0])->count();
+            $flag = $this->db->where(['id' => $param['id'],'ex_status' => 0])->count();
             if(empty($flag)){
                 $this->error('记录不存在或状态已发生改变');
             }
