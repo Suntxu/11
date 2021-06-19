@@ -37,8 +37,9 @@ class Feedback extends Backend
             $def = '';
             if($group){
                 $id = str_replace('WD','',$group);
-                $def = ' id = '.($id ? $id : 0);
+                $def = ' id = "'.($id ? $id : 0).'"';
             }
+
             $total = $this->db->where($def)->where($where)->count();
             $list = $this->db
                     ->field('id,uid,uqq,type,nickname,desc,create_time,money,cnstatus,status,ex_status,ex_remark')
