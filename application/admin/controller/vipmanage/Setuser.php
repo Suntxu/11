@@ -8,6 +8,8 @@ use think\Db;
 use app\admin\common\Fun;
 use app\admin\common\sendMail;
 use app\admin\library\Redis;
+use think\Exception;
+
 /**
  * 用户管理
  *
@@ -312,26 +314,47 @@ class Setuser extends Backend
         if(intval($score['num']) == 0){
             $this -> error('积分数量格式错误');
         }
-        $sj = date('Y-m-d H:i:s');
-        $uip = $this->request->ip();
-        $sm = intval(abs($score['num']));
-        $da = [
-            'userid'=>$id,
-            'sj'=>$sj,
-            'uip'=>$uip,
-        ];
-        Db::startTrans();
-        if($score['op'] == 1){
-            $da['tit'] = empty($score['remark']) ? '增加积分' : $score['remark'];
-            $da['jfnum']= $sm;
-            Db::name('domain_user')->where('id',$id)->setInc('jf',$sm);
-        }elseif($score['op'] == 2){
-            $da['tit'] = empty($score['remark']) ? '积分扣除' : $score['remark'];
-            $da['jfnum']= -$sm;
-            Db::name('domain_user')->where('id',$id)->setInc('jf',-$sm);
+
+        if(!empty($score['remark']) && mb_strlen($score['remark']) > 100){
+            $this->error('备注说明长度不得超过100个字符！');
         }
-        Db::name('domain_jfrecord')->insert($da);
+        $score['num'] = abs($score['num']);
+
+        Fun::ini()->lockKey('score_balance_'.$id) || $this->error('系统繁忙,请稍后操作!');
+        $uscore = $this->model->where('id',$id)->value('jf');
+        $insert = [
+            'userid' => $id,
+            'type' => 0,
+            'create_time' => time(),
+            'uip' => '127.0.0.1',
+            'remark' => empty($score['remark']) ? '后台操作' : $score['remark'],
+            'admin_id' => $this->auth->id,
+            'num' => $score['num'],
+        ];
+
+        if($score['op'] == 2){
+            if($score['num'] > $uscore){
+                Fun::ini()->unlockKey('score_balance_'.$id);
+                $this->error('账户积分不足'.$score['num'].'积分');
+            }
+            $insert['num'] = -$score['num'];
+        }
+
+        $insert['balance'] = $uscore+$insert['num'];
+
+        Db::startTrans();
+        try{
+            $this->model->where('id',$id)->setInc('jf',$insert['num']);
+            Db::name('score_detailed')->insert($insert);
+        }catch(Exception $e){
+            Fun::ini()->unlockKey('score_balance_'.$id);
+            Db::rollback();
+            $this->error($e->getMessage());
+        }
         Db::commit();
+
+        Fun::ini()->unlockKey('score_balance_'.$id);
+
         $this->success('操作成功');
     }
     /**
