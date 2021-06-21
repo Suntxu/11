@@ -33,6 +33,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                         {field: 'xflow', title: '消费总金额',operate: false,sortable:true},
                         {field: 'u.money1', title: '账户余额',operate: 'between',sortable:true},
                         {field: 'kyye', title: '可用余额',operate:false},
+                        {field: 'jf', title: '积分余额',operate: 'between',sortable:true},
                         {field: 'baomoney1', title: '保证金',operate: 'between',sortable:true},
                         {field: 'u.special', title: '会员标识',formatter: Table.api.formatter.status, notit:true, searchList:{0:'普通',1:'专属客服'}},
                         {field: 'u.sj', title: '注册时间',operate: 'RANGE', addclass: 'datetimerange', formatter: Table.api.formatter.datetime},

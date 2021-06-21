@@ -29,6 +29,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                         {field: 'money1', title: '账户余额',operate: 'between',sortable:true},
                         {field: 'baomoney1', title: '保证金',operate: 'between',sortable:true},
                         {field: 'balance', title: '可用余额',operate: false,sortable:true},
+                        {field: 'jf', title: '积分余额',operate: 'between',sortable:true},
                         {field: 'uip', title: '注册IP',operate: false,formatter:Table.api.formatter.alink,url:'http://www.baidu.com/s',fieldvaleu:'uip',fieldname:'wd',tit:'Ip归属地查询',},
                         {field: 'operate', title: __('Operate'), table: table,
                                 events: Table.api.events.operate,

@@ -41,7 +41,7 @@ class Usersop extends Backend
                 ->where($where)->where($def)
                 ->count();
             
-            $list = $this->model->field('id,uid,uqq,money1,uip,mot,zt,baomoney1,(money1 - baomoney1) as balance')
+            $list = $this->model->field('id,uid,jf,uqq,money1,uip,mot,zt,baomoney1,(money1 - baomoney1) as balance')
                 ->where($where)->where($def)
                 ->order($sort,$order)
                 ->limit($offset, $limit)

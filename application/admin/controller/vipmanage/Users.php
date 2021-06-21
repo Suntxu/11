@@ -86,7 +86,6 @@ class Users extends Backend
                 }
             }
 
-
             $total = $this->model->alias('u')->join('storeconfig s','u.id = s.userid','left')->join('domain_promotion_relation p','p.userid=u.id ','left')
                 ->where($where)->where($def)
                 ->count();
@@ -96,7 +95,7 @@ class Users extends Backend
 
             $list = $this->model->alias('u')->join('storeconfig s','u.id = s.userid','left')->join('domain_promotion_relation p','p.userid=u.id ','left')
                 ->where($where)->where($def)
-                ->field('u.id,u.qh,u.uqq,u.uid,u.uip,u.sj,u.jf,u.money1,u.zt,u.mot,u.baomoney1,u.special,s.flag,p.relation_id as puserid'.$to)
+                ->field('u.id,u.jf,u.qh,u.uqq,u.uid,u.uip,u.sj,u.jf,u.money1,u.zt,u.mot,u.baomoney1,u.special,s.flag,p.relation_id as puserid'.$to)
                 ->order($sort,$order)
                 ->limit($offset, $limit)
                 ->select();

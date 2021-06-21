@@ -437,8 +437,9 @@ class Fun
     /*******************redis锁*******************/
     /**
      * 任意锁
+     * 积分锁 score_balance_userid
      */
-    public function lockKey($key,$expire = 5,$redis=null){
+    public function lockKey($key,$expire = 10,$redis=null){
 
         if(empty($redis)){
             $redis = new Redis();
